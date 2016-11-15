@@ -111,15 +111,14 @@ class wpGEOjson {
 				
 				$feature = array(
 					'ID'	=> $the_query->post->ID,
-					'type' => 'Feature',
-					'geometry' => array(
+					'type' 			=> 'Feature',
+					'geometry' 		=> array(
 						'type' => 'Point',
-						# Pass Longitude and Latitude Columns here
 						'coordinates' => array( $acf_data['lng'], $acf_data['lat'] )
 					),
-					# Pass other attribute columns here
 					'properties' => array(
-						'address'	=> $acf_data['address']
+						'address'	=> $acf_data['address'],
+						'post_id'	=> $the_query->post->ID
 					)
 				);
 				array_push( $geojson['features'], $feature );
@@ -270,7 +269,8 @@ class wpGEOjson {
 			array('jquery'), 
 			'1.0.1',
 			true
-		);		
+		);
+		/** **/
 		
 		/** Openlayers **/
 		wp_register_script(
@@ -280,7 +280,7 @@ class wpGEOjson {
 			'1.0',
 			true
 		);
-		/**/
+		/** **/
 		
 		/** Google Maps specific **/
 		wp_register_script(
@@ -297,7 +297,17 @@ class wpGEOjson {
 			'1.0',
 			true
 		);
-		/**/
+		/** **/
+		
+		/** Turf.js **/
+		wp_register_script(
+			'turf',
+			plugins_url( '/js/turf.min.js', dirname( __FILE__ ) ),
+			array('jquery'),
+			'3.5.1',
+			true
+		);
+		/** **/
 	}
 	
 	/**
@@ -328,7 +338,9 @@ class wpGEOjson {
 		}
 		/** **/
 		
+		wp_print_scripts('turf');
 		wp_print_scripts('wp-geojson-map');
+				
 		?>
 			<script type="text/javascript">
 			var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';

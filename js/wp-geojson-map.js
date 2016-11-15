@@ -107,6 +107,13 @@ function ggmap_init() {
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
 			mapTypeControlOptions: { mapTypeIds: [] },
 		});
+		
+		// zoom to show all the features
+		var bounds = new google.maps.LatLngBounds();
+		map.data.addListener('addfeature', function(e) {
+			processPoints(e.feature.getGeometry(), bounds.extend, bounds);
+			map.fitBounds(bounds);
+		});
 	
 	} else {
 		console.log( 'No map canvas on this page.' );
@@ -114,17 +121,49 @@ function ggmap_init() {
 	
 }
 
+//@see: http://stackoverflow.com/questions/28507044/zoom-to-geojson-polygons-bounds-in-google-maps-api-v3
+function processPoints(geometry, callback, thisArg) {
+	  if (geometry instanceof google.maps.LatLng) {
+	    callback.call(thisArg, geometry);
+	  } else if (geometry instanceof google.maps.Data.Point) {
+	    callback.call(thisArg, geometry.get());
+	  } else {
+	    geometry.getArray().forEach(function(g) {
+	      processPoints(g, callback, thisArg);
+	    });
+	  }
+	}
 
 /**
  * GEOjson functions
  *
  */
 function add_markers( geojson, map_type ) {
-	if( 'ggmap' == map_type )
-		map.data.addGeoJson(geojson);
 	
-	if( 'leaflet' == map_type )
-		L.geoJSON(geojson).addTo(map);
+	// Turf test		
+	var hull = turf.concave( geojson, 15, 'kilometers' );
+	var hull2 = turf.convex( geojson );
+	
+	if( 'ggmap' == map_type ) {
+		map.data.addGeoJson(geojson);
+		map.data.addGeoJson(hull);
+		map.data.addGeoJson(hull2, { fillColor: 'red', style: {color: 'red', fillColor: 'red'} });
+	}
+	
+	if( 'leaflet' == map_type ) {
+		allFeatures = L.geoJSON(geojson);
+		allFeatures.addTo(map);
+		map.fitBounds(allFeatures.getBounds(), {
+            padding: [50, 50]
+        });
+		
+
+		L.geoJSON(hull).addTo(map);
+		L.geoJSON(
+			hull2, {
+				style: {color: 'red'}				
+			}).addTo(map);
+	}
 	
 	if( 'openlayers' == map_type ) {
 	    var features = new ol.format.GeoJSON().readFeatures(geojson, {
