@@ -12,7 +12,7 @@ class wpGEOjson {
 	const CACHE_KEY_SEP		= '_';
 	const CACHE_TTL			= 86400;	//seconds
 	
-	static $add_script;	// this will help adding scripts on pages containing a map shortcode
+	static $load_scripts = array();	// this will help adding scripts on pages containing a map shortcode
 	
 	/**
 	 * Class constructor
@@ -40,9 +40,7 @@ class wpGEOjson {
 	 * @return string - html markup for map div
 	 */
 	public function shortcode_wpgeojson_map( $atts ) {
-		
-		self::$add_script = true;
-		
+				
 		$map_type_class = 'leaflet';
 		if( !empty( $atts['map_type'] ) ) {
 			if( 'openlayers' == $atts['map_type'] )
@@ -50,7 +48,7 @@ class wpGEOjson {
 			if( 'google-maps' == $atts['map_type'] )
 				$map_type_class = 'ggmap';
 		}
-		self::$add_script = $map_type_class;
+		array_push( self::$load_scripts, $map_type_class );
 		
 		$html = '';
 		$html .= '<div id="map-canvas" ';
@@ -316,24 +314,24 @@ class wpGEOjson {
 	 *
 	 */
 	public function print_script() {
-		if ( ! self::$add_script )
+		if ( empty( self::$load_scripts ) )
 			return;
 		
 		/** Google maps **/
-		if( 'ggmap' == self::$add_script ) {
+		if( in_array( 'ggmap', self::$load_scripts ) ) {
 			wp_print_scripts('ggmap-api');
 			wp_print_scripts('ggmap-clusterer');	
 		}
 		/** **/
 		
 		/** Openlayers **/
-		if( 'openlayers' == self::$add_script ) {
+		if( in_array( 'openlayers', self::$load_scripts ) ) {
 			wp_print_scripts('openlayers');
 		}
 		/** **/
 		
 		/** Leaflet **/
-		if( 'leaflet' == self::$add_script ) {
+		if( in_array( 'leaflet', self::$load_scripts ) ) {
 			wp_print_scripts('leaflet');
 		}
 		/** **/
