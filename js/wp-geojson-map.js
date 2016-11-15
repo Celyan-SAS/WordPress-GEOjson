@@ -140,9 +140,10 @@ function processPoints(geometry, callback, thisArg) {
  */
 function add_markers( geojson, map_type ) {
 	
-	// Turf test		
+	/* Turf test		
 	var hull = turf.concave( geojson, 15, 'kilometers' );
 	var hull2 = turf.convex( geojson );
+	*/
 	
 	if( 'ggmap' == map_type ) {
 		map.data.addGeoJson(geojson);
@@ -157,12 +158,13 @@ function add_markers( geojson, map_type ) {
             padding: [50, 50]
         });
 		
-
+		/* hull test
 		L.geoJSON(hull).addTo(map);
 		L.geoJSON(
 			hull2, {
 				style: {color: 'red'}				
 			}).addTo(map);
+		*/
 	}
 	
 	if( 'openlayers' == map_type ) {
