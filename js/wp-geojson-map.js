@@ -3,6 +3,7 @@
 
 console.log( 'wp-geojson-map js script loaded.' );
 var map;
+var additionalFeatures = [];
 
 /**
  * jQuery functions
@@ -157,6 +158,11 @@ function add_markers( geojson, map_type ) {
 		map.fitBounds(allFeatures.getBounds(), {
             padding: [50, 50]
         });
+		
+		additionalFeatures.foreach(function(item,index){
+			var feature = L.geoJSON(item);
+			feature.addTo(map);
+		});
 		
 		/* hull test
 		L.geoJSON(hull).addTo(map);
