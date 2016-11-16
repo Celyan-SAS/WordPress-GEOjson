@@ -159,7 +159,7 @@ function add_markers( geojson, map_type ) {
             padding: [50, 50]
         });
 		
-		additionalFeatures.foreach(function(item,index){
+		additionalFeatures.forEach(function(item){
 			var feature = L.geoJSON(item);
 			feature.addTo(map);
 		});
