@@ -153,16 +153,28 @@ function add_markers( geojson, map_type ) {
 	}
 	
 	if( 'leaflet' == map_type ) {
-		allFeatures = L.geoJSON(geojson);
-		allFeatures.addTo(map);
-		map.fitBounds(allFeatures.getBounds(), {
+		allFeatures = [];
+		features = L.geoJSON(geojson);
+		features.addTo(map);
+		allFeatures.push( features );
+		
+		var bounds = features.getBounds();
+		map.fitBounds( bounds, {
             padding: [50, 50]
         });
-		
+			
 		additionalFeatures.forEach(function(item){
 			var feature = L.geoJSON(item);
 			feature.addTo(map);
+			allFeatures.push( feature );
+			feature.on("click", function (e) {
+                // do something here like display a popup
+                console.log(e);
+            });
 		});
+		
+		var group = L.featureGroup( allFeatures );
+		map.fitBounds(group.getBounds());
 		
 		/* hull test
 		L.geoJSON(hull).addTo(map);
