@@ -78,12 +78,16 @@ class wpGEOjson {
 		if( !empty( $_REQUEST['acf_field_id'] ) )
 			$acf_field_id = sanitize_text_field( $_REQUEST['acf_field_id'] );
 		
+		$selection = 'all';
+		if( !empty( $_REQUEST['selection'] ) )
+			$acf_field_id = sanitize_text_field( $_REQUEST['selection'] );
+		
 		if( !$acf_field_id )
 			if( !$acf_field_id = $this->find_acf_ggmap_field( $post_type ) )
 				$this->send_ajax_error( 'geo field not found' );
 		
-		//if( $this->in_cache( $post_type, $acf_field_id, 'all' ) )
-		//	$this->send_ajax_response( $this->from_cache( $post_type, $acf_field_id, 'all' ) );
+		//if( $this->in_cache( $post_type, $acf_field_id, $selection ) )
+		//	$this->send_ajax_response( $this->from_cache( $post_type, $acf_field_id, $selection ) );
 		
 		if( !function_exists( 'get_field' ) )
 			$this->send_ajax_error( 'ACF plugin is not active' );
@@ -99,6 +103,11 @@ class wpGEOjson {
 				'posts_per_page'=> -1,
 				'offset'	=> 0
 		);
+		
+		/** Selection of one specific post id **/
+		if( !empty( $selection ) && preg_match( '/^\d+$/', $selection ) )
+			$args['p'] = $selection;
+		
 		$the_query = new WP_Query( $args );
 		
 		if ( $the_query->have_posts() ) {
