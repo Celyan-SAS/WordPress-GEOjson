@@ -80,7 +80,7 @@ class wpGEOjson {
 		
 		$selection = 'all';
 		if( !empty( $_REQUEST['selection'] ) )
-			$acf_field_id = sanitize_text_field( $_REQUEST['selection'] );
+			$selection = sanitize_text_field( $_REQUEST['selection'] );
 		
 		if( !$acf_field_id )
 			if( !$acf_field_id = $this->find_acf_ggmap_field( $post_type ) )
