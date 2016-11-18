@@ -75,9 +75,9 @@ class wpGEOjson {
 				// Shortcode description for cheatsheet and generator
 				'desc' => __( 'GEOjson map', 'textdomain' ),
 				// Custom icon (font-awesome)
-				'icon' => 'map-marker',
+				'icon' => 'plus',
 				// Name of custom shortcode function
-				'function' => 'su_shortcode_wpgeojson_map'
+				'function' => 'wpgeojson_map'
 		);
 		
 		return $shortcodes;
