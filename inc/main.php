@@ -77,7 +77,7 @@ class wpGEOjson {
 				// Custom icon (font-awesome)
 				'icon' => 'map-marker',
 				// Name of custom shortcode function
-				'function' => array( $this, 'shortcode_wpgeojson_map' )
+				'function' => 'su_shortcode_wpgeojson_map'
 		);
 		
 		return $shortcodes;
