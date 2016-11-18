@@ -32,7 +32,7 @@ class wpGEOjson {
 		add_action( 'wp_ajax_nopriv_get_points_for_post_type', array( $this, 'ajax_get_points_for_post_type' ) );
 		
 		/** Shortcodes Ultimate shortcode to configure/insert map shortcode **/
-		//add_filter( 'su/data/shortcodes', array( $this, 'su_shortcodes' ) );
+		add_filter( 'su/data/shortcodes', array( $this, 'su_shortcodes' ) );
 	}
 		
 	/**
