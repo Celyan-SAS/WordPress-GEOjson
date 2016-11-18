@@ -4,6 +4,8 @@
 console.log( 'wp-geojson-map js script loaded.' );
 var map;
 var additionalFeatures = [];
+var allFeatures = [];
+var allLayers = [];
 
 /**
  * jQuery functions
@@ -153,10 +155,11 @@ function add_markers( geojson, map_type ) {
 	}
 	
 	if( 'leaflet' == map_type ) {
-		allFeatures = [];
+		
 		features = L.geoJSON(geojson);
-		features.addTo(map);
+		layer = features.addTo(map);
 		allFeatures.push( features );
+		allLayers.push( layer );
 		
 		var bounds = features.getBounds();
 		map.fitBounds( bounds, {
@@ -165,8 +168,9 @@ function add_markers( geojson, map_type ) {
 			
 		additionalFeatures.forEach(function(item){
 			var feature = L.geoJSON(item);
-			feature.addTo(map);
+			layer = feature.addTo(map);
 			allFeatures.push( feature );
+			allLayers.push( layer );
 			feature.on("click", function (e) {
                 // do something here like display a popup
                 console.log(e);
