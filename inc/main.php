@@ -28,6 +28,10 @@ class wpGEOjson {
 		add_shortcode( 'wpgeojson_map', array( $this, 'shortcode_wpgeojson_map' ) );
 		add_shortcode( 'su_wpgeojson_map', array( $this, 'shortcode_wpgeojson_map' ) );
 		
+		/** Map companion list shortcode **/
+		add_shortcode( 'wpgeojson_list', array( $this, 'shortcode_wpgeojson_list' ) );
+		add_shortcode( 'su_wpgeojson_list', array( $this, 'shortcode_wpgeojson_list' ) );
+		
 		/** Ajax method to get all points of a given post_type **/
 		add_action( 'wp_ajax_get_points_for_post_type', array( $this, 'ajax_get_points_for_post_type' ) );
 		add_action( 'wp_ajax_nopriv_get_points_for_post_type', array( $this, 'ajax_get_points_for_post_type' ) );
@@ -128,6 +132,26 @@ class wpGEOjson {
 
 		$html .= '>';
 		$html .= '</div>';
+		return $html;
+	}
+	
+	/**
+	 * Shortcode to insert companion dynamic list box to the map
+	 *
+	 * @param array $atts
+	 * @return string - html markup for list div
+	 */
+	public function shortcode_wpgeojson_list( $atts ) {
+		
+		//TODO: handle a 'fields' attribute to choose which data field(s) we 
+		// extract (title, content, excerpt, daet, author, ACF fields, etc)
+		// - implement title and address ACF field as default
+		// all this should be made available to the JS through data- attributes in the HTML markup
+		
+		$html = '';
+		$html .= '<div class="wpgeojson_list">';
+		$html .= '</div>';
+		
 		return $html;
 	}
 	

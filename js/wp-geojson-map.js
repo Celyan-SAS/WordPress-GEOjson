@@ -134,6 +134,7 @@ function ggmap_init() {
 			map.fitBounds(bounds);
 		});
 	
+		google.maps.event.addListener( map, 'bounds_changed', 'on_bounds_changed' );
 	} else {
 		console.log( 'No map canvas on this page.' );
 	}
@@ -153,6 +154,11 @@ function processPoints(geometry, callback, thisArg) {
 	  }
 	}
 
+function on_bounds_changed() {
+	var visible = get_visible_markers();
+	
+}
+
 /**
  * GEOjson functions
  *
@@ -166,8 +172,11 @@ function add_markers( geojson, map_type ) {
 	
 	if( 'ggmap' == map_type ) {
 		map.data.addGeoJson(geojson);
+		
+		/* hull test
 		map.data.addGeoJson(hull);
 		map.data.addGeoJson(hull2, { fillColor: 'red', style: {color: 'red', fillColor: 'red'} });
+		*/
 	}
 	
 	if( 'leaflet' == map_type ) {
