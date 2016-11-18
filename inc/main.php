@@ -123,7 +123,7 @@ class wpGEOjson {
 		if( !empty( $atts['post_type'] ) ) {
 			$html .= 'data-post_type="' . $atts['post_type'] . '" ';
 			
-		if( !empty( $atts['load_points'] ) && 'no' == $atts['load_points'] ) {
+		if( !empty( $atts['load_points'] ) && 'no' == $atts['load_points'] )
 			$html .= 'data-load_points="' . $atts['load_points'] . '" ';
 
 		$html .= '>';
