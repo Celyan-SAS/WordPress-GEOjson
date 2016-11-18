@@ -76,8 +76,14 @@ class wpGEOjson {
 								'type'		=> 'image_source',
 								'default'	=> 'none',
 								'name'		=> __( 'Marker icon', 'textdomain' ),
-								'desc'		=> __( 'Select a small image in the media library', 'su' ),
+								'desc'		=> __( 'Select a small image in the media library', 'textdomain' ),
 						),
+						'load_points' => array(
+								'type' 		=> 'bool',
+								'default' 	=> 'yes',
+								'name'		=> __( 'Loid points', 'textdomain' ),
+								'desc'		=> __( 'Uncheck to leave map blank', 'textdomain' ),
+						)
 				),
 				// Shortcode description for cheatsheet and generator
 				'desc' => __( 'GEOjson map', 'textdomain' ),
@@ -110,16 +116,16 @@ class wpGEOjson {
 		$html = '';
 		$html .= '<div id="map-canvas" ';
 		$html .= 'class="wpgeojson_map ' . $map_type_class . '" ';
+		
 		if( !empty( $atts['selection'] ) ) {
 			$html .= 'data-selection="' . $atts['selection'] . '" ';
-		} else {
-			//$html .= 'data-selection="all" ';
-		}
+
 		if( !empty( $atts['post_type'] ) ) {
 			$html .= 'data-post_type="' . $atts['post_type'] . '" ';
-		} else {
-			//$html .= 'data-post_type="post" ';
-		}
+			
+		if( !empty( $atts['load_points'] ) && 'no' == $atts['load_points'] ) {
+			$html .= 'data-load_points="' . $atts['load_points'] . '" ';
+
 		$html .= '>';
 		$html .= '</div>';
 		return $html;

@@ -41,7 +41,7 @@ var allLayers = [];
 			leaflet_init();
 		
 		/** launch load_points ajax call **/		
-		if( $('#map-canvas').data('selection') )
+		if( !$('#map-canvas').attr('data-load_points') || 'yes'==$('#map-canvas').data('load_points') )
 			load_points( 
 				post_type, 
 				selection,
