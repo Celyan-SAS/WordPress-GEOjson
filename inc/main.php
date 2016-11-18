@@ -117,10 +117,10 @@ class wpGEOjson {
 		$html .= '<div id="map-canvas" ';
 		$html .= 'class="wpgeojson_map ' . $map_type_class . '" ';
 		
-		if( !empty( $atts['selection'] ) ) {
+		if( !empty( $atts['selection'] ) )
 			$html .= 'data-selection="' . $atts['selection'] . '" ';
 
-		if( !empty( $atts['post_type'] ) ) {
+		if( !empty( $atts['post_type'] ) )
 			$html .= 'data-post_type="' . $atts['post_type'] . '" ';
 			
 		if( !empty( $atts['load_points'] ) && 'no' == $atts['load_points'] )
