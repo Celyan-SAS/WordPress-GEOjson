@@ -398,7 +398,7 @@ class wpGEOjson {
 		/** Google Maps specific **/
 		wp_register_script(
 			'ggmap-api',
-			'http://maps.google.com/maps/api/js?sensor=true&libraries=places,geometry&key=AIzaSyCqT9oozbXDPphT-__n4OTPGWxBGPYVreg',
+			'http://maps.google.com/maps/api/js?libraries=places,geometry&key=AIzaSyCqT9oozbXDPphT-__n4OTPGWxBGPYVreg',
 			array('jquery'), 
 			'1.0',
 			true

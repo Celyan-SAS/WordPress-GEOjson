@@ -157,6 +157,17 @@ function processPoints(geometry, callback, thisArg) {
 function on_bounds_changed() {
 	var visible = get_visible_markers();
 	
+	//TODO: check if a companion list is present
+	//TODO: if it is, update it with visible marker info
+}
+
+function get_visible_markers() {
+	
+	var visible = [];
+	
+	//TODO: iterate on allFeatures
+	
+	return visible;
 }
 
 /**
