@@ -49,13 +49,19 @@ class wpGEOjson {
 				'group' => 'media content',
 				'atts' => array(
 						'map_type' => array(
-								'type'		=> 'text',
+								'type'		=> 'select',
+								'values'	=> array(
+									'leaflet'		=> __( 'Leaflet', 'textdomain' ),
+									'openlayers'	=> __( 'Openlayers', 'textdomain' ),
+									'google-maps'	=> __( 'Google Maps', 'textdomain' )		
+								),
 								'name'		=> __( 'Map type', 'textdomain' ),
 								'desc'		=> __( 'Leaflet / Openlayers / Google-Maps', 'textdomain' ),
 								'default'	=> 'leaflet'
 						),
 						'post_type' => array(
-								'type'		=> 'text',
+								'type' 		=> 'select',
+								'values' 	=> Su_Tools::get_types(),
 								'name'		=> __( 'Post type', 'textdomain' ),
 								'desc'		=> __( 'Select geo-encoded post type', 'textdomain' ),
 								'default'	=> 'post'
