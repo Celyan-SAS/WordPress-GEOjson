@@ -181,7 +181,7 @@ class wpGEOjson {
 		 * Selection based on an ACF relationship field 
 		 * @see: https://www.advancedcustomfields.com/resources/querying-relationship-fields/
 		 */
-		if( !empty( $selection ) && preg_match( '/^relation:([^:]+):(\d+)$/', $selection, $matches ) )
+		if( !empty( $selection ) && preg_match( '/^relation\:([^\:]+)\:(\d+)$/', $selection, $matches ) )
 			$args['meta_query'] = array(
 				array(
 					'key'	=> $matches[1], 			// name of custom field
