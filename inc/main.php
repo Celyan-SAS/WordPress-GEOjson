@@ -26,6 +26,7 @@ class wpGEOjson {
 		
 		/** Map Shortcode **/
 		add_shortcode( 'wpgeojson_map', array( $this, 'shortcode_wpgeojson_map' ) );
+		add_shortcode( 'su_wpgeojson_map', array( $this, 'shortcode_wpgeojson_map' ) );
 		
 		/** Ajax method to get all points of a given post_type **/
 		add_action( 'wp_ajax_get_points_for_post_type', array( $this, 'ajax_get_points_for_post_type' ) );
@@ -75,7 +76,7 @@ class wpGEOjson {
 				// Shortcode description for cheatsheet and generator
 				'desc' => __( 'GEOjson map', 'textdomain' ),
 				// Custom icon (font-awesome)
-				'icon' => 'plus',
+				'icon' => 'map-marker',
 				// Name of custom shortcode function
 				'function' => 'wpgeojson_map'
 		);
