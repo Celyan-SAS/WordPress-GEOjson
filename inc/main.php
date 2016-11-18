@@ -30,8 +30,58 @@ class wpGEOjson {
 		/** Ajax method to get all points of a given post_type **/
 		add_action( 'wp_ajax_get_points_for_post_type', array( $this, 'ajax_get_points_for_post_type' ) );
 		add_action( 'wp_ajax_nopriv_get_points_for_post_type', array( $this, 'ajax_get_points_for_post_type' ) );
+		
+		/** Shortcodes Ultimate shortcode to configure/insert map shortcode **/
+		add_filter( 'su/data/shortcodes', array( $this, 'su_shortcodes' ) );
 	}
-	
+		
+	/**
+	 * Shortcode generator
+	 * (Shortcodes Ultimate plugin add-on)
+	 * 
+	 */
+	public function su_shortcodes( $shortcodes ) {
+
+		$shortcodes['wpgeojson_map'] = array(
+				'name' => __( 'GEOjson map', 'textdomain' ),
+				'type' => 'single',
+				'group' => 'media content',
+				'atts' => array(
+						'map_type' => array(
+								'type'		=> 'text',
+								'name'		=> __( 'Map type', 'textdomain' ),
+								'desc'		=> __( 'Leaflet / Openlayers / Google-Maps', 'textdomain' ),
+								'default'	=> 'leaflet'
+						),
+						'post_type' => array(
+								'type'		=> 'text',
+								'name'		=> __( 'Post type', 'textdomain' ),
+								'desc'		=> __( 'Select geo-encoded post type', 'textdomain' ),
+								'default'	=> 'post'
+						),
+						'selection' => array(
+								'type'		=> 'text',
+								'name'		=> __( 'Selection', 'textdomain' ),
+								'desc'		=> __( 'See plugin documentation for data selector options', 'textdomain' ),
+								'default'	=> 'all'
+						),
+						'marker_icon' => array(
+								'type'		=> 'image_source',
+								'default'	=> 'none',
+								'name'		=> __( 'Marker icon', 'textdomain' ),
+								'desc'		=> __( 'Select a small image in the media library', 'su' ),
+						),
+				),
+				// Shortcode description for cheatsheet and generator
+				'desc' => __( 'GEOjson map', 'textdomain' ),
+				// Custom icon (font-awesome)
+				'icon' => 'map-marker',
+				// Name of custom shortcode function
+				'function' => array( $this, 'shortcode_wpgeojson_map' )
+		);
+		
+		return $shortcodes;
+	}
 	
 	/**
 	 * Shortcode to insert a map
