@@ -2,6 +2,7 @@
 /** Map and geolocation JavaScript functions **/
 
 console.log( 'wp-geojson-map js script loaded.' );
+
 var map;
 var additionalFeatures = [];
 var allFeatures = [];
@@ -14,8 +15,18 @@ var allLayers = [];
 (function($) {
 	$(document).ready(function() {
 		
+		/** defaults **/
 		var map_type = 'leaflet';
 		
+		var post_type = 'post';
+		if( $('#map-canvas').attr('data-post_type') )
+			post_type = $('#map-canvas').data('post_type');
+		
+		var selection = 'all';
+		if( $('#map-canvas').attr('data-selection') )
+			selection = $('#map-canvas').data('selection');
+		
+		/** Check map type **/
 		if( $('#map-canvas').hasClass('ggmap') ) {
 			ggmap_init();
 			map_type = 'ggmap';
@@ -29,14 +40,19 @@ var allLayers = [];
 		if( $('#map-canvas').hasClass('leaflet') )
 			leaflet_init();
 		
+		/** launch load_points ajax call **/		
 		if( $('#map-canvas').data('selection') )
 			load_points( 
-				$('#map-canvas').data('post_type'), 
-				$('#map-canvas').data('selection'),
+				post_type, 
+				selection,
 				map_type
 			);
 	});
 	
+	/** 
+	 * Ajax request to load needed points/features on the map
+	 * 
+	 */
 	function load_points( post_type, selection, map_type ) {
 		console.log( 'Loading points...' );
 

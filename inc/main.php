@@ -110,10 +110,16 @@ class wpGEOjson {
 		$html = '';
 		$html .= '<div id="map-canvas" ';
 		$html .= 'class="wpgeojson_map ' . $map_type_class . '" ';
-		if( !empty( $atts['selection'] ) )
+		if( !empty( $atts['selection'] ) ) {
 			$html .= 'data-selection="' . $atts['selection'] . '" ';
-		if( !empty( $atts['post_type'] ) )
+		} else {
+			//$html .= 'data-selection="all" ';
+		}
+		if( !empty( $atts['post_type'] ) ) {
 			$html .= 'data-post_type="' . $atts['post_type'] . '" ';
+		} else {
+			//$html .= 'data-post_type="post" ';
+		}
 		$html .= '>';
 		$html .= '</div>';
 		return $html;
