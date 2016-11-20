@@ -76,6 +76,12 @@ class wpGEOjson {
 								'desc'		=> __( 'See plugin documentation for data selector options', 'textdomain' ),
 								'default'	=> 'all'
 						),
+						'file' => array(
+								'type' 		=> 'upload',
+								'name'		=> __( 'File', 'textdomain' ),
+								'desc'		=> __( 'Please provide a GEOjson file', 'textdomain' ),
+								'default'	=> ''
+						),
 						'marker_icon' => array(
 								'type'		=> 'image_source',
 								'default'	=> 'none',
@@ -127,6 +133,9 @@ class wpGEOjson {
 		if( !empty( $atts['post_type'] ) )
 			$html .= 'data-post_type="' . $atts['post_type'] . '" ';
 			
+		if( !empty( $atts['file'] ) )
+			$html .= 'data-file="' . $atts['file'] . '" ';
+		
 		if( !empty( $atts['load_points'] ) && 'no' == $atts['load_points'] )
 			$html .= 'data-load_points="' . $atts['load_points'] . '" ';
 

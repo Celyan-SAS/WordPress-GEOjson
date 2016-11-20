@@ -26,6 +26,10 @@ var allLayers = [];
 		if( $('#map-canvas').attr('data-selection') )
 			selection = $('#map-canvas').data('selection');
 		
+		var file = '';
+		if( $('#map-canvas').attr('data-file') )
+			file = $('#map-canvas').data('file');
+		
 		/** Check map type **/
 		if( $('#map-canvas').hasClass('ggmap') ) {
 			ggmap_init();
@@ -45,6 +49,7 @@ var allLayers = [];
 			load_points( 
 				post_type, 
 				selection,
+				file,
 				map_type
 			);
 	});
@@ -53,24 +58,38 @@ var allLayers = [];
 	 * Ajax request to load needed points/features on the map
 	 * 
 	 */
-	function load_points( post_type, selection, map_type ) {
+	function load_points( post_type, selection, file, map_type ) {
 		console.log( 'Loading points...' );
 
-		$.post( ajaxurl, {
-			action: 'get_points_for_post_type',
-			post_type: post_type,
-			selection: selection
-		}, function( data ) {
-			console.log( 'Ajax get_points_for_post_type data length: ' + data.length );
-			//console.log( data );
-			add_markers( data, map_type );
-		}).done(function() {
-			console.log( "Ajax get_points_for_post_type success" );
-		}).fail(function() {
-			console.log( "Ajax get_points_for_post_type error" );
-		}).always(function() {
-			console.log( "Ajax get_points_for_post_type finished" );
-		});
+		if( '' != file ) {
+			/** get existing GEOjson file **/
+			console.log('loading GEOjson file ' + file + '...');
+			var fetures = new L.geoJson();
+			$.ajax({
+				dataType: "json",
+				url: file,
+				success: function(data) {
+					add_markers( data, map_type );
+				}
+			});
+		} else {
+			/** get GEOjson list of selected points **/
+			$.post( ajaxurl, {
+				action: 'get_points_for_post_type',
+				post_type: post_type,
+				selection: selection
+			}, function( data ) {
+				console.log( 'Ajax get_points_for_post_type data length: ' + data.length );
+				//console.log( data );
+				add_markers( data, map_type );
+			}).done(function() {
+				console.log( "Ajax get_points_for_post_type success" );
+			}).fail(function() {
+				console.log( "Ajax get_points_for_post_type error" );
+			}).always(function() {
+				console.log( "Ajax get_points_for_post_type finished" );
+			});
+		}
 	}
 })( jQuery );
 
