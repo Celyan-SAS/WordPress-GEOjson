@@ -30,6 +30,10 @@ var allLayers = [];
 		if( $('#map-canvas').attr('data-file') )
 			file = $('#map-canvas').data('file');
 		
+		var popup_fields = '';
+		if( $('#map-canvas').attr('popup_fields') )
+			popup_fields = $('#map-canvas').data('popup_fields');
+		
 		/** Check map type **/
 		if( $('#map-canvas').hasClass('ggmap') ) {
 			ggmap_init();
@@ -50,6 +54,7 @@ var allLayers = [];
 				post_type, 
 				selection,
 				file,
+				popup_fields,
 				map_type
 			);
 	});
@@ -58,7 +63,7 @@ var allLayers = [];
 	 * Ajax request to load needed points/features on the map
 	 * 
 	 */
-	function load_points( post_type, selection, file, map_type ) {
+	function load_points( post_type, selection, file, popup_fields, map_type ) {
 		console.log( 'Loading points...' );
 
 		if( '' != file ) {
@@ -69,7 +74,7 @@ var allLayers = [];
 				dataType: "json",
 				url: file,
 				success: function(data) {
-					add_markers( data, map_type );
+					add_markers( data, popup_fields, map_type );
 				}
 			});
 		} else {
@@ -81,7 +86,7 @@ var allLayers = [];
 			}, function( data ) {
 				console.log( 'Ajax get_points_for_post_type data length: ' + data.length );
 				//console.log( data );
-				add_markers( data, map_type );
+				add_markers( data, popup_fields, map_type );
 			}).done(function() {
 				console.log( "Ajax get_points_for_post_type success" );
 			}).fail(function() {
@@ -193,7 +198,7 @@ function get_visible_markers() {
  * GEOjson functions
  *
  */
-function add_markers( geojson, map_type ) {
+function add_markers( geojson, popup_fields, map_type ) {
 	
 	/* Turf test		
 	var hull = turf.concave( geojson, 15, 'kilometers' );
@@ -211,7 +216,19 @@ function add_markers( geojson, map_type ) {
 	
 	if( 'leaflet' == map_type ) {
 		
-		features = L.geoJSON(geojson);
+		popup_arr = popup_fields.split(",");
+		features = L.geoJSON(
+			geojson, {
+				style: {},
+				onEachFeature: function (feature, layer) {
+					popupcontent = '';
+					popup_arr.forEach( function(field){
+						popupcontent += '<div class="' + field + '">' + feature.properties[field] + '</div>';
+					});
+					layer.bindPopup( popupcontent );
+				} 
+			}
+		);
 		layer = features.addTo(map);
 		allFeatures.push( features );
 		allLayers.push( layer );

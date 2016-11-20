@@ -97,6 +97,12 @@ class wpGEOjson {
 								'name'		=> __( 'Marker icon', 'textdomain' ),
 								'desc'		=> __( 'Select a small image in the media library', 'textdomain' ),
 						),
+						'popup_fields' => array(
+								'type'		=> 'text',
+								'name'		=> __( 'Pop-up fields', 'textdomain' ),
+								'desc'		=> __( 'Coma-separated list of fields to display in the bound pop-up', 'textdomain' ),
+								'default'	=> 'all'
+						),
 						'load_points' => array(
 								'type' 		=> 'bool',
 								'default' 	=> 'yes',
@@ -147,6 +153,9 @@ class wpGEOjson {
 		
 		if( !empty( $atts['load_points'] ) && 'no' == $atts['load_points'] )
 			$html .= 'data-load_points="' . $atts['load_points'] . '" ';
+		
+		if( !empty( $atts['popup_fields'] ) )
+			$html .= 'data-popup_fields="' . $atts['popup_fields'] . '" ';
 
 		if( !empty( $atts['height'] ) )
 			$html .= 'style="min-height:' . $atts['height'] . 'px;" ';
