@@ -139,7 +139,7 @@ class wpGEOjson {
 		if( !empty( $atts['load_points'] ) && 'no' == $atts['load_points'] )
 			$html .= 'data-load_points="' . $atts['load_points'] . '" ';
 
-		$html .= '>';
+		$html .= ' style="min-height:250px;">';
 		$html .= '</div>';
 		return $html;
 	}
