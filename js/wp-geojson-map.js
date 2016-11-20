@@ -106,7 +106,7 @@ var allLayers = [];
 function leaflet_init() {
 	console.log( 'leaflet_init()' );
 	map = L.map('map-canvas').setView([47, 1.6], 5);
-	L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
 	}).addTo(map);
 }
