@@ -31,7 +31,7 @@ var allLayers = [];
 			file = $('#map-canvas').data('file');
 		
 		var popup_fields = '';
-		if( $('#map-canvas').attr('popup_fields') )
+		if( $('#map-canvas').attr('data-popup_fields') )
 			popup_fields = $('#map-canvas').data('popup_fields');
 		
 		/** Check map type **/
@@ -200,6 +200,7 @@ function get_visible_markers() {
  */
 function add_markers( geojson, popup_fields, map_type ) {
 	
+	console.log( 'popup_fields:' + popup_fields );
 	/* Turf test		
 	var hull = turf.concave( geojson, 15, 'kilometers' );
 	var hull2 = turf.convex( geojson );
@@ -217,6 +218,7 @@ function add_markers( geojson, popup_fields, map_type ) {
 	if( 'leaflet' == map_type ) {
 		
 		popup_arr = popup_fields.split(",");
+		console.log( 'popup_arr:' + popup_arr );
 		features = L.geoJSON(
 			geojson, {
 				style: {},
