@@ -82,6 +82,15 @@ class wpGEOjson {
 								'desc'		=> __( 'Please provide a GEOjson file', 'textdomain' ),
 								'default'	=> ''
 						),
+						'height' => array(
+								'type'		=> 'number',
+								'min'		=> 50,
+								'max'		=> 1000,
+								'step'		=> 1,
+								'default'	=> 250,
+								'name'		=> __( 'Map height', 'textdomain' ),
+								'desc'		=> __( 'inpixels', 'textdomain' )
+						),
 						'marker_icon' => array(
 								'type'		=> 'image_source',
 								'default'	=> 'none',
@@ -139,7 +148,10 @@ class wpGEOjson {
 		if( !empty( $atts['load_points'] ) && 'no' == $atts['load_points'] )
 			$html .= 'data-load_points="' . $atts['load_points'] . '" ';
 
-		$html .= ' style="min-height:250px;">';
+		if( !empty( $atts['height'] ) )
+			$html .= 'style="min-height:' . $atts['height'] . 'px;" ';
+		
+		$html .= '>';
 		$html .= '</div>';
 		return $html;
 	}
