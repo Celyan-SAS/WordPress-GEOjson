@@ -107,6 +107,12 @@ class wpGEOjson {
 								'desc'		=> __( 'Coma-separated list of fields to display in the bound pop-up', 'textdomain' ),
 								'default'	=> 'all'
 						),
+						'field_names' => array(
+								'type' 		=> 'bool',
+								'default' 	=> 'no',
+								'name'		=> __( 'Field names', 'textdomain' ),
+								'desc'		=> __( 'Display the field names in the bound pop-up', 'textdomain' ),
+						),
 						'load_points' => array(
 								'type' 		=> 'bool',
 								'default' 	=> 'yes',
@@ -161,6 +167,9 @@ class wpGEOjson {
 		if( !empty( $atts['popup_fields'] ) )
 			$html .= 'data-popup_fields="' . $atts['popup_fields'] . '" ';
 
+		if( !empty( $atts['field_names'] ) )
+			$html .= 'data-field_names="' . $atts['field_names'] . '" ';
+		
 		if( !empty( $atts['height'] ) )
 			$html .= 'style="min-height:' . $atts['height'] . 'px;" ';
 		
@@ -398,7 +407,7 @@ class wpGEOjson {
 			'wp-geojson-map',
 			plugins_url( '/js/wp-geojson-map.js', dirname( __FILE__ ) ),
 			array('jquery'), 
-			'1.0',
+			'1.1',
 			true
 		);
 		

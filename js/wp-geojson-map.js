@@ -34,6 +34,10 @@ var allLayers = [];
 		if( $('#map-canvas').attr('data-popup_fields') )
 			popup_fields = $('#map-canvas').data('popup_fields');
 		
+		var field_names = 'no';
+		if( $('#map-canvas').attr('data-field_names') )
+			popup_fields = $('#map-canvas').data('field_names');
+		
 		/** Check map type **/
 		if( $('#map-canvas').hasClass('ggmap') ) {
 			ggmap_init();
@@ -55,6 +59,7 @@ var allLayers = [];
 				selection,
 				file,
 				popup_fields,
+				field_names,
 				map_type
 			);
 	});
@@ -63,7 +68,7 @@ var allLayers = [];
 	 * Ajax request to load needed points/features on the map
 	 * 
 	 */
-	function load_points( post_type, selection, file, popup_fields, map_type ) {
+	function load_points( post_type, selection, file, popup_fields, field_names, map_type ) {
 		console.log( 'Loading points...' );
 
 		if( '' != file ) {
@@ -74,7 +79,7 @@ var allLayers = [];
 				dataType: "json",
 				url: file,
 				success: function(data) {
-					add_markers( data, popup_fields, map_type );
+					add_markers( data, popup_fields, field_names, map_type );
 				}
 			});
 		} else {
@@ -198,7 +203,7 @@ function get_visible_markers() {
  * GEOjson functions
  *
  */
-function add_markers( geojson, popup_fields, map_type ) {
+function add_markers( geojson, popup_fields, field_names, map_type ) {
 	
 	console.log( 'popup_fields:' + popup_fields );
 	/* Turf test		
@@ -225,7 +230,11 @@ function add_markers( geojson, popup_fields, map_type ) {
 				onEachFeature: function (feature, layer) {
 					popupcontent = '';
 					popup_arr.forEach( function(field){
-						popupcontent += '<div class="' + field + '">' + feature.properties[field] + '</div>';
+						popupcontent += '<div class="' + field + '">';
+						if( 'yes' == field_names )
+							popupcontent += '<strong>' + field + '</strong>';
+						popupcontent += feature.properties[field];
+						popupcontent += '</div>';
 					});
 					layer.bindPopup( popupcontent );
 				} 
