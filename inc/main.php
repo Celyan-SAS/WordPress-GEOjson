@@ -44,7 +44,7 @@ class wpGEOjson {
 		add_action('admin_init', array( $this, 'plugin_admin_init' ) );
 		
 		/** ACF compatible plugin default options page **/
-		//add_action('admin_init', array( $this, 'acf_add_options_page' ) );
+		add_action('init', array( $this, 'acf_add_options_page' ) );
 	}
 		
 	/**
@@ -536,12 +536,12 @@ class wpGEOjson {
 	 */
 	public function plugin_admin_init() {
 		register_setting( 
-			'plugin_options',							// Options group
-			'plugin_options', 							// Option name
+			'wpgeojson_options',						// Options group
+			'wpgeojson_options', 						// Option name
 			array( $this, 'plugin_options_validate'	)	// Sanitize callback
 		);
 		add_settings_section(
-			'plugin_main', 								// ID
+			'wpgeojson_main', 							// ID
 			'Default map settings',						// Title 
 			array( $this, 'plugin_section_text' ),		// Callback 'plugin'
 			'wpgeojson'									// Page
