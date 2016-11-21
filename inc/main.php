@@ -602,7 +602,7 @@ class wpGEOjson {
 		acf_add_options_sub_page(array(
 			'page_title' 	=> __( 'WP GEOjson Settings', 'wpgeojson' ),
 			'menu_title'	=> __( 'WP GEOjson', 'wpgeojson' ),
-			'parent_slug'	=> 'wpgeojson',
+			'parent_slug'	=> 'admin.php?page=wpgeojson',
 		));
 		
 		/*
