@@ -608,6 +608,7 @@ class wpGEOjson {
 			'menu'			=> __( 'WP GEOjson 3', 'wpgeojson' ),
 			'parent'		=> 'wpgeojson',
 			'slug'			=> 'wpjslug',
+			'capability'	=> 'manage_options',
 		));
 		
 		acf_add_options_sub_page(array(
@@ -619,6 +620,7 @@ class wpGEOjson {
 			'menu'			=> __( 'WP GEOjson 4', 'wpgeojson' ),
 			'parent'		=> 'admin.php?page=wpgeojson',
 			'slug'			=> 'wpjslugg',
+			'capability'	=> 'manage_options',
 		));
 		
 		/* */
