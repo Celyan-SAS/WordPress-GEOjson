@@ -44,7 +44,7 @@ class wpGEOjson {
 		add_action('admin_init', array( $this, 'plugin_admin_init' ) );
 		
 		/** ACF compatible plugin default options page **/
-		add_action('admin_menu', array( $this, 'acf_add_options_page' ), 99 );
+		add_action('init', array( $this, 'acf_add_options_page' ), 99 );
 	}
 		
 	/**
