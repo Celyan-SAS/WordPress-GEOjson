@@ -503,6 +503,15 @@ class wpGEOjson {
 	 * 
 	 */
 	public function plugin_admin_add_page() {
+
+		add_menu_page( 
+			__( 'WP GEOjson Settings', 'wpgeojson' ),	// Page title
+			__( 'WP GEOjson', 'wpgeojson' ), 			// Menu title
+			'manage_options', 							// Capability
+			'wpgeojson', 								// Menu slug
+			array( $this, 'plugin_options_page'	)		// Method
+		);
+		/*
 		add_options_page(
 			__( 'WP GEOjson Settings', 'wpgeojson' ),	// Page title
 			__( 'WP GEOjson', 'wpgeojson' ), 			// Menu title
@@ -510,6 +519,7 @@ class wpGEOjson {
 			'wpgeojson', 								// Menu slug
 			array( $this, 'plugin_options_page'	)		// Method
 		);
+		*/
 	}
 	
 	/**
@@ -522,8 +532,8 @@ class wpGEOjson {
 		<h2><?php echo __( 'WP GEOjson Settings', 'wpgeojson' ); ?></h2>
 		<?php echo __( 'Options relating to the WP GEOjson Plugin.', 'wpgeojson' ); ?>
 		<form action="options.php" method="post">
-		<?php settings_fields('plugin_options'); ?>
-		<?php do_settings_sections('plugin'); ?>
+		<?php settings_fields('wpgeojson_options'); ?>
+		<?php do_settings_sections('wpgeojson'); ?>
 		<input name="Submit" type="submit" value="<?php esc_attr_e('Save Changes'); ?>" />
 		</form>
 		</div> 
@@ -586,9 +596,16 @@ class wpGEOjson {
 	}
 	
 	public function acf_add_options_page() {
-		if( !function_exists('acf_add_options_page') )
+		if( !function_exists('acf_add_options_sub_page') )
 			return;
 
+		acf_add_options_sub_page(array(
+			'page_title' 	=> __( 'WP GEOjson Settings', 'wpgeojson' ),
+			'menu_title'	=> __( 'WP GEOjson', 'wpgeojson' ),
+			'parent_slug'	=> 'wpgeojson',
+		));
+		
+		/*
 		acf_add_options_page(array(
 			'page_title' 	=> __( 'WP GEOjson Settings', 'wpgeojson' ),
 			'menu_title'	=> __( 'WP GEOjson', 'wpgeojson' ),
@@ -596,6 +613,7 @@ class wpGEOjson {
 			'capability'	=> 'manage_options',
 			'redirect'		=> false
 		));
+		*/
 	}
 }
 ?>
