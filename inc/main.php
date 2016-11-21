@@ -598,6 +598,8 @@ class wpGEOjson {
 	public function acf_add_options_page() {
 		if( !function_exists('acf_add_options_sub_page') )
 			return;
+		
+		die('test');
 
 		acf_add_options_sub_page(array(
 			'page_title' 	=> __( 'WP GEOjson Settings', 'wpgeojson' ),
