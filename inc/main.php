@@ -603,17 +603,26 @@ class wpGEOjson {
 			'page_title' 	=> __( 'WP GEOjson Settings', 'wpgeojson' ),
 			'menu_title'	=> __( 'WP GEOjson', 'wpgeojson' ),
 			'parent_slug'	=> 'admin.php?page=wpgeojson',
+			
+			'title' 		=> __( 'WP GEOjson Settings', 'wpgeojson' ),
+			'menu'			=> __( 'WP GEOjson', 'wpgeojson' ),
+			'parent'		=> 'admin.php?page=wpgeojson',
+			'slug'			=> 'wpjslug',
 		));
 		
-		/*
+		/* */
 		acf_add_options_page(array(
-			'page_title' 	=> __( 'WP GEOjson Settings', 'wpgeojson' ),
-			'menu_title'	=> __( 'WP GEOjson', 'wpgeojson' ),
+			'page_title' 	=> __( 'WP GEOjson Settings 2', 'wpgeojson' ),
+			'menu_title'	=> __( 'WP GEOjson 2', 'wpgeojson' ),
 			'menu_slug' 	=> 'wpgeojson-settings',
 			'capability'	=> 'manage_options',
-			'redirect'		=> false
+			'redirect'		=> false,
+			
+			'title' 		=> __( 'WP GEOjson Settings 2', 'wpgeojson' ),
+			'menu'			=> __( 'WP GEOjson 2', 'wpgeojson' ),
+			'slug' 			=> 'wpgeojson-settings',
 		));
-		*/
+		/* */
 	}
 }
 ?>
