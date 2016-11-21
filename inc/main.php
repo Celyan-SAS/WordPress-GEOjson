@@ -561,7 +561,7 @@ class wpGEOjson {
 			'Plugin Text Input', 						// Title
 			array( $this, 'plugin_setting_string' ), 	// Callback
 			'wpgeojson', 								// Page
-			'plugin_main'								// Section
+			'wpgeojson_main'							// Section
 		);
 	}
 	
