@@ -600,14 +600,25 @@ class wpGEOjson {
 			return;
 
 		acf_add_options_sub_page(array(
-			'page_title' 	=> __( 'WP GEOjson Settings', 'wpgeojson' ),
-			'menu_title'	=> __( 'WP GEOjson', 'wpgeojson' ),
+			'page_title' 	=> __( 'WP GEOjson Settings 3', 'wpgeojson' ),
+			'menu_title'	=> __( 'WP GEOjson 3', 'wpgeojson' ),
 			'parent_slug'	=> 'wpgeojson',
 			
-			'title' 		=> __( 'WP GEOjson Settings', 'wpgeojson' ),
-			'menu'			=> __( 'WP GEOjson', 'wpgeojson' ),
+			'title' 		=> __( 'WP GEOjson Settings 3', 'wpgeojson' ),
+			'menu'			=> __( 'WP GEOjson 3', 'wpgeojson' ),
 			'parent'		=> 'wpgeojson',
 			'slug'			=> 'wpjslug',
+		));
+		
+		acf_add_options_sub_page(array(
+			'page_title' 	=> __( 'WP GEOjson Settings 4', 'wpgeojson' ),
+			'menu_title'	=> __( 'WP GEOjson 4', 'wpgeojson' ),
+			'parent_slug'	=> 'admin.php?page=wpgeojson',
+				
+			'title' 		=> __( 'WP GEOjson Settings 4', 'wpgeojson' ),
+			'menu'			=> __( 'WP GEOjson 4', 'wpgeojson' ),
+			'parent'		=> 'admin.php?page=wpgeojson',
+			'slug'			=> 'wpjslugg',
 		));
 		
 		/* */
