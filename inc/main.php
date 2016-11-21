@@ -505,8 +505,8 @@ class wpGEOjson {
 			__( 'WP GEOjson Settings', 'wpgeojson' ),	// Page title
 			__( 'WP GEOjson', 'wpgeojson' ), 			// Menu title
 			'manage_options', 							// Capability
-			'wpgeojson', 								// Menu slug
-			//array( $this, 'plugin_options_page'	)		// Method
+			'wpgeojson' 								// Menu slug
+			//, array( $this, 'plugin_options_page'	)		// Method
 		);
 		
 		if( !function_exists('acf_add_options_sub_page') )
