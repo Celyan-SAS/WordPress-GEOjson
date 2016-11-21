@@ -44,7 +44,7 @@ class wpGEOjson {
 		add_action('admin_init', array( $this, 'plugin_admin_init' ) );
 		
 		/** ACF compatible plugin default options page **/
-		add_action('admin_menu', array( $this, 'acf_add_options_page' ), 1 );
+		//add_action('admin_menu', array( $this, 'acf_add_options_page' ) );
 	}
 		
 	/**
@@ -511,6 +511,18 @@ class wpGEOjson {
 			'wpgeojson', 								// Menu slug
 			array( $this, 'plugin_options_page'	)		// Method
 		);
+		
+		if( !function_exists('acf_add_options_sub_page') )
+			return;
+		
+		acf_add_options_sub_page(array(
+			'title' 		=> __( 'WP GEOjson Settings 3', 'wpgeojson' ),
+			'menu'			=> __( 'WP GEOjson 3', 'wpgeojson' ),
+			'parent'		=> 'wpgeojson',
+			'slug'			=> 'wpjslug',
+			'capability'	=> 'manage_options',
+		));
+		
 		/*
 		add_options_page(
 			__( 'WP GEOjson Settings', 'wpgeojson' ),	// Page title
@@ -617,9 +629,12 @@ class wpGEOjson {
 			//'parent_slug'	=> 'admin.php?page=wpgeojson',
 				
 			'title' 		=> __( 'WP GEOjson Settings 4', 'wpgeojson' ),
-			//'menu'			=> __( 'WP GEOjson 4', 'wpgeojson' ),
+			'menu'			=> __( 'WP GEOjson 4', 'wpgeojson' ),
+			'slug'			=> 'wpjslugg',
+			'parent'		=> 'wpgeojson',
+			
 			//'parent'		=> 'admin.php?page=wpgeojson',
-			'parent' => 'edit.php?post_type=page',
+			//'parent' => 'edit.php?post_type=page',
 			//'slug'			=> 'wpjslugg',
 			'capability'	=> 'manage_options',
 		));
