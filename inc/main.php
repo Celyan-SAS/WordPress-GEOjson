@@ -38,6 +38,10 @@ class wpGEOjson {
 		
 		/** Shortcodes Ultimate shortcode to configure/insert map shortcode **/
 		add_filter( 'su/data/shortcodes', array( $this, 'su_shortcodes' ) );
+		
+		/** Plugin admin page for map defaults, etc. **/
+		add_action( 'admin_menu', array( $this, 'plugin_admin_add_page' ) );
+		add_action('admin_init', array( $this, 'plugin_admin_init' ) );
 	}
 		
 	/**
@@ -489,6 +493,76 @@ class wpGEOjson {
 			var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
 			</script>
 		<?php
+	}
+	
+	/**
+	 * Adds the plugin settings page
+	 * 
+	 */
+	public function plugin_admin_add_page() {
+		add_options_page(
+			__( 'WP GEOjson Settings', 'wpgeojson' ),	// Page title
+			__( 'WP GEOjson', 'wpgeojson' ), 			// Menu title
+			'manage_options', 							// Capability
+			'plugin', 									// Menu slug
+			array( $this, 'plugin_options_page'	)		// Method
+		);
+	}
+	
+	/**
+	 * Plugin settings page display
+	 * 
+	 */
+	public function plugin_options_page() {
+		?>
+		<div>
+		<h2><?php echo __( 'WP GEOjson Settings', 'wpgeojson' ); ?></h2>
+		<?php echo __( 'Options relating to the WP GEOjson Plugin.', 'wpgeojson' ); ?>
+		<form action="options.php" method="post">
+		<?php settings_fields('plugin_options'); ?>
+		<?php do_settings_sections('plugin'); ?>
+		<input name="Submit" type="submit" value="<?php esc_attr_e('Save Changes'); ?>" />
+		</form>
+		</div> 
+		<?php
+	}
+	
+	public function plugin_admin_init() {
+		register_setting( 
+			'plugin_options',							// Options group
+			'plugin_options', 							// Option name
+			array( $this, 'plugin_options_validate'	)	// Sanitize callback
+		);
+		add_settings_section(
+			'plugin_main', 								// ID
+			'Main Settings',							// Title 
+			array( $this, 'plugin_section_text' ),		// Callback 'plugin'
+			'plugin'									// Page
+		);
+		add_settings_field(
+			'plugin_text_string', 						// ID
+			'Plugin Text Input', 						// Title
+			array( $this, 'plugin_setting_string' ), 	// Callback
+			'plugin', 									// Page
+			'plugin_main'								// Section
+		);
+	}
+	
+	public function plugin_options_validate( $input ) {
+		$options = get_option('plugin_options');
+		$options['text_string'] = trim($input['text_string']);
+		if(!preg_match('/^[a-z0-9]{32}$/i', $options['text_string']))
+			$options['text_string'] = '';
+		return $options;
+	}
+	
+	public function plugin_section_text() {
+		echo '<p>Main description of this section here.</p>';	//TODO
+	}
+	
+	public function plugin_setting_string() {
+		$options = get_option( 'plugin_options' );
+		echo '<input id="plugin_text_string" name="plugin_options[text_string]" size="40" type="text" value="' . $options['text_string'] . '" />';
 	}
 }
 ?>
