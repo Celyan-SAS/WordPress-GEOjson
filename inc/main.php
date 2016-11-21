@@ -42,6 +42,10 @@ class wpGEOjson {
 		/** Plugin admin page for map defaults, etc. **/
 		add_action( 'admin_menu', array( $this, 'plugin_admin_add_page' ) );
 		add_action('admin_init', array( $this, 'plugin_admin_init' ) );
+		
+		/** ACF compatible plugin default options page **/
+		if( function_exists('acf_add_options_page') )
+			$this->acf_add_options_page();
 	}
 		
 	/**
@@ -504,7 +508,7 @@ class wpGEOjson {
 			__( 'WP GEOjson Settings', 'wpgeojson' ),	// Page title
 			__( 'WP GEOjson', 'wpgeojson' ), 			// Menu title
 			'manage_options', 							// Capability
-			'plugin', 									// Menu slug
+			'wpgeojson', 								// Menu slug
 			array( $this, 'plugin_options_page'	)		// Method
 		);
 	}
@@ -527,6 +531,10 @@ class wpGEOjson {
 		<?php
 	}
 	
+	/**
+	 * Register our plugin settings
+	 * 
+	 */
 	public function plugin_admin_init() {
 		register_setting( 
 			'plugin_options',							// Options group
@@ -535,19 +543,25 @@ class wpGEOjson {
 		);
 		add_settings_section(
 			'plugin_main', 								// ID
-			'Main Settings',							// Title 
+			'Default map settings',						// Title 
 			array( $this, 'plugin_section_text' ),		// Callback 'plugin'
-			'plugin'									// Page
+			'wpgeojson'									// Page
 		);
 		add_settings_field(
 			'plugin_text_string', 						// ID
 			'Plugin Text Input', 						// Title
 			array( $this, 'plugin_setting_string' ), 	// Callback
-			'plugin', 									// Page
+			'wpgeojson', 								// Page
 			'plugin_main'								// Section
 		);
 	}
 	
+	/**
+	 * Validate our settings (callback)
+	 * 
+	 * @param string $input
+	 * @return array options
+	 */
 	public function plugin_options_validate( $input ) {
 		$options = get_option('plugin_options');
 		$options['text_string'] = trim($input['text_string']);
@@ -556,13 +570,30 @@ class wpGEOjson {
 		return $options;
 	}
 	
+	/**
+	 * Display settings section text (callback)
+	 * 
+	 */
 	public function plugin_section_text() {
-		echo '<p>Main description of this section here.</p>';	//TODO
+		echo '<p>Default settings for maps</p>';	//TODO
 	}
 	
+	/**
+	 * Settings string field (callback)
+	 */
 	public function plugin_setting_string() {
 		$options = get_option( 'plugin_options' );
 		echo '<input id="plugin_text_string" name="plugin_options[text_string]" size="40" type="text" value="' . $options['text_string'] . '" />';
+	}
+	
+	public function acf_add_options_page() {
+		acf_add_options_page(array(
+			'page_title' 	=> __( 'WP GEOjson Settings', 'wpgeojson' ),
+			'menu_title'	=> __( 'WP GEOjson', 'wpgeojson' ),
+			'menu_slug' 	=> 'wpgeojson-settings',
+			'capability'	=> 'manage_options',
+			'redirect'		=> false
+		));
 	}
 }
 ?>
