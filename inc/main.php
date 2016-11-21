@@ -516,8 +516,8 @@ class wpGEOjson {
 		remove_submenu_page('wpgeojson','wpgeojson');
 		
 		acf_add_options_sub_page(array(
-			'title' 		=> __( 'WP GEOjson Settings 3', 'wpgeojson' ),
-			'menu'			=> __( 'WP GEOjson 3', 'wpgeojson' ),
+			'title' 		=> __( 'WP GEOjson Settings', 'wpgeojson' ),
+			'menu'			=> __( 'WP GEOjson', 'wpgeojson' ),
 			'parent'		=> 'wpgeojson',
 			'slug'			=> 'wpgeojson',
 			'capability'	=> 'manage_options',
