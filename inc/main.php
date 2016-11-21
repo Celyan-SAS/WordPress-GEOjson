@@ -611,6 +611,9 @@ class wpGEOjson {
 		));
 		
 		/* */
+		if( !function_exists('acf_add_options_page') )
+			return;
+		
 		acf_add_options_page(array(
 			'page_title' 	=> __( 'WP GEOjson Settings 2', 'wpgeojson' ),
 			'menu_title'	=> __( 'WP GEOjson 2', 'wpgeojson' ),
