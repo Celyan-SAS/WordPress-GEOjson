@@ -211,6 +211,7 @@ function get_visible_markers() {
 function add_markers( geojson, popup_fields, field_names, gray_if_no, map_type ) {
 	
 	console.log( 'popup_fields:' + popup_fields );
+	console.log( 'gray_if_no:' + gray_if_no );
 	/* Turf test		
 	var hull = turf.concave( geojson, 15, 'kilometers' );
 	var hull2 = turf.convex( geojson );
