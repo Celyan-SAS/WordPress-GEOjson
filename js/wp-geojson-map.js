@@ -210,8 +210,8 @@ function get_visible_markers() {
  */
 function add_markers( geojson, popup_fields, field_names, gray_if_no, map_type ) {
 	
-	console.log( 'popup_fields:' + popup_fields );
-	console.log( 'gray_if_no:' + gray_if_no );
+	//console.log( 'popup_fields:' + popup_fields );
+	//console.log( 'gray_if_no:' + gray_if_no );
 	/* Turf test		
 	var hull = turf.concave( geojson, 15, 'kilometers' );
 	var hull2 = turf.convex( geojson );
@@ -259,8 +259,14 @@ function add_markers( geojson, popup_fields, field_names, gray_if_no, map_type )
 					});
 					layer.bindPopup( popupcontent );
 					if( '' == popupcontent || ( gray_if_no && ''==feature.properties[gray_if_no] ) ) {
-						layer.setStyle({fillColor: "#bbb",color: "#999"});
-						console.log( 'grayifno' );
+						layer.setStyle({fillColor: "#aaa",color: "#999"});
+					} else {
+						var ffp = feature.properties['res.F. Fillon']/feature.properties['res.Exprimés'];
+						var shade = 128 + 249*ffp;
+						shade = parseInt( shade );
+						shade = shade.toString(16);
+						shade = 'ffff' + shade;
+						layer.setStyle({fillColor: shade});
 					}
 				}
 			}
