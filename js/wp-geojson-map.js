@@ -264,10 +264,10 @@ function add_markers( geojson, popup_fields, field_names, gray_if_no, map_type )
 						var ffp = feature.properties['res.F. Fillon']/feature.properties['res.Exprimés'];
 						var shade = (ffp*100-30)*11.7;
 						shade = parseInt( shade );
-						invshade = parseInt( (256-shade)/2 );
+						invshade = parseInt( (256-shade) );
 						shade = shade.toString(16);
 						invshade = invshade.toString(16);
-						shade = '#' +invshade + invshade + shade;
+						shade = '#' +invshade + invshade + 'ff';
 						layer.setStyle({fillColor: shade, fillOpacity: 0.8});
 						console.log( 'shade:' + shade );
 					}
