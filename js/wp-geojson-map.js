@@ -107,11 +107,34 @@ var allLayers = [];
 		}
 	}
 	
-	window.call_me_test = function( visible ) {
-		console.log( 'I was called' );
-		visible.forEach( function( feature ){
-			console.log( 'visible:' );
-			console.log( feature );
+	window.update_list_box = function( visible ) {
+		
+		$('.wpgeojson_list').forEach( function( list_box ) {
+			
+			var html = '';
+			
+			if( !$('#map-canvas').attr('data-field_names') )
+				return;
+			
+			var field_names = $('#map-canvas').data('field_names');
+			
+			fields_arr = field_names.split(",");
+				
+			html += '<ul>';
+			visible.forEach( function( feature ){
+				html += '<li>';
+				fields_arr.forEach( function( field ){
+					
+					html += '<div class="' + field + '">';
+					html += feature.properties[field];
+					html += '</div>';
+					
+				});
+				html +='</li>';
+			});
+			html += '</ul>';
+			
+			list_box.html( html );
 		});
 	};
 	
@@ -202,11 +225,7 @@ function on_bounds_changed() {
 	var visible = get_visible_markers();
 	
 	if( nodes = document.getElementsByClassName("wpgeojson_list") ) {
-	
-		//TODO: if it is, update it with visible marker info
-	
-		call_me_test(visible);
-	
+		update_list_box( visible );	
 	}
 }
 
