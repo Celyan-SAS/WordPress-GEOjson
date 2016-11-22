@@ -106,6 +106,15 @@ var allLayers = [];
 			});
 		}
 	}
+	
+	function call_me_test( visible ) {
+		console.log( 'I was called' );
+		visible.forEach( function( feature ){
+			console.log( 'visible:' );
+			console.log( feature );
+		});
+	}
+	
 })( jQuery );
 
 
@@ -177,28 +186,28 @@ function ggmap_init() {
 
 //@see: http://stackoverflow.com/questions/28507044/zoom-to-geojson-polygons-bounds-in-google-maps-api-v3
 function processPoints(geometry, callback, thisArg) {
-	  if (geometry instanceof google.maps.LatLng) {
+	if (geometry instanceof google.maps.LatLng) {
 	    callback.call(thisArg, geometry);
-	  } else if (geometry instanceof google.maps.Data.Point) {
+	} else if (geometry instanceof google.maps.Data.Point) {
 	    callback.call(thisArg, geometry.get());
-	  } else {
+	} else {
 	    geometry.getArray().forEach(function(g) {
-	      processPoints(g, callback, thisArg);
+	       processPoints(g, callback, thisArg);
 	    });
-	  }
 	}
+}
 
 function on_bounds_changed() {
 	console.log( 'bounds changed' );
 	var visible = get_visible_markers();
 	
-	//TODO: check if a companion list is present
-	//TODO: if it is, update it with visible marker info
+	if( nodes = document.getElementsByClassName("wpgeojson_list") ) {
 	
-	visible.forEach( function( feature ){
-		console.log( 'visible:' );
-		console.log( feature );
-	});
+		//TODO: if it is, update it with visible marker info
+	
+		call_me_test(visible);
+	
+	}
 }
 
 function get_visible_markers() {
