@@ -172,7 +172,7 @@ class wpGEOjson {
 				'type' => 'single',
 				'group' => 'media content',
 				'atts' => array(
-						'property' => array(
+						'color' => array(
 								'type'		=> 'select',
 								'values'	=> array(
 									'ffff**'	=> __( 'Blue', 'textdomain' ),
@@ -183,14 +183,14 @@ class wpGEOjson {
 									'**ff**'	=> __( 'Magenta', 'textdomain' ),
 									'******'	=> __( 'Grey', 'textdomain' )
 								),
-								'name'		=> __( 'Property', 'textdomain' ),
-								'desc'		=> __( 'Property to use for coloring', 'textdomain' ),
-								'default'	=> 'ffff**'
-						),
-						'color' => array(
-								'type'		=> 'text',
 								'name'		=> __( 'Color', 'textdomain' ),
 								'desc'		=> __( 'Base color', 'textdomain' ),
+								'default'	=> 'ffff**'
+						),
+						'property' => array(
+								'type'		=> 'text',
+								'name'		=> __( 'Property', 'textdomain' ),
+								'desc'		=> __( 'Property to use for coloring', 'textdomain' ),
 								'default'	=> ''
 						)
 				),
