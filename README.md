@@ -14,7 +14,7 @@ _This documentation will be completed progressively_
 
 ## Insert maps using Shortcodes Ultimate
 
-Although this plugin can be used without Shortcodes Ultimate, complex map shortcode generation will be much simpler usinf Shortcodes Ultimate's in-editor shortcode generation interface.
+Although this plugin can be used without Shortcodes Ultimate, complex map shortcode generation will be much simpler using Shortcodes Ultimate's in-editor shortcode generation interface.
 
 Instructions:
 - Install the [Shortcodes Ultimate WordPress plugin] (it can be install with WP's automatic plugin installation procedure inside the admin panel)

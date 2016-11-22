@@ -32,6 +32,10 @@ class wpGEOjson {
 		add_shortcode( 'wpgeojson_list', array( $this, 'shortcode_wpgeojson_list' ) );
 		add_shortcode( 'su_wpgeojson_list', array( $this, 'shortcode_wpgeojson_list' ) );
 		
+		/** Choropleth map colouring shortcode **/
+		add_shortcode( 'wpgeojson_choropleth', array( $this, 'shortcode_wpgeojson_choropleth' ) );
+		add_shortcode( 'su_wpgeojson_choropleth', array( $this, 'shortcode_wpgeojson_choropleth' ) );
+		
 		/** Ajax method to get all points of a given post_type **/
 		add_action( 'wp_ajax_get_points_for_post_type', array( $this, 'ajax_get_points_for_post_type' ) );
 		add_action( 'wp_ajax_nopriv_get_points_for_post_type', array( $this, 'ajax_get_points_for_post_type' ) );
@@ -105,7 +109,7 @@ class wpGEOjson {
 								'type'		=> 'text',
 								'name'		=> __( 'Pop-up fields', 'textdomain' ),
 								'desc'		=> __( 'Coma-separated list of fields to display in the bound pop-up', 'textdomain' ),
-								'default'	=> 'all'
+								'default'	=> ''
 						),
 						'field_names' => array(
 								'type' 		=> 'bool',
@@ -146,7 +150,7 @@ class wpGEOjson {
 								'type'		=> 'text',
 								'name'		=> __( 'List fields', 'textdomain' ),
 								'desc'		=> __( 'Coma-separated list of fields to display in the list', 'textdomain' ),
-								'default'	=> 'all'
+								'default'	=> ''
 						),
 						'field_names' => array(
 								'type' 		=> 'bool',
@@ -161,6 +165,41 @@ class wpGEOjson {
 				'icon' => 'map-marker',
 				// Name of custom shortcode function
 				'function' => 'wpgeojson_list'
+		);
+		
+		$shortcodes['shortcode_wpgeojson_choropleth'] = array(
+				'name' => __( 'GEOjson choropleth', 'textdomain' ),
+				'type' => 'single',
+				'group' => 'media content',
+				'atts' => array(
+						'property' => array(
+								'type'		=> 'select',
+								'values'	=> array(
+									'ffff**'	=> __( 'Blue', 'textdomain' ),
+									'ff**ff'	=> __( 'Green', 'textdomain' ),
+									'**ffff'	=> __( 'Red', 'textdomain' ),
+									'****ff'	=> __( 'Yellow', 'textdomain' ),
+									'ff****'	=> __( 'Cyan', 'textdomain' ),
+									'**ff**'	=> __( 'Magenta', 'textdomain' ),
+									'******'	=> __( 'Grey', 'textdomain' )
+								),
+								'name'		=> __( 'Property', 'textdomain' ),
+								'desc'		=> __( 'Property to use for coloring', 'textdomain' ),
+								'default'	=> 'ffff**'
+						),
+						'color' => array(
+								'type'		=> 'text',
+								'name'		=> __( 'Color', 'textdomain' ),
+								'desc'		=> __( 'Base color', 'textdomain' ),
+								'default'	=> ''
+						)
+				),
+				// Shortcode description for cheatsheet and generator
+				'desc' => __( 'Dynamic list of the points displayed on the corresponding map', 'textdomain' ),
+				// Custom icon (font-awesome)
+				'icon' => 'map-marker',
+				// Name of custom shortcode function
+				'function' => 'wpgeojson_choropleth'
 		);
 		
 		return $shortcodes;
@@ -224,11 +263,6 @@ class wpGEOjson {
 	 */
 	public function shortcode_wpgeojson_list( $atts ) {
 		
-		//TODO: handle a 'fields' attribute to choose which data field(s) we 
-		// extract (title, content, excerpt, daet, author, ACF fields, etc)
-		// - implement title and address ACF field as default
-		// all this should be made available to the JS through data- attributes in the HTML markup
-		
 		$html = '';
 		$html .= '<div class="wpgeojson_list" ';
 		
@@ -239,6 +273,23 @@ class wpGEOjson {
 		$html .= '</div>';
 		
 		return $html;
+	}
+	
+	public function shortcode_wpgeojson_choropleth( $atts ) {
+		
+		$html = '';
+		$html .= '<div class="wpgeojson_choropleth" ';
+		
+		if( !empty( $atts['property'] ) )
+			$html .= 'data-property="' . $atts['property'] . '" ';
+		
+		if( !empty( $atts['color'] ) )
+			$html .= 'data-color="' . $atts['color'] . '" ';
+		
+		$html .= '>';
+		$html .= '<input type="radio" name="wpgeojson_choropleth" value="1">';
+		$html .= '<label></label>';
+		$html .= '</div>';
 	}
 	
 	/** 
