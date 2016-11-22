@@ -262,7 +262,7 @@ function add_markers( geojson, popup_fields, field_names, gray_if_no, map_type )
 						layer.setStyle({fillColor: "#aaa",color: "#999"});
 					} else {
 						var ffp = feature.properties['res.F. Fillon']/feature.properties['res.Exprimés'];
-						var shade = 128 + 249*ffp;
+						var shade = 498*ffp;
 						shade = parseInt( shade );
 						shade = shade.toString(16);
 						shade = '#0000' + shade;
