@@ -282,7 +282,7 @@ function add_markers( geojson, popup_fields, field_names, gray_if_no, map_type )
 		
 		var bounds = features.getBounds();
 		map.fitBounds( bounds, {
-            padding: [50, 50]
+            padding: [20, 30]
         });
 			
 		additionalFeatures.forEach(function(item){
