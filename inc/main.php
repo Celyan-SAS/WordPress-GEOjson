@@ -36,7 +36,7 @@ class wpGEOjson {
 		add_action( 'wp_ajax_get_points_for_post_type', array( $this, 'ajax_get_points_for_post_type' ) );
 		add_action( 'wp_ajax_nopriv_get_points_for_post_type', array( $this, 'ajax_get_points_for_post_type' ) );
 		
-		/** Shortcodes Ultimate shortcode to configure/insert map shortcode **/
+		/** Shortcodes Ultimate shortcode to configure/insert map shortcodes **/
 		add_filter( 'su/data/shortcodes', array( $this, 'su_shortcodes' ) );
 		
 		/** Plugin admin page for map defaults, etc. **/
@@ -93,7 +93,7 @@ class wpGEOjson {
 								'step'		=> 1,
 								'default'	=> 250,
 								'name'		=> __( 'Map height', 'textdomain' ),
-								'desc'		=> __( 'inpixels', 'textdomain' )
+								'desc'		=> __( 'in pixels', 'textdomain' )
 						),
 						'marker_icon' => array(
 								'type'		=> 'image_source',
@@ -126,6 +126,41 @@ class wpGEOjson {
 				'icon' => 'map-marker',
 				// Name of custom shortcode function
 				'function' => 'wpgeojson_map'
+		);
+		
+		$shortcodes['shortcode_wpgeojson_list'] = array(
+				'name' => __( 'GEOjson list', 'textdomain' ),
+				'type' => 'single',
+				'group' => 'media content',
+				'atts' => array(
+						'height' => array(
+								'type'		=> 'number',
+								'min'		=> 50,
+								'max'		=> 1000,
+								'step'		=> 1,
+								'default'	=> 250,
+								'name'		=> __( 'List height', 'textdomain' ),
+								'desc'		=> __( 'in pixels', 'textdomain' )
+						),
+						'list_fields' => array(
+								'type'		=> 'text',
+								'name'		=> __( 'List fields', 'textdomain' ),
+								'desc'		=> __( 'Coma-separated list of fields to display in the list', 'textdomain' ),
+								'default'	=> 'all'
+						),
+						'field_names' => array(
+								'type' 		=> 'bool',
+								'default' 	=> 'no',
+								'name'		=> __( 'Field names', 'textdomain' ),
+								'desc'		=> __( 'Display the field names in the list', 'textdomain' ),
+						)
+				),
+				// Shortcode description for cheatsheet and generator
+				'desc' => __( 'Dynamic list of the points displayed on the corresponding map', 'textdomain' ),
+				// Custom icon (font-awesome)
+				'icon' => 'map-marker',
+				// Name of custom shortcode function
+				'function' => 'wpgeojson_list'
 		);
 		
 		return $shortcodes;

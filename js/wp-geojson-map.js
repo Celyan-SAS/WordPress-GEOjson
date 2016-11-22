@@ -199,7 +199,10 @@ function get_visible_markers() {
 	
 	var visible = [];
 	
-	//TODO: iterate on allFeatures
+	allFeatures.forEach( function( item ) {
+		console.log('feature:');
+		console.log(item);
+	});
 	
 	return visible;
 }
