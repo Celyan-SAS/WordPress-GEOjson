@@ -267,6 +267,7 @@ function add_markers( geojson, popup_fields, field_names, gray_if_no, map_type )
 						shade = shade.toString(16);
 						shade = 'ffff' + shade;
 						layer.setStyle({fillColor: shade});
+						console.log( 'shade:' + shade );
 					}
 				}
 			}
