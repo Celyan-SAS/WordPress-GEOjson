@@ -319,6 +319,7 @@ class wpGEOjson {
 						'address'	=> $acf_data['address'],
 						'post_id'	=> $the_query->post->ID,
 						'title'		=> get_the_title( $the_query->post->ID ),
+						'link'		=> get_permalink( $the_query->post->ID )
 					)
 				);
 				array_push( $geojson['features'], $feature );

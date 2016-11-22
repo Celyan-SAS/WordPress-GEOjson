@@ -128,6 +128,10 @@ var allLayers = [];
 				console.log(feature);
 				
 				html += '<li>';
+				
+				if( feature.properties['link'] )
+					html += '<a href="' + link + '">';
+				
 				fields_arr.forEach( function( field ){
 					
 					html += '<div class="' + field + '">';
@@ -135,6 +139,10 @@ var allLayers = [];
 					html += '</div>';
 					
 				});
+				
+				if( feature.properties['link'] )
+					html += '</a>';
+				
 				html +='</li>';
 			});
 			html += '</ul>';
