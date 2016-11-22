@@ -265,7 +265,7 @@ function add_markers( geojson, popup_fields, field_names, gray_if_no, map_type )
 							return;
 						console.log(layer);
 						var ffp = feature.properties['res.F. Fillon']/feature.properties['res.Exprimés'];
-						var shade = (ffp*100-24)*12;	//11.7
+						var shade = (ffp*100-24)*11.5;	//11.7
 						shade = parseInt( shade );
 						invshade = parseInt( (256-shade) ); 
 						shade = shade.toString(16);
