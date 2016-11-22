@@ -224,6 +224,10 @@ function add_markers( geojson, popup_fields, field_names, gray_if_no, map_type )
 	if( 'ggmap' == map_type ) {
 		map.data.addGeoJson(geojson);
 		
+		geojson.features.forEach( function( item ) {
+			allFeatures.push( item );
+		});
+		
 		/* hull test
 		map.data.addGeoJson(hull);
 		map.data.addGeoJson(hull2, { fillColor: 'red', style: {color: 'red', fillColor: 'red'} });
