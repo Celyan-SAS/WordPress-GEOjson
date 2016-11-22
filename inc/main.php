@@ -310,7 +310,6 @@ class wpGEOjson {
 				
 				$feature = array(
 					'ID'	=> $the_query->post->ID,
-					'title'	=> $the_query->get_the_title(),
 					'type' 			=> 'Feature',
 					'geometry' 		=> array(
 						'type' => 'Point',
@@ -318,7 +317,8 @@ class wpGEOjson {
 					),
 					'properties' => array(
 						'address'	=> $acf_data['address'],
-						'post_id'	=> $the_query->post->ID
+						'post_id'	=> $the_query->post->ID,
+						'title'	=> $the_query->get_the_title(),
 					)
 				);
 				array_push( $geojson['features'], $feature );
