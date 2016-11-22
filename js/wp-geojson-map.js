@@ -252,7 +252,7 @@ function add_markers( geojson, popup_fields, field_names, map_type ) {
 						popupcontent += '</div>';
 					});
 					layer.bindPopup( popupcontent );
-					if( '' == popupcontent )
+					if( '' == popupcontent || ( $('#map-canvas').attr('data-gray_if_no') && ''==feature.properties[$('#map-canvas').data('gray_if_no')] ) )
 						layer.setStyle({fillColor: "#ccc",color: "#999"});
 				} 
 			}
