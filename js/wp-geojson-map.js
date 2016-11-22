@@ -38,6 +38,10 @@ var allLayers = [];
 		if( $('#map-canvas').attr('data-field_names') )
 			field_names = $('#map-canvas').data('field_names');
 		
+		var gray_if_no = '';
+		if( $('#map-canvas').attr('data-gray_if_no') )
+			gray_if_no = $('#map-canvas').data('gray_if_no');
+		
 		/** Check map type **/
 		if( $('#map-canvas').hasClass('ggmap') ) {
 			ggmap_init();
@@ -60,6 +64,7 @@ var allLayers = [];
 				file,
 				popup_fields,
 				field_names,
+				gray_if_no,
 				map_type
 			);
 	});
@@ -68,7 +73,7 @@ var allLayers = [];
 	 * Ajax request to load needed points/features on the map
 	 * 
 	 */
-	function load_points( post_type, selection, file, popup_fields, field_names, map_type ) {
+	function load_points( post_type, selection, file, popup_fields, field_names, gray_if_no, map_type ) {
 		console.log( 'Loading points...' );
 
 		if( '' != file ) {
@@ -79,7 +84,7 @@ var allLayers = [];
 				dataType: "json",
 				url: file,
 				success: function(data) {
-					add_markers( data, popup_fields, field_names, map_type );
+					add_markers( data, popup_fields, field_names, gray_if_no, map_type );
 				}
 			});
 		} else {
@@ -91,7 +96,7 @@ var allLayers = [];
 			}, function( data ) {
 				console.log( 'Ajax get_points_for_post_type data length: ' + data.length );
 				//console.log( data );
-				add_markers( data, popup_fields, field_names, map_type );
+				add_markers( data, popup_fields, field_names, gray_if_no, map_type );
 			}).done(function() {
 				console.log( "Ajax get_points_for_post_type success" );
 			}).fail(function() {
@@ -203,7 +208,7 @@ function get_visible_markers() {
  * GEOjson functions
  *
  */
-function add_markers( geojson, popup_fields, field_names, map_type ) {
+function add_markers( geojson, popup_fields, field_names, gray_if_no, map_type ) {
 	
 	console.log( 'popup_fields:' + popup_fields );
 	/* Turf test		
@@ -252,7 +257,7 @@ function add_markers( geojson, popup_fields, field_names, map_type ) {
 						popupcontent += '</div>';
 					});
 					layer.bindPopup( popupcontent );
-					if( '' == popupcontent || ( $('#map-canvas').attr('data-gray_if_no') && ''==feature.properties[$('#map-canvas').data('gray_if_no')] ) )
+					if( '' == popupcontent || gray_if_no && ''==feature.properties[gray_if_no] )
 						layer.setStyle({fillColor: "#ccc",color: "#999"});
 				} 
 			}
