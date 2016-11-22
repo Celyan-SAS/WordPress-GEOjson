@@ -194,15 +194,26 @@ function on_bounds_changed() {
 	
 	//TODO: check if a companion list is present
 	//TODO: if it is, update it with visible marker info
+	
+	visible.forEach( function( feature ){
+		console.log( 'visible:' );
+		console.log( feature );
+	});
 }
 
 function get_visible_markers() {
 	
 	var visible = [];
 	
-	allFeatures.forEach( function( item ) {
-		console.log('feature:');
-		console.log(item);
+	allFeatures.forEach( function( feature ) {
+		//console.log('feature:');
+		//console.log( feature );
+		if( 'Point' == feature.geometry.type ) {
+			position = new google.maps.LatLng( feature.geometry.coordinates[1], feature.geometry.coordinates[0] );
+			if ( map.getBounds().contains( position )) {
+				visible.push( feature );
+			}
+		}
 	});
 	
 	return visible;
