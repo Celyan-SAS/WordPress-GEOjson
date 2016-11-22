@@ -168,7 +168,7 @@ function ggmap_init() {
 			map.fitBounds(bounds);
 		});
 	
-		//google.maps.event.addListener( map, 'bounds_changed', 'on_bounds_changed' );
+		google.maps.event.addListener( map, 'bounds_changed', on_bounds_changed );
 	} else {
 		console.log( 'No map canvas on this page.' );
 	}
@@ -189,6 +189,7 @@ function processPoints(geometry, callback, thisArg) {
 	}
 
 function on_bounds_changed() {
+	console.log( 'bounds changed' );
 	var visible = get_visible_markers();
 	
 	//TODO: check if a companion list is present
