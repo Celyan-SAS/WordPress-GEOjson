@@ -36,7 +36,7 @@ var allLayers = [];
 		
 		var field_names = 'no';
 		if( $('#map-canvas').attr('data-field_names') )
-			popup_fields = $('#map-canvas').data('field_names');
+			field_names = $('#map-canvas').data('field_names');
 		
 		/** Check map type **/
 		if( $('#map-canvas').hasClass('ggmap') ) {
