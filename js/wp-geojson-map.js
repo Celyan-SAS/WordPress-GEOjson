@@ -124,6 +124,9 @@ var allLayers = [];
 				
 			html += '<ul>';
 			visible.forEach( function( feature ){
+				
+				console.log(feature);
+				
 				html += '<li>';
 				fields_arr.forEach( function( field ){
 					

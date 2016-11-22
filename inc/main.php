@@ -230,7 +230,12 @@ class wpGEOjson {
 		// all this should be made available to the JS through data- attributes in the HTML markup
 		
 		$html = '';
-		$html .= '<div class="wpgeojson_list">';
+		$html .= '<div class="wpgeojson_list" ';
+		
+		if( !empty( $atts['field_names'] ) )
+			$html .= 'data-field_names="' . $atts['field_names'] . '" ';
+		
+		$html .= '>';
 		$html .= '</div>';
 		
 		return $html;
