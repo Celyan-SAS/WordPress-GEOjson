@@ -231,6 +231,7 @@ function add_markers( geojson, popup_fields, field_names, map_type ) {
 				onEachFeature: function (feature, layer) {
 					popupcontent = '';
 					popup_arr.forEach( function(field){
+						
 						perc = '';
 						if( re.test(field) ) {
 							var splitted = field.split("%");
@@ -238,15 +239,21 @@ function add_markers( geojson, popup_fields, field_names, map_type ) {
 							if( splitted[1] )
 								perc = Math.round(feature.properties[field]*1000/feature.properties[splitted[1]])/10;
 						}
+						
+						if( '' == feature.properties[field] )
+							return;
+						
 						popupcontent += '<div class="' + field + '">';
 						if( 'yes' == field_names )
 							popupcontent += '<strong>' + field + ': </strong>';
 						popupcontent += feature.properties[field];
 						if( '' != perc )
-							popupcontent += ' ' + perc + '%';
+							popupcontent += ' | ' + perc + '%';
 						popupcontent += '</div>';
 					});
 					layer.bindPopup( popupcontent );
+					if( '' == popupcontent )
+						layer.setStyle({fillColor: "#ccc",color: "#999"});
 				} 
 			}
 		);
