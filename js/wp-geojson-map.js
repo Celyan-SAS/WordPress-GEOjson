@@ -115,10 +115,10 @@ var allLayers = [];
 			
 			var html = '';
 			
-			if( !$('#map-canvas').attr('data-field_names') )
+			if( !list_box.attr('data-field_names') )
 				return;
 			
-			var field_names = $('#map-canvas').data('field_names');
+			var field_names = list_box.data('field_names');
 			
 			fields_arr = field_names.split(",");
 				
