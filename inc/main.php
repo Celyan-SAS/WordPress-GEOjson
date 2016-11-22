@@ -170,6 +170,9 @@ class wpGEOjson {
 		if( !empty( $atts['field_names'] ) )
 			$html .= 'data-field_names="' . $atts['field_names'] . '" ';
 		
+		if( !empty( $atts['gray_if_no'] ) )
+			$html .= 'data-gray_if_no="' . $atts['gray_if_no'] . '" ';
+		
 		if( !empty( $atts['height'] ) )
 			$html .= 'style="min-height:' . $atts['height'] . 'px;" ';
 		
