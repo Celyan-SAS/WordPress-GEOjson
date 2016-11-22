@@ -107,13 +107,13 @@ var allLayers = [];
 		}
 	}
 	
-	function call_me_test( visible ) {
+	window.call_me_test = function( visible ) {
 		console.log( 'I was called' );
 		visible.forEach( function( feature ){
 			console.log( 'visible:' );
 			console.log( feature );
 		});
-	}
+	};
 	
 })( jQuery );
 
