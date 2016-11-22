@@ -223,17 +223,27 @@ function add_markers( geojson, popup_fields, field_names, map_type ) {
 	if( 'leaflet' == map_type ) {
 		
 		popup_arr = popup_fields.split(",");
-		console.log( 'popup_arr:' + popup_arr );
+		//console.log( 'popup_arr:' + popup_arr );
+		re = new RegExp("\%");
 		features = L.geoJSON(
 			geojson, {
 				style: {},
 				onEachFeature: function (feature, layer) {
 					popupcontent = '';
 					popup_arr.forEach( function(field){
+						perc = '';
+						if( re.test(field) ) {
+							var splitted = field.split("%");
+							field = splitted[0];
+							if( splitted[1] )
+								perc = Math.round(feature.properties[field]*10/feature.properties[splitted[1]])/10;
+						}
 						popupcontent += '<div class="' + field + '">';
 						if( 'yes' == field_names )
-							popupcontent += '<strong>' + field + '</strong>';
+							popupcontent += '<strong>' + field + ': </strong>';
 						popupcontent += feature.properties[field];
+						if( '' != perc )
+							popupcontent += ' ' + perc + '%';
 						popupcontent += '</div>';
 					});
 					layer.bindPopup( popupcontent );
