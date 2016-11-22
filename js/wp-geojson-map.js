@@ -257,9 +257,11 @@ function add_markers( geojson, popup_fields, field_names, gray_if_no, map_type )
 						popupcontent += '</div>';
 					});
 					layer.bindPopup( popupcontent );
-					if( '' == popupcontent || gray_if_no && ''==feature.properties[gray_if_no] )
+					if( '' == popupcontent || ( gray_if_no && ''==feature.properties[gray_if_no] ) ) {
 						layer.setStyle({fillColor: "#ccc",color: "#999"});
-				} 
+						console.log( 'grayifno' );
+					}
+				}
 			}
 		);
 		layer = features.addTo(map);
