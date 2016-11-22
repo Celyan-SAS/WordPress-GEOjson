@@ -265,7 +265,7 @@ function add_markers( geojson, popup_fields, field_names, gray_if_no, map_type )
 						var shade = 128 + 249*ffp;
 						shade = parseInt( shade );
 						shade = shade.toString(16);
-						shade = '0000' + shade;
+						shade = '#0000' + shade;
 						layer.setStyle({fillColor: shade});
 						console.log( 'shade:' + shade );
 					}
