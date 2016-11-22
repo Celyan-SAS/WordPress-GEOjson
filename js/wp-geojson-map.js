@@ -109,7 +109,9 @@ var allLayers = [];
 	
 	window.update_list_box = function( visible ) {
 		
-		$('.wpgeojson_list').forEach( function( list_box ) {
+		$('.wpgeojson_list').each( function( index ) {
+			
+			var list_box = $( this );
 			
 			var html = '';
 			
