@@ -236,7 +236,7 @@ function add_markers( geojson, popup_fields, field_names, map_type ) {
 							var splitted = field.split("%");
 							field = splitted[0];
 							if( splitted[1] )
-								perc = Math.round(feature.properties[field]*10/feature.properties[splitted[1]])/10;
+								perc = Math.round(feature.properties[field]*1000/feature.properties[splitted[1]])/10;
 						}
 						popupcontent += '<div class="' + field + '">';
 						if( 'yes' == field_names )
