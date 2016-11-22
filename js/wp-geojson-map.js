@@ -130,7 +130,7 @@ var allLayers = [];
 				html += '<li>';
 				
 				if( feature.properties['link'] )
-					html += '<a href="' + link + '">';
+					html += '<a href="' + feature.properties['link'] + '">';
 				
 				fields_arr.forEach( function( field ){
 					
