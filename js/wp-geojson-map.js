@@ -109,7 +109,7 @@ var allLayers = [];
 				dataType: "json",
 				url: file,
 				success: function(data) {
-					add_markers( data, popup_fields, field_names, gray_if_no, map_type );
+					add_markers( data, popup_fields, field_names, gray_if_no, marker_icon, big_cluster_icon, medium_cluster_icon, small_cluster_icon, map_type );
 					if( $('.wpgeojson_choropleth').length > 0 )
 						process_choropleths();
 				}
@@ -123,7 +123,7 @@ var allLayers = [];
 			}, function( data ) {
 				console.log( 'Ajax get_points_for_post_type data length: ' + data.length );
 				//console.log( data );
-				add_markers( data, popup_fields, field_names, gray_if_no, map_type );
+				add_markers( data, popup_fields, field_names, gray_if_no, marker_icon, big_cluster_icon, medium_cluster_icon, small_cluster_icon, map_type );
 			}).done(function() {
 				console.log( "Ajax get_points_for_post_type success" );
 			}).fail(function() {
