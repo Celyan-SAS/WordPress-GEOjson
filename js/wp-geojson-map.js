@@ -261,8 +261,8 @@ var allLayers = [];
 					
 					console.log( 'invshade new:' + invshade );
 					
-					shade = '#' + max_color.replace( 'ff', invshade );
-					//shade = shade.replace( /[\*]{2}/, invshade );
+					shade = '#' + base_color.replace( /ff/g, invshade );
+					shade = shade.replace( /\*/g, 'f' );
 					console.log( 'shade new:' + shade );
 					
 					layer.setStyle({fillColor: shade, fillOpacity: 0.8});
