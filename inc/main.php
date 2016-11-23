@@ -181,7 +181,7 @@ class wpGEOjson {
 									'****ff'	=> __( 'Yellow', 'textdomain' ),
 									'ff****'	=> __( 'Cyan', 'textdomain' ),
 									'**ff**'	=> __( 'Magenta', 'textdomain' ),
-									'******'	=> __( 'Grey', 'textdomain' )
+									'ffffff'	=> __( 'Grey', 'textdomain' )
 								),
 								'name'		=> __( 'Color', 'textdomain' ),
 								'desc'		=> __( 'Base color', 'textdomain' ),
@@ -516,7 +516,7 @@ class wpGEOjson {
 			'wp-geojson-map',
 			plugins_url( '/js/wp-geojson-map.js', dirname( __FILE__ ) ),
 			array('jquery'), 
-			'2.0',
+			'3.0',
 			true
 		);
 		
