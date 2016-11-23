@@ -223,14 +223,14 @@ var allLayers = [];
 			console.log( 'max_color:' + max_color );
 			
 			html = '';
-			html += '<span class="field">' + field + '</span>';
-			html += '<span class="min">' + min_value;
+			html += '<span class="field" style="width:15%;padding:3px 10px;">' + field + '</span>';
+			html += '<span class="min" style="width:15%;padding:3px 10px;">' + min_value;
 			if( percentage )
 				html += '%';
 			html += '</span>';
-			html += '<span class="min_shade" style="background-color:#fff">&nbsp;</span>';
-			html += '<span class="max_shade" style="background-color:#' + max_color + '">&nbsp;</span>';
-			html += '<span class="max">' + max_value;
+			html += '<span class="min_shade" style="width:15%;padding:3px 10px;background-color:#fff">&nbsp;</span>';
+			html += '<span class="max_shade" style="width:15%;padding:3px 10px;background-color:#' + max_color + '">&nbsp;</span>';
+			html += '<span class="max" style="width:15%;padding:3px 10px;">' + max_value;
 			if( percentage )
 				html += '%';
 			html += '</span>';
@@ -440,21 +440,6 @@ function add_markers( geojson, popup_fields, field_names, gray_if_no, map_type )
 					layer.bindPopup( popupcontent );
 					if( '' == popupcontent || ( gray_if_no && ''==feature.properties[gray_if_no] ) ) {
 						layer.setStyle({fillColor: "#999",color: "#999", fillOpacity: 0.5});
-					} else {
-						if( typeof layer.setStyle != 'function' )
-							return;
-						//console.log(layer);
-						var ffp = feature.properties['res.F. Fillon']/feature.properties['res.Exprimés'];
-						var shade = (ffp*100-24)*9;
-						shade = parseInt( shade );
-						invshade = parseInt( (256-shade) ); 
-						shade = shade.toString(16);
-						invshade = invshade.toString(16);
-						while (invshade.length < 2)
-							invshade = '0' + invshade;
-						shade = '#' +invshade + invshade + 'ff';
-						layer.setStyle({fillColor: shade, fillOpacity: 0.8});
-						//console.log( 'shade:' + shade );
 					}
 				}
 			}
