@@ -163,12 +163,12 @@ var allLayers = [];
 			
 			/** defaults **/
 			var base_color = 'ffff**';
-			if( list_box.attr('data-color') )
-				base_color = list_box.data('color');
+			if( choro_box.attr('data-color') )
+				base_color = choro_box.data('color');
 			
-			if( !list_box.attr('data-property') )
+			if( !choro_box.attr('data-property') )
 				return;
-			var field = list_box.data('property');
+			var field = choro_box.data('property');
 			
 			allFeatures.forEach( function( feature ) {
 				
