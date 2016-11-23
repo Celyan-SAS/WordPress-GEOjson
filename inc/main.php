@@ -132,7 +132,7 @@ class wpGEOjson {
 				'function' => 'wpgeojson_map'
 		);
 		
-		$shortcodes['shortcode_wpgeojson_list'] = array(
+		$shortcodes['wpgeojson_list'] = array(
 				'name' => __( 'GEOjson list', 'textdomain' ),
 				'type' => 'single',
 				'group' => 'media content',
@@ -167,7 +167,7 @@ class wpGEOjson {
 				'function' => 'wpgeojson_list'
 		);
 		
-		$shortcodes['shortcode_wpgeojson_choropleth'] = array(
+		$shortcodes['wpgeojson_choropleth'] = array(
 				'name' => __( 'GEOjson choropleth', 'textdomain' ),
 				'type' => 'single',
 				'group' => 'media content',
