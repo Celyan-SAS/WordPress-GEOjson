@@ -192,7 +192,7 @@ var allLayers = [];
 					if( typeof layer.setStyle != 'function' )
 						return;
 					
-					console.log( layer.feature );
+					//console.log( layer.feature );
 					
 					var value = layer.feature.properties[field];
 					if( percentage )
@@ -210,7 +210,11 @@ var allLayers = [];
 			});
 			
 			var interval = max_value - min_value;
-			var step = Math.round( interval / 255 );
+			var step = interval / 255;
+			console.log( 'min_value:' + min_value );
+			console.log( 'max_value:' + max_value );
+			console.log( 'interval:' + interval );
+			console.log( 'step:' + step );
 			
 			/** Style the shades **/
 			allFeatures.forEach( function( feature ) {
@@ -229,6 +233,8 @@ var allLayers = [];
 					invshade = invshade.toString(16);
 					while (invshade.length < 2)
 						invshade = '0' + invshade;
+					
+					console.log( 'invshade new:' + invshade );
 					
 					shade = '#ff' + invshade + invshade;
 					layer.setStyle({fillColor: shade, fillOpacity: 0.8});
