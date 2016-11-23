@@ -360,15 +360,22 @@ class wpGEOjson {
 			$key = $matches[1];
 			$value = $matches[2];
 			
+			$geojson['properties']['key']	= $key;
+			$geojson['properties']['value1']	= $value;
+						
 			/** If the relation value is given by a query_var, find it **/
 			if( preg_match( '/_query_var\(([^\)]+)\)/', $value, $rematches ) )
 				$value = get_query_var( $rematches[1] );
+			
+			$geojson['properties']['value2']	= $value;
 							
 			/** If the relation value was passed by path, find the post ID **/
 			if( !preg_match( '/$\d+$/', $value ) ) {
 				$post = get_page_by_path( $value, OBJECT, get_queried_object()->name );
 				$value = $post->ID;
 			}
+			
+			$geojson['properties']['value3']	= $value;
 		
 			$args['meta_query'] = array(
 				array(
@@ -378,6 +385,8 @@ class wpGEOjson {
 				)
 			);
 		}
+		
+		$geojson['properties']['wp_query']	= $args;
 		
 		$the_query = new WP_Query( $args );
 		
