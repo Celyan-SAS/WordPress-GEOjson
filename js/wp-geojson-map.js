@@ -161,6 +161,8 @@ var allLayers = [];
 			
 			var choro_box = $( this );
 			
+			//TODO: only process box with active radio button
+			
 			/** defaults **/
 			var base_color = 'ffff**';
 			if( choro_box.attr('data-color') )
@@ -170,27 +172,66 @@ var allLayers = [];
 				return;
 			var field = choro_box.data('property');
 			
+			var min_value = -1;
+			var max_value = 0;
+			
+			var percentage = false;
+			re = new RegExp("\%");
+			if( re.test(field) ) {
+				var splitted = field.split("%");
+				field = splitted[0];
+				if( splitted[1] )
+					percentage = true;
+			}
+			
+			/** Get min and max values **/
 			allFeatures.forEach( function( feature ) {
 				
-				//if( typeof features.setStyle != 'function' )
-				
-				console.log( 'cp feature:' );
-				console.log( feature );
-				
 				feature.eachLayer(function(layer){
+					
+					if( typeof layer.setStyle != 'function' )
+						return;
+					
 					console.log( layer.feature );
+					
+					var value = feature.properties[field];
+					if( percentage )
+						value = Math.round(feature.properties[field]*1000/feature.properties[splitted[1]])/10;
+					
+					if( min_value == -1 )
+						min_value = value;
+					
+					if( value < min_value ) 
+						min_value = value;
+					
+					if( value > max_value ) 
+						max_value = value;
 				});
 			});
 			
-			allLayers.forEach( function( layer ) {
+			var interval = max_value - min_value;
+			var step = Math.round( interval / 255 );
+			
+			/** Style the shades **/
+			allFeatures.forEach( function( feature ) {
+				feature.eachLayer(function(layer){
+					
+					if( typeof layer.setStyle != 'function' )
+						return;
 				
-				//if( typeof features.setStyle != 'function' )
-				
-				console.log( 'cp layer:' );
-				console.log( layer );
-				
-				layer.eachLayer(function(layer){
-					console.log( layer.feature );
+					var value = feature.properties[field];
+					if( percentage )
+						value = Math.round(feature.properties[field]*1000/feature.properties[splitted[1]])/10;
+					
+					var shade = Math.round( value * step );
+					console.log( 'shade new:' + shade );
+					var invshade = parseInt( (256-shade) );
+					invshade = invshade.toString(16);
+					while (invshade.length < 2)
+						invshade = '0' + invshade;
+					
+					shade = '#ff' + invshade + invshade;
+					layer.setStyle({fillColor: shade, fillOpacity: 0.8});
 				});
 			});
 		});
