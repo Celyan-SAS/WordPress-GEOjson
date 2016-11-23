@@ -218,8 +218,8 @@ var allLayers = [];
 			
 			var interval = max_value - min_value;
 			var step = 255 / interval;
-			var max_color = base_color.replace( 'ff', '00' );
-			max_color = max_color.replace( '**', 'ff' );
+			var max_color = base_color.replace( /ff/, '00' );
+			max_color = max_color.replace( /\*\*/, 'ff' );
 			console.log( 'min_value:' + min_value );
 			console.log( 'max_value:' + max_value );
 			console.log( 'interval:' + interval );
@@ -252,7 +252,7 @@ var allLayers = [];
 						value = Math.round(layer.feature.properties[field]*1000/layer.feature.properties[splitted[1]])/10;
 					
 					var shade = Math.round( ( value - min_value ) * step );
-					console.log( 'shade new:' + shade );
+					//console.log( 'shade new:' + shade );
 					var invshade = parseInt( (255-shade) );
 					invshade = invshade.toString(16);
 					while (invshade.length < 2)
@@ -260,7 +260,10 @@ var allLayers = [];
 					
 					console.log( 'invshade new:' + invshade );
 					
-					shade = '#ff' + invshade + invshade;
+					shade = '#' + base_color.replace( /ff/, '00' );
+					shade = shade.replace( /\*\*/, invshade );
+					console.log( 'shade new:' + shade );
+					
 					layer.setStyle({fillColor: shade, fillOpacity: 0.8});
 				});
 			});
