@@ -166,10 +166,6 @@ var allLayers = [];
 			
 			var choro_box = $( this );
 			
-			/** only process box with active radio button **/
-			if( !$('input',this).is(':checked') )
-				return;
-			
 			/** defaults **/
 			var base_color = 'ffff**';
 			if( choro_box.attr('data-color') )
@@ -240,6 +236,10 @@ var allLayers = [];
 			html += '</span>';
 			
 			$( 'label', this ).html( html );
+			
+			/** only process box with active radio button **/
+			if( !$('input',this).is(':checked') )
+				return;
 			
 			/** Style the shades **/
 			allFeatures.forEach( function( feature ) {
