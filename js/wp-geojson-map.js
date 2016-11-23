@@ -210,7 +210,7 @@ var allLayers = [];
 			});
 			
 			var interval = max_value - min_value;
-			var step = interval / 255;
+			var step = 256 / interval;
 			console.log( 'min_value:' + min_value );
 			console.log( 'max_value:' + max_value );
 			console.log( 'interval:' + interval );
