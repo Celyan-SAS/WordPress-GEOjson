@@ -85,6 +85,8 @@ var allLayers = [];
 				url: file,
 				success: function(data) {
 					add_markers( data, popup_fields, field_names, gray_if_no, map_type );
+					if( $('.wpgeojson_choropleth').length > 0 )
+						process_choropleths();
 				}
 			});
 		} else {
@@ -150,6 +152,28 @@ var allLayers = [];
 			list_box.html( html );
 		});
 	};
+	
+	function process_choropleths() {
+		$('.wpgeojson_choropleth').each( function( index ) {
+			
+			var choro_box = $( this );
+			
+			/** defaults **/
+			var base_color = 'ffff**';
+			if( list_box.attr('data-color') )
+				base_color = list_box.data('color');
+			
+			if( !list_box.attr('data-property') )
+				return;
+			var field = list_box.data('property');
+			
+			allFeatures.forEach( function( feature ) {
+				
+				console.log( 'cp feature:' );
+				console.log( feature );
+			});
+		});
+	}
 	
 })( jQuery );
 

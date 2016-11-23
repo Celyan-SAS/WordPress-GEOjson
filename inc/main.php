@@ -290,6 +290,8 @@ class wpGEOjson {
 		$html .= '<input type="radio" name="wpgeojson_choropleth" value="1">';
 		$html .= '<label></label>';
 		$html .= '</div>';
+		
+		return $html;
 	}
 	
 	/** 
