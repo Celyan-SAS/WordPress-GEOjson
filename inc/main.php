@@ -355,14 +355,29 @@ class wpGEOjson {
 		 * Selection based on an ACF relationship field 
 		 * @see: https://www.advancedcustomfields.com/resources/querying-relationship-fields/
 		 */
-		if( !empty( $selection ) && preg_match( '/^relation\:([^\:]+)\:(\d+)$/', $selection, $matches ) )
+		if( !empty( $selection ) && preg_match( '/^relation\:([^\:]+)\:(\d+)$/', $selection, $matches ) ) {
+			
+			$key = $matches[1];
+			$value = $matches[2];
+			
+			/** If the relation value is given by a query_var, find it **/
+			if( preg_match( '/_query_var\(([^\)]+)\)/', $value, $rematches ) )
+				$value = get_query_var( $rematches[1] );
+							
+			/** If the relation value was passed by path, find the post ID **/
+			if( !preg_match( '/$\d+$/', $value ) ) {
+				$post = get_page_by_path( $value, OBJECT, get_queried_object()->name );
+				$value = $post->ID;
+			}
+		
 			$args['meta_query'] = array(
 				array(
-					'key'	=> $matches[1], 			// name of custom field
-					'value'	=> '"' . $matches[2] . '"', // matches exaclty "123", not just 123. This prevents a match for "1234"
-					'compare' => 'LIKE'
+					'key'		=> $key, 				// name of custom field
+					'value'		=> '"' . $value . '"',	// matches exaclty "123", not just 123. This prevents a match for "1234"
+					'compare'	=> 'LIKE'
 				)
 			);
+		}
 		
 		$the_query = new WP_Query( $args );
 		
