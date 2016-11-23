@@ -272,10 +272,6 @@ var allLayers = [];
 		});
 	}
 	
-	window.full_screen = function() {
-		$('map-canvas')
-	};
-	
 })( jQuery );
 
 
@@ -329,7 +325,7 @@ function ggmap_init() {
 			zoom: 5,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
 			mapTypeControlOptions: { mapTypeIds: [] },
-			FullscreenControlOptions: RIGHT_TOP
+			fullscreenControl: true
 		});
 		
 		// zoom to show all the features
