@@ -261,6 +261,22 @@ class wpGEOjson {
 		if( !empty( $atts['gray_if_no'] ) )
 			$html .= 'data-gray_if_no="' . $atts['gray_if_no'] . '" ';
 		
+		if( function_exists( 'get_field' ) ) {
+			
+			if( $marker_icon = get_field( 'marker_icon', 'option' ) )
+				$html .= 'data-marker_icon="' . $marker_icon . '" ';
+			
+			if( $big_cluster_icon = get_field( 'big_cluster_icon', 'option' ) )
+				$html .= 'data-big_cluster_icon="' . $big_cluster_icon . '" ';
+			
+			if( $medium_cluster_icon = get_field( 'medium_cluster_icon', 'option' ) )
+				$html .= 'data-medium_cluster_icon="' . $medium_cluster_icon . '" ';
+			
+			if( $small_cluster_icon = get_field( 'small_cluster_icon', 'option' ) )
+				$html .= 'data-small_cluster_icon="' . $small_cluster_icon . '" ';
+			
+		}
+		
 		if( !empty( $atts['height'] ) )
 			$html .= 'style="min-height:' . $atts['height'] . 'px;" ';
 		
