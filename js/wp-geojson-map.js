@@ -223,12 +223,13 @@ var allLayers = [];
 			console.log( 'max_color:' + max_color );
 			
 			html = '';
-			html += '<span class="field" style="width:15%;padding:3px 10px;">' + field + '</span>';
+			html += '<span class="field" style="width:150px;padding:3px 10px;">' + field + '</span>';
 			html += '<span class="min" style="width:15%;padding:3px 10px;">' + min_value;
 			if( percentage )
 				html += '%';
 			html += '</span>';
 			html += '<span class="min_shade" style="width:15%;padding:3px 10px;background-color:#fff">&nbsp;</span>';
+			html += '<span class="gradient" style="width:15%;padding:3px 10px;background-image:linear-gradient(to right, white, #' + max_color + ');">&nbsp;</span>';
 			html += '<span class="max_shade" style="width:15%;padding:3px 10px;background-color:#' + max_color + '">&nbsp;</span>';
 			html += '<span class="max" style="width:15%;padding:3px 10px;">' + max_value;
 			if( percentage )
