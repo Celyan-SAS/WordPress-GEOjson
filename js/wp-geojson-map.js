@@ -167,7 +167,7 @@ var allLayers = [];
 			var choro_box = $( this );
 			
 			/** only process box with active radio button **/
-			if( !('input',this).is(':checked') )
+			if( !$('input',this).is(':checked') )
 				return;
 			
 			/** defaults **/
