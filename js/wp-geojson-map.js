@@ -216,6 +216,21 @@ var allLayers = [];
 			console.log( 'interval:' + interval );
 			console.log( 'step:' + step );
 			
+			html = '';
+			html += '<span class="field">' + field + '</span>';
+			html += '<span class="min">' + min_value;
+			if( percentage )
+				html += '%';
+			html += '</span>';
+			html += '<span class="min_shade" style="background-color:#fff">&nbsp;</span>';
+			html += '<span class="max_shade" style="background-color:#f00">&nbsp;</span>';
+			html += '<span class="max">' + max_value;
+			if( percentage )
+				html += '%';
+			html += '</span>';
+			
+			$( 'label', this ).html( html );
+			
 			/** Style the shades **/
 			allFeatures.forEach( function( feature ) {
 				feature.eachLayer(function(layer){
