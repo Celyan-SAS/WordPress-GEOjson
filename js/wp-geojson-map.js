@@ -67,6 +67,11 @@ var allLayers = [];
 				gray_if_no,
 				map_type
 			);
+		
+		$('.wpgeojson_choropleth input').on('click', function(e){
+			console.log('clicked cp');
+			process_choropleths();
+		});
 	});
 	
 	/** 
