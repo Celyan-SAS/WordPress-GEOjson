@@ -223,7 +223,7 @@ var allLayers = [];
 			console.log( 'max_color:' + max_color );
 			
 			html = '';
-			html += '<span class="field" style="width:210px;padding:3px 10px;display:inline-block;">' + field + '</span>';
+			html += '<span class="field" style="width:200px;padding:3px 10px;display:inline-block;">' + field + '</span>';
 			html += '<span class="min" style="width:60px;padding:3px 10px;;display:inline-block;">de ' + min_value;
 			if( percentage )
 				html += '%';
