@@ -192,7 +192,13 @@ class wpGEOjson {
 								'name'		=> __( 'Property', 'textdomain' ),
 								'desc'		=> __( 'Property to use for coloring', 'textdomain' ),
 								'default'	=> ''
-						)
+						),
+						'checked' => array(
+								'type' 		=> 'bool',
+								'default' 	=> 'no',
+								'name'		=> __( 'Default colors', 'textdomain' ),
+								'desc'		=> __( 'Apply this scheme as a default', 'textdomain' ),
+						),
 				),
 				// Shortcode description for cheatsheet and generator
 				'desc' => __( 'Dynamic list of the points displayed on the corresponding map', 'textdomain' ),
@@ -287,7 +293,12 @@ class wpGEOjson {
 			$html .= 'data-color="' . $atts['color'] . '" ';
 		
 		$html .= '>';
-		$html .= '<input type="radio" name="wpgeojson_choropleth" value="1">';
+		$html .= '<input type="radio" name="wpgeojson_choropleth" value="1" ';
+		
+		if( !empty( $atts['checked'] ) && 'yes' == $atts['checked'] )
+			$html .= 'checked="checked" ';
+		
+		$html .= '>';
 		$html .= '<label></label>';
 		$html .= '</div>';
 		
