@@ -111,6 +111,9 @@ var allLayers = [];
 	
 	window.update_list_box = function( visible ) {
 		
+		if( !$('.wpgeojson_list').length > 0 )
+			return;
+		
 		$('.wpgeojson_list').each( function( index ) {
 			
 			var list_box = $( this );
@@ -347,7 +350,7 @@ function add_markers( geojson, popup_fields, field_names, gray_if_no, map_type )
 					} else {
 						if( typeof layer.setStyle != 'function' )
 							return;
-						console.log(layer);
+						//console.log(layer);
 						var ffp = feature.properties['res.F. Fillon']/feature.properties['res.Exprimés'];
 						var shade = (ffp*100-24)*9;
 						shade = parseInt( shade );
@@ -358,7 +361,7 @@ function add_markers( geojson, popup_fields, field_names, gray_if_no, map_type )
 							invshade = '0' + invshade;
 						shade = '#' +invshade + invshade + 'ff';
 						layer.setStyle({fillColor: shade, fillOpacity: 0.8});
-						console.log( 'shade:' + shade );
+						//console.log( 'shade:' + shade );
 					}
 				}
 			}
