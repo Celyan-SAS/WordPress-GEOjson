@@ -194,9 +194,9 @@ var allLayers = [];
 					
 					console.log( layer.feature );
 					
-					var value = feature.properties[field];
+					var value = layer.feature.properties[field];
 					if( percentage )
-						value = Math.round(feature.properties[field]*1000/feature.properties[splitted[1]])/10;
+						value = Math.round(layer.feature.properties[field]*1000/layer.feature.properties[splitted[1]])/10;
 					
 					if( min_value == -1 )
 						min_value = value;
@@ -219,9 +219,9 @@ var allLayers = [];
 					if( typeof layer.setStyle != 'function' )
 						return;
 				
-					var value = feature.properties[field];
+					var value = layer.feature.properties[field];
 					if( percentage )
-						value = Math.round(feature.properties[field]*1000/feature.properties[splitted[1]])/10;
+						value = Math.round(layer.feature.properties[field]*1000/layer.feature.properties[splitted[1]])/10;
 					
 					var shade = Math.round( value * step );
 					console.log( 'shade new:' + shade );
