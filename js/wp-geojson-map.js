@@ -42,6 +42,22 @@ var allLayers = [];
 		if( $('#map-canvas').attr('data-gray_if_no') )
 			gray_if_no = $('#map-canvas').data('gray_if_no');
 		
+		var marker_icon = '';
+		if( $('#map-canvas').attr('data-marker_icon') )
+			marker_icon = $('#map-canvas').data('marker_icon');
+		
+		var big_cluster_icon = '';
+		if( $('#map-canvas').attr('data-big_cluster_icon') )
+			big_cluster_icon = $('#map-canvas').data('big_cluster_icon');
+		
+		var medium_cluster_icon = '';
+		if( $('#map-canvas').attr('data-medium_cluster_icon') )
+			medium_cluster_icon = $('#map-canvas').data('medium_cluster_icon');
+		
+		var small_cluster_icon = '';
+		if( $('#map-canvas').attr('data-small_cluster_icon') )
+			small_cluster_icon = $('#map-canvas').data('small_cluster_icon');
+		
 		/** Check map type **/
 		if( $('#map-canvas').hasClass('ggmap') ) {
 			ggmap_init();
@@ -65,6 +81,10 @@ var allLayers = [];
 				popup_fields,
 				field_names,
 				gray_if_no,
+				marker_icon,
+				big_cluster_icon,
+				medium_cluster_icon,
+				small_cluster_icon,
 				map_type
 			);
 		
@@ -78,7 +98,7 @@ var allLayers = [];
 	 * Ajax request to load needed points/features on the map
 	 * 
 	 */
-	function load_points( post_type, selection, file, popup_fields, field_names, gray_if_no, map_type ) {
+	function load_points( post_type, selection, file, popup_fields, field_names, gray_if_no, marker_icon, big_cluster_icon, medium_cluster_icon, small_cluster_icon, map_type ) {
 		console.log( 'Loading points...' );
 
 		if( '' != file ) {
@@ -386,7 +406,7 @@ function get_visible_markers() {
  * GEOjson functions
  *
  */
-function add_markers( geojson, popup_fields, field_names, gray_if_no, map_type ) {
+function add_markers( geojson, popup_fields, field_names, gray_if_no, marker_icon, big_cluster_icon, medium_cluster_icon, small_cluster_icon, map_type ) {
 	
 	//console.log( 'popup_fields:' + popup_fields );
 	//console.log( 'gray_if_no:' + gray_if_no );
@@ -396,7 +416,11 @@ function add_markers( geojson, popup_fields, field_names, gray_if_no, map_type )
 	*/
 	
 	if( 'ggmap' == map_type ) {
+		
 		map.data.addGeoJson(geojson);
+		
+		if( marker_icon )
+			map.data.setStyle({ icon: marker_icon });
 		
 		geojson.features.forEach( function( item ) {
 			allFeatures.push( item );
