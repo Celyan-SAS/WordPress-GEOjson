@@ -227,7 +227,7 @@ var allLayers = [];
 					if( percentage )
 						value = Math.round(layer.feature.properties[field]*1000/layer.feature.properties[splitted[1]])/10;
 					
-					var shade = Math.round( value * step );
+					var shade = Math.round( ( value - min_value ) * step );
 					console.log( 'shade new:' + shade );
 					var invshade = parseInt( (256-shade) );
 					invshade = invshade.toString(16);
