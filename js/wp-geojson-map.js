@@ -224,14 +224,14 @@ var allLayers = [];
 			
 			html = '';
 			html += '<span class="field" style="width:210px;padding:3px 10px;display:inline-block;">' + field + '</span>';
-			html += '<span class="min" style="width:15%;padding:3px 10px;;display:inline-block;">' + min_value;
+			html += '<span class="min" style="width:30px;padding:3px 10px;;display:inline-block;">de ' + min_value;
 			if( percentage )
 				html += '%';
 			html += '</span>';
 			html += '<span class="min_shade" style="width:10%;padding:3px 10px;background-color:#fff">&nbsp;</span>';
 			html += '<span class="gradient" style="width:30%;padding:3px 10px;background-image:linear-gradient(to right, white, #' + max_color + ');">&nbsp;</span>';
 			html += '<span class="max_shade" style="width:10%;padding:3px 10px;background-color:#' + max_color + '">&nbsp;</span>';
-			html += '<span class="max" style="width:15%;padding:3px 10px;">' + max_value;
+			html += '<span class="max" style="width:15%;padding:3px 10px;">à ' + max_value;
 			if( percentage )
 				html += '%';
 			html += '</span>';
