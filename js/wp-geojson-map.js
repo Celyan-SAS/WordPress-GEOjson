@@ -219,7 +219,7 @@ var allLayers = [];
 			var interval = max_value - min_value;
 			var step = 255 / interval;
 			var max_color = base_color.replace( /ff/, '00' );
-			max_color = max_color.replace( /\*\*/, 'ff' );
+			max_color = max_color.replace( /[\*]{2}/, 'ff' );
 			console.log( 'min_value:' + min_value );
 			console.log( 'max_value:' + max_value );
 			console.log( 'interval:' + interval );
@@ -260,8 +260,8 @@ var allLayers = [];
 					
 					console.log( 'invshade new:' + invshade );
 					
-					shade = '#' + base_color.replace( /ff/, '00' );
-					shade = shade.replace( /\*\*/, invshade );
+					shade = '#' + max_color.replace( /ff/, invshade );
+					//shade = shade.replace( /[\*]{2}/, invshade );
 					console.log( 'shade new:' + shade );
 					
 					layer.setStyle({fillColor: shade, fillOpacity: 0.8});
