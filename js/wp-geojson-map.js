@@ -161,7 +161,9 @@ var allLayers = [];
 			
 			var choro_box = $( this );
 			
-			//TODO: only process box with active radio button
+			/** only process box with active radio button **/
+			if( !('input',this).is(':checked') )
+				return;
 			
 			/** defaults **/
 			var base_color = 'ffff**';
@@ -211,6 +213,8 @@ var allLayers = [];
 			
 			var interval = max_value - min_value;
 			var step = 255 / interval;
+			var max_color = base_color.replace( 'ff', '00' );
+			max_color = max_color.replace( '**', 'ff' );
 			console.log( 'min_value:' + min_value );
 			console.log( 'max_value:' + max_value );
 			console.log( 'interval:' + interval );
@@ -223,7 +227,7 @@ var allLayers = [];
 				html += '%';
 			html += '</span>';
 			html += '<span class="min_shade" style="background-color:#fff">&nbsp;</span>';
-			html += '<span class="max_shade" style="background-color:#f00">&nbsp;</span>';
+			html += '<span class="max_shade" style="background-color:#' + max_color + '">&nbsp;</span>';
 			html += '<span class="max">' + max_value;
 			if( percentage )
 				html += '%';
@@ -244,7 +248,7 @@ var allLayers = [];
 					
 					var shade = Math.round( ( value - min_value ) * step );
 					console.log( 'shade new:' + shade );
-					var invshade = parseInt( (256-shade) );
+					var invshade = parseInt( (255-shade) );
 					invshade = invshade.toString(16);
 					while (invshade.length < 2)
 						invshade = '0' + invshade;
