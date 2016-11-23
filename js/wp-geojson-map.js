@@ -224,7 +224,7 @@ var allLayers = [];
 			
 			html = '';
 			html += '<span class="field" style="width:210px;padding:3px 10px;display:inline-block;">' + field + '</span>';
-			html += '<span class="min" style="width:30px;padding:3px 10px;;display:inline-block;">de ' + min_value;
+			html += '<span class="min" style="width:60px;padding:3px 10px;;display:inline-block;">de ' + min_value;
 			if( percentage )
 				html += '%';
 			html += '</span>';
