@@ -218,8 +218,8 @@ var allLayers = [];
 			
 			var interval = max_value - min_value;
 			var step = 255 / interval;
-			var max_color = base_color.replace( /f/, '0' );
-			max_color = max_color.replace( /\*/, 'f' );
+			var max_color = base_color.replace( /f/g, '0' );
+			max_color = max_color.replace( /\*/g, 'f' );
 			console.log( 'min_value:' + min_value );
 			console.log( 'max_value:' + max_value );
 			console.log( 'interval:' + interval );
