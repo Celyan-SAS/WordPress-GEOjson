@@ -370,10 +370,14 @@ class wpGEOjson {
 			
 			$geojson['properties']['key']	= $key;
 			$geojson['properties']['value']	= $value;
+			
+			/** Find the other part of the relationship field **/
+			$oth_post_type = $this->find_acf_rel_pt( $post_type, $key );
+			
 							
 			/** If the relation value was passed by path, find the post ID **/
-			if( !preg_match( '/$\d+$/', $value ) ) {
-				$post = get_page_by_path( $value, OBJECT, get_queried_object()->name );
+			if( !preg_match( '/^\d+$/', $value ) ) {
+				$post = get_page_by_path( $value, OBJECT, $post_type );
 				$value = $post->ID;
 			}
 			
@@ -507,6 +511,27 @@ class wpGEOjson {
 				return $field['name'];
 		
 		return false;
+	}
+	
+	private function find_acf_rel_pt( $post_type, $key ) {
+		
+		
+		if( !function_exists( 'get_field_objects' ) )
+			return false;
+		
+		if( !$posts = get_posts( array( 'post_type'=>$post_type ) ) )
+			return false;
+		
+		if( !$fields = get_field_objects( $posts[0]->ID ) )
+			return false;
+		
+		foreach( $fields as $field )
+			if( $key == $field['name'] ) {
+				var_dump( $field );
+				exit;
+			}
+		
+			//return $field['name'];
 	}
 	
 	/**
