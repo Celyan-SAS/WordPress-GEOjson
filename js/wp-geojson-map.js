@@ -172,8 +172,18 @@ var allLayers = [];
 			
 			allFeatures.forEach( function( feature ) {
 				
+				//if( typeof features.setStyle != 'function' )
+				
 				console.log( 'cp feature:' );
 				console.log( feature );
+			});
+			
+			allLayers.forEach( function( layer ) {
+				
+				//if( typeof features.setStyle != 'function' )
+				
+				console.log( 'cp layer:' );
+				console.log( layer );
 			});
 		});
 	}
