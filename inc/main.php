@@ -232,9 +232,17 @@ class wpGEOjson {
 		$html .= '<div id="map-canvas" ';
 		$html .= 'class="wpgeojson_map ' . $map_type_class . '" ';
 		
-		if( !empty( $atts['selection'] ) )
+		if( !empty( $atts['selection'] ) ) {
+			
+			/** If the relation value is given by a query_var, find it **/
+			if( preg_match( '/\_query\_var\(([^\)]+)\)/', $atts['selection'], $matches ) ) {
+				$value = get_query_var( $matches[1] );
+				
+				$atts['selection'] = preg_replace( '/\_query\_var\(([^\)]+)\)/', $value, $atts['selection'] );
+			}
 			$html .= 'data-selection="' . $atts['selection'] . '" ';
-
+		}
+		
 		if( !empty( $atts['post_type'] ) )
 			$html .= 'data-post_type="' . $atts['post_type'] . '" ';
 			
@@ -361,13 +369,7 @@ class wpGEOjson {
 			$value = $matches[2];
 			
 			$geojson['properties']['key']	= $key;
-			$geojson['properties']['value1']	= $value;
-						
-			/** If the relation value is given by a query_var, find it **/
-			if( preg_match( '/_query_var\(([^\)]+)\)/', $value, $rematches ) )
-				$value = get_query_var( $rematches[1] );
-			
-			$geojson['properties']['value2']	= $value;
+			$geojson['properties']['value']	= $value;
 							
 			/** If the relation value was passed by path, find the post ID **/
 			if( !preg_match( '/$\d+$/', $value ) ) {
@@ -375,7 +377,7 @@ class wpGEOjson {
 				$value = $post->ID;
 			}
 			
-			$geojson['properties']['value3']	= $value;
+			$geojson['properties']['value2']	= $value;
 		
 			$args['meta_query'] = array(
 				array(
