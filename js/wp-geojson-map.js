@@ -176,6 +176,10 @@ var allLayers = [];
 				
 				console.log( 'cp feature:' );
 				console.log( feature );
+				
+				feature.eachLayer(function(layer){
+					console( layer.feature );
+				});
 			});
 			
 			allLayers.forEach( function( layer ) {
@@ -184,6 +188,10 @@ var allLayers = [];
 				
 				console.log( 'cp layer:' );
 				console.log( layer );
+				
+				layer.eachLayer(function(layer){
+					console( layer.feature );
+				});
 			});
 		});
 	}
