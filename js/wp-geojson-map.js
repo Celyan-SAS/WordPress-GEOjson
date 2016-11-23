@@ -218,12 +218,13 @@ var allLayers = [];
 			
 			var interval = max_value - min_value;
 			var step = 255 / interval;
-			var max_color = base_color.replace( /ff/, '00' );
-			max_color = max_color.replace( /[\*]{2}/, 'ff' );
+			var max_color = base_color.replace( /f/, '0' );
+			max_color = max_color.replace( /\*/, 'f' );
 			console.log( 'min_value:' + min_value );
 			console.log( 'max_value:' + max_value );
 			console.log( 'interval:' + interval );
 			console.log( 'step:' + step );
+			console.log( 'max_color:' + max_color );
 			
 			html = '';
 			html += '<span class="field">' + field + '</span>';
@@ -260,7 +261,7 @@ var allLayers = [];
 					
 					console.log( 'invshade new:' + invshade );
 					
-					shade = '#' + max_color.replace( /ff/, invshade );
+					shade = '#' + max_color.replace( 'ff', invshade );
 					//shade = shade.replace( /[\*]{2}/, invshade );
 					console.log( 'shade new:' + shade );
 					
