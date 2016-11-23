@@ -1,6 +1,6 @@
 <?php
 /**
- * MANGOPAY WordPress GEOjson plugin main class
+ * WordPress GEOjson plugin main class
 *
 * @author yann@abc.fr
 * @see: https://github.com/Celyan-SAS/WordPress-GEOjson
