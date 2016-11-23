@@ -178,7 +178,7 @@ var allLayers = [];
 				console.log( feature );
 				
 				feature.eachLayer(function(layer){
-					console( layer.feature );
+					console.log( layer.feature );
 				});
 			});
 			
@@ -190,7 +190,7 @@ var allLayers = [];
 				console.log( layer );
 				
 				layer.eachLayer(function(layer){
-					console( layer.feature );
+					console.log( layer.feature );
 				});
 			});
 		});
