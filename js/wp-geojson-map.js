@@ -94,7 +94,7 @@ var allLayers = [];
 			process_choropleths();
 		});
 		
-		$('.locate_button').on('click', function(e){
+		$('.locate_button').live('click', function(e){
 			console.log('clicked locate');
 			center_map_on_feature( $(this).data('id') );
 		});
