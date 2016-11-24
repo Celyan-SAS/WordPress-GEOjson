@@ -637,13 +637,18 @@ function center_map_on_feature( id ) {
 
 function locate_me( position ) {
 	
+	console.log( 'locate me!' );
+	
 	if( 'undefined' == typeof map || !map )
 		return false;
+	
+	console.log( 'map ok' );
 	
 	var pos = new google.maps.LatLng(position.coords.latitude,
         	position.coords.longitude);
 	
-	console.log( 'locate me!' );
+	console.log( 'pos ok' );
+	console.log( pos );
 	
 	marker = new google.maps.Marker({
 		position: pos,
@@ -652,5 +657,9 @@ function locate_me( position ) {
 		icon: '//www.google.com/mapfiles/dd-start.png'
 	});
 	
+	console.log( 'marker ok' );
+	
 	map.panTo( pos );
+	
+	console.log( 'panTo ok' );
 }
