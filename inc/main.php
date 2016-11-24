@@ -401,7 +401,7 @@ class wpGEOjson {
 	public function shortcode_wpgeojson_locateme( $atts ) {
 	
 		$html = '';
-		$html .= '<button class="wpgeojson_locateme" ';
+		$html .= '<input type="button" class="wpgeojson_locateme" ';
 	
 		if( !empty( $atts['button_text'] ) )
 			$html .= 'value="' . $atts['button_text'] . '" ';
