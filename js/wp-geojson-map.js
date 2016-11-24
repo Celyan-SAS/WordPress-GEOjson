@@ -4,6 +4,7 @@
 console.log( 'wp-geojson-map js script loaded.' );
 
 var map;
+var infowindow;
 var additionalFeatures = [];
 var allFeatures = [];
 var allLayers = [];
@@ -354,6 +355,8 @@ function ggmap_init() {
 			processPoints(e.feature.getGeometry(), bounds.extend, bounds);
 			map.fitBounds(bounds);
 		});
+		
+		infowindow = new google.maps.InfoWindow();
 		
 		// Set mouseover event for each feature.
 		map.data.addListener('mouseover', function(event) {
