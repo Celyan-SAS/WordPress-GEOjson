@@ -157,6 +157,18 @@ class wpGEOjson {
 								'default' 	=> 'no',
 								'name'		=> __( 'Field names', 'textdomain' ),
 								'desc'		=> __( 'Display the field names in the list', 'textdomain' ),
+						),
+						'locate_button' => array(
+								'type' 		=> 'bool',
+								'default' 	=> 'yes',
+								'name'		=> __( 'Locate button', 'textdomain' ),
+								'desc'		=> __( 'Add a "locate on map" button after each list item', 'textdomain' ),
+						),
+						'more_button' => array(
+								'type' 		=> 'bool',
+								'default' 	=> 'yes',
+								'name'		=> __( 'Open button', 'textdomain' ),
+								'desc'		=> __( 'Add a "More..." button after each list item', 'textdomain' ),
 						)
 				),
 				// Shortcode description for cheatsheet and generator
@@ -301,6 +313,12 @@ class wpGEOjson {
 		
 		if( !empty( $atts['field_names'] ) )
 			$html .= 'data-field_names="' . $atts['field_names'] . '" ';
+		
+		if( !empty( $atts['locate_button'] ) )
+			$html .= 'data-locate_button="' . $atts['locate_button'] . '" ';
+		
+		if( !empty( $atts['more_button'] ) )
+			$html .= 'data-more_button="' . $atts['more_button'] . '" ';
 		
 		$html .= '>';
 		$html .= '</div>';
