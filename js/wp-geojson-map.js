@@ -158,7 +158,10 @@ var allLayers = [];
 				
 				console.log(feature);
 				
-				html += '<li>';
+				html += '<li ';
+				if( feature.id )
+					html += 'id="' + id + '" ';
+				html += '>';
 				
 				if( feature.properties['link'] )
 					html += '<a href="' + feature.properties['link'] + '">';
