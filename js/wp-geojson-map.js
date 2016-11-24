@@ -102,6 +102,14 @@ var allLayers = [];
 			console.log('clicked more_button');
 			document.location='/?p=' + $(this).data('id');
 		});
+		
+		$('.wpgeojson_locateme').click( function(e) {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition( locate_me );
+			} else {
+				$('.wpgeojson_locateme').val('Geolocation unavailable');
+			}
+		});
 	});
 	
 	/** 
@@ -625,4 +633,22 @@ function center_map_on_feature( id ) {
 			}
 		}
 	});
+}
+
+function locate_me( position ) {
+	
+	if( 'undefined' == typeof map || !map )
+		return false;
+	
+	var pos = new google.maps.LatLng(position.coords.latitude,
+        	position.coords.longitude);
+	
+	marker = new google.maps.Marker({
+		position: pos,
+		map: map,
+		title: 'Your position',
+		icon: '//www.google.com/mapfiles/dd-start.png'
+	});
+	
+	map.panTo( pos );
 }
