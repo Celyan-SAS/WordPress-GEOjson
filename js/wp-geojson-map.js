@@ -192,9 +192,19 @@ var allLayers = [];
 			fields_arr = field_names.split(",");
 		}
 		
-		fields_arr.forEach( function (field ) {
+		more_text = '[More...]';
+		if( $('#map-canvas').attr('data-more_text') )
+			more_text = $('#map-canvas').data('more_text');
+		
+		fields_arr.forEach( function ( field ) {
 			html += '<div class="' + field + '">';
-			html += feature.getProperty(field);
+			if( 'link' == field ) {
+				html += '<a href="' + feature.getProperty(field) + '">';
+				html += more_text;
+				html += '</a>';
+			} else {
+				html += feature.getProperty(field);
+			}
 			html += '</div>';
 		});
 	
