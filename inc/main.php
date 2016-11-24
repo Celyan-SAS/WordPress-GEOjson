@@ -36,6 +36,10 @@ class wpGEOjson {
 		add_shortcode( 'wpgeojson_choropleth', array( $this, 'shortcode_wpgeojson_choropleth' ) );
 		add_shortcode( 'su_wpgeojson_choropleth', array( $this, 'shortcode_wpgeojson_choropleth' ) );
 		
+		/** "Locate me" button shortcode **/
+		add_shortcode( 'wpgeojson_locateme', array( $this, 'shortcode_wpgeojson_locateme' ) );
+		add_shortcode( 'su_wpgeojson_locateme', array( $this, 'shortcode_wpgeojson_locateme' ) );
+		
 		/** Ajax method to get all points of a given post_type **/
 		add_action( 'wp_ajax_get_points_for_post_type', array( $this, 'ajax_get_points_for_post_type' ) );
 		add_action( 'wp_ajax_nopriv_get_points_for_post_type', array( $this, 'ajax_get_points_for_post_type' ) );
@@ -225,11 +229,31 @@ class wpGEOjson {
 						),
 				),
 				// Shortcode description for cheatsheet and generator
-				'desc' => __( 'Dynamic list of the points displayed on the corresponding map', 'textdomain' ),
+				'desc' => __( 'Interface to switch between different coloration schemes based on data on a map', 'textdomain' ),
 				// Custom icon (font-awesome)
 				'icon' => 'map-marker',
 				// Name of custom shortcode function
 				'function' => 'wpgeojson_choropleth'
+		);
+		
+		$shortcodes['wpgeojson_locateme'] = array(
+				'name' => __( 'Locate button', 'textdomain' ),
+				'type' => 'single',
+				'group' => 'media content',
+				'atts' => array(
+						'button_text' => array(
+								'type'		=> 'text',
+								'name'		=> __( 'Button text', 'textdomain' ),
+								'desc'		=> __( 'Text of the button', 'textdomain' ),
+								'default'	=> ''
+						)
+				),
+				// Shortcode description for cheatsheet and generator
+				'desc' => __( '"Locate me" geolocation button', 'textdomain' ),
+				// Custom icon (font-awesome)
+				'icon' => 'map-marker',
+				// Name of custom shortcode function
+				'function' => 'wpgeojson_locateme'
 		);
 		
 		return $shortcodes;
@@ -365,6 +389,25 @@ class wpGEOjson {
 		$html .= '<label></label>';
 		$html .= '</div>';
 		
+		return $html;
+	}
+	
+	/**
+	 * Shortcode to insert a "Locate me" geolocation button
+	 *
+	 * @param array $atts
+	 * @return string - html markup for button
+	 */
+	public function shortcode_wpgeojson_locateme( $atts ) {
+	
+		$html = '';
+		$html .= '<button class="wpgeojson_locateme" ';
+	
+		if( !empty( $atts['button_text'] ) )
+			$html .= 'value="' . $atts['button_text'] . '" ';
+	
+		$html .= '/>';
+	
 		return $html;
 	}
 	
