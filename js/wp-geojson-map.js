@@ -354,12 +354,37 @@ function ggmap_init() {
 			processPoints(e.feature.getGeometry(), bounds.extend, bounds);
 			map.fitBounds(bounds);
 		});
+		
+		// Set mouseover event for each feature.
+		map.data.addListener('mouseover', function(event) {
+			list_highlight( event.feature.ID );
+			console.log( 'highlighting:' + event.feature.ID );
+		});
+		
+		// Set click event on each feature
+		map.data.addListener('click', function(event) {
+			open_infowindow( event.feature );
+			console.log( 'infowindow:' + event.feature.ID );
+		});
 	
 		google.maps.event.addListener( map, 'bounds_changed', on_bounds_changed );
 	} else {
 		console.log( 'No map canvas on this page.' );
 	}
-	
+}
+
+function list_highlight( id ) {
+	//TODO
+}
+
+function open_infowindow( feature ) {
+	var html = '';
+	html += '<div style="width:150px;text-align:center;">';
+	html += 'Hello World!';
+	html += '</div>';
+	infowindow.setPosition(event.feature.getGeometry().get());
+    infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
+    infowindow.open(map);
 }
 
 //@see: http://stackoverflow.com/questions/28507044/zoom-to-geojson-polygons-bounds-in-google-maps-api-v3
