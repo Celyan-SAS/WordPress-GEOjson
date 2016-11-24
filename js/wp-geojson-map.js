@@ -99,6 +99,7 @@ var allLayers = [];
 		});
 		
 		$('.more_button').live('click', function(e){
+			console.log('clicked more_button');
 			document.location='/?p=' + $(this).data('id');
 		});
 	});
@@ -205,10 +206,10 @@ var allLayers = [];
 					html += '<div class="clear">';
 				
 				if( locate_button && feature.id )
-					html += '<input type="button" class="locate_button" value="' + locate_text + '" data-id="' + feature.id + '">';
+					html += '<input type="button" class="locate_button" value="' + locate_text + '" data-id="' + feature.id + '"/>';
 				
 				if( more_button && feature.id )
-					html += '<input type="button" class="more_button" value="' + more_text + '" data-id="' + feature.id + '">';
+					html += '<input type="button" class="more_button" value="' + more_text + '" data-id="' + feature.id + '"/>';
 					
 				if( locate_button || more_button )
 					html += '</div>';
