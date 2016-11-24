@@ -164,11 +164,23 @@ class wpGEOjson {
 								'name'		=> __( 'Locate button', 'textdomain' ),
 								'desc'		=> __( 'Add a "locate on map" button after each list item', 'textdomain' ),
 						),
+						'locate_text' => array(
+								'type'		=> 'text',
+								'name'		=> __( 'Locate button text', 'textdomain' ),
+								'desc'		=> __( 'Text for the "Locate on map" button', 'textdomain' ),
+								'default'	=> ''
+						),
 						'more_button' => array(
 								'type' 		=> 'bool',
 								'default' 	=> 'yes',
 								'name'		=> __( 'Open button', 'textdomain' ),
 								'desc'		=> __( 'Add a "More..." button after each list item', 'textdomain' ),
+						),
+						'more_text' => array(
+								'type'		=> 'text',
+								'name'		=> __( 'More button text', 'textdomain' ),
+								'desc'		=> __( 'Text for the "More..." button', 'textdomain' ),
+								'default'	=> ''
 						)
 				),
 				// Shortcode description for cheatsheet and generator
@@ -317,8 +329,14 @@ class wpGEOjson {
 		if( !empty( $atts['locate_button'] ) )
 			$html .= 'data-locate_button="' . $atts['locate_button'] . '" ';
 		
+		if( !empty( $atts['locate_text'] ) )
+			$html .= 'data-locate_text="' . $atts['locate_text'] . '" ';
+		
 		if( !empty( $atts['more_button'] ) )
 			$html .= 'data-more_button="' . $atts['more_button'] . '" ';
+		
+		if( !empty( $atts['more_text'] ) )
+			$html .= 'data-more_text="' . $atts['more_text'] . '" ';
 		
 		$html .= '>';
 		$html .= '</div>';

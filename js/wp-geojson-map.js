@@ -152,12 +152,20 @@ var allLayers = [];
 			var field_names = list_box.data('field_names');
 			
 			var locate_button = false;
-			if( list_box.attr('data-locate_button') && 'yes' == list_box.data('locate_button') )
+			var locate_text = 'Locate on map';
+			if( list_box.attr('data-locate_button') && 'yes' == list_box.data('locate_button') ) {
 				locate_button = true;
+				if( list_box.attr('data-locate_text') )
+					locate_text = list_box.data('locate_text');
+			}
 			
 			var more_button = false;
-			if( list_box.attr('data-more_button') && 'yes' == list_box.data('more_button') )
+			var more_text = 'More...';
+			if( list_box.attr('data-more_button') && 'yes' == list_box.data('more_button') ) {
 				more_button = true;
+				if( list_box.attr('data-more_text') )
+					more_text = list_box.data('more_text')
+			}
 			
 			fields_arr = field_names.split(",");
 				
@@ -189,10 +197,10 @@ var allLayers = [];
 					html += '<div class="clear">';
 				
 				if( locate_button && feature.id )
-					html += '<input type="button" class="locate_button" value="Locate on map" data-id="' + feature.id + '">';
+					html += '<input type="button" class="locate_button" value="' + locate_text + '" data-id="' + feature.id + '">';
 				
 				if( more_button && feature.id )
-					html += '<input type="button" class="more_button" value="More..." data-id="' + feature.id + '">';
+					html += '<input type="button" class="more_button" value="' + more_text + '" data-id="' + feature.id + '">';
 					
 				if( locate_button || more_button )
 					html += '</div>';
