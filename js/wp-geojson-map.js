@@ -184,7 +184,7 @@ var allLayers = [];
 	
 	window.open_infowindow = function( feature ) {
 		var html = '';
-		html += '<div style="width:150px;text-align:center;">';
+		html += '<div class="infowindow pop-up open">';
 		
 		fields_arr = [];
 		if( $('#map-canvas').attr('data-popup_fields') ) {
