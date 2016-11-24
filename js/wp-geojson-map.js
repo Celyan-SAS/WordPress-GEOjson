@@ -404,7 +404,7 @@ function ggmap_init() {
 		// Set click event on each feature
 		map.data.addListener('click', function(event) {
 			open_infowindow( event.feature );
-			console.log( 'infowindow:' + event.feature.ID );
+			console.log( 'infowindow:' + event.feature.getId() );
 		});
 	
 		google.maps.event.addListener( map, 'bounds_changed', on_bounds_changed );
