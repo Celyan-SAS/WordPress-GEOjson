@@ -393,7 +393,7 @@ function ggmap_init() {
 		
 		// Set mouseover event for each feature.
 		map.data.addListener('mouseover', function(event) {
-			list_highlight( event.feature.ID );
+			list_highlight( event.feature.getId() );
 			console.log( 'highlighting:' + event.feature.ID );
 		});
 		
