@@ -185,22 +185,22 @@ var allLayers = [];
 				if( feature.properties['link'] )
 					html += '</a>';
 				
+				if( locate_button || more_button )
+					html += '<div class="clear">';
+				
+				if( locate_button && feature.id )
+					html += '<input type="button" class="locate_button" value="Locate on map" data-id="' + feature.id + '">';
+				
+				if( more_button && feature.id )
+					html += '<input type="button" class="more_button" value="More..." data-id="' + feature.id + '">';
+					
+				if( locate_button || more_button )
+					html += '</div>';
+				
 				html +='</li>';
 			});
 			
 			html += '</ul>';
-			
-			if( locate_button || more_button )
-				html += '<div class="clear">';
-			
-			if( locate_button && feature.id )
-				html += '<input type="button" class="locate_button" value="Locate on map" data-id="' + feature.id + '">';
-			
-			if( more_button && feature.id )
-				html += '<input type="button" class="more_button" value="More..." data-id="' + feature.id + '">';
-				
-			if( locate_button || more_button )
-				html += '</div>';
 			
 			list_box.html( html );
 		});
