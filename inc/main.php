@@ -422,6 +422,7 @@ class wpGEOjson {
 				
 				$feature = array(
 					'ID'	=> $the_query->post->ID,
+					'id'	=> $the_query->post->ID,
 					'type' 			=> 'Feature',
 					'geometry' 		=> array(
 						'type' => 'Point',
@@ -581,7 +582,7 @@ class wpGEOjson {
 			'wp-geojson-map',
 			plugins_url( '/js/wp-geojson-map.js', dirname( __FILE__ ) ),
 			array('jquery'), 
-			'3.0',
+			'3.1',
 			true
 		);
 		
