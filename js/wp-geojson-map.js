@@ -385,8 +385,8 @@ function open_infowindow( feature ) {
 	html += '<div style="width:150px;text-align:center;">';
 	html += 'Hello World!';
 	html += '</div>';
-	infowindow.setPosition(event.feature.getGeometry().get());
-    infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
+	infowindow.setPosition( feature.getGeometry().get() );
+    infowindow.setOptions( {pixelOffset: new google.maps.Size(0,-30)} );
     infowindow.open(map);
 }
 
