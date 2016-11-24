@@ -182,6 +182,29 @@ var allLayers = [];
 		});
 	};
 	
+	window.open_infowindow = function( feature ) {
+		var html = '';
+		html += '<div style="width:150px;text-align:center;">';
+		
+		fields_arr = [];
+		if( $('#map-canvas').attr('data-field_names') ) {
+			field_names = $('#map-canvas').data('field_names');
+			fields_arr = field_names.split(",");
+		}
+		
+		fields_arr.forEach( field ) {
+			html += '<div class="' + field + '">';
+			html += feature.properties[field];
+			html += '</div>';
+		}
+	
+		html += '</div>';
+		infowindow.setContent( html );
+		infowindow.setPosition( feature.getGeometry().get() );
+	    infowindow.setOptions( { pixelOffset: new google.maps.Size(0,-30) } );
+	    infowindow.open(map);
+	};
+	
 	function process_choropleths() {
 		$('.wpgeojson_choropleth').each( function( index ) {
 			
@@ -378,16 +401,6 @@ function ggmap_init() {
 
 function list_highlight( id ) {
 	//TODO
-}
-
-function open_infowindow( feature ) {
-	var html = '';
-	html += '<div style="width:150px;text-align:center;">';
-	html += 'Hello World!';
-	html += '</div>';
-	infowindow.setPosition( feature.getGeometry().get() );
-    infowindow.setOptions( {pixelOffset: new google.maps.Size(0,-30)} );
-    infowindow.open(map);
 }
 
 //@see: http://stackoverflow.com/questions/28507044/zoom-to-geojson-polygons-bounds-in-google-maps-api-v3
