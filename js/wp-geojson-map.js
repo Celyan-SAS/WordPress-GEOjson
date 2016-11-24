@@ -160,7 +160,7 @@ var allLayers = [];
 				
 				html += '<li ';
 				if( feature.id )
-					html += 'id="' + id + '" ';
+					html += 'id="' + feature.id + '" ';
 				html += '>';
 				
 				if( feature.properties['link'] )
