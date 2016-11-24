@@ -194,7 +194,7 @@ var allLayers = [];
 		
 		fields_arr.forEach( function (field ) {
 			html += '<div class="' + field + '">';
-			html += feature.properties[field];
+			html += feature.getProperty(field);
 			html += '</div>';
 		});
 	
