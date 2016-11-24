@@ -643,6 +643,8 @@ function locate_me( position ) {
 	var pos = new google.maps.LatLng(position.coords.latitude,
         	position.coords.longitude);
 	
+	console.log( 'locate me!' );
+	
 	marker = new google.maps.Marker({
 		position: pos,
 		map: map,
