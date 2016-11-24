@@ -192,11 +192,11 @@ var allLayers = [];
 			fields_arr = field_names.split(",");
 		}
 		
-		fields_arr.forEach( field ) {
+		fields_arr.forEach( function (field ) {
 			html += '<div class="' + field + '">';
 			html += feature.properties[field];
 			html += '</div>';
-		}
+		});
 	
 		html += '</div>';
 		infowindow.setContent( html );
