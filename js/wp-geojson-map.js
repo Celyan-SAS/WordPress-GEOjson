@@ -187,8 +187,8 @@ var allLayers = [];
 		html += '<div style="width:150px;text-align:center;">';
 		
 		fields_arr = [];
-		if( $('#map-canvas').attr('data-field_names') ) {
-			field_names = $('#map-canvas').data('field_names');
+		if( $('#map-canvas').attr('data-popup_fields') ) {
+			field_names = $('#map-canvas').data('popup_fields');
 			fields_arr = field_names.split(",");
 		}
 		
