@@ -205,11 +205,14 @@ var allLayers = [];
 				if( locate_button || more_button )
 					html += '<div class="clear">';
 				
-				if( more_button && feature.id )
-					html += '<input type="button" class="more_button" value="' + more_text + '" data-id="' + feature.id + '"/>';
-	
 				if( locate_button && feature.id )
 					html += '<input type="button" class="locate_button" value="' + locate_text + '" data-id="' + feature.id + '"/>';
+
+				if( locate_button && more_button )
+					html += ' ';
+				
+				if( more_button && feature.id )
+					html += '<input type="button" class="more_button" value="' + more_text + '" data-id="' + feature.id + '"/>';	
 				
 				if( locate_button || more_button )
 					html += '</div>';
