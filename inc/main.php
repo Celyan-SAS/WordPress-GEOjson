@@ -421,7 +421,6 @@ class wpGEOjson {
 				$acf_data = get_field( $acf_field_id, $the_query->post->ID );
 				
 				$feature = array(
-					'ID'	=> $the_query->post->ID,
 					'id'	=> $the_query->post->ID,
 					'type' 			=> 'Feature',
 					'geometry' 		=> array(
