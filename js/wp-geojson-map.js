@@ -93,6 +93,11 @@ var allLayers = [];
 			console.log('clicked cp');
 			process_choropleths();
 		});
+		
+		$('.locate_button').on('click', function(e){
+			console.log('clicked locate');
+			center_map_on_feature( $(this).data('id') );
+		});
 	});
 	
 	/** 
@@ -602,4 +607,8 @@ function add_markers( geojson, popup_fields, field_names, gray_if_no, marker_ico
 		map.addLayer(vectorLayer);
 	}
 		
+}
+
+function center_map_on_feature( id ) {
+	console.log( 'feature id to center map on: ' + id );
 }
