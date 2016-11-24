@@ -254,7 +254,10 @@ class wpGEOjson {
 		
 		if( !empty( $atts['popup_fields'] ) )
 			$html .= 'data-popup_fields="' . $atts['popup_fields'] . '" ';
-
+		
+		if( !empty( $atts['more_text'] ) )
+			$html .= 'data-more_text="' . $atts['more_text'] . '" ';
+		
 		if( !empty( $atts['field_names'] ) )
 			$html .= 'data-field_names="' . $atts['field_names'] . '" ';
 		
