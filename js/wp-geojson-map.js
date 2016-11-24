@@ -107,6 +107,7 @@ var allLayers = [];
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition( locate_me );
 			} else {
+				console.log( 'Geolocation unavailable' );
 				$('.wpgeojson_locateme').val('Geolocation unavailable');
 			}
 		});
