@@ -239,6 +239,26 @@ var allLayers = [];
 		});
 	};
 	
+	window.list_highlight = function( id, on_off ) {
+		
+		if( !$('.wpgeojson_list').length > 0 )
+			return;
+		
+		$('.wpgeojson_list').each( function( index ) {
+			
+			//var list_box = $( this );
+			
+			if( on_off ) {
+				$( 'li#' + id, this ).addClass( 'highlight' );
+				console.log( 'highlight ' + id );
+			} else {
+				$( 'li#' + id, this ).removeClass( 'highlight' );
+				console.log( 'unlight ' + id );
+			}
+		
+		});		
+	};
+	
 	window.open_infowindow = function( feature ) {
 		var html = '';
 		html += '<div class="infowindow pop-up open">';
@@ -472,10 +492,6 @@ function ggmap_init() {
 	} else {
 		console.log( 'No map canvas on this page.' );
 	}
-}
-
-function list_highlight( id ) {
-	//TODO
 }
 
 //@see: http://stackoverflow.com/questions/28507044/zoom-to-geojson-polygons-bounds-in-google-maps-api-v3
