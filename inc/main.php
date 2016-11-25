@@ -706,6 +706,13 @@ class wpGEOjson {
 			'1.0',
 			true
 		);
+		wp_register_script(
+			'ggmap-geojson-clusterer',
+			plugins_url( '/js/datalayerclusterer.js', dirname( __FILE__ ) ),
+			array('ggmap-api'),
+			'1.0',
+			true
+		);
 		/** **/
 		
 		/** Turf.js **/
@@ -731,7 +738,8 @@ class wpGEOjson {
 		/** Google maps **/
 		if( in_array( 'ggmap', self::$load_scripts ) ) {
 			wp_print_scripts('ggmap-api');
-			wp_print_scripts('ggmap-clusterer');	
+			wp_print_scripts('ggmap-clusterer');
+			wp_print_scripts('ggmap-geojson-clusterer');
 		}
 		/** **/
 		
