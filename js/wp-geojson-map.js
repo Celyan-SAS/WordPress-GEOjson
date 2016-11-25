@@ -194,7 +194,7 @@ var allLayers = [];
 			html += '<ul>';
 			visible.forEach( function( feature ){
 				
-				console.log(feature);
+				//console.log(feature);
 				
 				html += '<li ';
 				if( feature.id )
@@ -492,7 +492,7 @@ function processPoints(geometry, callback, thisArg) {
 }
 
 function on_bounds_changed() {
-	console.log( 'bounds changed' );
+	//console.log( 'bounds changed' );
 	var visible = get_visible_markers();
 	
 	if( nodes = document.getElementsByClassName("wpgeojson_list") ) {
