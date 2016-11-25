@@ -439,6 +439,8 @@ function ggmap_init() {
 			fullscreenControl: true
 		});
 		
+		var markerCluster = new DataLayerClusterer( map );
+		
 		// zoom to show all the features
 		var bounds = new google.maps.LatLngBounds();
 		map.data.addListener('addfeature', function(e) {
