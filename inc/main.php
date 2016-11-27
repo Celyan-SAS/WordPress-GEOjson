@@ -32,6 +32,10 @@ class wpGEOjson {
 		add_shortcode( 'wpgeojson_list', array( $this, 'shortcode_wpgeojson_list' ) );
 		add_shortcode( 'su_wpgeojson_list', array( $this, 'shortcode_wpgeojson_list' ) );
 		
+		/** Display GEOjson data as a table **/
+		add_shortcode( 'wpgeojson_table', array( $this, 'shortcode_wpgeojson_table' ) );
+		add_shortcode( 'su_wpgeojson_table', array( $this, 'shortcode_wpgeojson_table' ) );
+		
 		/** Choropleth map colouring shortcode **/
 		add_shortcode( 'wpgeojson_choropleth', array( $this, 'shortcode_wpgeojson_choropleth' ) );
 		add_shortcode( 'su_wpgeojson_choropleth', array( $this, 'shortcode_wpgeojson_choropleth' ) );
@@ -363,6 +367,21 @@ class wpGEOjson {
 			$html .= 'data-more_text="' . $atts['more_text'] . '" ';
 		
 		$html .= '>';
+		$html .= '</div>';
+		
+		return $html;
+	}
+	
+	/**
+	 * Display GEOjson data as a table
+	 * 
+	 * @param array $atts
+	 * @return string html to display
+	 */
+	public function shortcode_wpgeojson_table( $atts ) {
+		
+		$html = '';
+		$html .= '<div class="wpgeojson_table >';
 		$html .= '</div>';
 		
 		return $html;
