@@ -380,9 +380,41 @@ class wpGEOjson {
 	 */
 	public function shortcode_wpgeojson_table( $atts ) {
 		
+		$fields = array();
+		if( !empty( $atts['list_fields'] ) )
+			$fields = explode( ',', $atts['list_fields'] );
+		
 		$html = '';
-		$html .= '<div class="wpgeojson_table" >';
-		$html .= '</div>';
+		$html .= '<div class="wpgeojson_table" ><table>';
+		
+		$html .= '<thead><tr>';
+		foreach( $fields as $field ) {
+			$html .= '<td>' . $field . '</td>';
+		}
+		$html .= '</tr></thead>';
+		
+		if( !empty( $atts['file'] ) ) {
+			if( $response = wp_remote_get( $atts['file'], array( 'timeout' => 3 ) ) ) {
+				if( $geojson = json_decode( $response['body'] ) ) {
+					if( isset( $geojson->features ) && is_array( $geojson->features) ) {
+						
+						$html .= '<tbody>';
+						foreach( $geojson->features as $feature ) {
+							if( isset( $feature->properties ) && is_array( $feature->properties ) ) {
+								$html .= '<tr>';
+								foreach( $fields as $field ) {
+									$html .= '<td>' . $feature->properties[$field] . '</td>';
+								}
+								$html .= '</tr>';
+							}
+						}
+						$html .= '</tbody>';
+					}
+				}
+			}
+		}
+		
+		$html .= '</table></div>';
 		
 		return $html;
 	}
