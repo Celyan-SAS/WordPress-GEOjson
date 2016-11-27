@@ -403,8 +403,30 @@ class wpGEOjson {
 							if( isset( $feature->properties ) ) {
 								$html .= '<tr>';
 								foreach( $fields as $field ) {
-									if( isset( $feature->properties->$field ) )
-										$html .= '<td>' . $feature->properties->$field . '</td>';
+
+									$perc = false;
+									if( preg_match( '^/.+\%.+/$', $field ) ) {
+										$fielda = explode( '%', $field );
+										$field = $fielda[0];
+										$perc = true;
+									}
+									
+									if( isset( $feature->properties->$field ) ) {
+										$html .= '<td>' . $feature->properties->$field; 
+										
+										if( 
+											$perc && 
+											isset( $feature->properties->{$fielda[1]} ) && 
+											$feature->properties->{$fielda[1]} > 0 
+										) {
+											$v1 = $feature->properties->$field;
+											$v2 = $feature->properties->{$fielda[1]};
+											$p = ( floor( ( $v1 * 1000 / $v2 ) + 0.5 ) / 10 );
+											$html .= '&nbsp;(&nbsp;' . $p . '%&nbsp;)'; 
+										}
+										
+										$html .= '</td>';
+									}
 								}
 								$html .= '</tr>';
 							}
