@@ -332,19 +332,21 @@ var allLayers = [];
 					if( percentage )
 						value = Math.round(layer.feature.properties[field]*1000/layer.feature.properties[splitted[1]])/10;
 					
-					if( min_value == -1 )
+					if( min_value == -1 && !isNaN(value) )
 						min_value = value;
 					
-					if( value < min_value ) 
+					if( value < min_value && !isNaN(value) ) 
 						min_value = value;
 					
-					if( value > max_value ) 
+					if( value > max_value && !isNaN(value) ) 
 						max_value = value;
 				});
 			});
 			
 			var interval = max_value - min_value;
-			var step = 255 / interval;
+			var step = 0.0001;
+			if( interval != 0  && !isNaN(interval) )
+				step = 255 / interval;
 			var max_color = base_color.replace( /f/g, '0' );
 			max_color = max_color.replace( /\*/g, 'f' );
 			console.log( 'min_value:' + min_value );
