@@ -381,7 +381,7 @@ var allLayers = [];
 						return;
 				
 					var value = layer.feature.properties[field];
-					if( percentage )
+					if( percentage && layer.feature.properties[splitted[1]] > 0 )
 						value = Math.round(layer.feature.properties[field]*1000/layer.feature.properties[splitted[1]])/10;
 					
 					var shade = Math.round( ( value - min_value ) * step );
