@@ -403,7 +403,8 @@ class wpGEOjson {
 							if( isset( $feature->properties ) ) {
 								$html .= '<tr>';
 								foreach( $fields as $field ) {
-									$html .= '<td>' . $feature->$field . '</td>';
+									if( isset( $feature->properties->$field ) )
+										$html .= '<td>' . $feature->properties->$field . '</td>';
 								}
 								$html .= '</tr>';
 							}
