@@ -405,7 +405,7 @@ class wpGEOjson {
 								foreach( $fields as $field ) {
 
 									$perc = false;
-									if( preg_match( '^/.+\%.+/$', $field ) ) {
+									if( preg_match( '/^.+\%.+$/', $field ) ) {
 										$fielda = explode( '%', $field );
 										$field = $fielda[0];
 										$perc = true;
