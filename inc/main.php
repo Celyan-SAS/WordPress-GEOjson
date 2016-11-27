@@ -381,7 +381,7 @@ class wpGEOjson {
 	public function shortcode_wpgeojson_table( $atts ) {
 		
 		$html = '';
-		$html .= '<div class="wpgeojson_table >';
+		$html .= '<div class="wpgeojson_table" >';
 		$html .= '</div>';
 		
 		return $html;
