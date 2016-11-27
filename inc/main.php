@@ -400,10 +400,10 @@ class wpGEOjson {
 						
 						$html .= '<tbody>';
 						foreach( $geojson->features as $feature ) {
-							if( isset( $feature->properties ) && is_array( $feature->properties ) ) {
+							if( isset( $feature->properties ) ) {
 								$html .= '<tr>';
 								foreach( $fields as $field ) {
-									$html .= '<td>' . $feature->properties[$field] . '</td>';
+									$html .= '<td>' . $feature->$field . '</td>';
 								}
 								$html .= '</tr>';
 							}
