@@ -533,6 +533,16 @@ function get_visible_markers() {
 		}
 	});
 	
+	/** Trier par distance au centre de la carte **/
+	var mapCenter = map.getCenter();
+	visible.sort( function( a, b ) {
+		var distance_a = google.maps.geometry.spherical.computeDistanceBetween( a.get(), mapCenter );
+		a.properties.distance = distance_a;
+		var distance_b = google.maps.geometry.spherical.computeDistanceBetween( b.get(), mapCenter );
+		b.properties.distance = distance_b;
+		return distance_a - distance_b;
+	});
+	
 	return visible;
 }
 
