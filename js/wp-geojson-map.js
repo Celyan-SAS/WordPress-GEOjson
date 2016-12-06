@@ -536,9 +536,11 @@ function get_visible_markers() {
 	/** Trier par distance au centre de la carte **/
 	var mapCenter = map.getCenter();
 	visible.sort( function( a, b ) {
-		var distance_a = google.maps.geometry.spherical.computeDistanceBetween( a.getGeometry().get(), mapCenter );
+		var position_a = new google.maps.LatLng( a.geometry.coordinates[1], a.geometry.coordinates[0] );
+		var distance_a = google.maps.geometry.spherical.computeDistanceBetween( position_a, mapCenter );
 		a.properties.distance = distance_a;
-		var distance_b = google.maps.geometry.spherical.computeDistanceBetween( b.getGeometry().get(), mapCenter );
+		var position_b = new google.maps.LatLng( b.geometry.coordinates[1], b.geometry.coordinates[0] );
+		var distance_b = google.maps.geometry.spherical.computeDistanceBetween( position_b, mapCenter );
 		b.properties.distance = distance_b;
 		return distance_a - distance_b;
 	});
