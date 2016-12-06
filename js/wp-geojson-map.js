@@ -192,13 +192,17 @@ var allLayers = [];
 			fields_arr = field_names.split(",");
 				
 			html += '<ul>';
+			var count = 0;
 			visible.forEach( function( feature ){
 				
+				count ++;
+				var color_number = ( count % 4 ) + 1;
 				//console.log(feature);
 				
 				html += '<li ';
 				if( feature.id )
 					html += 'id="' + feature.id + '" ';
+				html += 'class="color_' + color_number + '" ';
 				html += '>';
 				
 				if( feature.properties['link'] )
