@@ -523,8 +523,8 @@ function get_visible_markers() {
 	var visible = [];
 	
 	allFeatures.forEach( function( feature ) {
-		//console.log('feature:');
-		//console.log( feature );
+		console.log('feature:');
+		console.log( feature );
 		if( 'Point' == feature.geometry.type ) {
 			position = new google.maps.LatLng( feature.geometry.coordinates[1], feature.geometry.coordinates[0] );
 			if ( map.getBounds().contains( position )) {
