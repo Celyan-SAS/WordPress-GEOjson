@@ -524,7 +524,7 @@ function get_visible_markers() {
 	
 	allFeatures.forEach( function( feature ) {
 		console.log('feature:');
-		console.log( feature );
+		console.log( feature.getGeometry() );
 		if( 'Point' == feature.geometry.type ) {
 			position = new google.maps.LatLng( feature.geometry.coordinates[1], feature.geometry.coordinates[0] );
 			if ( map.getBounds().contains( position )) {
@@ -536,9 +536,9 @@ function get_visible_markers() {
 	/** Trier par distance au centre de la carte **/
 	var mapCenter = map.getCenter();
 	visible.sort( function( a, b ) {
-		var distance_a = google.maps.geometry.spherical.computeDistanceBetween( a.get(), mapCenter );
+		var distance_a = google.maps.geometry.spherical.computeDistanceBetween( a.getGeometry().get(), mapCenter );
 		a.properties.distance = distance_a;
-		var distance_b = google.maps.geometry.spherical.computeDistanceBetween( b.get(), mapCenter );
+		var distance_b = google.maps.geometry.spherical.computeDistanceBetween( b.getGeometry().get(), mapCenter );
 		b.properties.distance = distance_b;
 		return distance_a - distance_b;
 	});
