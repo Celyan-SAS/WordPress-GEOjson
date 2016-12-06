@@ -196,7 +196,7 @@ var allLayers = [];
 			visible.forEach( function( feature ){
 				
 				count ++;
-				var color_number = ( count % 4 ) + 1;
+				var color_number = ( ( count - 1 ) % 4 ) + 1;
 				//console.log(feature);
 				
 				html += '<li ';
