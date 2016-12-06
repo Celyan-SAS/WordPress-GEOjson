@@ -524,7 +524,7 @@ function get_visible_markers() {
 	
 	allFeatures.forEach( function( feature ) {
 		console.log('feature:');
-		console.log( feature.getGeometry() );
+		console.log( feature.get() );
 		if( 'Point' == feature.geometry.type ) {
 			position = new google.maps.LatLng( feature.geometry.coordinates[1], feature.geometry.coordinates[0] );
 			if ( map.getBounds().contains( position )) {
