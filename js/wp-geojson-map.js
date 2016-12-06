@@ -570,7 +570,7 @@ function add_markers( geojson, popup_fields, field_names, gray_if_no, marker_ico
 		map.data.addGeoJson(geojson);
 		
 		if( marker_icon )
-			map.data.setStyle({ icon: marker_icon });
+			map.data.setStyle({ icon: marker_icon, fillColor: blue, strokeColor: blue });
 		
 		geojson.features.forEach( function( item ) {
 			allFeatures.push( item );
