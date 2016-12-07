@@ -220,13 +220,15 @@ var allLayers = [];
 					console.log( 'my_feature: ' + my_feature.getId() );
 					console.log( 'feature.id: ' + feature.id );
 					
-					if( my_feature.getId() != feature.id )
-						return my_feature.getStyle();
-					
+					if( my_feature.getId() != feature.id ) {
+						marker_icon = $('#map-canvas').data('marker_icon');
+						return({icon: marker_icon});
+					}
+				
 					if( $('#map-canvas').attr('data-marker_icon_' + color_number) ) {
 						marker_icon = $('#map-canvas').data('marker_icon_' + color_number);
 					} else {
-						return my_feature.getStyle();
+						marker_icon = $('#map-canvas').data('marker_icon');
 					}
 					
 					return({icon: marker_icon});
