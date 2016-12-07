@@ -570,30 +570,7 @@ function add_markers( geojson, popup_fields, field_names, gray_if_no, marker_ico
 		map.data.addGeoJson(geojson);
 		
 		if( marker_icon )
-			map.data.setStyle( function(feature) { 
-				
-				var my_icon = marker_icon;
-				
-				if(feature.getProperty('post_id') == 18903 ) {
-					my_icon = {
-							anchor: new google.maps.Point(16, 16),
-							url: 'data:image/svg+xml;utf-8, \
-								<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"> \
-								<path d="M3.5 3.5h25v25h-25z" ></path> \
-								</svg>',
-							fillColor: 'blue',
-							strokeColor: 'blue',
-							strokeWeight: 1.5
-					};
-				}
-				
-				return({
-					icon: my_icon,
-					fillColor: 'blue',
-					strokeColor: 'blue',
-					strokeWeight: 1.5
-				});
-			});
+			map.data.setStyle({icon: marker_icon});
 		
 		geojson.features.forEach( function( item ) {
 			allFeatures.push( item );
