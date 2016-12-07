@@ -216,6 +216,10 @@ var allLayers = [];
 				
 				/** If map implements marker numbers change related marker icon **/
 				map.data.setStyle( function(my_feature){
+					
+					console.log( 'my_feature: ' + my_feature.getId() );
+					console.log( 'feature.id: ' + feature.id );
+					
 					if( my_feature.getId() != feature.id )
 						return my_feature.getStyle();
 					
