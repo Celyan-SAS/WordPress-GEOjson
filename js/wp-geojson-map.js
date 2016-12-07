@@ -217,12 +217,12 @@ var allLayers = [];
 				/** If map implements marker numbers change related marker icon **/
 				map.data.setStyle( function(my_feature){
 					if( my_feature.getId() != feature.id )
-						return;
+						return my_feature.getStyle();
 					
 					if( $('#map-canvas').attr('data-marker_icon_' + color_number) ) {
 						marker_icon = $('#map-canvas').data('marker_icon_' + color_number);
 					} else {
-						return;
+						return my_feature.getStyle();
 					}
 					
 					return({icon: marker_icon});
