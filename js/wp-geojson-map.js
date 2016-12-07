@@ -157,7 +157,8 @@ var allLayers = [];
 			$.post( ajaxurl, {
 				action: 'get_points_for_post_type',
 				post_type: params.post_type,
-				selection: params.selection
+				selection: params.selection,
+				fields: params.popup_fields
 			}, function( data ) {
 				console.log( 'Ajax get_points_for_post_type data length: ' + data.length );
 				//console.log( data );

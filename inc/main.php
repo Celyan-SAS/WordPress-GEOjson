@@ -525,6 +525,10 @@ class wpGEOjson {
 			if( !$acf_field_id = $this->find_acf_ggmap_field( $post_type ) )
 				$this->send_ajax_error( 'geo field not found' );
 		
+		$fields = array();
+		if( !empty( $_REQUEST['fields'] ) )
+			$fields = explode( ',', sanitize_text_field( $_REQUEST['fields'] ) );
+		
 		//if( $this->in_cache( $post_type, $acf_field_id, $selection ) )
 		//	$this->send_ajax_response( $this->from_cache( $post_type, $acf_field_id, $selection ) );
 		
@@ -603,6 +607,12 @@ class wpGEOjson {
 						'link'		=> get_permalink( $the_query->post->ID )
 					)
 				);
+				
+				if( $fields )
+					foreach( $fields as $field )
+						if( $value = get_field( $field, $the_query->post->ID ) )
+							$feature['properties'][$field] = $value;
+				
 				array_push( $geojson['features'], $feature );
 			}
 		}
