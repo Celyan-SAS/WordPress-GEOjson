@@ -217,13 +217,14 @@ var allLayers = [];
 				/** If map implements marker numbers change related marker icon **/
 				map.data.setStyle( function(my_feature){
 					
-					console.log( 'my_feature: ' + my_feature.getId() );
-					console.log( 'feature.id: ' + feature.id );
-					
 					if( my_feature.getId() != feature.id ) {
 						marker_icon = $('#map-canvas').data('marker_icon');
 						return({icon: marker_icon});
 					}
+					
+					console.log( 'my_feature: ' + my_feature.getId() );
+					console.log( 'feature.id: ' + feature.id );
+					console.log( 'color_number: ' + color_number );
 				
 					if( $('#map-canvas').attr('data-marker_icon_' + color_number) ) {
 						marker_icon = $('#map-canvas').data('marker_icon_' + color_number);
