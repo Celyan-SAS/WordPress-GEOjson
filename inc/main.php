@@ -321,6 +321,15 @@ class wpGEOjson {
 			if( $marker_icon = get_field( 'marker_icon', 'option' ) )
 				$html .= 'data-marker_icon="' . $marker_icon . '" ';
 			
+			if( $marker_icon_2 = get_field( 'marker_icon_2', 'option' ) )
+				$html .= 'data-marker_icon_2="' . $marker_icon_2 . '" ';
+			
+			if( $marker_icon_3 = get_field( 'marker_icon_3', 'option' ) )
+				$html .= 'data-marker_icon_3="' . $marker_icon_3 . '" ';
+			
+			if( $marker_icon_4 = get_field( 'marker_icon_4', 'option' ) )
+				$html .= 'data-marker_icon_4="' . $marker_icon_4 . '" ';
+			
 			if( $big_cluster_icon = get_field( 'big_cluster_icon', 'option' ) )
 				$html .= 'data-big_cluster_icon="' . $big_cluster_icon . '" ';
 			

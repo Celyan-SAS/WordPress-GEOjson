@@ -47,6 +47,18 @@ var allLayers = [];
 		if( $('#map-canvas').attr('data-marker_icon') )
 			marker_icon = $('#map-canvas').data('marker_icon');
 		
+		var marker_icon_2 = '';
+		if( $('#map-canvas').attr('data-marker_icon_2') )
+			marker_icon = $('#map-canvas').data('marker_icon_2');
+		
+		var marker_icon_3 = '';
+		if( $('#map-canvas').attr('data-marker_icon_3') )
+			marker_icon = $('#map-canvas').data('marker_icon_3');
+		
+		var marker_icon_4 = '';
+		if( $('#map-canvas').attr('data-marker_icon_4') )
+			marker_icon = $('#map-canvas').data('marker_icon_4');
+		
 		var big_cluster_icon = '';
 		if( $('#map-canvas').attr('data-big_cluster_icon') )
 			big_cluster_icon = $('#map-canvas').data('big_cluster_icon');
@@ -75,19 +87,22 @@ var allLayers = [];
 		
 		/** launch load_points ajax call **/		
 		if( !$('#map-canvas').attr('data-load_points') || 'yes'==$('#map-canvas').data('load_points') )
-			load_points( 
-				post_type, 
-				selection,
-				file,
-				popup_fields,
-				field_names,
-				gray_if_no,
-				marker_icon,
-				big_cluster_icon,
-				medium_cluster_icon,
-				small_cluster_icon,
-				map_type
-			);
+			load_points({ 
+				post_type: post_type, 
+				selection: selection,
+				file: file,
+				popup_fields: popup_fields,
+				field_names: field_names,
+				gray_if_no: gray_if_no,
+				marker_icon: marker_icon,
+				marker_icon_2: marker_icon_2,
+				marker_icon_3: marker_icon_3,
+				marker_icon_4: marker_icon_4,
+				big_cluster_icon: big_cluster_icon,
+				medium_cluster_icon: medium_cluster_icon,
+				small_cluster_icon: small_cluster_icon,
+				map_type: map_type
+			});
 		
 		$('.wpgeojson_choropleth input').on('click', function(e){
 			console.log('clicked cp');
@@ -121,18 +136,18 @@ var allLayers = [];
 	 * Ajax request to load needed points/features on the map
 	 * 
 	 */
-	function load_points( post_type, selection, file, popup_fields, field_names, gray_if_no, marker_icon, big_cluster_icon, medium_cluster_icon, small_cluster_icon, map_type ) {
+	function load_points( params ) {
 		console.log( 'Loading points...' );
 
-		if( '' != file ) {
+		if( '' != params.file ) {
 			/** get existing GEOjson file **/
-			console.log('loading GEOjson file ' + file + '...');
-			var fetures = new L.geoJson();
+			console.log('loading GEOjson file ' + params.file + '...');
+			//var features = new L.geoJson();
 			$.ajax({
 				dataType: "json",
-				url: file,
+				url: params.file,
 				success: function(data) {
-					add_markers( data, popup_fields, field_names, gray_if_no, marker_icon, big_cluster_icon, medium_cluster_icon, small_cluster_icon, map_type );
+					add_markers( data, params );
 					if( $('.wpgeojson_choropleth').length > 0 )
 						process_choropleths();
 				}
@@ -141,12 +156,12 @@ var allLayers = [];
 			/** get GEOjson list of selected points **/
 			$.post( ajaxurl, {
 				action: 'get_points_for_post_type',
-				post_type: post_type,
-				selection: selection
+				post_type: params.post_type,
+				selection: params.selection
 			}, function( data ) {
 				console.log( 'Ajax get_points_for_post_type data length: ' + data.length );
 				//console.log( data );
-				add_markers( data, popup_fields, field_names, gray_if_no, marker_icon, big_cluster_icon, medium_cluster_icon, small_cluster_icon, map_type );
+				add_markers( data, params );
 			}).done(function() {
 				console.log( "Ajax get_points_for_post_type success" );
 			}).fail(function() {
@@ -556,7 +571,7 @@ function get_visible_markers() {
  * GEOjson functions
  *
  */
-function add_markers( geojson, popup_fields, field_names, gray_if_no, marker_icon, big_cluster_icon, medium_cluster_icon, small_cluster_icon, map_type ) {
+function add_markers( geojson, params ) {
 	
 	//console.log( 'popup_fields:' + popup_fields );
 	//console.log( 'gray_if_no:' + gray_if_no );
@@ -565,12 +580,12 @@ function add_markers( geojson, popup_fields, field_names, gray_if_no, marker_ico
 	var hull2 = turf.convex( geojson );
 	*/
 	
-	if( 'ggmap' == map_type ) {
+	if( 'ggmap' == params.map_type ) {
 		
 		map.data.addGeoJson(geojson);
 		
-		if( marker_icon )
-			map.data.setStyle({icon: marker_icon});
+		if( params.marker_icon )
+			map.data.setStyle({icon: params.marker_icon});
 		
 		geojson.features.forEach( function( item ) {
 			allFeatures.push( item );
@@ -582,9 +597,9 @@ function add_markers( geojson, popup_fields, field_names, gray_if_no, marker_ico
 		*/
 	}
 	
-	if( 'leaflet' == map_type ) {
+	if( 'leaflet' == params.map_type ) {
 		
-		popup_arr = popup_fields.split(",");
+		popup_arr = params.popup_fields.split(",");
 		//console.log( 'popup_arr:' + popup_arr );
 		re = new RegExp("\%");
 		features = L.geoJSON(
