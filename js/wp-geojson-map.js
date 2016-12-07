@@ -272,7 +272,6 @@ var allLayers = [];
 				}
 				
 				console.log( 'my_feature: ' + my_feature.getId() );
-				console.log( 'feature.id: ' + feature.id );
 				console.log( 'color_number: ' + color_number );
 				
 				return({icon: marker_icon});
