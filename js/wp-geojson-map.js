@@ -681,7 +681,7 @@ function add_markers( geojson, params ) {
 		*/
 	}
 	
-	if( 'openlayers' == map_type ) {
+	if( 'openlayers' == params.map_type ) {
 	    var features = new ol.format.GeoJSON().readFeatures(geojson, {
 	        featureProjection: 'EPSG:3857'
 	    });
