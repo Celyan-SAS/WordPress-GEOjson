@@ -214,6 +214,20 @@ var allLayers = [];
 				var color_number = ( ( count - 1 ) % 4 ) + 1;
 				//console.log(feature);
 				
+				/** If map implements marker numbers change related marker icon **/
+				map.data.setStyle( function(my_feature){
+					if( my_feature.getId() != feature.id )
+						return;
+					
+					if( $('#map-canvas').attr('data-marker_icon_' + color_number) ) {
+						marker_icon = $('#map-canvas').data('marker_icon_' + color_number);
+					} else {
+						return;
+					}
+					
+					return({icon: marker_icon});
+				});
+				
 				html += '<li ';
 				if( feature.id )
 					html += 'id="' + feature.id + '" ';
