@@ -207,33 +207,14 @@ var allLayers = [];
 			fields_arr = field_names.split(",");
 				
 			html += '<ul>';
+			var marker_colors = [];
 			var count = 0;
 			visible.forEach( function( feature ){
 				
 				count ++;
 				var color_number = ( ( count - 1 ) % 4 ) + 1;
 				//console.log(feature);
-				
-				/** If map implements marker numbers change related marker icon **/
-				map.data.setStyle( function(my_feature){
-					
-					if( my_feature.getId() != feature.id ) {
-						marker_icon = $('#map-canvas').data('marker_icon');
-						return({icon: marker_icon});
-					}
-					
-					console.log( 'my_feature: ' + my_feature.getId() );
-					console.log( 'feature.id: ' + feature.id );
-					console.log( 'color_number: ' + color_number );
-				
-					if( $('#map-canvas').attr('data-marker_icon_' + color_number) ) {
-						marker_icon = $('#map-canvas').data('marker_icon_' + color_number);
-					} else {
-						marker_icon = $('#map-canvas').data('marker_icon');
-					}
-					
-					return({icon: marker_icon});
-				});
+				marker_colors[feature.id] = color_number;
 				
 				html += '<li ';
 				if( feature.id )
@@ -276,6 +257,26 @@ var allLayers = [];
 			html += '</ul>';
 			
 			list_box.html( html );
+			
+			/** If map implements marker numbers change related marker icon **/
+			map.data.setStyle( function(my_feature){
+				
+				feature_id = my_feature.getId();
+				if( marker_colors[feature_id] ) {
+					color_number = marker_colors[feature_id];
+					if( $('#map-canvas').attr('data-marker_icon_' + color_number) ) {
+						marker_icon = $('#map-canvas').data('marker_icon_' + color_number);
+					} else {
+						marker_icon = $('#map-canvas').data('marker_icon');
+					}
+				}
+				
+				console.log( 'my_feature: ' + my_feature.getId() );
+				console.log( 'feature.id: ' + feature.id );
+				console.log( 'color_number: ' + color_number );
+				
+				return({icon: marker_icon});
+			});
 		});
 	};
 	
