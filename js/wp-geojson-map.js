@@ -8,6 +8,7 @@ var infowindow;
 var additionalFeatures = [];
 var allFeatures = [];
 var allLayers = [];
+var list_limit = 50;	// Maximum number of point data to return in the list box
 
 /**
  * jQuery functions
@@ -213,6 +214,10 @@ var allLayers = [];
 			visible.forEach( function( feature ){
 				
 				count ++;
+				
+				if( count > list_limit )
+					return;
+				
 				var color_number = ( ( count - 1 ) % 4 ) + 1;
 				//console.log(feature);
 				marker_colors[feature.id] = color_number;
