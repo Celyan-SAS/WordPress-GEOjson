@@ -792,9 +792,12 @@ class wpGEOjson {
 		/** **/
 		
 		/** Google Maps specific **/
+		$key = '';
+		if( function_exists( 'get_field' ) && $google_maps_key = get_field( 'google_maps_key', 'option' ) )
+			$key = '&key=' . $google_maps_key;
 		wp_register_script(
 			'ggmap-api',
-			'//maps.google.com/maps/api/js?libraries=places,geometry&key=AIzaSyCqT9oozbXDPphT-__n4OTPGWxBGPYVreg',
+			'//maps.google.com/maps/api/js?libraries=places,geometry' . $key,
 			array('jquery'), 
 			'1.0',
 			true
