@@ -131,6 +131,36 @@ var list_limit = 50;	// Maximum number of point data to return in the list box
 				$('.wpgeojson_locateme').val('Geolocation unavailable');
 			}
 		});
+		
+		/** Champ de recherche de lieu autocomplete **/
+		if( document.getElementById('ggsearch') ) {
+			var input = document.getElementById('ggsearch');
+			var options = {
+			  types: ['(cities)'],
+			  componentRestrictions: {country: 'fr'}
+			};
+			autocomplete = new google.maps.places.Autocomplete(input, options);
+
+			google.maps.event.addListener(autocomplete, 'place_changed', function() {
+				var place = autocomplete.getPlace();
+				//getCity( place.geometry.location );
+
+				if( document.getElementById("map-canvas") ) {
+					//document.getElementById("map-canvas") && 
+					//( 'undefined' == typeof iti || !iti ) && 
+					//( 'undefined' == typeof page_ville || !page_ville ) 
+					//) {
+					
+					map.setCenter( place.geometry.location );
+					//find_closest_marker( place.geometry.location );
+					//map.setZoom( 15 );
+					console.log( place );
+					initialZoom = true;
+				} else {
+					document.location = '?lat=' + place.geometry.location.lat() + '&lng=' + place.geometry.location.lng();
+				}
+			});
+		}
 	});
 	
 	/** 
