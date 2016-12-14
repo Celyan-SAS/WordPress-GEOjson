@@ -132,7 +132,7 @@ var list_limit = 50;	// Maximum number of point data to return in the list box
 			}
 		});
 		
-		/** Champ de recherche de lieu autocomplete **/
+		/** Autocomplete Place search **/
 		if( document.getElementById('ggsearch') ) {
 			var input = document.getElementById('ggsearch');
 			var options = {
