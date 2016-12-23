@@ -593,6 +593,9 @@ class wpGEOjson {
 				
 				$acf_data = get_field( $acf_field_id, $the_query->post->ID );
 				
+				if( !$acf_data['lng'] || !$acf_data['lat'] )
+					continue;
+				
 				$feature = array(
 					'id'	=> $the_query->post->ID,
 					'type' 			=> 'Feature',
