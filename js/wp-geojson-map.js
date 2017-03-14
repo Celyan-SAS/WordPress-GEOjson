@@ -689,6 +689,9 @@ function add_markers( geojson, params ) {
 					if( '' == popupcontent || ( gray_if_no && ''==feature.properties[gray_if_no] ) ) {
 						layer.setStyle({fillColor: "#999",color: "#999", fillOpacity: 0.5});
 					}
+					if( feature.properties['iconUrl'] ) {
+						layer.setIcon( L.icon({ iconUrl: feature.properties['iconUrl'] }) );
+					}
 				}
 			}
 		);
