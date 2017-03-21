@@ -9,6 +9,8 @@ var additionalFeatures = [];
 var allFeatures = [];
 var allLayers = [];
 var list_limit = 50;	// Maximum number of point data to return in the list box
+var field_names;
+var gray_if_no;
 
 /**
  * jQuery functions
@@ -36,11 +38,11 @@ var list_limit = 50;	// Maximum number of point data to return in the list box
 		if( $('#map-canvas').attr('data-popup_fields') )
 			popup_fields = $('#map-canvas').data('popup_fields');
 		
-		var field_names = 'no';
+		field_names = 'no';
 		if( $('#map-canvas').attr('data-field_names') )
 			field_names = $('#map-canvas').data('field_names');
 		
-		var gray_if_no = '';
+		gray_if_no = '';
 		if( $('#map-canvas').attr('data-gray_if_no') )
 			gray_if_no = $('#map-canvas').data('gray_if_no');
 		
@@ -192,7 +194,6 @@ var list_limit = 50;	// Maximum number of point data to return in the list box
 				fields: params.popup_fields
 			}, function( data ) {
 				console.log( 'Ajax get_points_for_post_type data length: ' + data.length );
-				//console.log( data );
 				add_markers( data, params );
 			}).done(function() {
 				console.log( "Ajax get_points_for_post_type success" );
@@ -218,7 +219,7 @@ var list_limit = 50;	// Maximum number of point data to return in the list box
 			if( !list_box.attr('data-field_names') )
 				return;
 			
-			var field_names = list_box.data('field_names');
+			field_names = list_box.data('field_names');
 			
 			var locate_button = false;
 			var locate_text = 'Locate on map';
@@ -340,7 +341,7 @@ var list_limit = 50;	// Maximum number of point data to return in the list box
 		html += '<div class="infowindow pop-up open">';
 		
 		fields_arr = [];
-		if( $('#map-canvas').attr('data-popup_fields') ) {
+		if( $('#map-canvas').attr('data-popup_fields') ) {            
 			field_names = $('#map-canvas').data('popup_fields');
 			fields_arr = field_names.split(",");
 		}
@@ -481,8 +482,9 @@ var list_limit = 50;	// Maximum number of point data to return in the list box
 		});
 	}
 	
-})( jQuery );
-
+    
+    
+    
 
 /** 
  * Leaflet maps functions
@@ -655,6 +657,10 @@ function add_markers( geojson, params ) {
 	}
 	
 	if( 'leaflet' == params.map_type ) {
+        
+        if((field_names == undefined || field_names == '') && $('#map-canvas').attr('data-popup_fields') ) {            
+			field_names = $('#map-canvas').data('popup_fields');
+		}
 		
 		popup_arr = params.popup_fields.split(",");
 		//console.log( 'popup_arr:' + popup_arr );
@@ -781,3 +787,4 @@ function locate_me( position ) {
 	
 	console.log( 'panTo ok' );
 }
+})( jQuery );
