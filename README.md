@@ -1,6 +1,8 @@
 # WordPress-GEOjson
 GEOjson utility library for WordPress
 
+[Voir la documentation en français ici](https://github.com/Celyan-SAS/WordPress-GEOjson/wiki)
+
 Compatible with Advanced Custom Fields: uses ACF's google-map type fields to specify geographic coordinates (latitude, longitude) for every post of a given post type.
 
 Can display maps using 3 different frameworks:
