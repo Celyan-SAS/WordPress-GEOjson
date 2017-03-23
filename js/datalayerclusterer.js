@@ -1007,7 +1007,7 @@ FeatureClusterIcon.prototype.setSums = function(sums) {
  *
  * @type {string}
  */
-DataLayerClusterer.MARKER_CLUSTER_IMAGE_PATH_ = 'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/m';
+DataLayerClusterer.MARKER_CLUSTER_IMAGE_PATH_ = '//google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/m';
 DataLayerClusterer.MARKER_CLUSTER_IMAGE_EXTENSION_ = 'png';
 
 /**
