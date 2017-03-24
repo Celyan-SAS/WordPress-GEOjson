@@ -54,6 +54,9 @@ class wpGEOjson {
 		/** Plugin admin page for map defaults, etc. **/
 		add_action( 'admin_menu', array( $this, 'plugin_admin_add_page' ) );
 		add_action('admin_init', array( $this, 'plugin_admin_init' ) );
+		
+		/** Allow uloads of GeoJSON files in the WP Media library **/
+		add_filter( 'upload_mimes', array( $this, 'allow_json_upload' ), 1 );
 	}
 		
 	/**
@@ -1031,6 +1034,20 @@ class wpGEOjson {
 			'slug' 			=> 'wpgeojson-settings',
 		));
 		/* */
+	}
+	
+	/**
+	 * Allow upload of GeoJSON files in the WP Media Library
+	 * Such files should have the .geojson extension
+	 * @see: https://tools.ietf.org/html/rfc7946 for offocial mime type
+	 * 
+	 * @param array $mime_types
+	 * @return array
+	 */
+	public function allow_json_upload( $mime_types ) {
+		$mime_types['geojson'] = 'application/geo+json';
+		$mime_types['geo.json'] = 'application/geo+json';
+		return $mime_types;
 	}
 }
 ?>
