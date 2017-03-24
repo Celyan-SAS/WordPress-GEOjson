@@ -1061,7 +1061,7 @@ class wpGEOjson {
 		if( !preg_match( '/\.geojson$/', $attachment['url'] ) )
 			return $html;
 		
-		return( do_shortcode( '[su_wpgeojson_map file="' . $attachment['url'] . '"]' ) );
+		return( '[su_wpgeojson_map file="' . $attachment['url'] . '"]' );
 	}
 	
 	public function embed_handler( $matches, $attr, $url, $rawattr ) {
