@@ -698,6 +698,10 @@ function add_markers( geojson, params ) {
 					if( feature.properties['iconUrl'] ) {
 						layer.setIcon( L.icon({ iconUrl: feature.properties['iconUrl'] }) );
 					}
+					/** Umap compatibility **/
+					if( feature.properties['_storage_options'].iconUrl ) {
+						layer.setIcon( L.icon({ iconUrl: feature.properties['_storage_options'].iconUrl }) );
+					}
 				}
 			}
 		);
