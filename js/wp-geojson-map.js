@@ -699,7 +699,7 @@ function add_markers( geojson, params ) {
 						layer.setIcon( L.icon({ iconUrl: feature.properties['iconUrl'] }) );
 					}
 					/** Umap compatibility **/
-					if( feature.properties['_storage_options'].iconUrl ) {
+					if( feature.properties['_storage_options'] && feature.properties['_storage_options'].iconUrl ) {
 						layer.setIcon( L.icon({ iconUrl: feature.properties['_storage_options'].iconUrl }) );
 					}
 				}
