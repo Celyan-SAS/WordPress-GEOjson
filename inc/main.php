@@ -347,8 +347,11 @@ class wpGEOjson {
 			
 		}
 		
-		if( !empty( $atts['height'] ) )
+		if( !empty( $atts['height'] ) ) {
 			$html .= 'style="min-height:' . $atts['height'] . 'px;" ';
+		} else {
+			$html .= 'style="min-height:250px;" ';
+		}
 		
 		$html .= '>';
 		$html .= '</div>';
