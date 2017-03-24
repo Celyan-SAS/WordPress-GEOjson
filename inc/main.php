@@ -57,6 +57,9 @@ class wpGEOjson {
 		
 		/** Allow uloads of GeoJSON files in the WP Media library **/
 		add_filter( 'upload_mimes', array( $this, 'allow_json_upload' ), 1 );
+		
+		/** Direct support of geojson URLs with WP's embed API **/
+		wp_embed_register_handler( 'geojson', '#https?://[^/]+/.+\.geojson#', array( $this, 'embed_handler' ) );
 	}
 		
 	/**
@@ -1048,6 +1051,10 @@ class wpGEOjson {
 		$mime_types['geojson'] = 'application/geo+json';
 		$mime_types['geo.json'] = 'application/geo+json';
 		return $mime_types;
+	}
+	
+	public function embed_handler( $matches, $attr, $url, $rawattr ) {
+		return( do_shortcode( '[su_wpgeojson_map file="' . $url . '"]' ) );
 	}
 }
 ?>
