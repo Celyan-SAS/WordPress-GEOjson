@@ -692,7 +692,7 @@ function add_markers( geojson, params ) {
 						popupcontent += '</div>';
 					});
 					layer.bindPopup( popupcontent );
-					if( '' == popupcontent || ( gray_if_no && ''==feature.properties[gray_if_no] ) ) {
+					if( typeof layer.setStyle == 'function' && ( '' == popupcontent || ( gray_if_no && ''==feature.properties[gray_if_no] ) ) ) {
 						layer.setStyle({fillColor: "#999",color: "#999", fillOpacity: 0.5});
 					}
 					if( feature.properties['iconUrl'] ) {
