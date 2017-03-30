@@ -60,7 +60,10 @@ class wpGEOjson {
 		add_filter( 'media_send_to_editor', array( $this, 'media_send_to_editor' ), 20, 3 );
 		
 		/** Direct support of geojson URLs with WP's embed API **/
-		wp_embed_register_handler( 'geojson', '#https?://[^/]+/.+\.geojson#', array( $this, 'embed_handler' ) );
+		wp_embed_register_handler( 'geojson', '#^https?://[^/]+/.+\.geojson$#', array( $this, 'geojson_embed_handler' ) );
+		
+		/** Direct support of Umap map URLs with WP's embed API **/
+		wp_embed_register_handler( 'umap', '#^https?://umap.openstreetmap.fr/fr/map/(.+)$#', array( $this, 'umap_embed_handler' ) );
 	}
 		
 	/**
@@ -1056,16 +1059,39 @@ class wpGEOjson {
 		$mime_types['geo.json'] = 'application/geo+json';
 		return $mime_types;
 	}
-	
 	public function media_send_to_editor( $html, $send_id, $attachment ) {
 		if( !preg_match( '/\.geojson$/', $attachment['url'] ) )
 			return $html;
 		
 		return( '[su_wpgeojson_map file="' . $attachment['url'] . '"]' );
 	}
+	/** **/
 	
-	public function embed_handler( $matches, $attr, $url, $rawattr ) {
+	/** 
+	 * Direct support of geojson URLs with WP's embed API 
+	 * 
+	 */
+	public function geojson_embed_handler( $matches, $attr, $url, $rawattr ) {
 		return( do_shortcode( '[su_wpgeojson_map file="' . $url . '"]' ) );
+	}
+	
+	/** 
+	 * Direct support of Umap map URLs with WP's embed API
+	 * @see: https://umap.openstreetmap.fr/fr/
+	 * 
+	 */
+	public function umap_embed_handler( $matches, $attr, $url, $rawattr ) {
+		$html = '';
+		$html .= '<iframe width="100%" height="300px" frameBorder="0" src="';
+		$html .= $url;
+		$html .= '?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&allowEdit=false';
+		$html .= '&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null';
+		$html .= '&datalayersControl=true&onLoadPanel=undefined&captionBar=false';
+		$html .= '"></iframe><p>';
+		$html .= '<a href="' . $url . '">';
+		$html .= __( 'Voir en plein écran', 'wpgeojson' );
+		$html .= '</a></p>';
+		return $html;
 	}
 }
 ?>
