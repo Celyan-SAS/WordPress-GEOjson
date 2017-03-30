@@ -1098,6 +1098,7 @@ class wpGEOjson {
 	}
 	
 	public function option_page( $args ) {
+
 		if( !is_admin() )
 			return;
 		
