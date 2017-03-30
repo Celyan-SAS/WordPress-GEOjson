@@ -65,8 +65,9 @@ class wpGEOjson {
 		/** Direct support of Umap map URLs with WP's embed API **/
 		wp_embed_register_handler( 'umap', '#^https?://umap.openstreetmap.fr/fr/map/(.+)$#', array( $this, 'umap_embed_handler' ) );
 
-		/** Customization of WP-GeoJSON ACf option page in the admin **/
-		add_action( 'acf/input/form_data', array( $this, 'option_page' ) );
+		/** Customization of WP-GeoJSON ACF option page in the admin **/
+		//add_action( 'acf/input/form_data', array( $this, 'option_page' ), 20, 1 );
+		//TODO: use add_meta_box( 'acf_options_page', 'normal' );
 	}
 		
 	/**
@@ -1097,12 +1098,15 @@ class wpGEOjson {
 		return $html;
 	}
 	
+	/* UNUSED
 	public function option_page( $args ) {
 
 		if( !is_admin() )
 			return;
 		
-		if( empty( $args ) || is_array( $args ) )
+		//var_dump( $args ); exit();
+		
+		if( empty( $args ) || !is_array( $args ) )
 			return;
 		
 		if( empty( $args['post_id'] ) || 'options' != $args['post_id'] )
@@ -1116,5 +1120,6 @@ class wpGEOjson {
 		
 		echo '***';
 	}
+	*/
 }
 ?>
