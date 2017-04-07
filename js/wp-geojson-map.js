@@ -73,7 +73,7 @@ var gray_if_no;
 		var small_cluster_icon = '';
 		if( $('#map-canvas').attr('data-small_cluster_icon') )
 			small_cluster_icon = $('#map-canvas').data('small_cluster_icon');
-		
+				
 		/** Check map type **/
 		if( $('#map-canvas').hasClass('ggmap') ) {
 			ggmap_init();
@@ -491,8 +491,31 @@ var gray_if_no;
  *
  */
 function leaflet_init() {
-	console.log( 'leaflet_init()' );
-	map = L.map('map-canvas').setView([47, 1.6], 5);
+	//console.log( 'leaflet_init()' );
+	options = {};
+	var map_options = '';
+	if( $('#map-canvas').attr('data-map_options') )
+		map_options = $('#map-canvas').data('map_options');
+
+	if( map_options.length ) {
+		//console.log( 'map has options' );
+		aoptions = map_options.split(',');
+		while( aoptions.length ) {
+			okv = aoptions.shift();
+			//console.log( 'okv: ' + okv );
+			if( okv.length ) {
+				kv = okv.split(':');
+				if( kv[0].length && kv[1].length ) {
+					if( 'false' == kv[1] ) {
+						kv[1] = false;
+					}
+					options[ kv[0] ] = kv[1];
+				}
+			}
+		}
+	}
+	//console.log( 'map_options:' ); console.log( options );
+	map = L.map( 'map-canvas', options ).setView([47, 1.6], 5);
 	L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
 	}).addTo(map);

@@ -361,6 +361,9 @@ class wpGEOjson {
 			$html .= 'style="min-height:250px;" ';
 		}
 		
+		if( !empty( $atts['map_options'] ) )
+			$html .= 'data-map_options="' . $atts['map_options'] . '" ';
+		
 		$html .= '>';
 		$html .= '</div>';
 		return $html;
