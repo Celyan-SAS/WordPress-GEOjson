@@ -492,11 +492,21 @@ var gray_if_no;
  */
 function leaflet_init() {
 	//console.log( 'leaflet_init()' );
-	options = {};
+	var options = {};
 	var map_options = '';
 	if( $('#map-canvas').attr('data-map_options') )
 		map_options = $('#map-canvas').data('map_options');
+	options = get_map_options_object( options, map_options );
+	
+	//console.log( 'map_options:' ); console.log( options );
+	map = L.map( 'map-canvas', options ).setView([47, 1.6], 5);
+	L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+	}).addTo(map);
+}
 
+
+function get_map_options_object( options, map_options ) {
 	if( map_options.length ) {
 		//console.log( 'map has options' );
 		aoptions = map_options.split(',');
@@ -514,13 +524,8 @@ function leaflet_init() {
 			}
 		}
 	}
-	//console.log( 'map_options:' ); console.log( options );
-	map = L.map( 'map-canvas', options ).setView([47, 1.6], 5);
-	L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-	}).addTo(map);
+	return options;
 }
-
 
 /**
  * Openlayers maps functions
@@ -554,13 +559,19 @@ function ggmap_init() {
 		
 		console.log( 'found map-canvas' );
 
-		map = new google.maps.Map(document.getElementById("map-canvas"), {
+		var options = {
 			center: new google.maps.LatLng( '47', '1.6' ),
 			zoom: 5,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
 			mapTypeControlOptions: { mapTypeIds: [] },
 			fullscreenControl: true
-		});
+		};
+		var map_options = '';
+		if( $('#map-canvas').attr('data-map_options') )
+			map_options = $('#map-canvas').data('map_options');
+		options = get_map_options_object( options, map_options );
+				
+		map = new google.maps.Map(document.getElementById("map-canvas"), options);
 		
 		var markerCluster = new DataLayerClusterer({ 
 			map: map
