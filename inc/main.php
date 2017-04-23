@@ -485,7 +485,7 @@ class wpGEOjson {
         padding: 0.8em !important;
     }
     .wpgeojson_table table td {
-        padding: 0.5em !important;
+        padding: 0.3em !important;
         vertical-align: middle;
     }
 
