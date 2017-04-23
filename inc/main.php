@@ -465,9 +465,6 @@ class wpGEOjson {
 .wpgeojson_table table td:before {
     color: #005e84;
 }
-    .wpgeojson_table table thead {
-	display: none;
-    }
 
 @media all and (min-width:992px){
     
