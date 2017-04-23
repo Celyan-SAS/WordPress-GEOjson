@@ -414,6 +414,127 @@ class wpGEOjson {
 			$fields = explode( ',', $atts['list_fields'] );
 		
 		$html = '';
+		
+		$html .= "
+<style>
+.wpgeojson_table table {
+    margin: 1em 0;
+    min-width: 300px;
+    font-size: 13px;
+}
+.wpgeojson_table table th {
+    display: none;
+}
+.wpgeojson_table table td {
+    display: block;
+    text-align: center;
+}
+.wpgeojson_table table td:first-child {
+    padding-top: .5em;
+    text-align: left;
+}
+.wpgeojson_table table td:last-child {
+    padding-bottom: .5em;
+}
+.wpgeojson_table table td:before {
+    content: attr(data-th) ': ';
+    font-weight: bold;
+    width: 6.5em;
+    display: inline-block;
+}
+.wpgeojson_table table {
+    color: #79737f;
+    overflow: hidden;
+}
+.wpgeojson_table table th, .wpgeojson_table table td {
+    margin: .5em 1em;
+}
+.wpgeojson_table table tr:nth-child(even) {
+    background-color: #e9e9e9;
+}
+.wpgeojson_table table tr:nth-child(odd) {
+    background-color: #fff;
+}
+.wpgeojson_table table th {
+    text-align: center;
+    vertical-align: middle;
+    text-transform: uppercase;
+    background-color: #79737f;
+    color: #005e84;
+}
+.wpgeojson_table table td:before {
+    color: #005e84;
+}
+    .wpgeojson_table table thead {
+	display: none;
+    }
+
+@media all and (min-width:992px){
+    
+    .wpgeojson_table table td:before {
+        display: none;
+    }
+    .wpgeojson_table table th, .wpgeojson_table table td {
+        display: table-cell;
+        padding: .25em .5em;
+    }
+    .wpgeojson_table table th:first-child, .wpgeojson_table table td:first-child {
+        padding-left: 0;
+    }
+    .wpgeojson_table table th:last-child, .wpgeojson_table table td:last-child {
+        padding-right: 0;
+    }
+    .wpgeojson_table table th {
+        padding: 0.8em !important;
+    }
+    .wpgeojson_table table td {
+        padding: 0.5em !important;
+        vertical-align: middle;
+    }
+    .wpgeojson_table table thead {
+	display: none;
+    }
+}
+
+@media all and (max-width:991px){
+    
+
+    .wpgeojson_table table{
+        width:100%;
+        border:1px solid #E9E9E9;
+    }
+    .wpgeojson_table table th, .wpgeojson_table table td {
+        margin:0;
+        padding: .5em 1em;
+        border-bottom:1px solid #E9E9E9;
+        vertical-align: middle;
+    }
+    .wpgeojson_table table td{
+        text-align: left;
+        font-size:16px;
+    }
+    .wpgeojson_table table td:before {
+        width: 50%;
+        padding-right:15px;
+        color:#000;
+    }
+    .wpgeojson_table table thead {
+	display: none;
+    }
+}
+
+@media all and (max-width:480px){
+    
+    .wpgeojson_table table td{
+        font-size:14px;
+    }
+    .wpgeojson_table table thead {
+	display: none;
+    }
+}
+</style>						
+		";
+				
 		$html .= '<div class="wpgeojson_table" ><table>';
 		
 		$html .= '<thead><tr>';
