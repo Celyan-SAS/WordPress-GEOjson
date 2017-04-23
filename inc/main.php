@@ -537,7 +537,7 @@ class wpGEOjson {
 			if( preg_match( '/^.+\%.+$/', $field ) ) {
 				$fielda = explode( '%', $field );
 				//$display = $fielda[0] . '&nbsp;(&nbsp;%&nbsp;' . $fielda[1] . '&nbsp;)';
-				$display = preg_replace( '/^res\./', '', $fielda[0] ) . ' (' . $fielda[1] . ')';
+				$display = preg_replace( '/^res\./', '', $fielda[0] ) . ' (' . preg_replace( '/^res\./', '', $fielda[1] ) . ')';
 			}
 			
 			$html .= '<td>' . $display . '</td>';
@@ -574,7 +574,7 @@ class wpGEOjson {
 											$v2 = $feature->properties->{$fielda[1]};
 											$p = ( floor( ( $v1 * 1000 / $v2 ) + 0.5 ) / 10 );
 											//$html .= '&nbsp;(&nbsp;' . $p . '%&nbsp;)'; 
-											$html .= ' (' . $p . ')'; 
+											$html .= ' (' . $p . '%)'; 
 										}
 										
 										$html .= '</td>';
