@@ -719,8 +719,8 @@ function add_markers( geojson, params ) {
 						
 						popupcontent += '<div class="' + field + '">';
 						if( 'yes' == field_names )
-							popupcontent += '<strong>' + field + ': </strong>';
-						popupcontent += feature.properties[field].replace(/^res\./,'');
+							popupcontent += '<strong>' + field.replace(/^res\./,'') + ': </strong>';
+						popupcontent += feature.properties[field];
 						if( '' != perc )
 							popupcontent += ' | ' + perc + '%';
 						popupcontent += '</div>';
