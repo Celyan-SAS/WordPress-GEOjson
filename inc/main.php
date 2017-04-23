@@ -448,7 +448,7 @@ class wpGEOjson {
 									}
 									
 									if( isset( $feature->properties->$field ) ) {
-										$html .= '<td>' . $feature->properties->$field; 
+										$html .= '<td data-th="' . $field . '">' . $feature->properties->$field; 
 										
 										if( 
 											$perc && 
