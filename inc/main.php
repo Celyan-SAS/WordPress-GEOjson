@@ -488,9 +488,7 @@ class wpGEOjson {
         padding: 0.5em !important;
         vertical-align: middle;
     }
-    .wpgeojson_table table thead {
-	display: none;
-    }
+
 }
 
 @media all and (max-width:991px){
