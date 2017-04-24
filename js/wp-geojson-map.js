@@ -707,6 +707,8 @@ function add_markers( geojson, params ) {
 					popupcontent = '';
 					popup_arr.forEach( function(field){
 						
+						console.log( feature.properties[field] );
+						
 						perc = '';
 						if( re.test(field) ) {
 							var splitted = field.split("%");
