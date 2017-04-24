@@ -452,7 +452,7 @@ class wpGEOjson {
 .wpgeojson_table table tr:nth-child(even) {
     background-color: #e9e9e9;
 }
-.wpgeojson_table table tr:nth-child(odd) {
+.wpgeojson_table table tbody tr:nth-child(odd) {
     background-color: #fff;
 }
 .wpgeojson_table table th {
