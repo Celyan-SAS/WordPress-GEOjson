@@ -703,6 +703,7 @@ function add_markers( geojson, params ) {
 			geojson, {
 				style: {},
 				onEachFeature: function (feature, layer) {
+					console.log( feature.properties );
 					popupcontent = '';
 					popup_arr.forEach( function(field){
 						
