@@ -513,8 +513,9 @@ class wpGEOjson {
         padding-right:15px;
         color:#000;
     }
-
-}
+    .wpgeojson_table table thead {
+		display: none;
+    }
 
 @media all and (max-width:480px){
     
@@ -522,7 +523,7 @@ class wpGEOjson {
         font-size:14px;
     }
     .wpgeojson_table table thead {
-	display: none;
+		display: none;
     }
 }
 </style>						
