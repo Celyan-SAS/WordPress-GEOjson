@@ -707,6 +707,7 @@ function add_markers( geojson, params ) {
 					popupcontent = '';
 					popup_arr.forEach( function(field){
 						
+						console.log( field + ': ' );
 						console.log( feature.properties[field] );
 						
 						perc = '';
