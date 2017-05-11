@@ -1010,6 +1010,7 @@ class wpGEOjson {
 		/** Leaflet **/
 		if( in_array( 'leaflet', self::$load_scripts ) ) {
 			wp_print_scripts('leaflet');
+			wp_print_scripts('leaflet-label');
 		}
 		/** **/
 		
