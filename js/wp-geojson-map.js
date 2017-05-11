@@ -734,6 +734,11 @@ function add_markers( geojson, params ) {
 						layer.setIcon( L.icon({ iconUrl: feature.properties['iconUrl'] }) );
 					}
 					if( feature.properties['res.label'] ) {
+						var polygonCenter = layer.getBounds().getCenter();
+						L.marker(polygonCenter)
+					    	.bindLabel( feature.properties['res.label'], { noHide: true })
+					    	.addTo(map);
+						
 						var label = new L.Label();
 						label.setContent( feature.properties['res.label'] );
 						label.setLatLng( layer.getBounds().getCenter() );
