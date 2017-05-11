@@ -919,6 +919,7 @@ class wpGEOjson {
 			'1.0.1',
 			true
 		);
+		/*
 		wp_register_script(
 			'leaflet-label',
 			plugins_url( '/leaflet/plugins/leaflet-label/dist/leaflet.label.js', dirname( __FILE__ ) ),
@@ -926,7 +927,6 @@ class wpGEOjson {
 			'1.0.1',
 			true
 		);
-		
 		wp_register_style(
 			'leaflet-label',
 			plugins_url( '/leaflet/plugins/leaflet-label/dist/leaflet.label.css', dirname( __FILE__ ) ),
@@ -934,6 +934,8 @@ class wpGEOjson {
 			'1.0.1'
 		);
 		wp_enqueue_style( 'leaflet-label' );
+		*/
+		
 		/** **/
 		
 		/** Openlayers **/
@@ -1010,7 +1012,7 @@ class wpGEOjson {
 		/** Leaflet **/
 		if( in_array( 'leaflet', self::$load_scripts ) ) {
 			wp_print_scripts('leaflet');
-			wp_print_scripts('leaflet-label');
+			//wp_print_scripts('leaflet-label');
 		}
 		/** **/
 		
