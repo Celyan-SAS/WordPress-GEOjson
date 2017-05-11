@@ -737,7 +737,7 @@ function add_markers( geojson, params ) {
 						var label = new L.Label();
 						label.setContent( feature.properties['res.label'] );
 						label.setLatLng( layer.getBounds().getCenter() );
-						map.showLabel(label);
+						//map.showLabel(label);
 					}
 					/** Umap compatibility **/
 					if( feature.properties['_storage_options'] && feature.properties['_storage_options'].iconUrl ) {
