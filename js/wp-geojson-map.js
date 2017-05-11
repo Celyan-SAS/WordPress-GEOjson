@@ -733,9 +733,9 @@ function add_markers( geojson, params ) {
 					if( feature.properties['iconUrl'] ) {
 						layer.setIcon( L.icon({ iconUrl: feature.properties['iconUrl'] }) );
 					}
-					if( feature.properties['label'] ) {
+					if( feature.properties['res.label'] ) {
 						var label = new L.Label();
-						label.setContent( feature.properties['label'] );
+						label.setContent( feature.properties['res.label'] );
 						label.setLatLng( layer.getBounds().getCenter() );
 						map.showLabel(label);
 					}
