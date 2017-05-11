@@ -1,0 +1,41 @@
+{
+  "name": "leaflet-label",
+  "version": "0.2.1-0",
+  "description": "Labels for leaflet maps",
+  "devDependencies": {
+    "jshint": "~2.1.4",
+    "uglify-js": "~2.3.6"
+  },
+  "main": "dist/leaflet.label.js",
+  "scripts": {
+    "test": "jake test",
+    "prepublish": "jake"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Leaflet/Leaflet.label.git"
+  },
+  "keywords": [
+    "gis",
+    "map"
+  ],
+  "bugs": {
+    "url": "https://github.com/Leaflet/Leaflet.label/issues"
+  },
+  "homepage": "https://github.com/Leaflet/Leaflet.label",
+  "directories": {
+    "example": "example"
+  },
+  "author": {
+    "name": "Jacob Toye"
+  },
+  "license": "MIT",
+  "readme": "Leaflet.label\n=============\n\n**NOTE: lastest Leaflet.label master requires Leaflet 0.7-dev**\n\nLeaflet.label is plugin for adding labels to markers &amp; shapes on leaflet powered maps.\n\nCheck out the [demo](http://leaflet.github.com/Leaflet.label/).\n\n##Usage examples\n\nIf you want to just bind a label to marker that will show when the mouse is over it, it's really easy:\n\n````js\nL.marker([-37.7772, 175.2606]).bindLabel('Look revealing label!').addTo(map);\n````\n\nPath overlays works the same:\n\n````js\nL.polyline([\n\t[-37.7612, 175.2756],\n\t[-37.7702, 175.2796],\n\t[-37.7802, 175.2750],\n]).bindLabel('Even polylines can have labels.').addTo(map)\t\n````\n\nIf you would prefer the label to be always visible set the ````noHide: true```` option and call ````showLabel()```` once added to the map:\n\n````js\nL.marker([-37.785, 175.263])\n\t.bindLabel('A sweet static label!', { noHide: true })\n\t.addTo(map);\n````\n\n##Options\n\nWhen you call ````bindLabel()```` you can pass in an options object. These options are:\n\n - **noHide**: doesn't attach event handler for showing/hiding the label on mouseover/out.\n - **className**: the css class to add to the label element\n - **direction**: one of `left`|`right`(default)|`auto`. The direction the label displays in relation to the marker. `auto` will choose the optimal direction depending on the position of the marker.\n - **pane**: which [map pane](http://leafletjs.com/reference.html#map-panes) to put the label into. By default, the `markerPane` will be used for markers, and the `popupPane` for other objects.\n\nE.g. To create a static label that automatically positions the label\n\n````js\nvar myIcon = L.icon({\n\ticonUrl: 'my-icon.png',\n\ticonSize: [20, 20],\n\ticonAnchor: [10, 10],\n\tlabelAnchor: [6, 0] // as I want the label to appear 2px past the icon (10 + 2 - 6)\n});\nL.marker([-37.7772, 175.2606], {\n\ticon: myIcon\n}).bindLabel('My label', {\n\tnoHide: true,\n\tdirection: 'auto'\n});\n````\n\n##Positioning the label for custom icons\n\nThe label is positioned relative to the L.Icon's ````iconAnchor```` option. To reposition the label set the ````labelAnchor```` option of your icon. By default ````labelAnchor```` is set so the label will show vertically centered for the default icon (````L.Icon.Default````).\n\nE.g. Vertically center an icon with ````iconAnchor```` set as the center of the icon:\n\n````js\nvar myIcon = L.icon({\n\ticonUrl: 'my-icon.png',\n\ticonSize: [20, 20],\n\ticonAnchor: [10, 10],\n\tlabelAnchor: [6, 0] // as I want the label to appear 2px past the icon (10 + 2 - 6)\n});\nL.marker([-37.7772, 175.2606], {\n\ticon: myIcon\n}).bindLabel('Look revealing label!').addTo(map);\n````\n\nWhen positioning the label L.Label includes a 6px horizontal padding. you will need to take this into account when setting ````labelAnchor````.\n\n##Setting the opacity of a label\n\nYou can set the opacity of a label by calling the `setOpacity` method on `L.Marker`. By default the opacity will either be **0** or **1**. \n\n````js\n// Sets opacity of marker to 0.3 and opacity of label to 1\nmarkerLabel.setOpacity(0.3);\n\n// Sets opacity of marker to 0.3 and opacity of label to 0.3\nmarkerLabel.setOpacity(0.3, true);\n\n// Sets opacity of marker to 0 and opacity of label to 0\nmarkerLabel.setOpacity(0);\nmarkerLabel.setOpacity(0, true);\n\n// Sets opacity of marker to 1 and opacity of label to 1\nmarkerLabel.setOpacity(1);\nmarkerLabel.setOpacity(1, true);\n````\n\n##Alternative label plugin\n\nMy previous label plugin is still available at https://github.com/jacobtoye/Leaflet.iconlabel. This plugin is a little harder to use, however if you want to have both the icon and label bound to the same event this plugin is for you.\n",
+  "readmeFilename": "README.md",
+  "_id": "leaflet-label@0.2.1-0",
+  "dist": {
+    "shasum": "18ca6eb3e194823ae4fd3421167933422396733e"
+  },
+  "_from": "leaflet-label@",
+  "_resolved": "https://registry.npmjs.org/leaflet-label/-/leaflet-label-0.2.1-0.tgz"
+}
