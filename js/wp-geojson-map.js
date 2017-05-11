@@ -733,6 +733,12 @@ function add_markers( geojson, params ) {
 					if( feature.properties['iconUrl'] ) {
 						layer.setIcon( L.icon({ iconUrl: feature.properties['iconUrl'] }) );
 					}
+					if( feature.properties['label'] ) {
+						var label = new L.Label();
+						label.setContent( feature.properties['label'] );
+						label.setLatLng( layer.getBounds().getCenter() );
+						map.showLabel(label);
+					}
 					/** Umap compatibility **/
 					if( feature.properties['_storage_options'] && feature.properties['_storage_options'].iconUrl ) {
 						layer.setIcon( L.icon({ iconUrl: feature.properties['_storage_options'].iconUrl }) );
