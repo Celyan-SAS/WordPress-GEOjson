@@ -696,12 +696,9 @@ function add_markers( geojson, params ) {
 			field_names = $('#map-canvas').data('popup_fields');
 		}
         
-		var more_text = 'More...';
-		if( list_box.attr('data-more_button') && 'yes' == list_box.data('more_button') ) {
-			more_button = true;
-			if( list_box.attr('data-more_text') )
-				more_text = list_box.data('more_text')
-		}
+        var more_text = '[More...]';
+		if( $('#map-canvas').attr('data-more_text') )
+			more_text = $('#map-canvas').data('more_text');
 		
 		popup_arr = params.popup_fields.split(",");
 		//console.log( 'popup_arr:' + popup_arr );
