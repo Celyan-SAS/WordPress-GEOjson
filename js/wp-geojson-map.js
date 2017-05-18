@@ -273,6 +273,12 @@ var gray_if_no;
 				if( feature.properties['link'] )
 					html += '</a>';
 				
+				if( more_text && feature.properties['res.link'] ) {
+					html += '<a href="' + feature.properties['res.link'] + '">';
+					html += more_text;
+					html += '</a>';
+				}
+				
 				if( locate_button || more_button )
 					html += '<div class="clear">';
 				
