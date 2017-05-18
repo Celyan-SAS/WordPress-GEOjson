@@ -273,12 +273,6 @@ var gray_if_no;
 				if( feature.properties['link'] )
 					html += '</a>';
 				
-				if( more_text && feature.properties['res.link'] ) {
-					html += '<a href="' + feature.properties['res.link'] + '">';
-					html += more_text;
-					html += '</a>';
-				}
-				
 				if( locate_button || more_button )
 					html += '<div class="clear">';
 				
@@ -701,6 +695,13 @@ function add_markers( geojson, params ) {
         if((field_names == undefined || field_names == '') && $('#map-canvas').attr('data-popup_fields') ) {            
 			field_names = $('#map-canvas').data('popup_fields');
 		}
+        
+		var more_text = 'More...';
+		if( list_box.attr('data-more_button') && 'yes' == list_box.data('more_button') ) {
+			more_button = true;
+			if( list_box.attr('data-more_text') )
+				more_text = list_box.data('more_text')
+		}
 		
 		popup_arr = params.popup_fields.split(",");
 		//console.log( 'popup_arr:' + popup_arr );
@@ -725,11 +726,17 @@ function add_markers( geojson, params ) {
 							return;
 						
 						popupcontent += '<div class="' + field + '">';
-						if( 'yes' == field_names )
-							popupcontent += '<strong>' + field.replace(/^res\./,'') + ': </strong>';
-						popupcontent += feature.properties[field];
-						if( '' != perc )
-							popupcontent += ' | ' + perc + '%';
+						if( 'link' == field || 'res.link' == field ) {
+							popupcontent += '<a href="' + feature.properties[field] + '">';
+							popupcontent += more_text;
+							popupcontent += '</a>';
+						} else {
+							if( 'yes' == field_names )
+								popupcontent += '<strong>' + field.replace(/^res\./,'') + ': </strong>';
+							popupcontent += feature.properties[field];
+							if( '' != perc )
+								popupcontent += ' | ' + perc + '%';
+						}
 						popupcontent += '</div>';
 					});
 					layer.bindPopup( popupcontent );
