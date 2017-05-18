@@ -737,8 +737,14 @@ function add_markers( geojson, params ) {
 						popupcontent += '</div>';
 					});
 					layer.bindPopup( popupcontent );
-					if( typeof layer.setStyle == 'function' && ( '' == popupcontent || ( gray_if_no && ''==feature.properties[gray_if_no] ) ) ) {
-						layer.setStyle({fillColor: "#999",color: "#999", fillOpacity: 0.5});
+					if( typeof layer.setStyle == 'function' ) {
+						if ( '' == popupcontent || ( gray_if_no && ''==feature.properties[gray_if_no] ) ) {
+							layer.setStyle({fillColor: "#999",color: "#999", fillOpacity: 0.5});
+						} else {
+							if( feature.properties['res.color'] ) {
+								layer.setStyle({fillColor: feature.properties['res.color'],color: feature.properties['res.color'], fillOpacity: 0.5});
+							}
+						}
 					}
 					if( feature.properties['iconUrl'] ) {
 						layer.setIcon( L.icon({ iconUrl: feature.properties['iconUrl'] }) );
