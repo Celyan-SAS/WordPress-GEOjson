@@ -205,6 +205,7 @@ var gray_if_no;
 		}
 	}
 	
+	/** Google Maps function **/
 	window.update_list_box = function( visible ) {
 		
 		if( !$('.wpgeojson_list').length > 0 )
@@ -265,7 +266,7 @@ var gray_if_no;
 				fields_arr.forEach( function( field ){
 					
 					html += '<div class="' + field + '">';
-					html += feature.properties[field];
+					html += nl2br( feature.properties[field] );
 					html += '</div>';
 					
 				});
@@ -336,6 +337,7 @@ var gray_if_no;
 		});		
 	};
 	
+	/** Google Maps function **/
 	window.open_infowindow = function( feature ) {
 		var html = '';
 		html += '<div class="infowindow pop-up open">';
@@ -358,7 +360,7 @@ var gray_if_no;
 					html += more_text;
 					html += '</a>';
 				} else {
-					html += feature.getProperty(field);
+					html += nl2br( feature.getProperty(field) );
 				}
 				html += '</div>';
 			}
@@ -623,6 +625,7 @@ function processPoints(geometry, callback, thisArg) {
 	}
 }
 
+/** Google Maps function **/
 function on_bounds_changed() {
 	//console.log( 'bounds changed' );
 	var visible = get_visible_markers();
@@ -711,7 +714,10 @@ function add_markers( geojson, params ) {
 				onEachFeature: function (feature, layer) {
 
 					popupcontent = '';
+					var fieldnb = 0;
 					popup_arr.forEach( function(field){
+						
+						fieldnb++;
 						
 						perc = '';
 						if( re.test(field) ) {
@@ -734,11 +740,17 @@ function add_markers( geojson, params ) {
 							popupcontent += more_text;
 							popupcontent += '</a>';
 						} else {
-							if( 'yes' == field_names )
+							if( 'yes' == field_names ) {
 								popupcontent += '<strong>' + field.replace(/^res\./,'') + ': </strong>';
-							popupcontent += feature.properties[field];
+							} else {
+								if( 1 == fieldnb && 'name' == field )
+									popupcontent += '<h2>';
+							}
+							popupcontent += markup2html( nl2br( feature.properties[field] ) );
 							if( '' != perc )
 								popupcontent += ' | ' + perc + '%';
+							if( 'yes' != field_names && 1 == fieldnb && 'name' == field )
+								popupcontent += '</h2>';
 						}
 						popupcontent += '</div>';
 					});
@@ -856,4 +868,18 @@ function locate_me( position ) {
 	
 	console.log( 'panTo ok' );
 }
+
+/** See: https://stackoverflow.com/questions/2919337/jquery-convert-line-breaks-to-br-nl2br-equivalent **/
+function nl2br (str, is_xhtml) {   
+	//console.log( 'nl2br' );
+	//console.log( str );
+    var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';    
+    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1'+ breakTag +'$2');
+}
+
+function markup2html( str ) {
+	str = (str + '').replace(/([^>\r\n]?)#(.+)\r?\n/g, '$1' + '<h3>' + '$2' + '</h3>');
+	return (str + '').replace(/---/g, '<hr/>');
+}
+
 })( jQuery );
