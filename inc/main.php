@@ -750,8 +750,8 @@ class wpGEOjson {
 				
 				if( $fields )
 					foreach( $fields as $field )
-						if( $value = get_field( $field, $the_query->post->ID ) )
-							$feature['properties'][$field] = apply_filters( 'wpgj_getval_' . $field, $value );
+						if( $value = apply_filters( 'wpgj_getval_' . $field, get_field( $field, $the_query->post->ID ), $the_query->post->ID ) )
+							$feature['properties'][$field] = $value;
 				
 				array_push( $geojson['features'], $feature );
 			}

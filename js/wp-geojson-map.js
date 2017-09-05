@@ -717,6 +717,10 @@ function add_markers( geojson, params ) {
 					var fieldnb = 0;
 					popup_arr.forEach( function(field){
 						
+						if( 'iconUrl' == field ) {
+							return;
+						}
+						
 						fieldnb++;
 						
 						perc = '';
