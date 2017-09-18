@@ -312,10 +312,12 @@ var gray_if_no;
 					} else {
 						marker_icon = $('#map-canvas').data('marker_icon');
 					}
+				} else {
+					marker_icon = $('#map-canvas').data('marker_icon');
 				}
 				
-				console.log( 'marker_colors[feature_id]: ' + marker_colors[feature_id] );
 				console.log( 'feature_id: ' + feature_id );
+				console.log( 'marker_colors[feature_id]: ' + marker_colors[feature_id] );
 				console.log( 'my_feature: ' + my_feature.getId() );
 				console.log( 'color_number: ' + color_number );
 								
