@@ -305,7 +305,7 @@ var gray_if_no;
 			map.data.setStyle( function(my_feature){
 				
 				feature_id = my_feature.getId();
-				if( marker_colors[feature_id] ) {
+				if( visible.length !== 0 && marker_colors[feature_id] ) {
 					color_number = marker_colors[feature_id];
 					if( $('#map-canvas').attr('data-marker_icon_' + color_number) ) {
 						marker_icon = $('#map-canvas').data('marker_icon_' + color_number);
@@ -316,6 +316,7 @@ var gray_if_no;
 				
 				console.log( 'my_feature: ' + my_feature.getId() );
 				console.log( 'color_number: ' + color_number );
+				console.log( 'marker_colors[feature_id]: ' + marker_colors[feature_id] );
 				
 				return({icon: marker_icon});
 			});
