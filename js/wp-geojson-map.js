@@ -305,7 +305,7 @@ var gray_if_no;
 			map.data.setStyle( function(my_feature){
 				
 				feature_id = my_feature.getId();
-				if( visible.length !== 0 && marker_colors[feature_id] ) {
+				if( visible.length !== 0 && marker_colors[feature_id] && typeof marker_colors[feature_id] !== 'undefined' ) {
 					color_number = marker_colors[feature_id];
 					if( $('#map-canvas').attr('data-marker_icon_' + color_number) ) {
 						marker_icon = $('#map-canvas').data('marker_icon_' + color_number);
