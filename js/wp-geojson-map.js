@@ -851,6 +851,7 @@ function center_map_on_feature( id ) {
 			if( id == feature.id ) {
 				position = new google.maps.LatLng( feature.geometry.coordinates[1], feature.geometry.coordinates[0] );
 				map.setCenter( position );
+				feature.click();
 			}
 		}
 	});
