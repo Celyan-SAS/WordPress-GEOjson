@@ -314,6 +314,7 @@ var gray_if_no;
 					}
 				} else {
 					marker_icon = $('#map-canvas').data('marker_icon');
+					color_number = '';
 				}
 				
 				console.log( 'feature_id: ' + feature_id );
