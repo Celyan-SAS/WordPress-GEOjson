@@ -211,6 +211,11 @@ var gray_if_no;
 		if( !$('.wpgeojson_list').length > 0 )
 			return;
 		
+		/* DEBUG */
+		console.log( 'visible:' );
+		console.log( visible );
+		/* */
+		
 		$('.wpgeojson_list').each( function( index ) {
 			
 			var list_box = $( this );
