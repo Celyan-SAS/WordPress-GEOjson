@@ -314,10 +314,11 @@ var gray_if_no;
 					}
 				}
 				
+				console.log( 'marker_colors[feature_id]: ' + marker_colors[feature_id] );
+				console.log( 'feature_id: ' + feature_id );
 				console.log( 'my_feature: ' + my_feature.getId() );
 				console.log( 'color_number: ' + color_number );
-				console.log( 'marker_colors[feature_id]: ' + marker_colors[feature_id] );
-				
+								
 				return({icon: marker_icon});
 			});
 		});
