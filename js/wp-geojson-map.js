@@ -853,7 +853,7 @@ function center_map_on_feature( id ) {
 				map.setCenter( position );
 				console.log( 'centered feature:' );
 				console.log( feature );
-				open_infowindow( allFeatures.getFeatureById( id ) );
+				open_infowindow( map.data.getFeatureById( id ) );
 			}
 		}
 	});
