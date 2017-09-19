@@ -162,6 +162,7 @@ var gray_if_no;
 					var bounds = new google.maps.LatLngBounds();
 					var position = new google.maps.LatLng( closest_m.geometry.coordinates[1], closest_m.geometry.coordinates[0] );
 					bounds.extend(position);
+					bounds.extend(place.geometry.location);
 					map.fitBounds(bounds);
 					
 					console.log( place );
