@@ -160,7 +160,7 @@ var gray_if_no;
 					map.setZoom( 15 );
 					
 					var bounds = new google.maps.LatLngBounds();
-					processPoints(closest_m.getGeometry(), bounds.extend, bounds);
+					processPoints(closest_m.geometry, bounds.extend, bounds);
 					map.fitBounds(bounds);
 					
 					console.log( place );
