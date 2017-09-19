@@ -160,9 +160,9 @@ var gray_if_no;
 					
 					var bounds = new google.maps.LatLngBounds();
 					var position = new google.maps.LatLng( closest_m.geometry.coordinates[1], closest_m.geometry.coordinates[0] );
-					bounds.extend(position);
-					bounds.extend(place.geometry.location);
-					getCity( place.geometry.location, bounds );
+					//bounds.extend(position);
+					//bounds.extend(place.geometry.location);
+					getCity( place.geometry.location, position );
 					//map.fitBounds(bounds);
 					
 					console.log( place );
@@ -696,7 +696,7 @@ function find_closest_marker( pos ) {
  * @see: http://stackoverflow.com/questions/6797569/get-city-name-using-geolocation
  *
  */
-function getCity( latLng, bounds ) {
+function getCity( latLng, closest_position ) {
 	var geocoder= new google.maps.Geocoder();
 	geocoder.geocode({'latLng': latLng}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
@@ -716,7 +716,7 @@ function getCity( latLng, bounds ) {
 			}
 			console.log( 'city_bounds:' );
 			console.log( city_bounds );
-			city_bounds.extend( bounds );
+			city_bounds.extend( closest_position );
 			map.fitBounds( city_bounds );
 
     			if (results[1]) {
