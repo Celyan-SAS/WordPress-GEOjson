@@ -145,8 +145,7 @@ var gray_if_no;
 
 			google.maps.event.addListener(autocomplete, 'place_changed', function() {
 				var place = autocomplete.getPlace();
-				getCity( place.geometry.location );
-
+				
 				if( document.getElementById("map-canvas") ) {
 					//document.getElementById("map-canvas") && 
 					//( 'undefined' == typeof iti || !iti ) && 
@@ -163,7 +162,8 @@ var gray_if_no;
 					var position = new google.maps.LatLng( closest_m.geometry.coordinates[1], closest_m.geometry.coordinates[0] );
 					bounds.extend(position);
 					bounds.extend(place.geometry.location);
-					map.fitBounds(bounds);
+					getCity( place.geometry.location, bounds );
+					//map.fitBounds(bounds);
 					
 					console.log( place );
 					initialZoom = true;
@@ -696,7 +696,7 @@ function find_closest_marker( pos ) {
  * @see: http://stackoverflow.com/questions/6797569/get-city-name-using-geolocation
  *
  */
-function getCity( latLng ) {
+function getCity( latLng, bounds ) {
 	var geocoder= new google.maps.Geocoder();
 	geocoder.geocode({'latLng': latLng}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
@@ -716,6 +716,7 @@ function getCity( latLng ) {
 			}
 			console.log( 'city_bounds:' );
 			console.log( city_bounds );
+			city_bounds.extend( bounds );
 			map.fitBounds( city_bounds );
 
     			if (results[1]) {
