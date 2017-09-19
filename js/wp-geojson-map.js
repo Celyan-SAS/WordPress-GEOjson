@@ -154,7 +154,9 @@ var gray_if_no;
 					//) {
 					
 					map.setCenter( place.geometry.location );
-					//find_closest_marker( place.geometry.location );
+					var closest_m = find_closest_marker( place.geometry.location );
+					console.log( 'closest marker:' );
+					console.log( closest_m );
 					//map.setZoom( 15 );
 					console.log( place );
 					initialZoom = true;
@@ -645,6 +647,40 @@ function on_bounds_changed() {
 	if( nodes = document.getElementsByClassName("wpgeojson_list") ) {
 		update_list_box( visible );	
 	}
+}
+
+/**
+ * Find closest marker
+ * @see http://stackoverflow.com/questions/4057665/google-maps-api-v3-find-nearest-markers
+ *
+ */
+function rad(x) {return x*Math.PI/180;}
+function find_closest_marker( pos ) {
+	console.log( 'searching closest marker...' );
+	var lat = pos.lat();
+	var lng = pos.lng();
+	var R = 6371; // radius of earth in km
+	var distances = [];
+	var closest = -1;
+	var i;
+	for( i=0; i<allFeatures.length; i++ ) {
+		if( 'Point' == feature.geometry.type ) {
+			var position = new google.maps.LatLng( feature.geometry.coordinates[1], feature.geometry.coordinates[0] );
+			var mlat = position.lat();
+			var mlng = position.lng();
+			var dLat  = rad(mlat - lat);
+			var dLong = rad(mlng - lng);
+			var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+		    		Math.cos(rad(lat)) * Math.cos(rad(lat)) * Math.sin(dLong/2) * Math.sin(dLong/2);
+			var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+			var d = R * c;
+			distances[i] = d;
+			if ( closest == -1 || d < distances[closest] ) {
+				closest = i;
+			}
+		}
+	}
+	return allFeatures[closest];
 }
 
 function get_visible_markers() {
