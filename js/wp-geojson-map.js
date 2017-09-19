@@ -664,6 +664,7 @@ function find_closest_marker( pos ) {
 	var closest = -1;
 	var i;
 	for( i=0; i<allFeatures.length; i++ ) {
+		feature = allFeatures[i];
 		if( 'Point' == feature.geometry.type ) {
 			var position = new google.maps.LatLng( feature.geometry.coordinates[1], feature.geometry.coordinates[0] );
 			var mlat = position.lat();
