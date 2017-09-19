@@ -157,7 +157,12 @@ var gray_if_no;
 					var closest_m = find_closest_marker( place.geometry.location );
 					console.log( 'closest marker:' );
 					console.log( closest_m );
-					//map.setZoom( 15 );
+					map.setZoom( 15 );
+					
+					var bounds = new google.maps.LatLngBounds();
+					processPoints(closest_m.getGeometry(), bounds.extend, bounds);
+					map.fitBounds(bounds);
+					
 					console.log( place );
 					initialZoom = true;
 				} else {
