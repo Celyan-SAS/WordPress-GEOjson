@@ -145,7 +145,7 @@ var gray_if_no;
 
 			google.maps.event.addListener(autocomplete, 'place_changed', function() {
 				var place = autocomplete.getPlace();
-				//getCity( place.geometry.location );
+				getCity( place.geometry.location );
 
 				if( document.getElementById("map-canvas") ) {
 					//document.getElementById("map-canvas") && 
@@ -157,7 +157,7 @@ var gray_if_no;
 					var closest_m = find_closest_marker( place.geometry.location );
 					console.log( 'closest marker:' );
 					console.log( closest_m );
-					map.setZoom( 15 );
+					//map.setZoom( 15 );
 					
 					var bounds = new google.maps.LatLngBounds();
 					var position = new google.maps.LatLng( closest_m.geometry.coordinates[1], closest_m.geometry.coordinates[0] );
@@ -689,6 +689,63 @@ function find_closest_marker( pos ) {
 		}
 	}
 	return allFeatures[closest];
+}
+
+/**
+ * Get city object from LatLng
+ * @see: http://stackoverflow.com/questions/6797569/get-city-name-using-geolocation
+ *
+ */
+function getCity( latLng ) {
+	var geocoder= new google.maps.Geocoder();
+	geocoder.geocode({'latLng': latLng}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+  				console.log(results);
+
+			//find city bounds
+			city_bounds = false;
+			for( var i=0; i<results.length; i++ ) {
+				for( var j=0; j<results[i].types.length; j++ ) {
+					if( results[i].types[j] == 'locality' ) {
+						city_bounds = results[i].geometry.bounds;
+						break;
+					}
+					if( city_bounds )
+						break;
+				}
+			}
+			console.log( 'city_bounds:' );
+			console.log( city_bounds );
+			map.fitBounds( city_bounds );
+
+    			if (results[1]) {
+     				//formatted address
+    				console.log( results[0].formatted_address );
+			        //find city name
+				for (var i=0; i<results[0].address_components.length; i++) {
+					for (var b=0;b<results[0].address_components[i].types.length;b++) {
+
+						//there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
+						if ( results[0].address_components[i].types[0] == 'locality' ) {
+                						//this is the object you are looking for
+                						city = results[0].address_components[i];
+
+							$ = jQuery;
+							$('h4.ville').html( city.long_name );
+							return city;
+						}
+					}
+				}
+
+			} else {
+				console.log( "getCity: No results found" );
+				return false;
+			}
+		} else {
+			console.log( "Geocoder failed due to: " + status );
+			return false;
+		}
+	});
 }
 
 function get_visible_markers() {
