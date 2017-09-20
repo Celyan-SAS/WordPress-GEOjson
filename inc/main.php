@@ -720,6 +720,33 @@ class wpGEOjson {
 			);
 		}
 		
+		/**
+		 * Selection based on an ACF standard field
+		 * 
+		 */
+		if( !empty( $selection ) && preg_match( '/^acf\:([^\:]+)\:(.+)$/', $selection, $matches ) ) {
+			
+			$key = $matches[1];
+			$value = $matches[2];
+			if( 'false' == strtolower( $value ) ) {
+				$value = false;
+			}
+			if( 'true' == strtolower( $value ) ) {
+				$value = true;
+			}
+			
+			$geojson['properties']['key']	= $key;
+			$geojson['properties']['value']	= $value;
+				
+			$args['meta_query'] = array(
+					array(
+							'key'		=> $key, 	// name of custom field
+							'value'		=> $value,
+							'compare'	=> 'LIKE'
+					)
+			);
+		}
+		
 		$geojson['properties']['wp_query']	= $args;
 		
 		$the_query = new WP_Query( $args );
