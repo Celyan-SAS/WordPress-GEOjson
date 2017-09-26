@@ -998,8 +998,18 @@ function locate_me( position ) {
 	console.log( 'marker ok' );
 	
 	map.panTo( pos );
-	
 	console.log( 'panTo ok' );
+	
+	var closest_m = find_closest_marker( pos );
+	console.log( 'closest marker:' );
+	console.log( closest_m );
+	//map.setZoom( 15 );
+	
+	var bounds = new google.maps.LatLngBounds();
+	var position = new google.maps.LatLng( closest_m.geometry.coordinates[1], closest_m.geometry.coordinates[0] );
+	//bounds.extend(position);
+	//bounds.extend(place.geometry.location);
+	getCity( place.geometry.location, position );
 }
 
 /** See: https://stackoverflow.com/questions/2919337/jquery-convert-line-breaks-to-br-nl2br-equivalent **/
