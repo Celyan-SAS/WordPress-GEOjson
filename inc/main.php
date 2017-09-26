@@ -729,10 +729,10 @@ class wpGEOjson {
 			$key = $matches[1];
 			$value = $matches[2];
 			if( 'false' == strtolower( $value ) ) {
-				$value = false;
+				$value = 0;
 			}
 			if( 'true' == strtolower( $value ) ) {
-				$value = true;
+				$value = 1;
 			}
 			
 			$geojson['properties']['key']	= $key;

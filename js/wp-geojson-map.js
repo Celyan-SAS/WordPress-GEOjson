@@ -388,6 +388,9 @@ var gray_if_no;
 		});
 	
 		html += '</div>';
+		if (infowindow) {
+	        infowindow.close();
+	    }
 		infowindow.setContent( html );
 		infowindow.setPosition( feature.getGeometry().get() );
 	    infowindow.setOptions( { pixelOffset: new google.maps.Size(0,-30) } );
