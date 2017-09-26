@@ -1009,7 +1009,7 @@ function locate_me( position ) {
 	var position = new google.maps.LatLng( closest_m.geometry.coordinates[1], closest_m.geometry.coordinates[0] );
 	//bounds.extend(position);
 	//bounds.extend(place.geometry.location);
-	getCity( place.geometry.location, position );
+	getCity( pos, position );
 }
 
 /** See: https://stackoverflow.com/questions/2919337/jquery-convert-line-breaks-to-br-nl2br-equivalent **/
