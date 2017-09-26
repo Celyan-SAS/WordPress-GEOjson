@@ -798,6 +798,10 @@ function add_markers( geojson, params ) {
 	var hull = turf.concave( geojson, 15, 'kilometers' );
 	var hull2 = turf.convex( geojson );
 	*/
+	if( !geojson ) {
+		console.log( 'No geojson data for markers :(' );
+		return false;
+	}
 	
 	if( 'ggmap' == params.map_type ) {
 		
