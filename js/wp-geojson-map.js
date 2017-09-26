@@ -285,7 +285,7 @@ var gray_if_no;
 					
 				});
 				
-				if( feature.properties['link'] )
+				if( feature.properties['link'] && !list_box.attr('data-no_link') )
 					html += '</a>';
 				
 				if( locate_button || more_button )
