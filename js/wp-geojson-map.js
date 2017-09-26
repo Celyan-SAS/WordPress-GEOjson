@@ -284,7 +284,8 @@ var gray_if_no;
 				fields_arr.forEach( function( field ){
 					
 					html += '<div class="' + field + '">';
-					html += nl2br( feature.properties[field] );
+					if( typeof feature.properties[field] !== 'undefined' )
+						html += nl2br( feature.properties[field] );
 					html += '</div>';
 					
 				});
