@@ -930,7 +930,7 @@ class wpGEOjson {
 			'wp-geojson-map',
 			plugins_url( '/js/wp-geojson-map.js', dirname( __FILE__ ) ),
 			array('jquery'), 
-			'3.4',
+			'3.5',
 			true
 		);
 		
