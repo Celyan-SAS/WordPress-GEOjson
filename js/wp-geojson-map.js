@@ -202,7 +202,11 @@ var gray_if_no;
 				selection: params.selection,
 				fields: params.popup_fields
 			}, function( data ) {
-				console.log( 'Ajax get_points_for_post_type data length: ' + data.length );
+				if( data ) {
+					console.log( 'Ajax get_points_for_post_type data length: ' + data.length );
+				} else {
+					console.log( 'No data :(' );
+				}
 				add_markers( data, params );
 			}).done(function() {
 				console.log( "Ajax get_points_for_post_type success" );
