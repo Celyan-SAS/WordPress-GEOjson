@@ -395,6 +395,9 @@ class wpGEOjson {
 		if( !empty( $atts['more_text'] ) )
 			$html .= 'data-more_text="' . $atts['more_text'] . '" ';
 		
+		if( !empty( $atts['no_link'] ) )
+			$html .= 'data-no_link="" ';
+		
 		$html .= '>';
 		$html .= '</div>';
 		

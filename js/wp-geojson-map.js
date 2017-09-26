@@ -274,7 +274,7 @@ var gray_if_no;
 				html += 'class="color_' + color_number + '" ';
 				html += '>';
 				
-				if( feature.properties['link'] )
+				if( feature.properties['link'] && !list_box.attr('data-no_link') )
 					html += '<a href="' + feature.properties['link'] + '">';
 				
 				fields_arr.forEach( function( field ){
