@@ -985,7 +985,7 @@ class wpGEOjson {
 		}
 		$language = '';
 		if( function_exists( 'qtrans_getLanguage' ) && ( 'en' == qtrans_getLanguage() ) ) {
-			$language = '&langiage=en';
+			$language = '&language=en';
 		}
 		wp_register_script(
 			'ggmap-api',
