@@ -980,11 +980,16 @@ class wpGEOjson {
 		
 		/** Google Maps specific **/
 		$key = '';
-		if( function_exists( 'get_field' ) && $google_maps_key = get_field( 'google_maps_key', 'option' ) )
+		if( function_exists( 'get_field' ) && $google_maps_key = get_field( 'google_maps_key', 'option' ) ) {
 			$key = '&key=' . $google_maps_key;
+		}
+		$language = '';
+		if( function_exists( 'qtrans_getLanguage' ) && ( 'en' == qtrans_getLanguage() ) ) {
+			$language = '&langiage=en';
+		}
 		wp_register_script(
 			'ggmap-api',
-			'//maps.google.com/maps/api/js?libraries=places,geometry' . $key,
+			'//maps.google.com/maps/api/js?libraries=places,geometry' . $key . $language,
 			array('jquery'), 
 			'1.0',
 			true
