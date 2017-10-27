@@ -119,7 +119,7 @@ var gray_if_no;
 		$('.more_button').live('click', function(e){
 			console.log('clicked more_button');
 			if( $(this).data('link') ) {
-				document.location=data('link');
+				document.location=$(this).data('link');
 			} else {
 				document.location='/?p=' + $(this).data('id');
 			}
@@ -302,9 +302,6 @@ var gray_if_no;
 				
 				if( locate_button && feature.id ) {
 					html += '<input type="button" class="locate_button" value="' + locate_text + '" data-id="' + feature.id + '" ';
-					if( feature.properties['link'] ) {
-						html += 'data-link="' + feature.properties['link'] + '" ';
-					}
 					html += '/>';
 				}
 
@@ -312,7 +309,11 @@ var gray_if_no;
 					html += ' ';
 				
 				if( more_button && feature.id )
-					html += '<input type="button" class="more_button" value="' + more_text + '" data-id="' + feature.id + '"/>';	
+					html += '<input type="button" class="more_button" value="' + more_text + '" data-id="' + feature.id + '" ';
+					if( feature.properties['link'] ) {
+						html += 'data-link="' + feature.properties['link'] + '" ';
+					}
+					html += '/>';	
 				
 				if( locate_button || more_button )
 					html += '</div>';
