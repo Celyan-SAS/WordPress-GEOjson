@@ -118,7 +118,11 @@ var gray_if_no;
 		
 		$('.more_button').live('click', function(e){
 			console.log('clicked more_button');
-			document.location='/?p=' + $(this).data('id');
+			if( $(this).data('link') ) {
+				document.location=data('link');
+			} else {
+				document.location='/?p=' + $(this).data('id');
+			}
 		});
 		
 		$('.wpgeojson_locateme').click( function(e) {
@@ -296,8 +300,13 @@ var gray_if_no;
 				if( locate_button || more_button )
 					html += '<div class="clear">';
 				
-				if( locate_button && feature.id )
-					html += '<input type="button" class="locate_button" value="' + locate_text + '" data-id="' + feature.id + '"/>';
+				if( locate_button && feature.id ) {
+					html += '<input type="button" class="locate_button" value="' + locate_text + '" data-id="' + feature.id + '" ';
+					if( feature.properties['link'] ) {
+						html += 'data-link="' + feature.properties['link'] + '" ';
+					}
+					html += '/>';
+				}
 
 				if( locate_button && more_button )
 					html += ' ';
