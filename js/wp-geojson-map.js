@@ -392,10 +392,12 @@ var gray_if_no;
 		fields_arr.forEach( function ( field ) {
 			if( typeof feature.getProperty(field) !== "undefined" ) {
 				html += '<div class="' + field + '">';
-				if( 'link' == field && 'no_link' != feature.getProperty(field) ) {
-					html += '<a href="' + feature.getProperty(field) + '">';
-					html += more_text;
-					html += '</a>';
+				if( 'link' == field ) {
+					if( 'no_link' != feature.getProperty(field) ) {
+						html += '<a href="' + feature.getProperty(field) + '">';
+						html += more_text;
+						html += '</a>';
+					}
 				} else {
 					html += nl2br( feature.getProperty(field) );
 				}
@@ -876,10 +878,12 @@ function add_markers( geojson, params ) {
 						}
 												
 						popupcontent += '<div class="' + field + '">';
-						if( ( 'link' == field || 'res.link' == field ) && 'no_link' != feature.properties[field] ) {
-							popupcontent += '<a href="' + feature.properties[field] + '">';
-							popupcontent += more_text;
-							popupcontent += '</a>';
+						if( 'link' == field || 'res.link' == field ) {
+							if( 'no_link' != feature.properties[field] ) {
+								popupcontent += '<a href="' + feature.properties[field] + '">';
+								popupcontent += more_text;
+								popupcontent += '</a>';
+							}
 						} else {
 							if( 'yes' == field_names ) {
 								popupcontent += '<strong>' + field.replace(/^res\./,'') + ': </strong>';
