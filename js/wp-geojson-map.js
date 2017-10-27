@@ -308,12 +308,13 @@ var gray_if_no;
 				if( locate_button && more_button )
 					html += ' ';
 				
-				if( more_button && feature.id )
+				if( more_button && feature.id && feature.properties['link'] != 'no_link' ) {
 					html += '<input type="button" class="more_button" value="' + more_text + '" data-id="' + feature.id + '" ';
 					if( feature.properties['link'] ) {
 						html += 'data-link="' + feature.properties['link'] + '" ';
 					}
 					html += '/>';	
+				}
 				
 				if( locate_button || more_button )
 					html += '</div>';
