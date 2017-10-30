@@ -138,19 +138,6 @@ var gray_if_no;
 			}
 		});
 		
-		if( $('.wpgeojson_locateme').length && $('.wpgeojson_locateme').attr('data-auto') ) {
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition( function( position ){
-					console.log( 'position:' );
-					console.log( position );
-					locate_me( position );
-				} );
-			} else {
-				console.log( 'Geolocation unavailable' );
-				$('.wpgeojson_locateme').val('Geolocation unavailable');
-			}			
-		}
-		
 		/** Autocomplete Place search **/
 		if( document.getElementById('ggsearch') ) {
 			var input = document.getElementById('ggsearch');
@@ -841,6 +828,18 @@ function add_markers( geojson, params ) {
 			allFeatures.push( item );
 		});
 		
+		if( $('.wpgeojson_locateme').length && $('.wpgeojson_locateme').attr('data-auto') ) {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition( function( position ){
+					console.log( 'position:' );
+					console.log( position );
+					locate_me( position );
+				} );
+			} else {
+				console.log( 'Geolocation unavailable' );
+				$('.wpgeojson_locateme').val('Geolocation unavailable');
+			}			
+		}
 		/* hull test
 		map.data.addGeoJson(hull);
 		map.data.addGeoJson(hull2, { fillColor: 'red', style: {color: 'red', fillColor: 'red'} });
