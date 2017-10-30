@@ -138,6 +138,19 @@ var gray_if_no;
 			}
 		});
 		
+		if( $('.wpgeojson_locateme').length && $('.wpgeojson_locateme').attr('data-auto') ) {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition( function( position ){
+					console.log( 'position:' );
+					console.log( position );
+					locate_me( position );
+				} );
+			} else {
+				console.log( 'Geolocation unavailable' );
+				$('.wpgeojson_locateme').val('Geolocation unavailable');
+			}			
+		}
+		
 		/** Autocomplete Place search **/
 		if( document.getElementById('ggsearch') ) {
 			var input = document.getElementById('ggsearch');

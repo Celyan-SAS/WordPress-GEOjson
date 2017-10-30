@@ -635,6 +635,9 @@ class wpGEOjson {
 	
 		if( !empty( $atts['button_text'] ) )
 			$html .= 'value="' . $atts['button_text'] . '" ';
+		
+		if( !empty( $atts['auto'] ) && 'yes' == $atts['auto']  )
+			$html .= 'data-auto="yes" ';
 	
 		$html .= '/>';
 	
