@@ -74,6 +74,12 @@ var gray_if_no;
 		if( $('#map-canvas').attr('data-small_cluster_icon') )
 			small_cluster_icon = $('#map-canvas').data('small_cluster_icon');
 				
+		$.event.trigger({
+			type:	"wpGeoJSON",
+			status:	"map_before_init",
+			time:	new Date()
+		});
+		
 		/** Check map type **/
 		if( $('#map-canvas').hasClass('ggmap') ) {
 			ggmap_init();
@@ -649,6 +655,14 @@ function ggmap_init() {
 		});
 	
 		google.maps.event.addListener( map, 'bounds_changed', on_bounds_changed );
+		
+		$.event.trigger({
+			type:		"wpGeoJSON",
+			status:		"map_after_init",
+			maptype:	"ggmap",
+			time:		new Date()
+		});
+		
 	} else {
 		console.log( 'No map canvas on this page.' );
 	}
