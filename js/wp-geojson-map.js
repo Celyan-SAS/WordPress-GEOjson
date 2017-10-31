@@ -162,6 +162,13 @@ var gray_if_no;
 					//( 'undefined' == typeof page_ville || !page_ville ) 
 					//) {
 					
+					$.event.trigger({
+						type:	"wpGeoJSON",
+						status:	"place_found",
+						place:	place,
+						time:	new Date()
+					});
+					
 					map.setCenter( place.geometry.location );
 					var closest_m = find_closest_marker( place.geometry.location );
 					console.log( 'closest marker:' );
@@ -1029,6 +1036,13 @@ function locate_me( position ) {
 	
 	console.log( 'pos ok' );
 	console.log( pos );
+	
+	$.event.trigger({
+		type:	"wpGeoJSON",
+		status:	"user_located",
+		pos: 	pos,
+		time:	new Date()
+	});
 	
 	marker = new google.maps.Marker({
 		position: pos,
