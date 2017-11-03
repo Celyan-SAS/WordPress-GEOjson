@@ -147,6 +147,7 @@ var gray_if_no;
 							type:	"wpGeoJSON",
 							status:	"geolocation_error",
 							error:	err,
+							auto:	false,
 							time:	new Date()
 						});
 					}
@@ -1022,6 +1023,7 @@ function add_markers( geojson, params ) {
 						type:	"wpGeoJSON",
 						status:	"geolocation_error",
 						error:	err,
+						auto:	true,
 						time:	new Date()
 					});
 				}
