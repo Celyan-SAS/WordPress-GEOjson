@@ -586,8 +586,9 @@ function leaflet_init() {
 		load_tiles = $('#map-canvas').data('load_tiles');
 	
 	//console.log( 'map_options:' ); console.log( options );
-	map = L.map( 'map-canvas', options ).setView([47, 1.6], 5);
+	map = L.map( 'map-canvas', options );
 	if( 'no' != load_tiles ) {
+		map.setView([47, 1.6], 5);
 		L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
 		}).addTo(map);
