@@ -74,6 +74,14 @@ var gray_if_no;
 		if( $('#map-canvas').attr('data-small_cluster_icon') )
 			small_cluster_icon = $('#map-canvas').data('small_cluster_icon');
 				
+		var load_tiles = 'yes';
+		if( $('#map-canvas').attr('data-load_tiles') )
+			load_tiles = $('#map-canvas').data('load_tiles');
+		
+		var fit_bounds = 'yes';
+		if( $('#map-canvas').attr('data-fit_bounds') )
+			load_tiles = $('#map-canvas').data('fit_bounds');
+		
 		$.event.trigger({
 			type:	"wpGeoJSON",
 			status:	"map_before_init",
@@ -110,7 +118,8 @@ var gray_if_no;
 				big_cluster_icon: big_cluster_icon,
 				medium_cluster_icon: medium_cluster_icon,
 				small_cluster_icon: small_cluster_icon,
-				map_type: map_type
+				map_type: map_type,
+				fit_bounds: fit_bounds
 			});
 		
 		$('.wpgeojson_choropleth input').on('click', function(e){
@@ -566,16 +575,23 @@ var gray_if_no;
 function leaflet_init() {
 	//console.log( 'leaflet_init()' );
 	var options = {};
+	
 	var map_options = '';
 	if( $('#map-canvas').attr('data-map_options') )
 		map_options = $('#map-canvas').data('map_options');
 	options = get_map_options_object( options, map_options );
 	
+	var load_tiles = 'yes';
+	if( $('#map-canvas').attr('data-load_tiles') )
+		load_tiles = $('#map-canvas').data('load_tiles');
+	
 	//console.log( 'map_options:' ); console.log( options );
 	map = L.map( 'map-canvas', options ).setView([47, 1.6], 5);
-	L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-	}).addTo(map);
+	if( 'no' != load_tiles ) {
+		L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+		}).addTo(map);
+	}
 }
 
 
@@ -967,10 +983,12 @@ function add_markers( geojson, params ) {
 		allLayers.push( layer );
 		
 		var bounds = features.getBounds();
-		map.fitBounds( bounds, {
-            padding: [10, 20]
-        });
-			
+		if( 'no' != params.fit_bounds ) {
+			map.fitBounds( bounds, {
+	            padding: [10, 20]
+	        });
+		}
+		
 		additionalFeatures.forEach(function(item){
 			var feature = L.geoJSON(item);
 			layer = feature.addTo(map);
@@ -983,7 +1001,9 @@ function add_markers( geojson, params ) {
 		});
 		
 		var group = L.featureGroup( allFeatures );
-		map.fitBounds(group.getBounds());
+		if( 'no' != params.fit_bounds ) {
+			map.fitBounds(group.getBounds());
+		}
 		
 		/* hull test
 		L.geoJSON(hull).addTo(map);

@@ -364,6 +364,12 @@ class wpGEOjson {
 		if( !empty( $atts['map_options'] ) )
 			$html .= 'data-map_options="' . $atts['map_options'] . '" ';
 		
+		if( !empty( $atts['load_tiles'] ) )
+			$html .= 'data-load_tiles="' . $atts['load_tiles'] . '" ';
+		
+		if( !empty( $atts['fit_bounds'] ) )
+			$html .= 'data-fit_bounds="' . $atts['fit_bounds'] . '" ';
+		
 		$html .= '>';
 		$html .= '</div>';
 		return $html;
