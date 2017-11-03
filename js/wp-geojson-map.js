@@ -143,6 +143,12 @@ var gray_if_no;
 					function (err){
 						console.log( 'navigator.geolocation.getCurrentPosition error:' );
 						console.log( err );
+						$.event.trigger({
+							type:	"wpGeoJSON",
+							status:	"geolocation_error",
+							error:	err,
+							time:	new Date()
+						});
 					}
 				);
 			} else {
@@ -1012,6 +1018,12 @@ function add_markers( geojson, params ) {
 				function (err){
 					console.log( 'navigator.geolocation.getCurrentPosition error:' );
 					console.log( err );
+					$.event.trigger({
+						type:	"wpGeoJSON",
+						status:	"geolocation_error",
+						error:	err,
+						time:	new Date()
+					});
 				}
 			);
 		} else {
