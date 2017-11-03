@@ -594,6 +594,9 @@ function leaflet_init() {
 	if( 'no' != fit_bounds ) {
 		map.setView([47, 1.6], 5);
 	}
+	if( options['center'] && options['zoom'] ) {
+		map.setView(options['center'], options['zoom']);
+	}
 	if( 'no' != load_tiles ) {
 		L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
