@@ -585,10 +585,16 @@ function leaflet_init() {
 	if( $('#map-canvas').attr('data-load_tiles') )
 		load_tiles = $('#map-canvas').data('load_tiles');
 	
+	var fit_bounds = 'yes';
+	if( $('#map-canvas').attr('data-fit_bounds') )
+		fit_bounds = $('#map-canvas').data('fit_bounds');
+	
 	//console.log( 'map_options:' ); console.log( options );
 	map = L.map( 'map-canvas', options );
-	if( 'no' != load_tiles ) {
+	if( 'no' != fit_bounds ) {
 		map.setView([47, 1.6], 5);
+	}
+	if( 'no' != load_tiles ) {
 		L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
 		}).addTo(map);
