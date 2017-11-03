@@ -134,11 +134,17 @@ var gray_if_no;
 		$('.wpgeojson_locateme').click( function(e) {
 			console.log( 'Trying out geolocation...' );
 			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition( function( position ){
-					console.log( 'position:' );
-					console.log( position );
-					locate_me( position );
-				} );
+				navigator.geolocation.getCurrentPosition( 
+					function( position ){
+						console.log( 'position:' );
+						console.log( position );
+						locate_me( position );
+					},
+					function (err){
+						console.log( 'navigator.geolocation.getCurrentPosition error:' );
+						console.log( err );
+					}
+				);
 			} else {
 				console.log( 'Geolocation unavailable' );
 				$('.wpgeojson_locateme').val('Geolocation unavailable');
@@ -997,11 +1003,17 @@ function add_markers( geojson, params ) {
 	if( $('.wpgeojson_locateme').length && $('.wpgeojson_locateme').attr('data-auto') ) {
 		console.log( 'Trying out auto geolocation...' );
 		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition( function( position ){
-				console.log( 'position:' );
-				console.log( position );
-				locate_me( position );
-			} );
+			navigator.geolocation.getCurrentPosition( 
+				function( position ){
+					console.log( 'position:' );
+					console.log( position );
+					locate_me( position );
+				},
+				function (err){
+					console.log( 'navigator.geolocation.getCurrentPosition error:' );
+					console.log( err );
+				}
+			);
 		} else {
 			console.log( 'Geolocation unavailable' );
 			$('.wpgeojson_locateme').val('Geolocation unavailable');
