@@ -615,6 +615,9 @@ function get_map_options_object( options, map_options ) {
 					if( 'false' == kv[1] ) {
 						kv[1] = false;
 					}
+					if( 'center' == kv[0] ) {
+						kv[1] = kv[0].split(';');
+					}
 					options[ kv[0] ] = kv[1];
 				}
 			}
