@@ -119,7 +119,8 @@ var gray_if_no;
 				medium_cluster_icon: medium_cluster_icon,
 				small_cluster_icon: small_cluster_icon,
 				map_type: map_type,
-				fit_bounds: fit_bounds
+				fit_bounds: fit_bounds,
+				load_points: $('#map-canvas').data('load_points')
 			});
 		
 		$('.wpgeojson_choropleth input').on('click', function(e){
@@ -234,7 +235,8 @@ var gray_if_no;
 						process_choropleths();
 				}
 			});
-		} else {
+		} 
+		if( '' == params.file || 'yes'==params.load_points ) {
 			/** get GEOjson list of selected points **/
 			$.post( ajaxurl, {
 				action: 'get_points_for_post_type',
