@@ -1081,7 +1081,7 @@ function add_markers( geojson, params ) {
 	
 	$.event.trigger({
 		type:	"wpGeoJSON",
-		status:	"after_add_markers",
+		status:	"markers_after_add",
 		map_type: params.map_type,
 		time:	new Date()
 	});
