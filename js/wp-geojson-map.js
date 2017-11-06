@@ -1078,6 +1078,13 @@ function add_markers( geojson, params ) {
 			$('.wpgeojson_locateme').val('Geolocation unavailable');
 		}			
 	}
+	
+	$.event.trigger({
+		type:	"wpGeoJSON",
+		status:	"after_add_markers",
+		map_type: params.map_type,
+		time:	new Date()
+	});
 }
 
 function center_map_on_feature( id ) {
