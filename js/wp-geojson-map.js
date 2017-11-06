@@ -602,6 +602,12 @@ function leaflet_init() {
 		    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
 		}).addTo(map);
 	}
+	$.event.trigger({
+		type:		"wpGeoJSON",
+		status:		"map_after_init",
+		maptype:	"leaflet",
+		time:		new Date()
+	});
 }
 
 
@@ -647,6 +653,12 @@ function ol_init() {
           zoom: 5
         })
       });
+	$.event.trigger({
+		type:		"wpGeoJSON",
+		status:		"map_after_init",
+		maptype:	"openlayers",
+		time:		new Date()
+	});
 }
 
 /**
