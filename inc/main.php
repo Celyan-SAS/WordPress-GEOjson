@@ -142,7 +142,7 @@ class wpGEOjson {
 						'load_points' => array(
 								'type' 		=> 'bool',
 								'default' 	=> 'yes',
-								'name'		=> __( 'Loid points', 'textdomain' ),
+								'name'		=> __( 'Load points', 'textdomain' ),
 								'desc'		=> __( 'Uncheck to leave map blank', 'textdomain' ),
 						)
 				),

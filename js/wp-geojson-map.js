@@ -82,9 +82,9 @@ var gray_if_no;
 		if( $('#map-canvas').attr('data-fit_bounds') )
 			load_tiles = $('#map-canvas').data('fit_bounds');
 		
-		var load_points = 'yes';
+		var v_load_points = 'yes';
 		if( $('#map-canvas').attr('data-load_points') )
-			load_points = $('#map-canvas').data('load_points');
+			v_load_points = $('#map-canvas').data('load_points');
 		
 		var force_load_points = 'no';
 		if( $('#map-canvas').attr('data-force_load_points') )
@@ -111,7 +111,7 @@ var gray_if_no;
 			leaflet_init();
 		
 		/** launch load_points ajax call **/		
-		if( 'yes'==load_points ) {
+		if( 'yes'==v_load_points ) {
 			load_points({ 
 				post_type: post_type, 
 				selection: selection,
