@@ -82,6 +82,14 @@ var gray_if_no;
 		if( $('#map-canvas').attr('data-fit_bounds') )
 			load_tiles = $('#map-canvas').data('fit_bounds');
 		
+		var load_points = 'yes';
+		if( $('#map-canvas').attr('data-load_points') )
+			load_points = $('#map-canvas').data('load_points');
+		
+		var force_load_points = 'no';
+		if( $('#map-canvas').attr('data-force_load_points') )
+			force_load_points = $('#map-canvas').data('force_load_points');
+		
 		$.event.trigger({
 			type:	"wpGeoJSON",
 			status:	"map_before_init",
@@ -103,7 +111,7 @@ var gray_if_no;
 			leaflet_init();
 		
 		/** launch load_points ajax call **/		
-		if( !$('#map-canvas').attr('data-load_points') || 'yes'==$('#map-canvas').data('load_points') )
+		if( 'yes'==load_points ) {
 			load_points({ 
 				post_type: post_type, 
 				selection: selection,
@@ -120,8 +128,9 @@ var gray_if_no;
 				small_cluster_icon: small_cluster_icon,
 				map_type: map_type,
 				fit_bounds: fit_bounds,
-				load_points: $('#map-canvas').data('load_points')
+				force_load_points: force_load_points
 			});
+		}
 		
 		$('.wpgeojson_choropleth input').on('click', function(e){
 			console.log('clicked cp');
@@ -235,8 +244,8 @@ var gray_if_no;
 						process_choropleths();
 				}
 			});
-		} 
-		if( '' == params.file || 'yes'==params.load_points ) {
+		}
+		if( '' == params.file || 'yes'==params.force_load_points ) {
 			/** get GEOjson list of selected points **/
 			console.log('loading GEOjson points...');
 			$.post( ajaxurl, {

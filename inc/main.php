@@ -370,6 +370,9 @@ class wpGEOjson {
 		if( !empty( $atts['fit_bounds'] ) )
 			$html .= 'data-fit_bounds="' . $atts['fit_bounds'] . '" ';
 		
+		if( !empty( $atts['force_load_points'] ) )
+			$html .= 'data-force_load_points="' . $atts['force_load_points'] . '" ';
+		
 		$html .= '>';
 		$html .= '</div>';
 		return $html;
