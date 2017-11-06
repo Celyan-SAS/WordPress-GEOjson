@@ -238,6 +238,7 @@ var gray_if_no;
 		} 
 		if( '' == params.file || 'yes'==params.load_points ) {
 			/** get GEOjson list of selected points **/
+			console.log('loading GEOjson points...');
 			$.post( ajaxurl, {
 				action: 'get_points_for_post_type',
 				post_type: params.post_type,
