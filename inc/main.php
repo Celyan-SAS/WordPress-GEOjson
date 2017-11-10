@@ -1031,6 +1031,19 @@ class wpGEOjson {
 			true
 		);
 		/** **/
+		
+		/** Leaflet.pattern.js 
+		 * @see: https://github.com/teastman/Leaflet.pattern
+		 * 
+		 */
+		wp_register_script(
+			'pattern',
+			plugins_url( '/js/leaflet.pattern.js', dirname( __FILE__ ) ),
+			array('leaflet'),
+			'1.0',
+			true
+		);
+		/** **/
 	}
 	
 	/**
@@ -1059,6 +1072,8 @@ class wpGEOjson {
 		/** Leaflet **/
 		if( in_array( 'leaflet', self::$load_scripts ) ) {
 			wp_print_scripts('leaflet');
+			wp_print_scripts('pattern');
+			
 			//wp_print_scripts('leaflet-label');
 		}
 		/** **/
