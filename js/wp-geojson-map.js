@@ -941,7 +941,12 @@ function add_markers( geojson, params ) {
 				showCoverageOnHover: false,
 				iconCreateFunction: function(cluster) {
 					if( params.big_cluster_icon )
-						return L.icon({ iconUrl: params.big_cluster_icon, iconSize: [33, 33], iconAnchor: [17, 17], popupAnchor[0, 0] });	//TODO: don't specify size?
+						return L.icon({
+							iconUrl: params.big_cluster_icon,
+							iconSize: [33, 33],
+							iconAnchor: [17,17],
+							popupAnchor: [0, 0]
+						});	//TODO: don't specify size?
 					if( params.marker_icon )
 						return L.icon({ iconUrl: params.marker_icon });
 					return L.divIcon({ html: '<b>' + cluster.getChildCount() + '</b>' });
