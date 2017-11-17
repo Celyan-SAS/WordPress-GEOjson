@@ -934,9 +934,10 @@ function add_markers( geojson, params ) {
 		
 		if( 'yes' == params.cluster_points ) {
 			var clustered_markers = L.markerClusterGroup({
+				showCoverageOnHover: false,
 				iconCreateFunction: function(cluster) {
 					if( params.big_cluster_icon )
-						return L.icon({ iconUrl: params.big_cluster_icon, iconSize: [33, 33] });
+						return L.icon({ iconUrl: params.big_cluster_icon, iconSize: [33, 33] });	//TODO: don't specify size?
 					if( params.marker_icon )
 						return L.icon({ iconUrl: params.marker_icon });
 					return L.divIcon({ html: '<b>' + cluster.getChildCount() + '</b>' });
