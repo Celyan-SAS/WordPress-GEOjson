@@ -1014,18 +1014,18 @@ function add_markers( geojson, params ) {
 							}
 						}
 					}
-					if( params.marker_icon ) {
+					if( typeof layer.setIcon == 'function' && params.marker_icon ) {
 						layer.setIcon( L.icon({ iconUrl: params.marker_icon }) );
-						console.log( 'layer.setIcon: ' + params.marker_icon );
+						//console.log( 'layer.setIcon: ' + params.marker_icon );
 					}
-					if( feature.properties['iconUrl'] ) {
+					if( typeof layer.setIcon == 'function' && feature.properties['iconUrl'] ) {
 						layer.setIcon( L.icon({ iconUrl: feature.properties['iconUrl'] }) );
 					}
 					if( feature.properties['res.label'] ) {
 						layer.bindTooltip( feature.properties['res.label'], { permanent: true } ).addTo( map );
 					}
 					/** Umap compatibility **/
-					if( feature.properties['_storage_options'] && feature.properties['_storage_options'].iconUrl ) {
+					if( typeof layer.setIcon == 'function' && feature.properties['_storage_options'] && feature.properties['_storage_options'].iconUrl ) {
 						layer.setIcon( L.icon({ iconUrl: feature.properties['_storage_options'].iconUrl }) );
 					}
 				}
