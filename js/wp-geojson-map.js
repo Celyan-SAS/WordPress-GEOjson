@@ -935,7 +935,11 @@ function add_markers( geojson, params ) {
 		if( 'yes' == params.cluster_points ) {
 			var clustered_markers = L.markerClusterGroup({
 				iconCreateFunction: function(cluster) {
-					return L.icon({ iconUrl: params.marker_icon });
+					if( params.big_cluster_icon )
+						return L.icon({ iconUrl: params.big_cluster_icon });
+					if( params.marker_icon )
+						return L.icon({ iconUrl: params.marker_icon });
+					return L.divIcon({ html: '<b>' + cluster.getChildCount() + '</b>' });
 				}
 			});
 		}
