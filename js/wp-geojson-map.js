@@ -1045,7 +1045,7 @@ function add_markers( geojson, params ) {
 								iconUrl: params.marker_icon,
 								iconSize: [32, 32],
 								iconAnchor: [16, 16],
-								popupAnchor: [0, -16]
+								popupAnchor: [0, 0]
 							})	//TODO: don't specify size?
 						);
 						//console.log( 'layer.setIcon: ' + params.marker_icon );
