@@ -944,15 +944,15 @@ function add_markers( geojson, params ) {
 						return L.icon({
 							iconUrl: params.big_cluster_icon,
 							iconSize: [32, 32],
-							iconAnchor: [16, 8],
-							popupAnchor: [0, -32]
+							iconAnchor: [16, 7],
+							popupAnchor: [0, 0]
 						});	//TODO: don't specify size?
 					if( params.marker_icon )
 						return L.icon({ 
 							iconUrl: params.marker_icon,
 							iconSize: [32, 32],
 							iconAnchor: [16, 16],
-							popupAnchor: [0, -16]
+							popupAnchor: [0, 0]
 						});	//TODO: don't specify size?
 					return L.divIcon({ html: '<b>' + cluster.getChildCount() + '</b>' });
 				},
