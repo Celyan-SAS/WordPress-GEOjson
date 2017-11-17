@@ -933,7 +933,11 @@ function add_markers( geojson, params ) {
 	if( 'leaflet' == params.map_type ) {
 		
 		if( 'yes' == params.cluster_points ) {
-			var clustered_markers = L.markerClusterGroup();
+			var clustered_markers = L.markerClusterGroup({
+				iconCreateFunction: function(cluster) {
+					return L.icon({ iconUrl: params.marker_icon });
+				}
+			});
 		}
 	
         if((field_names == undefined || field_names == '') && $('#map-canvas').attr('data-popup_fields') ) {            
