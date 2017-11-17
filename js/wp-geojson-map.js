@@ -1020,7 +1020,8 @@ function add_markers( geojson, params ) {
 		clustered_markers.addLayer( features );
 		map.addLayer( clustered_markers );
 		
-		layer = features.addTo(map);
+		//layer = features.addTo(map);
+		layer = features; // (??? test)
 		allFeatures.push( features );
 		allLayers.push( layer );
 		
