@@ -1043,7 +1043,7 @@ function add_markers( geojson, params ) {
 							L.icon({ 
 								iconUrl: params.marker_icon,
 								iconSize: [32, 32],
-								iconAnchor: [16, 16],
+								iconAnchor: [16, 32],
 								popupAnchor: [0, -16]
 							})	//TODO: don't specify size?
 						);
