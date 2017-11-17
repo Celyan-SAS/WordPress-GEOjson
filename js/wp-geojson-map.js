@@ -900,6 +900,8 @@ function get_visible_markers() {
  */
 function add_markers( geojson, params ) {
 	
+	console.log( 'add_markers params:' );
+	console.log( params );
 	//console.log( 'popup_fields:' + popup_fields );
 	//console.log( 'gray_if_no:' + gray_if_no );
 	/* Turf test		
