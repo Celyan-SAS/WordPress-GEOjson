@@ -86,6 +86,10 @@ var gray_if_no;
 		if( $('#map-canvas').attr('data-load_points') )
 			v_load_points = $('#map-canvas').data('load_points');
 		
+		var cluster_points = 'yes';
+		if( $('#map-canvas').attr('data-cluster_points') )
+			cluster_points = $('#map-canvas').data('cluster_points');
+		
 		var force_load_points = 'no';
 		if( $('#map-canvas').attr('data-force_load_points') )
 			force_load_points = $('#map-canvas').data('force_load_points');
@@ -128,7 +132,8 @@ var gray_if_no;
 				small_cluster_icon: small_cluster_icon,
 				map_type: map_type,
 				fit_bounds: fit_bounds,
-				force_load_points: force_load_points
+				force_load_points: force_load_points,
+				cluster_points: cluster_points
 			});
 		}
 		
@@ -699,6 +704,7 @@ function ggmap_init() {
 				
 		map = new google.maps.Map(document.getElementById("map-canvas"), options);
 		
+		//TODO: check if cluster_points == 'yes'
 		var markerCluster = new DataLayerClusterer({ 
 			map: map
 		});
@@ -924,8 +930,10 @@ function add_markers( geojson, params ) {
 	
 	if( 'leaflet' == params.map_type ) {
 		
-		var clustered_markers = L.markerClusterGroup();
-        
+		if( 'yes' == params.cluster_points ) {
+			var clustered_markers = L.markerClusterGroup();
+		}
+	
         if((field_names == undefined || field_names == '') && $('#map-canvas').attr('data-popup_fields') ) {            
 			field_names = $('#map-canvas').data('popup_fields');
 		}
@@ -1017,11 +1025,14 @@ function add_markers( geojson, params ) {
 				}
 			}
 		);
-		clustered_markers.addLayer( features );
-		map.addLayer( clustered_markers );
 		
-		//layer = features.addTo(map);
-		layer = features; // (??? test)
+		if( 'yes' == params.cluster_points ) {
+			clustered_markers.addLayer( features );
+			map.addLayer( clustered_markers );
+			layer = features; // (??? test)
+		} else {
+			layer = features.addTo(map);
+		}
 		allFeatures.push( features );
 		allLayers.push( layer );
 		
