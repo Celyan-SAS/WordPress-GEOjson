@@ -364,6 +364,17 @@ class wpGEOjson {
 			
 		}
 		
+		/**
+		 * If marker icons are specified in shortcode atts, they override ACF option values
+		 * 
+		 */
+		if( !empty( $atts['marker_icon'] ) )
+			$html .= 'data-marker_icon="' . $atts['marker_icon'] . '" ';
+		
+		if( !empty( $atts['big_cluster_icon'] ) )
+			$html .= 'data-big_cluster_icon="' . $atts['big_cluster_icon'] . '" ';
+		/** **/
+		
 		if( !empty( $atts['height'] ) ) {
 			$html .= 'style="min-height:' . $atts['height'] . 'px;" ';
 		} else {
