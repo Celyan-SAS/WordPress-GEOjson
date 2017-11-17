@@ -644,6 +644,10 @@ function get_map_options_object( options, map_options ) {
 					if( 'center' == kv[0] ) {
 						kv[1] = kv[1].split(';');
 					}
+					if( 'maxBounds' == kv[0] ) {
+						a = kv[1].split(';');
+						kv[1] = [a[0],a[1]],[a[2],a[3]];
+					}
 					options[ kv[0] ] = kv[1];
 				}
 			}
