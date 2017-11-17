@@ -948,7 +948,12 @@ function add_markers( geojson, params ) {
 							popupAnchor: [0, -16]
 						});	//TODO: don't specify size?
 					if( params.marker_icon )
-						return L.icon({ iconUrl: params.marker_icon });
+						return L.icon({ 
+							iconUrl: params.marker_icon,
+							iconSize: [32, 32],
+							iconAnchor: [16, 16],
+							popupAnchor: [0, -16]
+						});	//TODO: don't specify size?
 					return L.divIcon({ html: '<b>' + cluster.getChildCount() + '</b>' });
 				},
 				maxClusterRadius: 35																//TODO: don't specify size?
@@ -1034,7 +1039,14 @@ function add_markers( geojson, params ) {
 						}
 					}
 					if( typeof layer.setIcon == 'function' && params.marker_icon ) {
-						layer.setIcon( L.icon({ iconUrl: params.marker_icon }) );
+						layer.setIcon( 
+							L.icon({ 
+								iconUrl: params.marker_icon,
+								iconSize: [32, 32],
+								iconAnchor: [16, 16],
+								popupAnchor: [0, -16]
+							})	//TODO: don't specify size?
+						);
 						//console.log( 'layer.setIcon: ' + params.marker_icon );
 					}
 					if( typeof layer.setIcon == 'function' && feature.properties['iconUrl'] ) {
