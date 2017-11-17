@@ -957,7 +957,7 @@ function add_markers( geojson, params ) {
 					return L.divIcon({ html: '<b>' + cluster.getChildCount() + '</b>' });
 				},
 				maxClusterRadius: 32,
-				spiderfyDistanceMultiplier: 1.2		//TODO: don't specify size?
+				spiderfyDistanceMultiplier: 1.1		//TODO: don't specify size?
 			});
 		}
 	
@@ -1044,7 +1044,7 @@ function add_markers( geojson, params ) {
 							L.icon({ 
 								iconUrl: params.marker_icon,
 								iconSize: [32, 32],
-								iconAnchor: [16, 20],
+								iconAnchor: [16, 24],
 								popupAnchor: [0, -16]
 							})	//TODO: don't specify size?
 						);
