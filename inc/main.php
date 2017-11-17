@@ -1044,6 +1044,35 @@ class wpGEOjson {
 			true
 		);
 		/** **/
+		
+		/** Leaflet.markercluster.js
+		 * @see: https://github.com/Leaflet/Leaflet.markercluster
+		 *
+		 */
+		wp_register_script(
+			'leaflet-clusterer',
+			plugins_url( '/js/leaflet.markercluster.js', dirname( __FILE__ ) ),
+			array('leaflet'),
+			'1.0',
+			true
+		);
+		wp_register_style(
+			'leaflet-clusterer',
+			plugins_url( '/css/MarkerCluster.css', dirname( __FILE__ ) ),
+			array(),
+			'1.0',
+			true
+		);
+		wp_enqueue_style( 'leaflet-clusterer' );			//TODO: only if clustering needed?
+		wp_register_style(
+			'leaflet-clusterer-default',
+			plugins_url( '/css/MarkerCluster.Default.css', dirname( __FILE__ ) ),
+			array(),
+			'1.0',
+			true
+		);
+		wp_enqueue_style( 'leaflet-clusterer-default' );	//TODO: only if clustering needed?
+		/** **/
 	}
 	
 	/**
@@ -1072,13 +1101,14 @@ class wpGEOjson {
 		/** Leaflet **/
 		if( in_array( 'leaflet', self::$load_scripts ) ) {
 			wp_print_scripts('leaflet');
-			wp_print_scripts('pattern');
+			wp_print_scripts('pattern');			//TODO: only if patterns?
+			wp_print_scripts('leaflet-clusterer');	//TODO: only if clustering needed?
 			
 			//wp_print_scripts('leaflet-label');
 		}
 		/** **/
 		
-		wp_print_scripts('turf');
+		wp_print_scripts('turf');					//TODO: only if turf needed?
 		wp_print_scripts('wp-geojson-map');
 				
 		?>
