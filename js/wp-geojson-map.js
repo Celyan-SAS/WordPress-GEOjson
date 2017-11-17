@@ -945,7 +945,7 @@ function add_markers( geojson, params ) {
 							iconUrl: params.big_cluster_icon,
 							iconSize: [33, 33],
 							iconAnchor: [17,17],
-							popupAnchor: [0, 0]
+							popupAnchor: [17, 0]
 						});	//TODO: don't specify size?
 					if( params.marker_icon )
 						return L.icon({ iconUrl: params.marker_icon });
