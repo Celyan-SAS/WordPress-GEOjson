@@ -945,7 +945,8 @@ function add_markers( geojson, params ) {
 					if( params.marker_icon )
 						return L.icon({ iconUrl: params.marker_icon });
 					return L.divIcon({ html: '<b>' + cluster.getChildCount() + '</b>' });
-				}
+				},
+				maxClusterRadius: 40
 			});
 		}
 	
