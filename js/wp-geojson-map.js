@@ -1013,7 +1013,7 @@ function add_markers( geojson, params ) {
 						}
 					}
 					if( params.marker_icon ) {
-						layer.setIcon( L.icon({ iconUrl: feature.properties['iconUrl'] }) );
+						layer.setIcon( L.icon({ iconUrl: params.marker_icon }) );
 					}
 					if( feature.properties['iconUrl'] ) {
 						layer.setIcon( L.icon({ iconUrl: feature.properties['iconUrl'] }) );
