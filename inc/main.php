@@ -209,6 +209,12 @@ class wpGEOjson {
 								'name'		=> __( 'More button text', 'textdomain' ),
 								'desc'		=> __( 'Text for the "More..." button', 'textdomain' ),
 								'default'	=> ''
+						),
+						'more_blank' => array(
+								'type'		=> 'bool',
+								'default'	=> 'no',
+								'name'		=> __( 'Open in blank', 'textdomain' ),
+								'desc'		=> __( 'Open the link of the "More..." button in a new tab', 'textdomain' ),
 						)
 				),
 				// Shortcode description for cheatsheet and generator
@@ -333,6 +339,9 @@ class wpGEOjson {
 		if( !empty( $atts['more_text'] ) )
 			$html .= 'data-more_text="' . $atts['more_text'] . '" ';
 		
+		if( !empty( $atts['more_blank'] ) )
+			$html .= 'data-more_blank="' . $atts['more_blank'] . '" ';
+		
 		if( !empty( $atts['field_names'] ) )
 			$html .= 'data-field_names="' . $atts['field_names'] . '" ';
 		
@@ -423,6 +432,9 @@ class wpGEOjson {
 		
 		if( !empty( $atts['more_text'] ) )
 			$html .= 'data-more_text="' . $atts['more_text'] . '" ';
+		
+		if( !empty( $atts['more_blank'] ) )
+			$html .= 'data-more_blank="' . $atts['more_blank'] . '" ';
 		
 		if( !empty( $atts['no_link'] ) )
 			$html .= 'data-no_link="no_link" ';
