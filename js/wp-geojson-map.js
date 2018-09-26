@@ -149,7 +149,7 @@ var gray_if_no;
 		$('.more_button').live('click', function(e){
 			console.log('clicked more_button');
 			if( $(this).data('link') ) {
-				if( $(this).data('blank') ) {
+				if( 'yes' == $(this).data('blank') ) {
 					var win = window.open( $(this).data('link'), '_blank' );
 					if( win ) {
 						win.focus();
@@ -452,15 +452,22 @@ var gray_if_no;
 		}
 		
 		more_text = '[More...]';
+		more_blank = 'no';
 		if( $('#map-canvas').attr('data-more_text') )
 			more_text = $('#map-canvas').data('more_text');
+		if( $('#map-canvas').attr('data-more_blank') )
+			more_blank = $('#map-canvas').data('more_blank');
 		
 		fields_arr.forEach( function ( field ) {
 			if( typeof feature.getProperty(field) !== "undefined" ) {
 				html += '<div class="' + field + '">';
 				if( 'link' == field ) {
 					if( 'no_link' != feature.getProperty(field) ) {
-						html += '<a href="' + feature.getProperty(field) + '">';
+						html += '<a href="' + feature.getProperty(field) + '" ';
+						if( 'yes' == more_blank ) {
+							html += 'target="_blank" ';
+						}
+						html += '>';
 						html += more_text;
 						html += '</a>';
 					}
@@ -979,8 +986,11 @@ function add_markers( geojson, params ) {
 		}
         
         var more_text = '[More...]';
+        var more_blank = 'no';
 		if( $('#map-canvas').attr('data-more_text') )
 			more_text = $('#map-canvas').data('more_text');
+		if( $('#map-canvas').attr('data-more_blank') )
+			more_blank = $('#map-canvas').data('more_blank');
 		
 		popup_arr = params.popup_fields.split(",");
 		//console.log( 'popup_arr:' + popup_arr );
@@ -1018,7 +1028,11 @@ function add_markers( geojson, params ) {
 						popupcontent += '<div class="' + field + '">';
 						if( 'link' == field || 'res.link' == field ) {
 							if( 'no_link' != feature.properties[field] ) {
-								popupcontent += '<a href="' + feature.properties[field] + '">';
+								popupcontent += '<a href="' + feature.properties[field] + '" ';
+								if( 'yes' == more_blank ) {
+									popupcontent += 'target="_blank" ';
+								}
+								popupcontent += '>';
 								popupcontent += more_text;
 								popupcontent += '</a>';
 							}

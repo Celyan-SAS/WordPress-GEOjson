@@ -150,6 +150,18 @@ class wpGEOjson {
 								'default' 	=> 'yes',
 								'name'		=> __( 'Marker clustering', 'textdomain' ),
 								'desc'		=> __( 'Uncheck to avoid marker clustering', 'textdomain' ),								
+						),
+						'more_text' => array(
+								'type'		=> 'text',
+								'name'		=> __( 'More button text', 'textdomain' ),
+								'desc'		=> __( 'Text for the "More..." button', 'textdomain' ),
+								'default'	=> ''
+						),
+						'more_blank' => array(
+								'type'		=> 'bool',
+								'default'	=> 'no',
+								'name'		=> __( 'Open in blank', 'textdomain' ),
+								'desc'		=> __( 'Open the link of the "More..." button in a new tab', 'textdomain' ),
 						)
 				),
 				// Shortcode description for cheatsheet and generator
@@ -974,7 +986,7 @@ class wpGEOjson {
 			'wp-geojson-map',
 			plugins_url( '/js/wp-geojson-map.js', dirname( __FILE__ ) ),
 			array('jquery'), 
-			'3.5',
+			'3.6',
 			true
 		);
 		
