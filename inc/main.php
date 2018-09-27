@@ -717,7 +717,7 @@ class wpGEOjson {
 		if( !empty( $_REQUEST['selection'] ) )
 			$selection = sanitize_text_field( $_REQUEST['selection'] );
 		
-		if( !$acf_field_id )
+		if( empty( $acf_field_id ) )
 			if( !$acf_field_id = $this->find_acf_ggmap_field( $post_type ) )
 				$this->send_ajax_error( 'geo field not found' );
 		
@@ -884,7 +884,7 @@ class wpGEOjson {
 	 * @param string $selection
 	 * @param string $content
 	 */
-	private function store_cache( $post_type, $acf_field_id, $selection, $content ) {
+	private function store_cache( $post_type, $af_field, $selection, $content ) {
 		
 		set_transient( 
 			$this->get_cache_key( $post_type, $af_field, $selection ), 
