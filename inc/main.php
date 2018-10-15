@@ -94,8 +94,8 @@ class wpGEOjson {
 								'default'	=> 'leaflet'
 						),
 						'post_type' => array(
-								'type' 		=> 'select',
-								'values' 	=> Su_Tools::get_types(),
+								'type' 		=> 'post_type',
+								'values' 	=> array(),
 								'name'		=> __( 'Post type', 'textdomain' ),
 								'desc'		=> __( 'Select geo-encoded post type', 'textdomain' ),
 								'default'	=> 'post'
