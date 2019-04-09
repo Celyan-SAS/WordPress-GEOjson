@@ -1035,7 +1035,7 @@ class wpGEOjson {
 			return false;
 		}
 		
-		$args = array( 'role' => 'Administrator' );		
+		$args = array('orderby' => 'registered', 'order' => 'ASC');		
 		$user_query = new WP_User_Query( $args );
 		if ( ! empty( $user_query->get_results() ) ) {
 			$results = $user_query->get_results();			
