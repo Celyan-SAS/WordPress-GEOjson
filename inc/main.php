@@ -1043,7 +1043,13 @@ class wpGEOjson {
 			return false;
 		}
 		
-		if( !$fields = get_field_objects('user_'.$results[0]->ID)){
+		$fields = false;
+		foreach($results as $user){
+			if( $fields = get_field_objects('user_'.$results[0]->ID)){
+				break;
+			}
+		}		
+		if( !$fields ){
 			return false;	
 		}
 				
