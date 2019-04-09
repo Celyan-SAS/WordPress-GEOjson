@@ -702,14 +702,107 @@ class wpGEOjson {
 	 *
 	 */
 	public function ajax_get_points_for_post_type() {
-				
+		
 		session_write_close();
 		
 		/** Get the ajax request parameters **/
 		$post_type = 'post';	//default
-		if( !empty( $_REQUEST['post_type'] ) )
+		if( !empty( $_REQUEST['post_type'] ) ){
 			$post_type = sanitize_text_field( $_REQUEST['post_type'] );
+		}
 		
+		if($post_type == "users"){
+			$this->get_points_for_users();
+		}else{
+			$this->get_points_for_post_type();
+		}
+		
+	}
+	
+	public function get_points_for_users() {
+		
+		$geojson = array(
+			'type'      	=> 'FeatureCollection',
+			'features'  	=> array(),
+			'properties'	=> array()
+		);
+				
+		if( !empty( $_REQUEST['acf_field_id'] ) ){
+			$acf_field_id = sanitize_text_field( $_REQUEST['acf_field_id'] );
+		}
+		
+		if( empty( $acf_field_id ) ){
+			if( !$acf_field_id = $this->find_acf_ggmap_field_users() ){
+				$this->send_ajax_error( 'geo field not found' );
+			}
+		}
+		
+		$selection = 'all';
+		if( !empty( $_REQUEST['selection'] ) ){
+			$selection = sanitize_text_field( $_REQUEST['selection'] );
+		}
+		
+		$fields = array();
+		if( !empty( $_REQUEST['fields'] ) ){
+			$fields = explode( ',', sanitize_text_field( $_REQUEST['fields'] ) );
+		}
+		
+		$args =  array ( 'orderby' => 'registered', 'order' => 'ASC' );
+		$args = apply_filters('wpgj_getpointsforusers_query_args',$args,$_REQUEST);
+		$user_query = new WP_User_Query( $args );
+		
+		$all_users = $user_query->get_results();
+		$all_users = apply_filters('wpgj_getpointsforusers_query_args',$all_users,$_REQUEST);
+		
+		if ( ! empty( $all_users ) ) {
+			foreach ( $all_users as $user ) {
+				
+				$acf_data = get_field( $acf_field_id, 'user_'.$user->ID );								
+				if( !$acf_data['lng'] || !$acf_data['lat'] ){
+					continue;
+				}				
+				$feature = array(
+					'id'			=> $user->ID,
+					'type' 			=> 'Feature',
+					'geometry' 		=> array(
+						'type'			=> 'Point',
+						'coordinates'	=> array( $acf_data['lng'], $acf_data['lat'] )
+					),
+					'properties' => array(
+						'address'	=> $acf_data['address'],
+						'post_id'	=> $user->ID,
+						'title'		=> $user->display_name
+					)
+				);
+				
+				if( $fields ){
+					foreach( $fields as $field ){
+						if( $value = apply_filters( 'wpgj_getval_' . $field, get_field( $field, 'user_'.$user->ID ), $user->ID ) ){
+							$feature['properties'][$field] = $value;
+						}
+					}
+				}
+				$feature = apply_filters('wpgj_getpointsforusers_feature',$feature,$user->ID,$_REQUEST);
+				array_push( $geojson['features'], $feature );
+				
+			}
+		}
+		
+		if( $json = json_encode( $geojson, JSON_NUMERIC_CHECK ) ){
+			$this->store_cache( 'users', $acf_field_id, 'all', $json );
+		}
+		
+		$this->send_ajax_response( $json );		
+	}
+	
+	public function get_points_for_post_type() {
+		
+		/** Get the ajax request parameters **/
+		$post_type = 'post';	//default
+		if( !empty( $_REQUEST['post_type'] ) ){
+			$post_type = sanitize_text_field( $_REQUEST['post_type'] );
+		}
+								
 		if( !empty( $_REQUEST['acf_field_id'] ) )
 			$acf_field_id = sanitize_text_field( $_REQUEST['acf_field_id'] );
 		
@@ -935,6 +1028,33 @@ class wpGEOjson {
 		
 		return false;
 	}
+	
+	private function find_acf_ggmap_field_users() {
+		
+		if( !function_exists( 'get_field_objects' ) ){
+			return false;
+		}
+		
+		$args = array( 'role' => 'Administrator' );		
+		$user_query = new WP_User_Query( $args );
+		if ( ! empty( $user_query->get_results() ) ) {
+			$results = $user_query->get_results();			
+		}else{
+			return false;
+		}
+		
+		if( !$fields = get_field_objects('user_'.$results[0]->ID)){
+			return false;	
+		}
+				
+		foreach( $fields as $field ){
+			if( 'google_map' == $field['type'] ){
+				return $field['name'];
+			}
+		}
+		
+		return false;
+	}	
 	
 	private function find_acf_rel_pt( $post_type, $key ) {
 		
