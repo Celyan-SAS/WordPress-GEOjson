@@ -732,9 +732,8 @@ class wpGEOjson {
 		}
 		
 		if( empty( $acf_field_id ) ){
-			if( !$acf_field_id = $this->find_acf_ggmap_field_users() ){
-				$this->send_ajax_error( 'geo field not found' );
-			}
+			$acf_field_id = $this->find_acf_ggmap_field_users();			
+			$acf_field_id = apply_filters('wpgj_getpointsforusers_acffieldid',$acf_field_id,$_REQUEST);
 		}
 		
 		$selection = 'all';
@@ -757,9 +756,16 @@ class wpGEOjson {
 		if ( ! empty( $all_users ) ) {
 			foreach ( $all_users as $user ) {
 				
-				$acf_data = get_field( $acf_field_id, 'user_'.$user->ID );	
-				$acf_data = apply_filters('wpgj_getpointsforusers_coord',$acf_data,$user->ID,$_REQUEST);				
-				if( !$acf_data['lng'] || !$acf_data['lat'] ){
+				$acf_data = false;
+				if(!empty($acf_field_id)){
+					$acf_data = get_field( $acf_field_id, 'user_'.$user->ID );	
+				}				
+				$acf_data = apply_filters('wpgj_getpointsforusers_coord',$acf_data,$user->ID,$_REQUEST);
+				
+				if( !isset($acf_data['lng']) 
+					|| !isset($acf_data['lng']) 
+					|| !$acf_data['lng'] 
+					|| !$acf_data['lat'] ){
 					continue;
 				}				
 				$feature = array(
