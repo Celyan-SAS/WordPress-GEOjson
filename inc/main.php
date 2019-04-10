@@ -757,7 +757,9 @@ class wpGEOjson {
 		if ( ! empty( $all_users ) ) {
 			foreach ( $all_users as $user ) {
 				
-				$acf_data = get_field( $acf_field_id, 'user_'.$user->ID );								
+				$acf_data = get_field( $acf_field_id, 'user_'.$user->ID );	
+				$acf_data = apply_filters('wpgj_getpointsforusers_coord',$acf_data,$_REQUEST);
+				
 				if( !$acf_data['lng'] || !$acf_data['lat'] ){
 					continue;
 				}				
