@@ -752,7 +752,7 @@ class wpGEOjson {
 		$user_query = new WP_User_Query( $args );
 		
 		$all_users = $user_query->get_results();
-		$all_users = apply_filters('wpgj_getpointsforusers_query_args',$all_users,$_REQUEST);
+		$all_users = apply_filters('wpgj_getpointsforusers_allusers',$all_users,$_REQUEST);
 		
 		if ( ! empty( $all_users ) ) {
 			foreach ( $all_users as $user ) {
