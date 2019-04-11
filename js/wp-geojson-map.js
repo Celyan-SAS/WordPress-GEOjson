@@ -1077,8 +1077,15 @@ function add_markers( geojson, params ) {
 						);
 						//console.log( 'layer.setIcon: ' + params.marker_icon );
 					}
+					
+console.log('TEST property');
+console.log(feature.properties);
+console.log(feature);
+					
 					if( typeof layer.setIcon == 'function' && feature.properties['iconUrl'] ) {
 						layer.setIcon( L.icon({ iconUrl: feature.properties['iconUrl'] }) );
+						
+console.log("INSIDE");
 					}
 					if( feature.properties['res.label'] ) {
 						layer.bindTooltip( feature.properties['res.label'], { permanent: true } ).addTo( map );
