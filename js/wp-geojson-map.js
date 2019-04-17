@@ -1,13 +1,14 @@
 /** WordPress GEOjson plugin by Celyan **/
 /** Map and geolocation JavaScript functions **/
 
-console.log( 'wp-geojson-map js script loaded.' );
+clog( 'wp-geojson-map js script loaded.' );
 
 var map;
 var infowindow;
 var additionalFeatures = [];
 var allFeatures = [];
 var allLayers = [];
+var allMarkers = [];
 var list_limit = 50;	// Maximum number of point data to return in the list box
 var field_names;
 var gray_if_no;
@@ -139,7 +140,7 @@ var last_params_used;
 		}
 		
 		$('.wpgeojson_choropleth input').on('click', function(e){
-			console.log('clicked cp');
+			clog('clicked cp');
 			process_choropleths();
 		});
 		
@@ -148,7 +149,7 @@ var last_params_used;
 		});
 		
 		$('.more_button').live('click', function(e){
-			console.log('clicked more_button');
+			clog('clicked more_button');
 			if( $(this).data('link') ) {
 				if( 'yes' == $(this).data('blank') ) {
 					var win = window.open( $(this).data('link'), '_blank' );
@@ -166,17 +167,17 @@ var last_params_used;
 		});
 		
 		$('.wpgeojson_locateme').click( function(e) {
-			console.log( 'Trying out geolocation...' );
+			clog( 'Trying out geolocation...' );
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition( 
 					function( position ){
-						console.log( 'position:' );
-						console.log( position );
+						clog( 'position:' );
+						clog( position );
 						locate_me( position );
 					},
 					function (err){
-						console.log( 'navigator.geolocation.getCurrentPosition error:' );
-						console.log( err );
+						clog( 'navigator.geolocation.getCurrentPosition error:' );
+						clog( err );
 						$.event.trigger({
 							type:	"wpGeoJSON",
 							status:	"geolocation_error",
@@ -187,7 +188,7 @@ var last_params_used;
 					}
 				);
 			} else {
-				console.log( 'Geolocation unavailable' );
+				clog( 'Geolocation unavailable' );
 				$('.wpgeojson_locateme').val('Geolocation unavailable');
 			}
 		});
@@ -219,18 +220,18 @@ var last_params_used;
 					
 					map.setCenter( place.geometry.location );
 					var closest_m = find_closest_marker( place.geometry.location );
-					console.log( 'closest marker:' );
-					console.log( closest_m );
+					clog( 'closest marker:' );
+					clog( closest_m );
 					//map.setZoom( 15 );
 					
-					var bounds = new google.maps.LatLngBounds();
+					//var bounds = new google.maps.LatLngBounds();
 					var position = new google.maps.LatLng( closest_m.geometry.coordinates[1], closest_m.geometry.coordinates[0] );
 					//bounds.extend(position);
 					//bounds.extend(place.geometry.location);
 					getCity( place.geometry.location, position );
 					//map.fitBounds(bounds);
 					
-					console.log( place );
+					clog( place );
 					initialZoom = true;
 				} else {
 					document.location = '?lat=' + place.geometry.location.lat() + '&lng=' + place.geometry.location.lng();
@@ -239,15 +240,22 @@ var last_params_used;
 		}
 	});
 	
+	function clog(data){
+		if(true){
+			console.log(data);
+		}
+	}
+	
 	/** 
 	 * Ajax request to load needed points/features on the map
 	 * 
 	 */
 	window.load_points = function( params ) {
-		console.log( 'Loading points...' );
+		clog( 'Loading points...' );
 
+		console.log(allFeatures);
 		for (var i = 0; i < allFeatures.length; i++) {
-          allFeatures[i].setMap(null);
+          //allFeatures[i].setMap(null);
         }
 		allFeatures = [];
 		allLayers = [];
@@ -257,7 +265,7 @@ var last_params_used;
 
 		if( '' != params.file ) {
 			/** get existing GEOjson file **/
-			console.log('loading GEOjson file ' + params.file + '...');
+			clog('loading GEOjson file ' + params.file + '...');
 			
 			var data_ajax = {};
 			if(params.data_ajax != undefined && params.data_ajax != '' ){
@@ -278,7 +286,7 @@ var last_params_used;
 		}
 		if( '' == params.file || 'yes'==params.force_load_points ) {
 			/** get GEOjson list of selected points **/
-			console.log('loading GEOjson points...');
+			clog('loading GEOjson points...');
 			var data_filters = {};
 			if(params.data_filters!=undefined && params.data_filters!=''){
 				data_filters = params.data_filters;
@@ -291,17 +299,17 @@ var last_params_used;
 				datafilters:data_filters
 			}, function( data ) {
 				if( data ) {
-					console.log( 'Ajax get_points_for_post_type data length: ' + data.length );
+					clog( 'Ajax get_points_for_post_type data length: ' + data.length );
 				} else {
-					console.log( 'No data :(' );
+					clog( 'No data :(' );
 				}
 				add_markers( data, params );
 			}).done(function() {
-				console.log( "Ajax get_points_for_post_type success" );
+				clog( "Ajax get_points_for_post_type success" );
 			}).fail(function() {
-				console.log( "Ajax get_points_for_post_type error" );
+				clog( "Ajax get_points_for_post_type error" );
 			}).always(function() {
-				console.log( "Ajax get_points_for_post_type finished" );
+				clog( "Ajax get_points_for_post_type finished" );
 			});
 		}
 	}
@@ -313,8 +321,8 @@ var last_params_used;
 			return;
 		
 		/* DEBUG *
-		console.log( 'visible:' );
-		console.log( visible );
+		clog( 'visible:' );
+		clog( visible );
 		/* */
 		
 		$('.wpgeojson_list').each( function( index ) {
@@ -360,7 +368,7 @@ var last_params_used;
 					return;
 				
 				var color_number = ( ( count - 1 ) % 4 ) + 1;
-				//console.log(feature);
+				//clog(feature);
 				marker_colors[feature.id] = color_number;
 				
 				html += '<li ';
@@ -431,10 +439,10 @@ var last_params_used;
 				}
 				
 				/* DEBUG *
-				console.log( 'feature_id: ' + feature_id );
-				console.log( 'marker_colors[feature_id]: ' + marker_colors[feature_id] );
-				console.log( 'my_feature: ' + my_feature.getId() );
-				console.log( 'color_number: ' + color_number );
+				clog( 'feature_id: ' + feature_id );
+				clog( 'marker_colors[feature_id]: ' + marker_colors[feature_id] );
+				clog( 'my_feature: ' + my_feature.getId() );
+				clog( 'color_number: ' + color_number );
 				/* */
 				
 				return({icon: marker_icon});
@@ -453,10 +461,10 @@ var last_params_used;
 			
 			if( on_off ) {
 				$( 'li#' + id, this ).addClass( 'highlight' );
-				console.log( 'highlight ' + id );
+				clog( 'highlight ' + id );
 			} else {
 				$( 'li#' + id, this ).removeClass( 'highlight' );
-				console.log( 'unlight ' + id );
+				clog( 'unlight ' + id );
 			}
 		
 		});		
@@ -544,7 +552,7 @@ var last_params_used;
 					if( typeof layer.setStyle != 'function' )
 						return;
 					
-					//console.log( layer.feature );
+					//clog( layer.feature );
 					
 					var value = layer.feature.properties[field];
 					if( percentage )
@@ -567,11 +575,11 @@ var last_params_used;
 				step = 255 / interval;
 			var max_color = base_color.replace( /f/g, '0' );
 			max_color = max_color.replace( /\*/g, 'f' );
-			console.log( 'min_value:' + min_value );
-			console.log( 'max_value:' + max_value );
-			console.log( 'interval:' + interval );
-			console.log( 'step:' + step );
-			console.log( 'max_color:' + max_color );
+			clog( 'min_value:' + min_value );
+			clog( 'max_value:' + max_value );
+			clog( 'interval:' + interval );
+			clog( 'step:' + step );
+			clog( 'max_color:' + max_color );
 			
 			html = '';
 			html += '<span class="field" style="width:200px;padding:3px 10px;display:inline-block;">' + field.replace(/^res\./,'') + '</span>';
@@ -605,17 +613,17 @@ var last_params_used;
 						value = Math.round(layer.feature.properties[field]*1000/layer.feature.properties[splitted[1]])/10;
 					
 					var shade = Math.round( ( value - min_value ) * step );
-					//console.log( 'shade new:' + shade );
+					//clog( 'shade new:' + shade );
 					var invshade = parseInt( (255-shade) );
 					invshade = invshade.toString(16);
 					while (invshade.length < 2)
 						invshade = '0' + invshade;
 					
-					console.log( 'invshade new:' + invshade );
+					clog( 'invshade new:' + invshade );
 					
 					shade = '#' + base_color.replace( /ff/g, invshade );
 					shade = shade.replace( /\*/g, 'f' );
-					console.log( 'shade new:' + shade );
+					clog( 'shade new:' + shade );
 					
 					layer.setStyle({fillColor: shade, fillOpacity: 0.8});
 				});
@@ -632,7 +640,7 @@ var last_params_used;
  *
  */
 function leaflet_init() {
-	//console.log( 'leaflet_init()' );
+	//clog( 'leaflet_init()' );
 	var options = {};
 	
 	var map_options = '';
@@ -648,7 +656,7 @@ function leaflet_init() {
 	if( $('#map-canvas').attr('data-fit_bounds') )
 		fit_bounds = $('#map-canvas').data('fit_bounds');
 	
-	//console.log( 'map_options:' ); console.log( options );
+	//clog( 'map_options:' ); clog( options );
 	map = L.map( 'map-canvas', options );
 	if( 'no' != fit_bounds ) {
 		map.setView([47, 1.6], 5);
@@ -672,11 +680,11 @@ function leaflet_init() {
 
 function get_map_options_object( options, map_options ) {
 	if( map_options.length ) {
-		//console.log( 'map has options' );
+		//clog( 'map has options' );
 		aoptions = map_options.split(',');
 		while( aoptions.length ) {
 			okv = aoptions.shift();
-			//console.log( 'okv: ' + okv );
+			//clog( 'okv: ' + okv );
 			if( okv.length ) {
 				kv = okv.split(':');
 				if( kv[0].length && kv[1].length ) {
@@ -703,7 +711,7 @@ function get_map_options_object( options, map_options ) {
  * 
  */
 function ol_init() {
-	console.log( 'ol_init()' );
+	clog( 'ol_init()' );
     map = new ol.Map({
         target: 'map-canvas',
         layers: [
@@ -730,11 +738,11 @@ function ol_init() {
  */
 function ggmap_init() {
 	
-	console.log( 'ggmap_init()' );
+	clog( 'ggmap_init()' );
 	
 	if( document.getElementById("map-canvas") ) {
 		
-		console.log( 'found map-canvas' );
+		clog( 'found map-canvas' );
 
 		var options = {
 			center: new google.maps.LatLng( '47', '1.6' ),
@@ -767,17 +775,17 @@ function ggmap_init() {
 		// Set mouseover event for each feature.
 		map.data.addListener('mouseover', function(event) {
 			list_highlight( event.feature.getId(), true );
-			console.log( 'highlighting:' + event.feature.getId() );
+			clog( 'highlighting:' + event.feature.getId() );
 		});
 		map.data.addListener('mouseout', function(event) {
 			list_highlight( event.feature.getId(), false );
-			console.log( 'unlighting:' + event.feature.getId() );
+			clog( 'unlighting:' + event.feature.getId() );
 		});
 		
 		// Set click event on each feature
 		map.data.addListener('click', function(event) {
 			open_infowindow( event.feature );
-			console.log( 'infowindow:' + event.feature.getId() );
+			clog( 'infowindow:' + event.feature.getId() );
 		});
 	
 		google.maps.event.addListener( map, 'bounds_changed', on_bounds_changed );
@@ -790,7 +798,7 @@ function ggmap_init() {
 		});
 		
 	} else {
-		console.log( 'No map canvas on this page.' );
+		clog( 'No map canvas on this page.' );
 	}
 }
 
@@ -809,7 +817,7 @@ function processPoints(geometry, callback, thisArg) {
 
 /** Google Maps function **/
 function on_bounds_changed() {
-	//console.log( 'bounds changed' );
+	//clog( 'bounds changed' );
 	var visible = get_visible_markers();
 	
 	if( nodes = document.getElementsByClassName("wpgeojson_list") ) {
@@ -824,7 +832,7 @@ function on_bounds_changed() {
  */
 function rad(x) {return x*Math.PI/180;}
 function find_closest_marker( pos ) {
-	console.log( 'searching closest marker...' );
+	clog( 'searching closest marker...' );
 	var lat = pos.lat();
 	var lng = pos.lng();
 	var R = 6371; // radius of earth in km
@@ -861,7 +869,7 @@ function getCity( latLng, closest_position ) {
 	var geocoder= new google.maps.Geocoder();
 	geocoder.geocode({'latLng': latLng}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
-  				console.log(results);
+  				clog(results);
 
 			//find city bounds
 			city_bounds = false;
@@ -875,14 +883,14 @@ function getCity( latLng, closest_position ) {
 						break;
 				}
 			}
-			console.log( 'city_bounds:' );
-			console.log( city_bounds );
+			clog( 'city_bounds:' );
+			clog( city_bounds );
 			city_bounds.extend( closest_position );
 			map.fitBounds( city_bounds );
 
     			if (results[1]) {
      				//formatted address
-    				console.log( results[0].formatted_address );
+    				clog( results[0].formatted_address );
 			        //find city name
 				for (var i=0; i<results[0].address_components.length; i++) {
 					for (var b=0;b<results[0].address_components[i].types.length;b++) {
@@ -900,11 +908,11 @@ function getCity( latLng, closest_position ) {
 				}
 
 			} else {
-				console.log( "getCity: No results found" );
+				clog( "getCity: No results found" );
 				return false;
 			}
 		} else {
-			console.log( "Geocoder failed due to: " + status );
+			clog( "Geocoder failed due to: " + status );
 			return false;
 		}
 	});
@@ -915,8 +923,8 @@ function get_visible_markers() {
 	var visible = [];
 	
 	allFeatures.forEach( function( feature ) {
-		//console.log('feature:');
-		//console.log( feature );
+		//clog('feature:');
+		//clog( feature );
 		if( 'Point' == feature.geometry.type ) {
 			position = new google.maps.LatLng( feature.geometry.coordinates[1], feature.geometry.coordinates[0] );
 			if ( map.getBounds().contains( position )) {
@@ -946,16 +954,16 @@ function get_visible_markers() {
  */
 function add_markers( geojson, params ) {
 	
-	console.log( 'add_markers params:' );
-	console.log( params );
-	//console.log( 'popup_fields:' + popup_fields );
-	//console.log( 'gray_if_no:' + gray_if_no );
+	clog( 'add_markers params:' );
+	clog( params );
+	//clog( 'popup_fields:' + popup_fields );
+	//clog( 'gray_if_no:' + gray_if_no );
 	/* Turf test		
 	var hull = turf.concave( geojson, 15, 'kilometers' );
 	var hull2 = turf.convex( geojson );
 	*/
 	if( !geojson ) {
-		console.log( 'No geojson data for markers :(' );
+		clog( 'No geojson data for markers :(' );
 		return false;
 	}
 	
@@ -963,9 +971,14 @@ function add_markers( geojson, params ) {
 		
 		map.data.addGeoJson(geojson);
 		
-		if( params.marker_icon )
+		if( params.marker_icon ){
 			map.data.setStyle({icon: params.marker_icon});
+		}
 		
+clog("bob");
+clog(geojson.features);
+clog("b");
+clog(geojson);
 		geojson.features.forEach( function( item ) {
 			allFeatures.push( item );
 		});
@@ -1015,7 +1028,7 @@ function add_markers( geojson, params ) {
 			more_blank = $('#map-canvas').data('more_blank');
 		
 		popup_arr = params.popup_fields.split(",");
-		//console.log( 'popup_arr:' + popup_arr );
+		//clog( 'popup_arr:' + popup_arr );
 		re = new RegExp("\%");
 		features = L.geoJSON(
 			geojson, {
@@ -1097,7 +1110,7 @@ function add_markers( geojson, params ) {
 								popupAnchor: [0, 0]
 							})	//TODO: don't specify size?
 						);
-						//console.log( 'layer.setIcon: ' + params.marker_icon );
+						//clog( 'layer.setIcon: ' + params.marker_icon );
 					}
 					if( typeof layer.setIcon == 'function' && feature.properties['iconUrl'] ) {
 						layer.setIcon( L.icon({ iconUrl: feature.properties['iconUrl'] }) );
@@ -1137,7 +1150,7 @@ function add_markers( geojson, params ) {
 			allLayers.push( layer );
 			feature.on("click", function (e) {
                 // do something here like display a popup
-                console.log(e);
+                clog(e);
             });
 		});
 		
@@ -1169,17 +1182,17 @@ function add_markers( geojson, params ) {
 	}
 	
 	if( $('.wpgeojson_locateme').length && $('.wpgeojson_locateme').attr('data-auto') ) {
-		console.log( 'Trying out auto geolocation...' );
+		clog( 'Trying out auto geolocation...' );
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition( 
 				function( position ){
-					console.log( 'position:' );
-					console.log( position );
+					clog( 'position:' );
+					clog( position );
 					locate_me( position );
 				},
 				function (err){
-					console.log( 'navigator.geolocation.getCurrentPosition error:' );
-					console.log( err );
+					clog( 'navigator.geolocation.getCurrentPosition error:' );
+					clog( err );
 					$.event.trigger({
 						type:	"wpGeoJSON",
 						status:	"geolocation_error",
@@ -1190,7 +1203,7 @@ function add_markers( geojson, params ) {
 				}
 			);
 		} else {
-			console.log( 'Geolocation unavailable' );
+			clog( 'Geolocation unavailable' );
 			$('.wpgeojson_locateme').val('Geolocation unavailable');
 		}			
 	}
@@ -1204,14 +1217,14 @@ function add_markers( geojson, params ) {
 }
 
 function center_map_on_feature( id ) {
-	console.log( 'feature id to center map on: ' + id );
+	clog( 'feature id to center map on: ' + id );
 	allFeatures.forEach( function( feature ) {
 		if( 'Point' == feature.geometry.type ) {
 			if( id == feature.id ) {
 				position = new google.maps.LatLng( feature.geometry.coordinates[1], feature.geometry.coordinates[0] );
 				map.setCenter( position );
-				console.log( 'centered feature:' );
-				console.log( feature );
+				clog( 'centered feature:' );
+				clog( feature );
 				open_infowindow( map.data.getFeatureById( id ) );
 			}
 		}
@@ -1220,18 +1233,18 @@ function center_map_on_feature( id ) {
 
 function locate_me( position ) {
 	
-	console.log( 'locate me!' );
+	clog( 'locate me!' );
 	
 	if( 'undefined' == typeof map || !map )
 		return false;
 	
-	console.log( 'map ok' );
+	clog( 'map ok' );
 	
 	var pos = new google.maps.LatLng(position.coords.latitude,
         	position.coords.longitude);
 	
-	console.log( 'pos ok' );
-	console.log( pos );
+	clog( 'pos ok' );
+	clog( pos );
 	
 	$.event.trigger({
 		type:	"wpGeoJSON",
@@ -1247,14 +1260,14 @@ function locate_me( position ) {
 		icon: '//www.google.com/mapfiles/dd-start.png'
 	});
 	
-	console.log( 'marker ok' );
+	clog( 'marker ok' );
 	
 	map.panTo( pos );
-	console.log( 'panTo ok' );
+	clog( 'panTo ok' );
 	
 	var closest_m = find_closest_marker( pos );
-	console.log( 'closest marker:' );
-	console.log( closest_m );
+	clog( 'closest marker:' );
+	clog( closest_m );
 	//map.setZoom( 15 );
 	
 	var bounds = new google.maps.LatLngBounds();
@@ -1266,8 +1279,8 @@ function locate_me( position ) {
 
 /** See: https://stackoverflow.com/questions/2919337/jquery-convert-line-breaks-to-br-nl2br-equivalent **/
 function nl2br (str, is_xhtml) {   
-	//console.log( 'nl2br' );
-	//console.log( str );
+	//clog( 'nl2br' );
+	//clog( str );
     var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';    
     return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1'+ breakTag +'$2');
 }
