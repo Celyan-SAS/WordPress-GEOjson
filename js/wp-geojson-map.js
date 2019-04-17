@@ -249,10 +249,17 @@ var load_points;
 		if( '' != params.file ) {
 			/** get existing GEOjson file **/
 			console.log('loading GEOjson file ' + params.file + '...');
+			
+			var data_ajax = {};
+			if(params.data_ajax != undefined && params.data_ajax != '' ){
+				data_ajax = params.data_ajax;
+			}
+			
 			//var features = new L.geoJson();
 			$.ajax({
 				dataType: "json",
 				url: params.file,
+				data:data_ajax,
 				success: function(data) {
 					add_markers( data, params );
 					if( $('.wpgeojson_choropleth').length > 0 )
