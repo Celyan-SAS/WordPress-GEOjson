@@ -908,6 +908,7 @@ class wpGEOjson {
 		
 		$geojson['properties']['wp_query']	= $args;
 		
+		$args = apply_filters('geojson_getpointsforposttype_args',$args,$_REQUEST);		
 		$the_query = new WP_Query( $args );
 		
 		if ( $the_query->have_posts() ) {
