@@ -246,6 +246,9 @@ var last_params_used;
 	window.load_points = function( params ) {
 		console.log( 'Loading points...' );
 
+		allFeatures = [];
+		allLayers = [];
+		
 		/**save params in case of external use **/
 		last_params_used = params;
 
