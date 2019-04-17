@@ -277,12 +277,13 @@ var last_params_used;
 			if(params.data_filters!=undefined && params.data_filters!=''){
 				data_filters = params.data_filters;
 			}
+			console.log('---------------2 22222');
 			$.post( ajaxurl, {
 				action: 'get_points_for_post_type',
 				post_type: params.post_type,
 				selection: params.selection,
 				fields: params.popup_fields,
-				data_filters:data_filters
+				datafilters:data_filters
 			}, function( data ) {
 				if( data ) {
 					console.log( 'Ajax get_points_for_post_type data length: ' + data.length );
