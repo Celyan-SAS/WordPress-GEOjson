@@ -11,6 +11,7 @@ var allLayers = [];
 var list_limit = 50;	// Maximum number of point data to return in the list box
 var field_names;
 var gray_if_no;
+var last_params_used;
 
 /**
  * jQuery functions
@@ -245,9 +246,8 @@ var gray_if_no;
 	window.load_points = function( params ) {
 		console.log( 'Loading points...' );
 
-console.log("TEMP ");
-console.log(params);
-		console.log("TEMP END");
+		/**save params in case of external use **/
+		last_params_used = params;
 
 		if( '' != params.file ) {
 			/** get existing GEOjson file **/
@@ -273,11 +273,16 @@ console.log(params);
 		if( '' == params.file || 'yes'==params.force_load_points ) {
 			/** get GEOjson list of selected points **/
 			console.log('loading GEOjson points...');
+			var data_filters = {};
+			if(params.data_filters!=undefined && params.data_filters!=''){
+				data_filters = params.data_filters;
+			}
 			$.post( ajaxurl, {
 				action: 'get_points_for_post_type',
 				post_type: params.post_type,
 				selection: params.selection,
-				fields: params.popup_fields
+				fields: params.popup_fields,
+				data_filters:data_filters
 			}, function( data ) {
 				if( data ) {
 					console.log( 'Ajax get_points_for_post_type data length: ' + data.length );
