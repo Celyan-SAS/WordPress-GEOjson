@@ -11,7 +11,6 @@ var allLayers = [];
 var list_limit = 50;	// Maximum number of point data to return in the list box
 var field_names;
 var gray_if_no;
-var load_points;
 
 /**
  * jQuery functions
@@ -243,27 +242,16 @@ var load_points;
 	 * Ajax request to load needed points/features on the map
 	 * 
 	 */
-	load_points = function( params ) {
+	function load_points( params ) {
 		console.log( 'Loading points...' );
-
-console.log("TEMP ");
-console.log(params);
-		console.log("TEMP END");
 
 		if( '' != params.file ) {
 			/** get existing GEOjson file **/
 			console.log('loading GEOjson file ' + params.file + '...');
-			
-			var data_ajax = {};
-			if(params.data_ajax != undefined && params.data_ajax != '' ){
-				data_ajax = params.data_ajax;
-			}
-			
 			//var features = new L.geoJson();
 			$.ajax({
 				dataType: "json",
 				url: params.file,
-				data:data_ajax,
 				success: function(data) {
 					add_markers( data, params );
 					if( $('.wpgeojson_choropleth').length > 0 )
