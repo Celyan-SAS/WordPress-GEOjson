@@ -11,6 +11,7 @@ var allLayers = [];
 var list_limit = 50;	// Maximum number of point data to return in the list box
 var field_names;
 var gray_if_no;
+var load_points;
 
 /**
  * jQuery functions
@@ -242,11 +243,12 @@ var gray_if_no;
 	 * Ajax request to load needed points/features on the map
 	 * 
 	 */
-	window.load_points = function( params ) {
+	load_points = function( params ) {
 		console.log( 'Loading points...' );
-		
-console.log('TEMP');		
+
+console.log("TEMP ");
 console.log(params);
+		console.log("TEMP END");
 
 		if( '' != params.file ) {
 			/** get existing GEOjson file **/
