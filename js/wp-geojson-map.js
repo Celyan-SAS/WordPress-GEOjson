@@ -15,7 +15,7 @@ var gray_if_no;
 var last_params_used;
 
 function clog(data){
-	if(true){
+	if(false){
 		console.log(data);
 	}
 }
@@ -253,9 +253,10 @@ function clog(data){
 	window.load_points = function( params ) {
 		clog( 'Loading points...' );
 
-		console.log(allFeatures);
+console.log("all features");
+console.log(allFeatures);
 		for (var i = 0; i < allFeatures.length; i++) {
-          //allFeatures[i].setMap(null);
+			//allFeatures[i].setMap(null);
         }
 		allFeatures = [];
 		allLayers = [];
@@ -975,10 +976,10 @@ function add_markers( geojson, params ) {
 			map.data.setStyle({icon: params.marker_icon});
 		}
 		
-clog("bob");
-clog(geojson.features);
-clog("b");
-clog(geojson);
+console.log("bob");
+console.log(geojson.features);
+console.log("b");
+console.log(geojson);
 		geojson.features.forEach( function( item ) {
 			allFeatures.push( item );
 		});
