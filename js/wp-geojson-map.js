@@ -253,11 +253,13 @@ function clog(data){
 	window.load_points = function( params ) {
 		clog( 'Loading points...' );
 
-console.log("all features");
+console.log("all features 1 ");
 console.log(allFeatures);
 		for (var i = 0; i < allFeatures.length; i++) {
 			//allFeatures[i].setMap(null);
+			map.data.remove(allFeatures[i]);
         }
+		
 		allFeatures = [];
 		allLayers = [];
 		
