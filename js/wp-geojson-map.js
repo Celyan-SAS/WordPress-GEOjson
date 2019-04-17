@@ -248,7 +248,10 @@ var last_params_used;
 
 		allFeatures = [];
 		allLayers = [];
-		setMapOnAll(null);
+		for (var i = 0; i < allFeatures.length; i++) {
+          allFeatures[i].setMap(null);
+        }
+		
 		
 		/**save params in case of external use **/
 		last_params_used = params;
