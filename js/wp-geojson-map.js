@@ -246,12 +246,11 @@ var last_params_used;
 	window.load_points = function( params ) {
 		console.log( 'Loading points...' );
 
-		allFeatures = [];
-		allLayers = [];
 		for (var i = 0; i < allFeatures.length; i++) {
           allFeatures[i].setMap(null);
         }
-		
+		allFeatures = [];
+		allLayers = [];
 		
 		/**save params in case of external use **/
 		last_params_used = params;
