@@ -14,6 +14,12 @@ var field_names;
 var gray_if_no;
 var last_params_used;
 
+function clog(data){
+	if(true){
+		console.log(data);
+	}
+}
+	
 /**
  * jQuery functions
  *
@@ -239,12 +245,6 @@ var last_params_used;
 			});
 		}
 	});
-	
-	function clog(data){
-		if(true){
-			console.log(data);
-		}
-	}
 	
 	/** 
 	 * Ajax request to load needed points/features on the map
