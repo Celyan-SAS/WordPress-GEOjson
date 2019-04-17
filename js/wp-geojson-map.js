@@ -306,6 +306,12 @@ function clog(data){
 					clog( 'No data :(' );
 				}
 				add_markers( data, params );
+				
+				$.event.trigger({
+					type:		"wpGeoJSON_loadpoints",
+					time:		new Date()
+				});
+				
 			}).done(function() {
 				clog( "Ajax get_points_for_post_type success" );
 			}).fail(function() {
