@@ -277,7 +277,8 @@ var last_params_used;
 			if(params.data_filters!=undefined && params.data_filters!=''){
 				data_filters = params.data_filters;
 			}
-			console.log('---------------2 22222');
+console.log('---------------3 22222');
+console.log(data_filters);
 			$.post( ajaxurl, {
 				action: 'get_points_for_post_type',
 				post_type: params.post_type,
