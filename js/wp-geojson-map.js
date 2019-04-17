@@ -253,17 +253,12 @@ function clog(data){
 	window.load_points = function( params ) {
 		clog( 'Loading points...' );
 
-console.log("all features 2 bob");
-console.log(allFeatures);
-map.data.forEach(function(feature) {
-    // If you want, check here for some constraints.
-    map.data.remove(feature);
-});
-//		for (var i = 0; i < allFeatures.length; i++) {
-//			//allFeatures[i].setMap(null);
-//			map.data.remove(allFeatures[i]);
-//        }
-		
+		/**reset map features **/
+		map.data.forEach(function(feature) {
+			// If you want, check here for some constraints.
+			map.data.remove(feature);
+		});	
+		/** reset data printed **/
 		allFeatures = [];
 		allLayers = [];
 		
@@ -982,10 +977,6 @@ function add_markers( geojson, params ) {
 			map.data.setStyle({icon: params.marker_icon});
 		}
 		
-console.log("bob");
-console.log(geojson.features);
-console.log("b");
-console.log(geojson);
 		geojson.features.forEach( function( item ) {
 			allFeatures.push( item );
 		});
