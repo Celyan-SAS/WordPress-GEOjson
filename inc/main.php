@@ -910,8 +910,8 @@ class wpGEOjson {
 		
 		$args = apply_filters('geojson_getpointsforposttype_args',$args,$_REQUEST);
 		
-//echo "<pre>", print_r("ARGS --- ", 1), "</pre>";
-//echo "<pre>", print_r($args, 1), "</pre>";
+echo "<pre>", print_r("ARGS --- ", 1), "</pre>";
+echo "<pre>", print_r($args, 1), "</pre>";
 		
 		$the_query = new WP_Query( $args );
 		
