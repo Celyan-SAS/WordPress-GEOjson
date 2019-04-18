@@ -447,34 +447,34 @@ function clog(data){
 				if( data ) {
 					html = data;
 				}				
-			});
-			
-			list_box.html( html );
-			
-			/** If map implements marker numbers change related marker icon **/
-			map.data.setStyle( function(my_feature){
+			}).always(function() {
+				list_box.html( html );
 				
-				feature_id = my_feature.getId();
-				if( visible.length !== 0 && marker_colors[feature_id] && typeof marker_colors[feature_id] !== 'undefined' ) {
-					color_number = marker_colors[feature_id];
-					if( $('#map-canvas').attr('data-marker_icon_' + color_number) ) {
-						marker_icon = $('#map-canvas').data('marker_icon_' + color_number);
+				/** If map implements marker numbers change related marker icon **/
+				map.data.setStyle( function(my_feature){
+
+					feature_id = my_feature.getId();
+					if( visible.length !== 0 && marker_colors[feature_id] && typeof marker_colors[feature_id] !== 'undefined' ) {
+						color_number = marker_colors[feature_id];
+						if( $('#map-canvas').attr('data-marker_icon_' + color_number) ) {
+							marker_icon = $('#map-canvas').data('marker_icon_' + color_number);
+						} else {
+							marker_icon = $('#map-canvas').data('marker_icon');
+						}
 					} else {
 						marker_icon = $('#map-canvas').data('marker_icon');
+						color_number = '';
 					}
-				} else {
-					marker_icon = $('#map-canvas').data('marker_icon');
-					color_number = '';
-				}
-				
-				/* DEBUG *
-				clog( 'feature_id: ' + feature_id );
-				clog( 'marker_colors[feature_id]: ' + marker_colors[feature_id] );
-				clog( 'my_feature: ' + my_feature.getId() );
-				clog( 'color_number: ' + color_number );
-				/* */
-				
-				return({icon: marker_icon});
+
+					/* DEBUG *
+					clog( 'feature_id: ' + feature_id );
+					clog( 'marker_colors[feature_id]: ' + marker_colors[feature_id] );
+					clog( 'my_feature: ' + my_feature.getId() );
+					clog( 'color_number: ' + color_number );
+					/* */
+
+					return({icon: marker_icon});
+				});				
 			});
 		});
 	};
