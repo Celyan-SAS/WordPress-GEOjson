@@ -79,10 +79,10 @@ class wpGEOjson {
 	 */
 	public function ajax_geojson_html_result_build_filter(){
 		$list_visible = $_POST['visible'];
-		$list_box = $_POST['list_box'];
+		$general_data = $_POST['general_data'];
 		$html = $_POST['html'];
 		
-		$html = apply_filters('geojson_html_result_build_filter',$html,$list_visible,$list_box);
+		$html = apply_filters('geojson_html_result_build_filter',$html,$list_visible,$general_data);
 		
 		echo $html;
 		wp_die();
