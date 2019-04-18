@@ -81,10 +81,7 @@ class wpGEOjson {
 		$list_visible = $_POST['visible'];
 		$general_data = $_POST['general_data'];
 		$html = $_POST['html'];
-		
-		echo "<pre>", print_r("POST ---- ", 1), "</pre>";
-		echo "<pre>", print_r($_POST, 1), "</pre>";
-		
+				
 		$html = apply_filters('geojson_html_result_build_filter',$html,$list_visible,$general_data);
 		
 		echo $html;
