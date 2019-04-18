@@ -78,8 +78,8 @@ class wpGEOjson {
 	 * Let the possibility to change the html showed as the list
 	 */
 	public function ajax_geojson_html_result_build_filter(){
-		$list_visible = $_POST['visible'];
-		$general_data = $_POST['general_data'];
+		$list_visible = json_decode(stripslashes($_POST['visible']));
+		$general_data = json_decode(stripslashes($_POST['general_data']));
 		$html = $_POST['html'];
 				
 		$html = apply_filters('geojson_html_result_build_filter',$html,$list_visible,$general_data);
