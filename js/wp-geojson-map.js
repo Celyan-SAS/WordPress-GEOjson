@@ -428,6 +428,18 @@ function clog(data){
 			
 			html += '</ul>';
 			
+			/** add ajax call to do a filter **/
+			$.post( ajaxurl, {
+				action: 'geojson_html_result_build_filter',
+				visible: visible,
+				list_box: list_box,
+				html:html,
+			}, function( data ) {
+				if( data ) {
+					html = data;
+				}				
+			});
+			
 			list_box.html( html );
 			
 			/** If map implements marker numbers change related marker icon **/

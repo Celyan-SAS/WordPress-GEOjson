@@ -45,9 +45,13 @@ class wpGEOjson {
 		add_shortcode( 'su_wpgeojson_locateme', array( $this, 'shortcode_wpgeojson_locateme' ) );
 		
 		/** Ajax method to get all points of a given post_type **/
-		add_action( 'wp_ajax_get_points_for_post_type', array( $this, 'ajax_get_points_for_post_type' ) );
-		add_action( 'wp_ajax_nopriv_get_points_for_post_type', array( $this, 'ajax_get_points_for_post_type' ) );
+		add_action( 'wp_ajax_get_points_for_post_type', array( $this, 'ajax_get_points_for_post_type' ));
+		add_action( 'wp_ajax_nopriv_get_points_for_post_type', array( $this, 'ajax_get_points_for_post_type' ));
 		
+		/** Ajax method to get filter html of the list result **/
+		add_action( 'wp_ajax_geojson_html_result_build_filter', array( $this, 'ajax_geojson_html_result_build_filter' ) );
+		add_action( 'wp_ajax_nopriv_geojson_html_result_build_filter', array( $this, 'ajax_geojson_html_result_build_filter' ) );
+				
 		/** Shortcodes Ultimate shortcode to configure/insert map shortcodes **/
 		add_filter( 'su/data/shortcodes', array( $this, 'su_shortcodes' ) );
 		
@@ -68,6 +72,20 @@ class wpGEOjson {
 		/** Customization of WP-GeoJSON ACF option page in the admin **/
 		//add_action( 'acf/input/form_data', array( $this, 'option_page' ), 20, 1 );
 		//TODO: use add_meta_box( 'acf_options_page', 'normal' );
+	}
+	
+	/**
+	 * Let the possibility to change the html showed as the list
+	 */
+	public function ajax_geojson_html_result_build_filter(){
+		$list_visible = $_POST['visible'];
+		$list_box = $_POST['list_box'];
+		$html = $_POST['html'];
+		
+		$html = apply_filters('geojson_html_result_build_filter',$html,$list_visible,$list_box);
+		
+		echo $html;
+		wp_die();
 	}
 		
 	/**
