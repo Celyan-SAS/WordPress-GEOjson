@@ -431,8 +431,8 @@ function clog(data){
 			/** add ajax call to do a filter **/
 			$.post( ajaxurl, {
 				action: 'geojson_html_result_build_filter',
-				visible: visible,
-				list_box: list_box,
+				visible: JSON.stringify(visible),
+				list_box: JSON.stringify(list_box),
 				html:html,
 			}, function( data ) {
 				if( data ) {
