@@ -429,10 +429,19 @@ function clog(data){
 			html += '</ul>';
 			
 			/** add ajax call to do a filter **/
+			var general_data = {
+				'locate_button':locate_button,
+				'locate_text':locate_text,
+				'more_text':more_text,
+				'more_button':more_button,
+				'more_blank':more_blank,
+				'fields_arr':fields_arr,
+				'data_no_link':list_box.attr('data-no_link')
+			};
 			$.post( ajaxurl, {
 				action: 'geojson_html_result_build_filter',
 				visible: JSON.stringify(visible),
-				list_box: JSON.stringify(list_box),
+				general_data: JSON.stringify(general_data),
 				html:html,
 			}, function( data ) {
 				if( data ) {
