@@ -444,7 +444,7 @@ function clog(data){
 				general_data: JSON.stringify(general_data),
 				html:html,
 			}, function( data ) {
-				if( data ) {
+				if( data ) {					
 					html = data;
 				}				
 			}).always(function() {

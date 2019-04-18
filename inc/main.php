@@ -84,7 +84,7 @@ class wpGEOjson {
 		
 		$html = $_POST['html'];				
 		$html = apply_filters('geojson_html_result_build_filter',$html,$list_visible,$general_data);
-		
+				
 		echo $html;
 		wp_die();
 	}
