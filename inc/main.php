@@ -967,6 +967,8 @@ class wpGEOjson {
 			}
 		}
 		
+		$geojson = apply_filters('geojson_getpointsforposttype_geojson_final_list',$geojson,$_REQUEST);
+		
 		if( $json = json_encode( $geojson, JSON_NUMERIC_CHECK ) )
 			$this->store_cache( $post_type, $acf_field_id, 'all', $json );
 		
