@@ -843,8 +843,7 @@ class wpGEOjson {
 				$this->send_ajax_error( 'geo field not found' );
 			}
 		}
-				
-		
+
 		$fields = array();
 		if( !empty( $_REQUEST['fields'] ) )
 			$fields = explode( ',', sanitize_text_field( $_REQUEST['fields'] ) );
