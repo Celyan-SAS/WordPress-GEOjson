@@ -253,7 +253,7 @@ function clog(data){
 	window.load_points = function( params ) {
 		clog( 'Loading points...' );
 
-		if(map.data != undefined){
+		if(map != undefined){
 			/**reset map features **/
 			map.data.forEach(function(feature) {
 				// If you want, check here for some constraints.
