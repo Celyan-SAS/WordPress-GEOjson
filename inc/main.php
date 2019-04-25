@@ -702,7 +702,7 @@ class wpGEOjson {
 	 */
 	public function shortcode_wpgeojson_locateme( $atts ) {
 		
-		array_push( self::$load_scripts, 'unknowned' );
+		//array_push( self::$load_scripts, 'unknown' );
 	
 		$html = '';
 		$html .= '<input type="button" class="wpgeojson_locateme" ';
