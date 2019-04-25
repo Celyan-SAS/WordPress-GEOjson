@@ -309,7 +309,7 @@ function clog(data){
 						type:		"wpGeoJSON_loadpoints_empty",
 						time:		new Date()
 					});
-					
+					return false;
 				}
 				add_markers( data, params );
 				
