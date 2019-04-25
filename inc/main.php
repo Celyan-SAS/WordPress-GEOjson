@@ -729,13 +729,18 @@ class wpGEOjson {
 		if( !empty( $_REQUEST['post_type'] ) ){
 			$post_type = sanitize_text_field( $_REQUEST['post_type'] );
 		}
-		
-		if($post_type == "users"){
-			$this->get_points_for_users();
-		}else{
-			$this->get_points_for_post_type();
+		try {
+			if($post_type == "users"){
+				$this->get_points_for_users();
+			}else{
+				$this->get_points_for_post_type();
+			}	
+		} catch (Exception $exc) {
+			$json = json_encode(array(
+				'error'=>$exc->getTraceAsString(),
+			));
+			$this->send_ajax_response( $json );	
 		}
-		
 	}
 	
 	public function get_points_for_users() {
