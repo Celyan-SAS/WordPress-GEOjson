@@ -203,6 +203,7 @@ function clog(data){
 		if( document.getElementById('ggsearch') ) {
 			
 			if(google==undefined){
+				clog( 'GOOGLE Missing !!!!! ' );
 				return;
 			}
 			
