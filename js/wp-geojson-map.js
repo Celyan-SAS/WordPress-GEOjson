@@ -202,7 +202,7 @@ function clog(data){
 		/** Autocomplete Place search **/
 		if( document.getElementById('ggsearch') ) {
 			
-			if(google==undefined){
+			if(google === undefined){
 				clog( 'GOOGLE Missing !!!!! ' );
 				return;
 			}
