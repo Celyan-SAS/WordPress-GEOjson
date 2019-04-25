@@ -998,6 +998,7 @@ function add_markers( geojson, params ) {
 	
 	if( 'ggmap' == params.map_type ) {
 		
+		var geojson = JSON.parse(geojson);
 		map.data.addGeoJson(geojson);
 		
 		if( params.marker_icon ){
