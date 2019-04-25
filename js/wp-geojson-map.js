@@ -301,9 +301,15 @@ function clog(data){
 				datafilters:data_filters
 			}, function( data ) {
 				if( data ) {
-					clog( 'Ajax get_points_for_post_type data length: ' + data.length );
+					clog( 'Ajax get_points_for_post_type data length: ' + data.length );					
 				} else {
 					clog( 'No data :(' );
+					
+					$.event.trigger({
+						type:		"wpGeoJSON_loadpoints_empty",
+						time:		new Date()
+					});
+					
 				}
 				add_markers( data, params );
 				
@@ -998,8 +1004,6 @@ function add_markers( geojson, params ) {
 	
 	if( 'ggmap' == params.map_type ) {
 		
-console.log('3TEST ---------');
-console.log(geojson);
 		map.data.addGeoJson(geojson);
 		
 		if( params.marker_icon ){
