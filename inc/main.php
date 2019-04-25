@@ -701,6 +701,8 @@ class wpGEOjson {
 	 * @return string - html markup for button
 	 */
 	public function shortcode_wpgeojson_locateme( $atts ) {
+		
+		//array_push( self::$load_scripts, 'unknown' );
 	
 		array_push( self::$load_scripts, 'unknowned' );
 		
