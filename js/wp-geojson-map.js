@@ -253,11 +253,16 @@ function clog(data){
 	window.load_points = function( params ) {
 		clog( 'Loading points...' );
 
-		/**reset map features **/
-		map.data.forEach(function(feature) {
-			// If you want, check here for some constraints.
-			map.data.remove(feature);
-		});	
+		console.log("TEST");
+		console.log(map.data);
+
+		if(map.data != undefined){
+			/**reset map features **/
+			map.data.forEach(function(feature) {
+				// If you want, check here for some constraints.
+				map.data.remove(feature);
+			});	
+		}
 		/** reset data printed **/
 		allFeatures = [];
 		allLayers = [];
