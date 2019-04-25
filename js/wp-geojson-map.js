@@ -201,6 +201,11 @@ function clog(data){
 		
 		/** Autocomplete Place search **/
 		if( document.getElementById('ggsearch') ) {
+			
+			if(google==undefined){
+				return;
+			}
+			
 			var input = document.getElementById('ggsearch');
 			var options = {
 			  types: ['(cities)'],
