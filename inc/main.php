@@ -1296,11 +1296,7 @@ class wpGEOjson {
 	 * (only if map shortcode is present)
 	 *
 	 */
-	public function print_script() {
-		
-		echo "<pre>", print_r("LAOD SCRIPTS?", 1), "</pre>";
-		echo "<pre>", print_r(self::$load_scripts, 1), "</pre>";
-		
+	public function print_script() {		
 		if ( empty( self::$load_scripts ) )
 			return;
 		
