@@ -122,27 +122,28 @@ function clog(data){
 		if( $('#map-canvas').hasClass('leaflet') )
 			leaflet_init();
 		
-		/** launch load_points ajax call **/		
+		/** launch load_points ajax call **/
+		last_params_used = { 
+			post_type: post_type, 
+			selection: selection,
+			file: file,
+			popup_fields: popup_fields,
+			field_names: field_names,
+			gray_if_no: gray_if_no,
+			marker_icon: marker_icon,
+			marker_icon_2: marker_icon_2,
+			marker_icon_3: marker_icon_3,
+			marker_icon_4: marker_icon_4,
+			big_cluster_icon: big_cluster_icon,
+			medium_cluster_icon: medium_cluster_icon,
+			small_cluster_icon: small_cluster_icon,
+			map_type: map_type,
+			fit_bounds: fit_bounds,
+			force_load_points: force_load_points,
+			cluster_points: cluster_points
+		}
 		if( 'yes'==v_load_points ) {
-			load_points({ 
-				post_type: post_type, 
-				selection: selection,
-				file: file,
-				popup_fields: popup_fields,
-				field_names: field_names,
-				gray_if_no: gray_if_no,
-				marker_icon: marker_icon,
-				marker_icon_2: marker_icon_2,
-				marker_icon_3: marker_icon_3,
-				marker_icon_4: marker_icon_4,
-				big_cluster_icon: big_cluster_icon,
-				medium_cluster_icon: medium_cluster_icon,
-				small_cluster_icon: small_cluster_icon,
-				map_type: map_type,
-				fit_bounds: fit_bounds,
-				force_load_points: force_load_points,
-				cluster_points: cluster_points
-			});
+			load_points(last_params_used);
 		}
 		
 		$('.wpgeojson_choropleth input').on('click', function(e){
