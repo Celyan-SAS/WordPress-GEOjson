@@ -335,6 +335,10 @@ console.log(last_params_used);
 				clog( "Ajax get_points_for_post_type error" );
 			}).always(function() {
 				clog( "Ajax get_points_for_post_type finished" );
+				$.event.trigger({
+					type:		"wpGeoJSON_loadpoints_finished",
+					time:		new Date()
+				});				
 			});
 		}
 	}
