@@ -239,15 +239,19 @@ console.log(last_params_used);
 					clog( closest_m );
 					//map.setZoom( 15 );
 					
-					//var bounds = new google.maps.LatLngBounds();
-					var position = new google.maps.LatLng( closest_m.geometry.coordinates[1], closest_m.geometry.coordinates[0] );
-					//bounds.extend(position);
-					//bounds.extend(place.geometry.location);
-					getCity( place.geometry.location, position );
-					//map.fitBounds(bounds);
-					
-					clog( place );
-					initialZoom = true;
+					if(typeof closest_m != 'undefined'){
+						//var bounds = new google.maps.LatLngBounds();
+						var position = new google.maps.LatLng( closest_m.geometry.coordinates[1], closest_m.geometry.coordinates[0] );
+						//bounds.extend(position);
+						//bounds.extend(place.geometry.location);
+						getCity( place.geometry.location, position );
+						//map.fitBounds(bounds);
+
+						clog( place );
+						initialZoom = true;
+					}else{
+						console.log("no closest");
+					}
 				} else {
 					document.location = '?lat=' + place.geometry.location.lat() + '&lng=' + place.geometry.location.lng();
 				}
