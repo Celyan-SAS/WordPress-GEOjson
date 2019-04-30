@@ -1034,6 +1034,10 @@ function add_markers( geojson, params ) {
 			/**add event listener on the marker**/
 				console.log("ITEM -------- ");
 				console.log(item);
+				$(item).live('click',function(element){
+					console.log("clicked");
+					console.log(element);
+				});
 //			item.addListener('click', function(featured_marker) {
 //					console.log("i'm clicked");
 //					console.log(featured_marker);
