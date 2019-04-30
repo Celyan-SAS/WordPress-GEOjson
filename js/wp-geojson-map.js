@@ -123,7 +123,6 @@ function clog(data){
 			leaflet_init();
 		
 		/** launch load_points ajax call **/
-console.log('last params used');
 		last_params_used = { 
 			post_type: post_type, 
 			selection: selection,
@@ -143,7 +142,7 @@ console.log('last params used');
 			force_load_points: force_load_points,
 			cluster_points: cluster_points
 		}
-console.log(last_params_used);		
+		
 		if( 'yes'==v_load_points ) {
 			load_points(last_params_used);
 		}
