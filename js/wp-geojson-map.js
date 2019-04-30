@@ -1032,10 +1032,12 @@ function add_markers( geojson, params ) {
 		geojson.features.forEach( function( item ) {
 			allFeatures.push( item );
 			/**add event listener on the marker**/
-			item.addListener('click', function(featured_marker) {
-					console.log("i'm clicked");
-					console.log(featured_marker);
-			});
+				console.log("ITEM -------- ");
+				console.log(item);
+//			item.addListener('click', function(featured_marker) {
+//					console.log("i'm clicked");
+//					console.log(featured_marker);
+//			});
 		});
 		
 		/* hull test
