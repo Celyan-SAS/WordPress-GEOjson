@@ -1033,24 +1033,15 @@ function add_markers( geojson, params ) {
 		
 		geojson.features.forEach( function( item ) {
 			allFeatures.push( item );
-			/**add event listener on the marker**/
-//				console.log("ITEM -------- ");
-//				console.log(item);
-//				$(item).live('click',function(element){
-//					console.log("clicked");
-//					console.log(element);
-//				});
-//			item.addListener('click', function(featured_marker) {
-//					console.log("i'm clicked");
-//					console.log(featured_marker);
-//			});
 		});
 		
 		// Set mouseover event for each feature.
         map.data.addListener('click', function(event) {
-				console.log("TEST click 1 ");
-				console.log(event);
-          //document.getElementById('info-box').textContent = event.feature.getProperty('letter');
+			$.event.trigger({
+				type:	"wpGeoJSON_feature_clicked",
+				feature_clicked: event,
+				time:	new Date()
+			});				
         });
 		
 		/* hull test
