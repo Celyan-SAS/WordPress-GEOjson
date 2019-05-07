@@ -1163,9 +1163,10 @@ class wpGEOjson {
 		);
 		
 		/** Leaflet **/
+		$leaflet_css_url = apply_filters('geojson_leaflet_css_file',plugins_url( '/leaflet/leaflet.css', dirname( __FILE__ ) ));
 		wp_register_style(
 			'leaflet',
-			plugins_url( '/leaflet/leaflet.css', dirname( __FILE__ ) ),
+			$leaflet_css_url,
 			array(),
 			'1.0.1'
 		);
