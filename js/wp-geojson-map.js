@@ -1024,11 +1024,18 @@ function add_markers( geojson, params ) {
 		
 		map.data.addGeoJson(geojson);
 		
+		/** This code allows clustering **	
+		var flmarkers = geojson.features.map(function (feature) {
+			var position = new google.maps.LatLng( feature.geometry.coordinates[1], feature.geometry.coordinates[0] );
+            var marker = new google.maps.Marker({ 'position': position, 'icon':'/wp-content/uploads/2019/05/picto_20.png' });
+            return marker;
+        });
+		var markerCluster = new MarkerClusterer(map, flmarkers,{ imagePath: 'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m' });
+		/** **/
+		
 		if( params.marker_icon ){
 			map.data.setStyle({icon: params.marker_icon});
 		}
-		
-		
 		
 		geojson.features.forEach( function( item ) {
 			allFeatures.push( item );
