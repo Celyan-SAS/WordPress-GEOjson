@@ -1286,6 +1286,14 @@ function center_map_on_feature( id ) {
 				clog( 'centered feature:' );
 				clog( feature );
 				open_infowindow( map.data.getFeatureById( id ) );
+				
+				$.event.trigger({
+					type:	"wpGeoJSON",
+					status:	"center_map_on_feature",
+					position: position,
+					feature_id : feature.id,
+					time:	new Date()
+				});				
 			}
 		}
 	});
