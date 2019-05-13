@@ -1037,7 +1037,10 @@ function add_markers( geojson, params ) {
 				return marker;
 			});
 			if(typeof params.medium_cluster_icon!= 'undefined' &&  params.medium_cluster_icon!=''){
-				var markerCluster = new MarkerClusterer(map, flmarkers,{ imagePath: params.medium_cluster_icon});
+				var options = {
+					imagePath: 'images/m' //{ imagePath: params.medium_cluster_icon}
+				};
+				var markerCluster = new MarkerClusterer(map, flmarkers,options);
 			}else{
 				var markerCluster = new MarkerClusterer(map, flmarkers,{ imagePath: 'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m' });
 			}
