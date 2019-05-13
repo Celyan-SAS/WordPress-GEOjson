@@ -1043,14 +1043,7 @@ function add_markers( geojson, params ) {
 				
 				/** if we are in user type and we want the user thumb **/
 				var defaulticon = true;
-				if(typeof params.user_personnal_icon!= 'undefined' &&  params.user_personnal_icon=='yes'){	
-					
-console.log("ICONS");
-console.log(icons);
-console.log("feature");
-console.log(feature.id);
-console.log(icons[feature.id].icon);
-					
+				if(typeof params.user_personnal_icon!= 'undefined' &&  params.user_personnal_icon=='yes'){						
 					if(typeof icons != "undefined" 
 						&& typeof icons[feature.id] != "undefined" 
 						&& icons[feature.id].icon ){
