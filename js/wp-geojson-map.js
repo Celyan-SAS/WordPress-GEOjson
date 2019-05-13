@@ -1041,7 +1041,7 @@ function add_markers( geojson, params ) {
 				}
 				return marker;
 			});
-			if(typeof params.custom_cluster_icons!= 'undefined' &&  params.custom_cluster_icons!=''){
+			if(typeof params.custom_cluster_icons!= 'undefined' &&  params.custom_cluster_icons=='yes'){
 				var options = {
 					imagePath: 'images/m' //{ imagePath: params.medium_cluster_icon}
 				};
