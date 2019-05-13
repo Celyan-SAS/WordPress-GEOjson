@@ -379,6 +379,9 @@ class wpGEOjson {
 		if( !empty( $atts['gray_if_no'] ) )
 			$html .= 'data-gray_if_no="' . $atts['gray_if_no'] . '" ';
 		
+		if( !empty( $atts['custom_cluster_icons'] ) )
+			$html .= 'data-custom_cluster_icons="' . $atts['custom_cluster_icons'] . '" ';
+		
 		if( function_exists( 'get_field' ) ) {
 			
 			if( $marker_icon = get_field( 'marker_icon', 'option' ) )
