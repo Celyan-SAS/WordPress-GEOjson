@@ -1027,20 +1027,20 @@ function add_markers( geojson, params ) {
 		/** This code allows clustering **/
 		if( 'yes' == params.cluster_points ) {	
 			
-//console.log(marker_icon);
-//console.log(medium_cluster_icon);
+console.log(params.marker_icon);
+console.log(params.medium_cluster_icon);
 			
 			var flmarkers = geojson.features.map(function (feature) {
 				var position = new google.maps.LatLng( feature.geometry.coordinates[1], feature.geometry.coordinates[0] );
-				if(typeof marker_icon!= 'undefined' &&  marker_icon!=''){
+				if(typeof params.marker_icon!= 'undefined' &&  params.marker_icon!=''){
 					var marker = new google.maps.Marker({ 'position': position, 'icon':marker_icon });
 				}else{
 					var marker = new google.maps.Marker({ 'position': position});
 				}
 				return marker;
 			});
-			if(typeof medium_cluster_icon!= 'undefined' &&  medium_cluster_icon!=''){
-				var markerCluster = new MarkerClusterer(map, flmarkers,{ imagePath: medium_cluster_icon});
+			if(typeof params.medium_cluster_icon!= 'undefined' &&  medium_cluster_icon!=''){
+				var markerCluster = new MarkerClusterer(map, flmarkers,{ imagePath: params.medium_cluster_icon});
 			}else{
 				var markerCluster = new MarkerClusterer(map, flmarkers,{ imagePath: 'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m' });
 			}
