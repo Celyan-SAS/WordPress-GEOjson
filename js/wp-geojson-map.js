@@ -1049,13 +1049,11 @@ console.log("ICONS");
 console.log(icons);
 console.log("feature");
 console.log(feature.id);
-						console.log(icons[feature.id]);
-						
-						console.log("test");
-						var lkjh = feature.id;
-						console.log(icons.lkjh);
+console.log(icons[feature.id].icon);
 					
-					if(typeof icons != "undefined" && icons[feature.id].icon ){
+					if(typeof icons != "undefined" 
+						&& typeof icons[feature.id] != "undefined" 
+						&& icons[feature.id].icon ){
 						var icon_user = icons[feature.id].icon;
 						var marker = new google.maps.Marker({ 'position': position, 'icon':icon_user });
 						defaulticon = false;
