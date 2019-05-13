@@ -382,6 +382,9 @@ class wpGEOjson {
 		if( !empty( $atts['custom_cluster_icons'] ) )
 			$html .= 'data-custom_cluster_icons="' . $atts['custom_cluster_icons'] . '" ';
 		
+		if( !empty( $atts['user_personnal_icon'] ) )
+			$html .= 'data-user_personnal_icon="' . $atts['user_personnal_icon'] . '" ';
+		
 		if( function_exists( 'get_field' ) ) {
 			
 			if( $marker_icon = get_field( 'marker_icon', 'option' ) )
