@@ -70,6 +70,10 @@ function clog(data){
 		if( $('#map-canvas').attr('data-marker_icon_4') )
 			marker_icon = $('#map-canvas').data('marker_icon_4');
 		
+		var custom_cluster_icons = '';
+		if( $('#map-canvas').attr('data-custom_cluster_icons') )
+			custom_cluster_icons = $('#map-canvas').data('custom_cluster_icons');		
+		
 		var big_cluster_icon = '';
 		if( $('#map-canvas').attr('data-big_cluster_icon') )
 			big_cluster_icon = $('#map-canvas').data('big_cluster_icon');
@@ -77,7 +81,7 @@ function clog(data){
 		var medium_cluster_icon = '';
 		if( $('#map-canvas').attr('data-medium_cluster_icon') )
 			medium_cluster_icon = $('#map-canvas').data('medium_cluster_icon');
-		
+				
 		var small_cluster_icon = '';
 		if( $('#map-canvas').attr('data-small_cluster_icon') )
 			small_cluster_icon = $('#map-canvas').data('small_cluster_icon');
@@ -134,6 +138,7 @@ function clog(data){
 			marker_icon_2: marker_icon_2,
 			marker_icon_3: marker_icon_3,
 			marker_icon_4: marker_icon_4,
+			custom_cluster_icons : custom_cluster_icons,
 			big_cluster_icon: big_cluster_icon,
 			medium_cluster_icon: medium_cluster_icon,
 			small_cluster_icon: small_cluster_icon,
@@ -1036,7 +1041,7 @@ function add_markers( geojson, params ) {
 				}
 				return marker;
 			});
-			if(typeof params.medium_cluster_icon!= 'undefined' &&  params.medium_cluster_icon!=''){
+			if(typeof params.custom_cluster_icons!= 'undefined' &&  params.custom_cluster_icons!=''){
 				var options = {
 					imagePath: 'images/m' //{ imagePath: params.medium_cluster_icon}
 				};
