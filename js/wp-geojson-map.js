@@ -1043,7 +1043,13 @@ function add_markers( geojson, params ) {
 				
 				/** if we are in user type and we want the user thumb **/
 				var defaulticon = true;
-				if(typeof params.user_personnal_icon!= 'undefined' &&  params.user_personnal_icon=='yes'){					
+				if(typeof params.user_personnal_icon!= 'undefined' &&  params.user_personnal_icon=='yes'){	
+					
+console.log("ICONS");
+console.log(icons);
+console.log("feature");
+console.log(feature.id);
+					
 					if(typeof icons != "undefined" && icons[feature.id].icon ){
 						var icon_user = icons[feature.id].icon;
 						var marker = new google.maps.Marker({ 'position': position, 'icon':icon_user });
