@@ -1072,9 +1072,9 @@ console.log(icon_user);
 			}
 		}
 		
-		if( params.marker_icon ){
-			map.data.setStyle({icon: params.marker_icon});
-		}
+//		if( params.marker_icon ){
+//			map.data.setStyle({icon: params.marker_icon});
+//		}
 		
 		geojson.features.forEach( function( item ) {
 			allFeatures.push( item );
