@@ -1034,32 +1034,32 @@ function add_markers( geojson, params ) {
 		
 		map.data.addGeoJson(geojson);
 		
-		/** This code allows clustering **/
-		if( 'yes' == params.cluster_points ) {
-						
-			var flmarkers = geojson.features.map(function (feature) {
-				var position = new google.maps.LatLng( feature.geometry.coordinates[1], feature.geometry.coordinates[0] );
-				
-				/** if we are in user type and we want the user thumb **/
-				var defaulticon = true;
-				if(typeof params.user_personnal_icon!= 'undefined' &&  params.user_personnal_icon=='yes'){						
-					if(typeof icons != "undefined" 
-						&& typeof icons[feature.id] != "undefined" 
-						&& icons[feature.id].icon ){
-						var icon_user = icons[feature.id].icon;
-						var marker = new google.maps.Marker({ 'position': position, 'icon':icon_user });
-						defaulticon = false;
-					}
-				}				
-				if(defaulticon){					
-					if(typeof params.marker_icon!= 'undefined' &&  params.marker_icon!=''){
-						var marker = new google.maps.Marker({ 'position': position, 'icon':params.marker_icon });
-					}else{
-						var marker = new google.maps.Marker({ 'position': position});
-					}
+		/** This code allows clustering **/		
+		var flmarkers = geojson.features.map(function (feature) {
+			var position = new google.maps.LatLng( feature.geometry.coordinates[1], feature.geometry.coordinates[0] );
+
+			/** if we are in user type and we want the user thumb **/
+			var defaulticon = true;
+			if(typeof params.user_personnal_icon!= 'undefined' &&  params.user_personnal_icon=='yes'){						
+				if(typeof icons != "undefined" 
+					&& typeof icons[feature.id] != "undefined" 
+					&& icons[feature.id].icon ){
+					var icon_user = icons[feature.id].icon;
+					var marker = new google.maps.Marker({ 'position': position, 'icon':icon_user });
+					defaulticon = false;
 				}
-				return marker;
-			});
+			}				
+			if(defaulticon){					
+				if(typeof params.marker_icon!= 'undefined' &&  params.marker_icon!=''){
+					var marker = new google.maps.Marker({ 'position': position, 'icon':params.marker_icon });
+				}else{
+					var marker = new google.maps.Marker({ 'position': position});
+				}
+			}
+			return marker;
+		});
+			
+		if( 'yes' == params.cluster_points ) {
 			if(typeof params.custom_cluster_icons!= 'undefined' &&  params.custom_cluster_icons=='yes'){
 				var options = {
 					imagePath: 'images/m' //{ imagePath: params.medium_cluster_icon}
