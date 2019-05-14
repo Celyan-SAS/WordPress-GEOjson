@@ -70,11 +70,11 @@ function clog(data){
 		if( $('#map-canvas').attr('data-marker_icon_4') )
 			marker_icon = $('#map-canvas').data('marker_icon_4');
 		
-		var custom_cluster_icons = '';
+		var custom_cluster_icons = 'no';
 		if( $('#map-canvas').attr('data-custom_cluster_icons') )
 			custom_cluster_icons = $('#map-canvas').data('custom_cluster_icons');	
 		
-		var user_personnal_icon = '';
+		var user_personnal_icon = 'no';
 		if( $('#map-canvas').attr('data-user_personnal_icon') )
 			user_personnal_icon = $('#map-canvas').data('user_personnal_icon');	
 		
@@ -102,7 +102,7 @@ function clog(data){
 		if( $('#map-canvas').attr('data-load_points') )
 			v_load_points = $('#map-canvas').data('load_points');
 		
-		var cluster_points = 'yes';
+		var cluster_points = 'no';
 		if( $('#map-canvas').attr('data-cluster_points') )
 			cluster_points = $('#map-canvas').data('cluster_points');
 		
@@ -1035,11 +1035,10 @@ function add_markers( geojson, params ) {
 		map.data.addGeoJson(geojson);
 		
 		/** This code allows clustering **/
-		if( 'yes' == params.cluster_points ) {	
+		if( 'yes' == params.cluster_points ) {
 						
 			var flmarkers = geojson.features.map(function (feature) {
 				var position = new google.maps.LatLng( feature.geometry.coordinates[1], feature.geometry.coordinates[0] );
-				
 				
 				/** if we are in user type and we want the user thumb **/
 				var defaulticon = true;
@@ -1051,8 +1050,7 @@ function add_markers( geojson, params ) {
 						var marker = new google.maps.Marker({ 'position': position, 'icon':icon_user });
 						defaulticon = false;
 					}
-				}
-				
+				}				
 				if(defaulticon){					
 					if(typeof params.marker_icon!= 'undefined' &&  params.marker_icon!=''){
 						var marker = new google.maps.Marker({ 'position': position, 'icon':params.marker_icon });
@@ -1060,8 +1058,6 @@ function add_markers( geojson, params ) {
 						var marker = new google.maps.Marker({ 'position': position});
 					}
 				}
-				
-
 				return marker;
 			});
 			if(typeof params.custom_cluster_icons!= 'undefined' &&  params.custom_cluster_icons=='yes'){
@@ -1072,7 +1068,7 @@ function add_markers( geojson, params ) {
 			}else{
 				var markerCluster = new MarkerClusterer(map, flmarkers,{ imagePath: 'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m' });
 			}
-		}		 
+		}
 		
 		if( params.marker_icon ){
 			map.data.setStyle({icon: params.marker_icon});
