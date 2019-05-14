@@ -1054,14 +1054,17 @@ console.log(icons[feature.id].icon);
 					&& typeof icons[feature.id] != "undefined" 
 					&& icons[feature.id].icon ){
 					var icon_user = icons[feature.id].icon;
+console.log("here ------- ");
 					var marker = new google.maps.Marker({ 'position': position, 'icon':"www.gravatar.com/avatar/e691e5cf11b78b4f4040583df5bc879f?s=50&#038;r=g&#038;d=mm" });
 					defaulticon = false;
 				}
 			}				
 			if(defaulticon){					
 				if(typeof params.marker_icon!= 'undefined' &&  params.marker_icon!=''){
+console.log("pass here 1 ");
 					var marker = new google.maps.Marker({ 'position': position, 'icon':params.marker_icon });
 				}else{
+console.log("pass here 2 ");
 					var marker = new google.maps.Marker({ 'position': position});
 				}
 			}
