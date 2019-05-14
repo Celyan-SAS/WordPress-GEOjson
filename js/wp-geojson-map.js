@@ -1054,7 +1054,7 @@ console.log(icons[feature.id].icon);
 					&& typeof icons[feature.id] != "undefined" 
 					&& icons[feature.id].icon ){
 					var icon_user = icons[feature.id].icon;
-					var marker = new google.maps.Marker({ 'position': position, 'icon':icon_user });
+					var marker = new google.maps.Marker({ 'position': position, 'icon':"www.gravatar.com/avatar/e691e5cf11b78b4f4040583df5bc879f?s=50&#038;r=g&#038;d=mm" });
 					defaulticon = false;
 				}
 			}				
