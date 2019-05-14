@@ -1047,7 +1047,9 @@ function add_markers( geojson, params ) {
 					var icon_user = icons[feature.id].icon;
 console.log("here ------- ");
 console.log(icon_user);
-					var marker = new google.maps.Marker({ 'position': position, 'icon':"http://www.gravatar.com/avatar/e691e5cf11b78b4f4040583df5bc879f?s=50&#038;r=g&#038;d=mm" });
+					var marker = new google.maps.Marker({ 
+						'position': position, 
+						'icon':"https://upload.wikimedia.org/wikipedia/commons/1/16/Deletion_icon.svg" });
 					defaulticon = false;
 				}
 			}				
