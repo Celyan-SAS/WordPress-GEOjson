@@ -1040,31 +1040,21 @@ function add_markers( geojson, params ) {
 
 			/** if we are in user type and we want the user thumb **/
 			var defaulticon = true;
-			
-console.log("TES --- ");
-console.log(params.user_personnal_icon);
-console.log(icons[feature.id].icon);
-console.log("feature");
-console.log(feature.id);
-console.log("icons");
-console.log(icons[feature.id].icon);
-				
 			if(typeof params.user_personnal_icon!= 'undefined' &&  params.user_personnal_icon=='yes'){						
 				if(typeof icons != "undefined" 
 					&& typeof icons[feature.id] != "undefined" 
 					&& icons[feature.id].icon ){
 					var icon_user = icons[feature.id].icon;
 console.log("here ------- ");
-					var marker = new google.maps.Marker({ 'position': position, 'icon':"www.gravatar.com/avatar/e691e5cf11b78b4f4040583df5bc879f?s=50&#038;r=g&#038;d=mm" });
+console.log(icon_user);
+					var marker = new google.maps.Marker({ 'position': position, 'icon':"http://www.gravatar.com/avatar/e691e5cf11b78b4f4040583df5bc879f?s=50&#038;r=g&#038;d=mm" });
 					defaulticon = false;
 				}
 			}				
 			if(defaulticon){					
 				if(typeof params.marker_icon!= 'undefined' &&  params.marker_icon!=''){
-console.log("pass here 1 ");
 					var marker = new google.maps.Marker({ 'position': position, 'icon':params.marker_icon });
 				}else{
-console.log("pass here 2 ");
 					var marker = new google.maps.Marker({ 'position': position});
 				}
 			}
