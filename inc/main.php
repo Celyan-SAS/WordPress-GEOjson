@@ -797,9 +797,7 @@ class wpGEOjson {
 				if( !isset($acf_data['lng']) 
 					|| !isset($acf_data['lng']) 
 					|| !$acf_data['lng'] 
-					|| !$acf_data['lat']
-					|| !isset($acf_data['address'])
-					|| !$acf_data['address']){
+					|| !$acf_data['lat']){
 					continue;
 				}				
 				$feature = array(
