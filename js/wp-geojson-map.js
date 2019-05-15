@@ -1049,6 +1049,7 @@ console.log("here ------- ");
 console.log(icon_user);
 					var marker = new google.maps.Marker({ 
 						'position': position, 
+						'map': map,
 						'icon': icon_user});
 					defaulticon = false;
 				}
