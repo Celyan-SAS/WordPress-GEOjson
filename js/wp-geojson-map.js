@@ -1032,7 +1032,7 @@ function add_markers( geojson, params ) {
 	
 	if( 'ggmap' == params.map_type ) {
 		
-		map.data.addGeoJson(geojson);
+		//map.data.addGeoJson(geojson);
 		
 		/** This code allows clustering **/		
 		var flmarkers = geojson.features.map(function (feature) {
