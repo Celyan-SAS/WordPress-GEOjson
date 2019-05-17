@@ -361,7 +361,7 @@ class wpGEOjson {
 		if( !empty( $atts['load_points'] ) && 'no' == $atts['load_points'] )
 			$html .= 'data-load_points="' . $atts['load_points'] . '" ';
 		
-		if( !empty( $atts['cluster_points'] ) && 'no' == $atts['cluster_points'] )
+		if( !empty( $atts['cluster_points'] ))
 			$html .= 'data-cluster_points="' . $atts['cluster_points'] . '" ';
 		
 		if( !empty( $atts['popup_fields'] ) )

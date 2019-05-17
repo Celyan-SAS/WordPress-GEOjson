@@ -96,7 +96,7 @@ function clog(data){
 		
 		var fit_bounds = 'yes';
 		if( $('#map-canvas').attr('data-fit_bounds') )
-			load_tiles = $('#map-canvas').data('fit_bounds');
+			fit_bounds = $('#map-canvas').data('fit_bounds');
 		
 		var v_load_points = 'yes';
 		if( $('#map-canvas').attr('data-load_points') )
@@ -1062,8 +1062,8 @@ function add_markers( geojson, params ) {
 			return marker;
 		});
 			
-			console.log("cluster? ");
-			console.log(params.cluster_points);
+console.log("cluster? ");
+console.log(params.cluster_points);
 		if( 'yes' == params.cluster_points ) {
 console.log("IN CLUSTER");
 console.log(flmarkers);
