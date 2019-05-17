@@ -1048,9 +1048,10 @@ function add_markers( geojson, params ) {
 					var marker = new google.maps.Marker({ 
 						'position': position, 
 						'map': map,
-						'icon': icon_user,
+						'icon': {url:icon_user,size:new google.maps.Size(34,34)},
 						'shape':{coords:[17,17,18],type:'circle'},
-					});
+						optimized:false
+					});	
 					defaulticon = false;
 				}
 			}				
