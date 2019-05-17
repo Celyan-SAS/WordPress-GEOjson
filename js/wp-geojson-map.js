@@ -1064,12 +1064,42 @@ function add_markers( geojson, params ) {
 			
 		if( 'yes' == params.cluster_points ) {
 			if(typeof params.custom_cluster_icons!= 'undefined' &&  params.custom_cluster_icons!='no'){
-				var options = {
-					imagePath: params.custom_cluster_icons //{ imagePath: params.medium_cluster_icon}
-				};
-				var markerCluster = new MarkerClusterer(map, flmarkers,options);
+//				var options = {
+//					imagePath: params.custom_cluster_icons //{ imagePath: params.medium_cluster_icon}
+//				};
+				var clusterStyles = [
+					{
+						textColor: 'black',
+						url: params.big_cluster_icon,
+						height: 32,
+						width: 32
+					},
+					{
+						textColor: 'black',
+						url: params.medium_cluster_icon,
+						height: 32,
+						width: 32
+					},
+					{
+						textColor: 'black',
+						url: params.small_cluster_icon,
+						height: 32,
+						width: 32
+					}
+				];
+				var mcOptions = {
+					maxZoom: 10,
+					styles: clusterStyles
+				}				
+				var markerCluster = new MarkerClusterer(
+				map, 
+				flmarkers,
+				mcOptions);
 			}else{
-				var markerCluster = new MarkerClusterer(map, flmarkers,{ imagePath: 'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m' });
+				var markerCluster = new MarkerClusterer(
+				map, 
+				flmarkers,
+				{ imagePath: 'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m' });
 			}
 		}
 		
