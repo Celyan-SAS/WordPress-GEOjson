@@ -1063,6 +1063,8 @@ function add_markers( geojson, params ) {
 				}
 			}
 			
+			marker.css({"border-radius": '25px'});
+			
 			/** add event listener **/
 			marker.addListener('click', function(event) {
 				$.event.trigger({
