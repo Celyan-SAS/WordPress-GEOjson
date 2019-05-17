@@ -1062,6 +1062,8 @@ function add_markers( geojson, params ) {
 			return marker;
 		});
 			
+			console.log("cluster? ");
+			console.log(params.cluster_points);
 		if( 'yes' == params.cluster_points ) {
 console.log("IN CLUSTER");
 console.log(flmarkers);
