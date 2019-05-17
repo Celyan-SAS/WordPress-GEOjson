@@ -1032,6 +1032,9 @@ function add_markers( geojson, params ) {
 	
 	if( 'ggmap' == params.map_type ) {
 		
+			console.log('geo');
+			console.log(geojson);
+		
 		map.data.addGeoJson(geojson);
 		
 		/** This code allows clustering **/		
@@ -1054,8 +1057,10 @@ function add_markers( geojson, params ) {
 			}				
 			if(defaulticon){					
 				if(typeof params.marker_icon!= 'undefined' &&  params.marker_icon!=''){
+						console.log('h 2');
 					var marker = new google.maps.Marker({ 'position': position, 'icon':params.marker_icon });
 				}else{
+						console.log("here -- ");
 					var marker = new google.maps.Marker({ 'position': position});
 				}
 			}
