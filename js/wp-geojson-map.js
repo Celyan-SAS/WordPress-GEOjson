@@ -1045,8 +1045,6 @@ function add_markers( geojson, params ) {
 					&& typeof icons[feature.id] != "undefined" 
 					&& icons[feature.id].icon ){
 					var icon_user = icons[feature.id].icon;
-console.log("here ------- ");
-console.log(icon_user);
 					var marker = new google.maps.Marker({ 
 						'position': position, 
 						'map': map,
