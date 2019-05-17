@@ -1052,7 +1052,7 @@ function add_markers( geojson, params ) {
 						'icon': {
 							url:icon_user,
 							size:new google.maps.Size(34,34),
-							stylers: [{'border-radius': '25px'}]
+							//stylers: [{'border-radius': '25px'}]
 						},
 						//'shape':{coords:[17,17,18],type:'circle'},
 						optimized:false
