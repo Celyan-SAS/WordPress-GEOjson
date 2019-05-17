@@ -1063,11 +1063,14 @@ function add_markers( geojson, params ) {
 		});
 			
 		if( 'yes' == params.cluster_points ) {
+console.log("IN CLUSTER");
+console.log(flmarkers);
 			if(typeof params.custom_cluster_icons!= 'undefined' &&  params.custom_cluster_icons=='yes'){
 				var options = {
 					imagePath: 'images/m' //{ imagePath: params.medium_cluster_icon}
 				};
 				var markerCluster = new MarkerClusterer(map, flmarkers,options);
+console.log("here");
 			}else{
 				var markerCluster = new MarkerClusterer(map, flmarkers,{ imagePath: 'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m' });
 			}
