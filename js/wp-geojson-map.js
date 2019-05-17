@@ -1063,9 +1063,9 @@ function add_markers( geojson, params ) {
 		});
 			
 		if( 'yes' == params.cluster_points ) {
-			if(typeof params.custom_cluster_icons!= 'undefined' &&  params.custom_cluster_icons=='yes'){
+			if(typeof params.custom_cluster_icons!= 'undefined' &&  params.custom_cluster_icons!='no'){
 				var options = {
-					imagePath: '/wp-content/themes/share/images/m/' //{ imagePath: params.medium_cluster_icon}
+					imagePath: params.custom_cluster_icons //{ imagePath: params.medium_cluster_icon}
 				};
 				var markerCluster = new MarkerClusterer(map, flmarkers,options);
 			}else{
