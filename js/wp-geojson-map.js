@@ -1062,6 +1062,17 @@ function add_markers( geojson, params ) {
 					var marker = new google.maps.Marker({ 'position': position});
 				}
 			}
+			
+			/** add event listener **/
+			marker.addListener('click', function(event) {
+				$.event.trigger({
+					type:	"wpGeoJSON_marker_clicked",
+					marker_clicked: event,
+					marker:marker,
+					time:	new Date()
+				});
+			});
+			
 			return marker;
 		});
 			
