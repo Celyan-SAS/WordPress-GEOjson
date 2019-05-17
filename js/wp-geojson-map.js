@@ -1069,6 +1069,7 @@ function add_markers( geojson, params ) {
 					type:	"wpGeoJSON_marker_clicked",
 					marker_clicked: event,
 					marker:marker,
+					feature:feature,
 					time:	new Date()
 				});
 			});
