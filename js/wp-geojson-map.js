@@ -1051,7 +1051,7 @@ function add_markers( geojson, params ) {
 						'map': map,
 						'icon': {
 							url:icon_user,
-							size:new google.maps.Size(34,34),
+							//size:new google.maps.Size(34,34),
 							//stylers: [{'border-radius': '25px'}]
 						},
 						//'shape':{coords:[17,17,18],type:'circle'},
@@ -1147,6 +1147,14 @@ function add_markers( geojson, params ) {
 		map.data.addGeoJson(hull);
 		map.data.addGeoJson(hull2, { fillColor: 'red', style: {color: 'red', fillColor: 'red'} });
 		*/
+	   
+	   /** allow customisation of icons by css, target #markerLayer **/
+	   var customoverlay = new google.maps.OverlayView();
+		customoverlay.draw = function () {
+			this.getPanes().markerLayer.id='markerLayer';
+		};
+		customoverlay.setMap(map);
+	   
 	}
 	
 	if( 'leaflet' == params.map_type ) {
