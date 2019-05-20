@@ -1084,10 +1084,6 @@ function add_markers( geojson, params ) {
 				google.maps.event.addListener(marker, 'spider_click', function(event) {  // 'spider_click', not plain 'click'
 					//infowindow.setContent(markerData.text);
 					//infowindow.open(map, marker);
-					
-//						console.log("SPIDER CICK");
-//						console.log(event);
-					
 					$.event.trigger({
 						type:	"wpGeoJSON_marker_clicked",
 						marker_clicked: event,
