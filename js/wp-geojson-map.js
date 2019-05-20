@@ -1083,7 +1083,7 @@ function add_markers( geojson, params ) {
 			if('yes' == params.spideroverlaping){
 				google.maps.event.addListener(marker, 'spider_click', function(e) {  // 'spider_click', not plain 'click'
 					//infowindow.setContent(markerData.text);
-					infowindow.open(map, marker);
+					//infowindow.open(map, marker);
 				});
 			}
 		
