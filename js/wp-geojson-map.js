@@ -1084,19 +1084,30 @@ function add_markers( geojson, params ) {
 				google.maps.event.addListener(marker, 'spider_click', function(e) {  // 'spider_click', not plain 'click'
 					//infowindow.setContent(markerData.text);
 					infowindow.open(map, marker);
+					
+						$.event.trigger({
+						type:	"wpGeoJSON_marker_clicked",
+						marker_clicked: event,
+						marker:marker,
+						feature:feature,
+						time:	new Date()
+					});
+					
 				});
 			}
 		
 			/** add event listener **/
-			marker.addListener('click', function(event) {
-				$.event.trigger({
-					type:	"wpGeoJSON_marker_clicked",
-					marker_clicked: event,
-					marker:marker,
-					feature:feature,
-					time:	new Date()
+			if('yes' != params.spideroverlaping){
+				marker.addListener('click', function(event) {
+					$.event.trigger({
+						type:	"wpGeoJSON_marker_clicked",
+						marker_clicked: event,
+						marker:marker,
+						feature:feature,
+						time:	new Date()
+					});
 				});
-			});
+			}
 			
 			if('yes' == params.spideroverlaping){
 				oms.addMarker(marker);
