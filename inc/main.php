@@ -1166,6 +1166,12 @@ class wpGEOjson {
 			true
 		);
 		
+		wp_register_script(
+			'omsscripts',
+			plugins_url( '/js/oms.min.js', dirname( __FILE__ ) ),
+			array('jquery')
+		);
+		
 		/** Leaflet **/
 		$leaflet_css_url = apply_filters('geojson_leaflet_css_file',plugins_url( '/leaflet/leaflet.css', dirname( __FILE__ ) ));
 		wp_register_style(
@@ -1310,6 +1316,7 @@ class wpGEOjson {
 			wp_print_scripts('ggmap-api');
 			wp_print_scripts('ggmap-clusterer');
 			wp_print_scripts('ggmap-geojson-clusterer');
+			wp_print_scripts('omsscripts');
 		}
 		/** **/
 		
