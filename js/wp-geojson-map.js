@@ -1085,16 +1085,16 @@ function add_markers( geojson, params ) {
 					//infowindow.setContent(markerData.text);
 					//infowindow.open(map, marker);
 					
-						console.log("SPIDER CICK");
-						console.log(event);
+//						console.log("SPIDER CICK");
+//						console.log(event);
 					
-//					$.event.trigger({
-//						type:	"wpGeoJSON_marker_clicked",
-//						marker_clicked: event,
-//						marker:marker,
-//						feature:feature,
-//						time:	new Date()
-//					});
+					$.event.trigger({
+						type:	"wpGeoJSON_marker_clicked",
+						marker_clicked: event,
+						marker:marker,
+						feature:feature,
+						time:	new Date()
+					});
 				
 				});
 			}
