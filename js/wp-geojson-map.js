@@ -1116,6 +1116,9 @@ function add_markers( geojson, params ) {
 			return marker;
 		});
 		
+		map.addListener('zoom_changed', function() {
+				console.log('Zoom: ' + map.getZoom());
+		});
 
 		if( 'yes' == params.cluster_points ) {
 			if(typeof params.custom_cluster_icons!= 'undefined' &&  params.custom_cluster_icons!='no'){
