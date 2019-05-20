@@ -1072,7 +1072,6 @@ var oms = new OverlappingMarkerSpiderfier(map, {
 google.maps.event.addListener(marker, 'spider_click', function(e) {  // 'spider_click', not plain 'click'
 	//infowindow.setContent(markerData.text);
 	infowindow.open(map, marker);
-		console.log("spider click?");
 });
 		
 			/** add event listener **/
@@ -1091,67 +1090,45 @@ oms.addMarker(marker);
 			return marker;
 		});
 		
-/** TEST1 -------------------- **/
-//console.log("TEST MAP DATA");
-//console.log(window.mapData);	
-//var oms = new OverlappingMarkerSpiderfier(map, {
-//	markersWontMove: true,
-//	markersWontHide: true,
-//	basicFormatEvents: true
-//});		
-//for (var i = 0, len = window.mapData.length; i < len; i ++) {
-//	(function() {  // make a closure over the marker and marker data
-//		var markerData = window.mapData[i];  // e.g. { lat: 50.123, lng: 0.123, text: 'XYZ' }
-//		var marker = new google.maps.Marker({ position: markerData });  // markerData works here as a LatLngLiteral
-//		google.maps.event.addListener(marker, 'spider_click', function(e) {  // 'spider_click', not plain 'click'
-//			infowindow.setContent(markerData.text);
-//			infowindow.open(map, marker);
-//		});
-//		oms.addMarker(marker);  // adds the marker to the spiderfier _and_ the map
-//	})();
-//}
-/** TEST -------------------- **/
 
-//		if( 'yes' == params.cluster_points ) {
-//			if(typeof params.custom_cluster_icons!= 'undefined' &&  params.custom_cluster_icons!='no'){
-////				var options = {
-////					imagePath: params.custom_cluster_icons //{ imagePath: params.medium_cluster_icon}
-////				};
-//				var clusterStyles = [
-//					{
-//						textColor: 'black',
-//						url: params.big_cluster_icon,
-//						height: 32,
-//						width: 32
-//					},
-//					{
-//						textColor: 'black',
-//						url: params.medium_cluster_icon,
-//						height: 32,
-//						width: 32
-//					},
-//					{
-//						textColor: 'black',
-//						url: params.small_cluster_icon,
-//						height: 32,
-//						width: 32
-//					}
-//				];
-//				var mcOptions = {
-//					maxZoom: 10,
-//					styles: clusterStyles
-//				}				
-//				var markerCluster = new MarkerClusterer(
-//				map, 
-//				flmarkers,
-//				mcOptions);
-//			}else{
-//				var markerCluster = new MarkerClusterer(
-//				map, 
-//				flmarkers,
-//				{ imagePath: 'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m' });
-//			}
-//		}
+		if( 'yes' == params.cluster_points ) {
+			if(typeof params.custom_cluster_icons!= 'undefined' &&  params.custom_cluster_icons!='no'){
+				var clusterStyles = [
+					{
+						textColor: 'black',
+						url: params.big_cluster_icon,
+						height: 32,
+						width: 32
+					},
+					{
+						textColor: 'black',
+						url: params.medium_cluster_icon,
+						height: 32,
+						width: 32
+					},
+					{
+						textColor: 'black',
+						url: params.small_cluster_icon,
+						height: 32,
+						width: 32
+					}
+				];
+				var mcOptions = {
+					maxZoom: 10,
+					styles: clusterStyles
+				}				
+				var markerCluster = new MarkerClusterer(
+				map, 
+				flmarkers,
+				mcOptions);
+			}else{
+				var markerCluster = new MarkerClusterer(
+				map, 
+				flmarkers,
+				{ imagePath: 'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m' });
+			}
+			markerCluster.setMaxZoom(14);
+		}
 		
 		if( params.marker_icon ){
 			map.data.setStyle({icon: params.marker_icon});
