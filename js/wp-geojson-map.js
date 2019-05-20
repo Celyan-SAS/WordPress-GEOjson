@@ -1084,7 +1084,7 @@ function add_markers( geojson, params ) {
 				google.maps.event.addListener(marker, 'spider_click', function(e) {  // 'spider_click', not plain 'click'
 					//infowindow.setContent(markerData.text);
 					infowindow.open(map, marker);
-					
+console.log("TEST SPIDER");
 						$.event.trigger({
 						type:	"wpGeoJSON_marker_clicked",
 						marker_clicked: event,
@@ -1097,17 +1097,18 @@ function add_markers( geojson, params ) {
 			}
 		
 			/** add event listener **/
-			if('yes' != params.spideroverlaping){
-				marker.addListener('click', function(event) {
-					$.event.trigger({
-						type:	"wpGeoJSON_marker_clicked",
-						marker_clicked: event,
-						marker:marker,
-						feature:feature,
-						time:	new Date()
-					});
+			marker.addListener('click', function(event) {
+
+console.log("TEST -- 1");
+
+				$.event.trigger({
+					type:	"wpGeoJSON_marker_clicked",
+					marker_clicked: event,
+					marker:marker,
+					feature:feature,
+					time:	new Date()
 				});
-			}
+			});
 			
 			if('yes' == params.spideroverlaping){
 				oms.addMarker(marker);
