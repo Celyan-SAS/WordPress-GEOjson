@@ -1154,6 +1154,7 @@ function add_markers( geojson, params ) {
 				{ imagePath: 'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m' });
 			}
 			if('yes' == params.spideroverlaping){
+console.log(params.spideroverlaping_zoom);
 				if(params.spideroverlaping_zoom != '' && params.spideroverlaping_zoom != 'no'){
 					markerCluster.setMaxZoom(params.spideroverlaping_zoom);
 				}else{
