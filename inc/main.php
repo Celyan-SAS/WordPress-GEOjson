@@ -385,6 +385,12 @@ class wpGEOjson {
 		if( !empty( $atts['user_personnal_icon'] ) )
 			$html .= 'data-user_personnal_icon="' . $atts['user_personnal_icon'] . '" ';
 		
+		if( !empty( $atts['spideroverlaping'] ) )
+			$html .= 'data-spideroverlaping="' . $atts['spideroverlaping'] . '" ';
+		
+		if( !empty( $atts['spideroverlaping_zoom'] ) )
+			$html .= 'data-spideroverlaping_zoom="' . $atts['spideroverlaping_zoom'] . '" ';				
+		
 		if( function_exists( 'get_field' ) ) {
 			
 			if( $marker_icon = get_field( 'marker_icon', 'option' ) )

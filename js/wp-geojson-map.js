@@ -78,6 +78,14 @@ function clog(data){
 		if( $('#map-canvas').attr('data-user_personnal_icon') )
 			user_personnal_icon = $('#map-canvas').data('user_personnal_icon');	
 		
+		var spideroverlaping = 'no';
+		if( $('#map-canvas').attr('data-spideroverlaping') )
+			spideroverlaping = $('#map-canvas').data('spideroverlaping');	
+		
+		var spideroverlaping_zoom = 'no';
+		if( $('#map-canvas').attr('data-spideroverlaping_zoom') )
+			spideroverlaping_zoom = $('#map-canvas').data('spideroverlaping_zoom');			
+		
 		var big_cluster_icon = '';
 		if( $('#map-canvas').attr('data-big_cluster_icon') )
 			big_cluster_icon = $('#map-canvas').data('big_cluster_icon');
@@ -150,7 +158,9 @@ function clog(data){
 			map_type: map_type,
 			fit_bounds: fit_bounds,
 			force_load_points: force_load_points,
-			cluster_points: cluster_points
+			cluster_points: cluster_points,
+			spideroverlaping:spideroverlaping,
+			spideroverlaping_zoom:spideroverlaping_zoom
 		}
 		
 		if( 'yes'==v_load_points ) {
@@ -1034,11 +1044,13 @@ function add_markers( geojson, params ) {
 		
 		//map.data.addGeoJson(geojson);
 		
-var oms = new OverlappingMarkerSpiderfier(map, {
-	markersWontMove: true,
-	markersWontHide: true,
-	basicFormatEvents: true
-});	
+		if('yes' == params.spideroverlaping){
+			var oms = new OverlappingMarkerSpiderfier(map, {
+				markersWontMove: true,
+				markersWontHide: true,
+				basicFormatEvents: true
+			});	
+		}
 		
 		/** This code allows clustering **/		
 		var flmarkers = geojson.features.map(function (feature) {
@@ -1068,11 +1080,12 @@ var oms = new OverlappingMarkerSpiderfier(map, {
 				}
 			}
 			
-			
-google.maps.event.addListener(marker, 'spider_click', function(e) {  // 'spider_click', not plain 'click'
-	//infowindow.setContent(markerData.text);
-	infowindow.open(map, marker);
-});
+			if('yes' == params.spideroverlaping){
+				google.maps.event.addListener(marker, 'spider_click', function(e) {  // 'spider_click', not plain 'click'
+					//infowindow.setContent(markerData.text);
+					infowindow.open(map, marker);
+				});
+			}
 		
 			/** add event listener **/
 			marker.addListener('click', function(event) {
@@ -1085,7 +1098,9 @@ google.maps.event.addListener(marker, 'spider_click', function(e) {  // 'spider_
 				});
 			});
 			
-oms.addMarker(marker);
+			if('yes' == params.spideroverlaping){
+				oms.addMarker(marker);
+			}
 			
 			return marker;
 		});
@@ -1127,7 +1142,13 @@ oms.addMarker(marker);
 				flmarkers,
 				{ imagePath: 'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m' });
 			}
-			markerCluster.setMaxZoom(14);
+			if('yes' == params.spideroverlaping){
+				if(params.spideroverlaping_zoom != '' && params.spideroverlaping_zoom != 'no'){
+					markerCluster.setMaxZoom(params.spideroverlaping_zoom);
+				}else{
+					markerCluster.setMaxZoom(15);
+				}
+			}
 		}
 		
 		if( params.marker_icon ){
