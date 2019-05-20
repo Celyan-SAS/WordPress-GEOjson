@@ -1081,22 +1081,37 @@ function add_markers( geojson, params ) {
 			}
 			
 			if('yes' == params.spideroverlaping){
-				google.maps.event.addListener(marker, 'spider_click', function(e) {  // 'spider_click', not plain 'click'
+				google.maps.event.addListener(marker, 'spider_click', function(event) {  // 'spider_click', not plain 'click'
 					//infowindow.setContent(markerData.text);
 					//infowindow.open(map, marker);
+					
+						console.log("SPIDER CICK");
+						console.log(event);
+					
+//					$.event.trigger({
+//						type:	"wpGeoJSON_marker_clicked",
+//						marker_clicked: event,
+//						marker:marker,
+//						feature:feature,
+//						time:	new Date()
+//					});
+				
 				});
 			}
 		
-			/** add event listener **/
-			marker.addListener('click', function(event) {
-				$.event.trigger({
-					type:	"wpGeoJSON_marker_clicked",
-					marker_clicked: event,
-					marker:marker,
-					feature:feature,
-					time:	new Date()
+			/** other listener when we do not have spider **/
+			if('no' == params.spideroverlaping){
+				/** add event listener **/
+				marker.addListener('click', function(event) {
+					$.event.trigger({
+						type:	"wpGeoJSON_marker_clicked",
+						marker_clicked: event,
+						marker:marker,
+						feature:feature,
+						time:	new Date()
+					});
 				});
-			});
+			}
 			
 			if('yes' == params.spideroverlaping){
 				oms.addMarker(marker);
