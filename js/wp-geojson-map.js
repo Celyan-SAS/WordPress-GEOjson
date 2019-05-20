@@ -1046,15 +1046,9 @@ function add_markers( geojson, params ) {
 					&& icons[feature.id].icon ){
 					var icon_user = icons[feature.id].icon;
 					var marker = new google.maps.Marker({ 
-						//'stylers': [{'border-radius': '25px'}],
 						'position': position, 
 						'map': map,
-						'icon': {
-							url:icon_user,
-							//size:new google.maps.Size(34,34),
-							//stylers: [{'border-radius': '25px'}]
-						},
-						//'shape':{coords:[17,17,18],type:'circle'},
+						'icon': { url:icon_user }, //for css look for customoverlay.draw "markerLayer" a few lines down
 						optimized:false
 					});	
 					defaulticon = false;
@@ -1067,9 +1061,6 @@ function add_markers( geojson, params ) {
 					var marker = new google.maps.Marker({ 'position': position});
 				}
 			}
-			
-//			marker.css({"border-radius": '25px'});
-//			stylers: [{color: '#17263c'}]
 			
 			/** add event listener **/
 			marker.addListener('click', function(event) {
