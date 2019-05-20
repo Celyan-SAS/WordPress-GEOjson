@@ -1075,7 +1075,28 @@ function add_markers( geojson, params ) {
 			
 			return marker;
 		});
-			
+		
+/** TEST1 -------------------- **/
+console.log("TEST MAP DATA");
+console.log(window.mapData);	
+var oms = new OverlappingMarkerSpiderfier(map, {
+	markersWontMove: true,
+	markersWontHide: true,
+	basicFormatEvents: true
+});		
+for (var i = 0, len = window.mapData.length; i < len; i ++) {
+	(function() {  // make a closure over the marker and marker data
+		var markerData = window.mapData[i];  // e.g. { lat: 50.123, lng: 0.123, text: 'XYZ' }
+		var marker = new google.maps.Marker({ position: markerData });  // markerData works here as a LatLngLiteral
+		google.maps.event.addListener(marker, 'spider_click', function(e) {  // 'spider_click', not plain 'click'
+			infowindow.setContent(markerData.text);
+			infowindow.open(map, marker);
+		});
+		oms.addMarker(marker);  // adds the marker to the spiderfier _and_ the map
+	})();
+}
+/** TEST -------------------- **/
+
 		if( 'yes' == params.cluster_points ) {
 			if(typeof params.custom_cluster_icons!= 'undefined' &&  params.custom_cluster_icons!='no'){
 //				var options = {
