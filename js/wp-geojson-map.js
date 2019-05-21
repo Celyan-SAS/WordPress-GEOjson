@@ -1219,10 +1219,15 @@ function add_markers( geojson, params ) {
 		var customoverlay = new google.maps.OverlayView();
 		customoverlay.draw = function () {
 			
-				console.log("TEST with spider");
-				console.log(last_spider_format);
-			
-			this.getPanes().markerLayer.id='markerLayer';
+console.log("TEST with spider 2 ");
+console.log(last_spider_format);
+			if(last_spider_format!='' && 
+				last_spider_format == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE)
+			{
+				this.getPanes().markerLayer.id='markerLayer_spider';
+			}else{
+				this.getPanes().markerLayer.id='markerLayer';
+			}			
 		};
 		customoverlay.setMap(map);
 	   
