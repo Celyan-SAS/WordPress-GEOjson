@@ -1098,6 +1098,13 @@ function add_markers( geojson, params ) {
 				/** listen to the status of the marker to know what icon for the spider **/
 				google.maps.event.addListener(marker, 'spider_format', function(status) {
 					last_spider_format = status;
+					/** spiderfied clicked and changed to round thing, we reset imges to their original **/
+					if(status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIED){
+						marker.setIcon({
+							url:icon_user,
+							scaledSize: new google.maps.Size(32, 32)  // makes SVG icons work in IE
+						});
+					}					
 					/** if we are in the zoom zone that cluster does not cover and we have not clicked on the spider **/
 					if(status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE){
 						var regroup_spider_url = '';
@@ -1113,14 +1120,12 @@ function add_markers( geojson, params ) {
 							scaledSize: new google.maps.Size(32, 32)  // makes SVG icons work in IE
 						});
 					}
-					/** spiderfied clicked and changed to round thing, we reset imges to their original **/
-					if(status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIED){
-						marker.setIcon({
-							url:icon_user,
-							scaledSize: new google.maps.Size(32, 32)  // makes SVG icons work in IE
-						});
-					}
-				});				
+
+					
+console.log("TEST with spider 3 ");
+console.log(last_spider_format);
+					
+				});	
 			}
 		
 			/** other listener when we do not have spider **/
@@ -1218,9 +1223,6 @@ function add_markers( geojson, params ) {
 		/** allow customisation of icons by css, target #markerLayer **/
 		var customoverlay = new google.maps.OverlayView();
 		customoverlay.draw = function () {
-			
-console.log("TEST with spider 2 ");
-console.log(last_spider_format);
 			if(last_spider_format!='' && 
 				last_spider_format == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE)
 			{
