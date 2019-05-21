@@ -1093,6 +1093,25 @@ function add_markers( geojson, params ) {
 					});
 				
 				});
+				
+				google.maps.event.addListener(marker, 'spider_format', function(status) {
+console.log('test here --- ');
+					var regroup_spider_url = 'http://membertestplatform.share.university/wp-content/uploads/2019/05/1.png';
+					if(status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE){
+						marker.setIcon({
+							url: regroup_spider_url,
+							scaledSize: new google.maps.Size(23, 32)  // makes SVG icons work in IE
+						});
+					}
+//					else{
+//						marker.setIcon({
+//							url: regroup_spider_url,
+//							scaledSize: new google.maps.Size(23, 32)  // makes SVG icons work in IE
+//						});
+//					}
+					
+				  
+				});				
 			}
 		
 			/** other listener when we do not have spider **/
