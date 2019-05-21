@@ -1107,7 +1107,7 @@ function add_markers( geojson, params ) {
 				
 				});
 				
-				oms.addListener(marker, 'spider_format', function(status) {
+				google.maps.event.addListener(marker, 'spider_format', function(status) {
 console.log('test here --- ');
 console.log(OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE);
 console.log(status);
@@ -1120,10 +1120,10 @@ console.log(status);
 						});
 					}
 					
-					marker.setIcon({
-							url: regroup_spider_url,
-							scaledSize: new google.maps.Size(23, 32)  // makes SVG icons work in IE
-						});
+//					marker.setIcon({
+//							url: regroup_spider_url,
+//							scaledSize: new google.maps.Size(23, 32)  // makes SVG icons work in IE
+//						});
 						
 //					else{
 //						marker.setIcon({
