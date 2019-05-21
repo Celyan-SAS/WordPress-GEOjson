@@ -1106,7 +1106,7 @@ function add_markers( geojson, params ) {
 						});
 					}					
 					/** if we are in the zoom zone that cluster does not cover and we have not clicked on the spider **/
-					if(status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE){
+					if(status == OverlappingMarkerSpiderfier.markerStatus.UNSPIDERFIED){
 						var regroup_spider_url = '';
 						if(params.big_cluster_icon != ''){
 							regroup_spider_url = params.medium_cluster_icon;
@@ -1122,7 +1122,7 @@ function add_markers( geojson, params ) {
 					}
 
 					
-console.log("TEST with spider 3 4 ");
+console.log("TEST with spider 5 ");
 console.log(last_spider_format);
 					
 				});	
@@ -1224,7 +1224,7 @@ console.log(last_spider_format);
 		var customoverlay = new google.maps.OverlayView();
 		customoverlay.draw = function () {
 			if(last_spider_format!='' && 
-				last_spider_format == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE)
+				last_spider_format == OverlappingMarkerSpiderfier.markerStatus.UNSPIDERFIED)
 			{
 				this.getPanes().markerLayer.id='markerLayer_spider';
 			}else{
