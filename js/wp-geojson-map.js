@@ -1080,6 +1080,19 @@ function add_markers( geojson, params ) {
 				}
 			}
 			
+//			let oms = new OverlappingMarkerSpiderfier(map, {markersWontMove: true, markersWontHide: true});
+//
+//oms.addListener('format', function (marker, status) {
+//    let iconURL = (status === OverlappingMarkerSpiderfier.markerStatus.SPIDERFIED) ? 'pin_spiderable.png' :
+//        (status === OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE) ? 'pin_spiderable.png' :
+//        (status === OverlappingMarkerSpiderfier.markerStatus.UNSPIDERFIABLE) ? 'pin_spiderable.png' :
+//                null;
+//    marker.setIcon({
+//        url: iconURL,
+//        scaledSize: new google.maps.Size(32, 32)  // makes SVG icons work in IE
+//    });
+//});
+			
 			if('yes' == params.spideroverlaping){
 				google.maps.event.addListener(marker, 'spider_click', function(event) {  // 'spider_click', not plain 'click'
 					//infowindow.setContent(markerData.text);
@@ -1094,7 +1107,7 @@ function add_markers( geojson, params ) {
 				
 				});
 				
-				google.maps.event.addListener(marker, 'spider_format', function(status) {
+				oms.addListener(marker, 'spider_format', function(status) {
 console.log('test here --- ');
 console.log(OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE);
 console.log(status);
@@ -1118,8 +1131,6 @@ console.log(status);
 //							scaledSize: new google.maps.Size(23, 32)  // makes SVG icons work in IE
 //						});
 //					}
-					
-				  
 				});				
 			}
 		
