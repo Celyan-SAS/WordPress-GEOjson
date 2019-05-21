@@ -1121,9 +1121,9 @@ function add_markers( geojson, params ) {
 						});
 					}
 
-console.log("TEST with spider 6 ");
-console.log(last_spider_format);
-console.log(marker);
+//console.log("TEST with spider 6 ");
+//console.log(last_spider_format);
+//console.log(marker);
 					
 				});	
 			}
