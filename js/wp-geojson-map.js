@@ -1106,6 +1106,12 @@ console.log(status);
 							scaledSize: new google.maps.Size(23, 32)  // makes SVG icons work in IE
 						});
 					}
+					
+					marker.setIcon({
+							url: regroup_spider_url,
+							scaledSize: new google.maps.Size(23, 32)  // makes SVG icons work in IE
+						});
+						
 //					else{
 //						marker.setIcon({
 //							url: regroup_spider_url,
