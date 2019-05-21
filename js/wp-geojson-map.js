@@ -1048,7 +1048,7 @@ function add_markers( geojson, params ) {
 			var oms = new OverlappingMarkerSpiderfier(map, {
 				markersWontMove: true,
 				markersWontHide: true,
-				basicFormatEvents: true
+				basicFormatEvents: false
 			});	
 		}
 		
