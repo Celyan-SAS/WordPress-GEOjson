@@ -1049,7 +1049,7 @@ function add_markers( geojson, params ) {
 			var oms = new OverlappingMarkerSpiderfier(map, {
 				markersWontMove: true,
 				markersWontHide: true,
-				basicFormatEvents: true
+				basicFormatEvents: false
 			});	
 		}
 		
@@ -1106,7 +1106,7 @@ function add_markers( geojson, params ) {
 						});
 					}					
 					/** if we are in the zoom zone that cluster does not cover and we have not clicked on the spider **/
-					if(status == OverlappingMarkerSpiderfier.markerStatus.UNSPIDERFIED){
+					if(status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE){
 						var regroup_spider_url = '';
 						if(params.big_cluster_icon != ''){
 							regroup_spider_url = params.medium_cluster_icon;
@@ -1114,16 +1114,16 @@ function add_markers( geojson, params ) {
 							regroup_spider_url = params.small_cluster_icon;
 						}else if(params.small_cluster_icon != ''){
 							regroup_spider_url = params.big_cluster_icon;
-						}						
+						}
 						marker.setIcon({
 							url: regroup_spider_url,
-							scaledSize: new google.maps.Size(32, 32)  // makes SVG icons work in IE
+							//scaledSize: new google.maps.Size(32, 32)  // makes SVG icons work in IE
 						});
 					}
 
-					
-console.log("TEST with spider 5 ");
+console.log("TEST with spider 6 ");
 console.log(last_spider_format);
+console.log(marker);
 					
 				});	
 			}
@@ -1224,7 +1224,7 @@ console.log(last_spider_format);
 		var customoverlay = new google.maps.OverlayView();
 		customoverlay.draw = function () {
 			if(last_spider_format!='' && 
-				last_spider_format == OverlappingMarkerSpiderfier.markerStatus.UNSPIDERFIED)
+				last_spider_format == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE)
 			{
 				this.getPanes().markerLayer.id='markerLayer_spider';
 			}else{
