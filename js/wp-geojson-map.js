@@ -1108,14 +1108,15 @@ function add_markers( geojson, params ) {
 						}						
 						marker.setIcon({
 							url: regroup_spider_url,
-							scaledSize: new google.maps.Size(23, 32)  // makes SVG icons work in IE
+							scaledSize: new google.maps.Size(32, 32)  // makes SVG icons work in IE
 						});
+						marker.set("id", "spiderid");
 					}
 					/** spiderfied clicked and changed to round thing, we reset imges to their original **/
 					if(status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIED){
 						marker.setIcon({
 							url:icon_user,
-							scaledSize: new google.maps.Size(23, 32)  // makes SVG icons work in IE
+							scaledSize: new google.maps.Size(32, 32)  // makes SVG icons work in IE
 						});
 					}
 				});				
@@ -1143,7 +1144,7 @@ function add_markers( geojson, params ) {
 		});
 		
 		map.addListener('zoom_changed', function() {
-				console.log('Zoom: ' + map.getZoom());
+			clog('Zoom: ' + map.getZoom());
 		});
 
 		if( 'yes' == params.cluster_points ) {
@@ -1183,7 +1184,6 @@ function add_markers( geojson, params ) {
 				{ imagePath: 'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m' });
 			}
 			if('yes' == params.spideroverlaping){
-console.log(params.spideroverlaping_zoom);
 				if(params.spideroverlaping_zoom != '' && params.spideroverlaping_zoom != 'no'){
 					markerCluster.setMaxZoom(params.spideroverlaping_zoom);
 				}else{
@@ -1214,8 +1214,8 @@ console.log(params.spideroverlaping_zoom);
 		map.data.addGeoJson(hull2, { fillColor: 'red', style: {color: 'red', fillColor: 'red'} });
 		*/
 	   
-	   /** allow customisation of icons by css, target #markerLayer **/
-	   var customoverlay = new google.maps.OverlayView();
+		/** allow customisation of icons by css, target #markerLayer **/
+		var customoverlay = new google.maps.OverlayView();
 		customoverlay.draw = function () {
 			this.getPanes().markerLayer.id='markerLayer';
 		};
