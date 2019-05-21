@@ -1080,19 +1080,6 @@ function add_markers( geojson, params ) {
 				}
 			}
 			
-//			let oms = new OverlappingMarkerSpiderfier(map, {markersWontMove: true, markersWontHide: true});
-//
-//oms.addListener('format', function (marker, status) {
-//    let iconURL = (status === OverlappingMarkerSpiderfier.markerStatus.SPIDERFIED) ? 'pin_spiderable.png' :
-//        (status === OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE) ? 'pin_spiderable.png' :
-//        (status === OverlappingMarkerSpiderfier.markerStatus.UNSPIDERFIABLE) ? 'pin_spiderable.png' :
-//                null;
-//    marker.setIcon({
-//        url: iconURL,
-//        scaledSize: new google.maps.Size(32, 32)  // makes SVG icons work in IE
-//    });
-//});
-			
 			if('yes' == params.spideroverlaping){
 				google.maps.event.addListener(marker, 'spider_click', function(event) {  // 'spider_click', not plain 'click'
 					//infowindow.setContent(markerData.text);
@@ -1107,39 +1094,30 @@ function add_markers( geojson, params ) {
 				
 				});
 				
+				/** listen to the status of the marker to know what icon for the spider **/
 				google.maps.event.addListener(marker, 'spider_format', function(status) {
-console.log('test here --- ');
-//console.log(OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE);
-console.log(status);
-						
-					var regroup_spider_url = 'http://membertestplatform.share.university/wp-content/uploads/2019/05/1.png';
+					/** if we are in the zoom zone that cluster does not cover and we have not clicked on the spider **/
 					if(status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE){
-console.log("spideaBLE");						
+						var regroup_spider_url = '';
+						if(params.big_cluster_icon != ''){
+							regroup_spider_url = params.medium_cluster_icon;
+						}else if(params.medium_cluster_icon != ''){
+							regroup_spider_url = params.small_cluster_icon;
+						}else if(params.small_cluster_icon != ''){
+							regroup_spider_url = params.big_cluster_icon;
+						}						
 						marker.setIcon({
 							url: regroup_spider_url,
 							scaledSize: new google.maps.Size(23, 32)  // makes SVG icons work in IE
 						});
 					}
-					
+					/** spiderfied clicked and changed to round thing, we reset imges to their original **/
 					if(status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIED){
-console.log("reput imag?");
 						marker.setIcon({
 							url:icon_user,
 							scaledSize: new google.maps.Size(23, 32)  // makes SVG icons work in IE
 						});
 					}
-					
-//					marker.setIcon({
-//							url: regroup_spider_url,
-//							scaledSize: new google.maps.Size(23, 32)  // makes SVG icons work in IE
-//						});
-						
-//					else{
-//						marker.setIcon({
-//							url: regroup_spider_url,
-//							scaledSize: new google.maps.Size(23, 32)  // makes SVG icons work in IE
-//						});
-//					}
 				});				
 			}
 		
