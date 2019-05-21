@@ -1109,13 +1109,22 @@ function add_markers( geojson, params ) {
 				
 				google.maps.event.addListener(marker, 'spider_format', function(status) {
 console.log('test here --- ');
-console.log(OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE);
+//console.log(OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE);
 console.log(status);
 						
 					var regroup_spider_url = 'http://membertestplatform.share.university/wp-content/uploads/2019/05/1.png';
 					if(status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE){
+console.log("spideaBLE");						
 						marker.setIcon({
 							url: regroup_spider_url,
+							scaledSize: new google.maps.Size(23, 32)  // makes SVG icons work in IE
+						});
+					}
+					
+					if(status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIED){
+console.log("reput imag?");
+						marker.setIcon({
+							url:icon_user,
 							scaledSize: new google.maps.Size(23, 32)  // makes SVG icons work in IE
 						});
 					}
