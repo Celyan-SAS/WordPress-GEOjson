@@ -1049,7 +1049,7 @@ function add_markers( geojson, params ) {
 			var oms = new OverlappingMarkerSpiderfier(map, {
 				markersWontMove: true,
 				markersWontHide: true,
-				basicFormatEvents: false
+				basicFormatEvents: true
 			});	
 		}
 		
@@ -1102,7 +1102,7 @@ function add_markers( geojson, params ) {
 					if(status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIED){
 						marker.setIcon({
 							url:icon_user,
-							scaledSize: new google.maps.Size(32, 32)  // makes SVG icons work in IE
+							//scaledSize: new google.maps.Size(32, 32)  // makes SVG icons work in IE
 						});
 					}					
 					/** if we are in the zoom zone that cluster does not cover and we have not clicked on the spider **/
@@ -1122,7 +1122,7 @@ function add_markers( geojson, params ) {
 					}
 
 					
-console.log("TEST with spider 3 ");
+console.log("TEST with spider 3 4 ");
 console.log(last_spider_format);
 					
 				});	
