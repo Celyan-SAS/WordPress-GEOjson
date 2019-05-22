@@ -1051,7 +1051,7 @@ function add_markers( geojson, params ) {
 				markersWontHide: true,
 				basicFormatEvents: false,
 				spiralFootSeparation:26,
-				spiralLengthStart:20,
+				spiralLengthStart:50,
 				spiralLengthFactor:5,
 				nearbyDistance:40,
 			});	
