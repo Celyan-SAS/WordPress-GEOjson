@@ -1050,8 +1050,8 @@ function add_markers( geojson, params ) {
 				markersWontMove: true,
 				markersWontHide: true,
 				basicFormatEvents: false,
-				spiralFootSeparation:26,
-				spiralLengthStart:20,
+				spiralFootSeparation:30,
+				spiralLengthStart:11,
 				spiralLengthFactor:4,
 			});	
 		}
@@ -1096,10 +1096,10 @@ function add_markers( geojson, params ) {
 						time:	new Date()
 					});
 					
-					$.event.trigger({
-						type:	"spider_click",
-						event: event
-					});
+//					$.event.trigger({
+//						type:	"spider_click",
+//						event: event
+//					});
 				
 				});
 				
