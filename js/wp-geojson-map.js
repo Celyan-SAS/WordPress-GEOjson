@@ -1049,7 +1049,10 @@ function add_markers( geojson, params ) {
 			var oms = new OverlappingMarkerSpiderfier(map, {
 				markersWontMove: true,
 				markersWontHide: true,
-				basicFormatEvents: false
+				basicFormatEvents: false,
+				spiralFootSeparation:26,
+				spiralLengthStart:20,
+				spiralLengthFactor:4,
 			});	
 		}
 		
@@ -1091,6 +1094,11 @@ function add_markers( geojson, params ) {
 						marker:marker,
 						feature:feature,
 						time:	new Date()
+					});
+					
+					$.event.trigger({
+						type:	"spider_click",
+						event: event
 					});
 				
 				});
