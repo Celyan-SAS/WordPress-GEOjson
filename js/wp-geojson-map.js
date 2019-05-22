@@ -1103,10 +1103,6 @@ function add_markers( geojson, params ) {
 //	map.setZoom(map.getZoom()+1);
 //});
 
-google.maps.event.addListenerOnce(map, 'idle', function() {
-	console.log("IDLE ---");
-	google.maps.event.trigger(map, 'resize');
-});
 
 				/** listen to the status of the marker to know what icon for the spider **/
 				var just_once = true;
@@ -1180,6 +1176,14 @@ google.maps.event.addListenerOnce(map, 'idle', function() {
 			
 			return marker;
 		});
+		
+		
+		
+google.maps.event.addListenerOnce(map, 'idle', function() {
+	console.log("IDLE ---");
+	google.maps.event.trigger(map, 'resize');
+});
+		
 		
 		map.addListener('zoom_changed', function() {
 			clog('Zoom: ' + map.getZoom());
