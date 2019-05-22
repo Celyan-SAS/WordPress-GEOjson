@@ -1187,12 +1187,11 @@ function add_markers( geojson, params ) {
 		
 		
 		
-google.maps.event.addListenerOnce(map, 'idle', function() {
-	if(map.getZoom() == 20){
-					console.log("bbop?");
-		map.setZoom(20);
-	}
-});
+		google.maps.event.addListenerOnce(map, 'idle', function() {
+			if(map.getZoom() > 14){
+				map.setZoom(map.getZoom());
+			}
+		});
 		
 		
 		map.addListener('zoom_changed', function() {
