@@ -1055,6 +1055,7 @@ function add_markers( geojson, params ) {
 				spiralLengthFactor:5,
 				nearbyDistance:40,
 			});	
+				console.log("test -- &");
 		}
 		
 		/** This code allows clustering **/		
