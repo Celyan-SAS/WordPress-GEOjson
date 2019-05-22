@@ -1058,7 +1058,7 @@ function add_markers( geojson, params ) {
 				circleSpiralSwitchover: "Infinity",
 				circleFootSeparation: 50
 			});	
-				console.log("test -- 3");
+				console.log("test -- 4");
 		}
 		
 		/** This code allows clustering **/		
@@ -1189,7 +1189,8 @@ function add_markers( geojson, params ) {
 		
 google.maps.event.addListenerOnce(map, 'idle', function() {
 	console.log("IDLE ---");
-	google.maps.event.trigger(map, 'format');
+	//google.maps.event.trigger(map, 'format');
+	unspiderfy();
 });
 		
 		
