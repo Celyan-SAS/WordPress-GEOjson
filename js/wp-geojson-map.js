@@ -1058,7 +1058,7 @@ function add_markers( geojson, params ) {
 				circleSpiralSwitchover: "Infinity",
 				circleFootSeparation: 50
 			});	
-				console.log("test -- &");
+				console.log("test -- 2");
 		}
 		
 		/** This code allows clustering **/		
