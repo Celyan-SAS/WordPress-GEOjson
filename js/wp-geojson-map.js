@@ -1138,18 +1138,18 @@ function add_markers( geojson, params ) {
 							scaledSize: new google.maps.Size(40, 40)  // makes SVG icons work in IE
 						});
 					}
-						console.log("log");
-						console.log(status);
-						console.log(just_once);
-					if(status == OverlappingMarkerSpiderfier.UNSPIDERFIABLE && just_once){
-							console.log("test retrigger");
-						just_once = false;
-//						$.event.trigger({
-//							type:	"spider_format",
-//							marker : marker,
-//							status: status
-//						});
-					}
+//						console.log("log");
+//						console.log(status);
+//						console.log(just_once);
+//					if(status == OverlappingMarkerSpiderfier.UNSPIDERFIABLE && just_once){
+//							console.log("test retrigger");
+//						just_once = false;
+////						$.event.trigger({
+////							type:	"spider_format",
+////							marker : marker,
+////							status: status
+////						});
+//					}
 
 //					$.event.trigger({
 //						type:	"spider_format",
@@ -1190,12 +1190,13 @@ function add_markers( geojson, params ) {
 google.maps.event.addListenerOnce(map, 'idle', function() {
 	console.log("IDLE ---");
 	//google.maps.event.trigger(map, 'format');
-	unspiderfy();
+	console.log(map.getZoom());
+	//map.setZoom(20);
 });
 		
 		
 		map.addListener('zoom_changed', function() {
-			clog('Zoom: ' + map.getZoom());
+				console.log('Zoom: ' + map.getZoom());
 		});
 
 		if( 'yes' == params.cluster_points ) {
