@@ -1058,7 +1058,7 @@ function add_markers( geojson, params ) {
 				circleSpiralSwitchover: "Infinity",
 				circleFootSeparation: 50
 			});	
-				console.log("test -- 2");
+				console.log("test -- 3");
 		}
 		
 		/** This code allows clustering **/		
@@ -1075,7 +1075,10 @@ function add_markers( geojson, params ) {
 					var marker = new google.maps.Marker({ 
 						'position': position, 
 						'map': map,
-						'icon': { url:icon_user }, //for css look for customoverlay.draw "markerLayer" a few lines down
+						'icon': { 
+							url:icon_user,
+							scaledSize: new google.maps.Size(40, 40)
+						}, //for css look for customoverlay.draw "markerLayer" a few lines down
 						optimized:false
 					});	
 					defaulticon = false;
@@ -1116,6 +1119,7 @@ function add_markers( geojson, params ) {
 					if(status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIED){
 						marker.setIcon({
 							url:icon_user,
+							scaledSize: new google.maps.Size(40, 40)
 							//scaledSize: new google.maps.Size(32, 32)  // makes SVG icons work in IE
 						});
 					}					
@@ -1131,7 +1135,7 @@ function add_markers( geojson, params ) {
 						}
 						marker.setIcon({
 							url: regroup_spider_url,
-							//scaledSize: new google.maps.Size(32, 32)  // makes SVG icons work in IE
+							scaledSize: new google.maps.Size(40, 40)  // makes SVG icons work in IE
 						});
 					}
 						console.log("log");
