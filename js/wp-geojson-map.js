@@ -1184,15 +1184,12 @@ function add_markers( geojson, params ) {
 			
 			return marker;
 		});
-		
-		
-		
+				
 		google.maps.event.addListenerOnce(map, 'idle', function() {
 			if(map.getZoom() > 14){
 				map.setZoom(map.getZoom());
 			}
 		});
-		
 		
 		map.addListener('zoom_changed', function() {
 				clog('Zoom: ' + map.getZoom());
