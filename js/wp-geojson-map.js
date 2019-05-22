@@ -1188,15 +1188,15 @@ function add_markers( geojson, params ) {
 		
 		
 google.maps.event.addListenerOnce(map, 'idle', function() {
-	console.log("IDLE ---");
-	//google.maps.event.trigger(map, 'format');
-	console.log(map.getZoom());
-	map.setZoom(20);
+	if(map.getZoom() == 20){
+					console.log("bbop?");
+		map.setZoom(20);
+	}
 });
 		
 		
 		map.addListener('zoom_changed', function() {
-				console.log('Zoom: ' + map.getZoom());
+				clog('Zoom: ' + map.getZoom());
 		});
 
 		if( 'yes' == params.cluster_points ) {
