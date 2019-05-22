@@ -1098,6 +1098,16 @@ function add_markers( geojson, params ) {
 					});				
 				});
 				
+//google.maps.event.addListener(markerClusterer, 'clusterclick', function(cluster){
+//	map.setCenter(cluster.getCenter());
+//	map.setZoom(map.getZoom()+1);
+//});
+
+google.maps.event.addListenerOnce(map, 'idle', function() {
+	console.log("IDLE ---");
+	google.maps.event.trigger(map, 'resize');
+});
+
 				/** listen to the status of the marker to know what icon for the spider **/
 				var just_once = true;
 				google.maps.event.addListener(marker, 'spider_format', function(status) {
@@ -1124,8 +1134,6 @@ function add_markers( geojson, params ) {
 							//scaledSize: new google.maps.Size(32, 32)  // makes SVG icons work in IE
 						});
 					}
-
-
 						console.log("log");
 						console.log(status);
 						console.log(just_once);
