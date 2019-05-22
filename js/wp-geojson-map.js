@@ -1053,6 +1053,7 @@ function add_markers( geojson, params ) {
 				spiralFootSeparation:26,
 				spiralLengthStart:11,
 				spiralLengthFactor:4,
+				nearbyDistance:40,
 			});	
 		}
 		
