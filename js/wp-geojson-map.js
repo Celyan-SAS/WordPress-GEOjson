@@ -1125,6 +1125,9 @@ function add_markers( geojson, params ) {
 					}
 
 
+						console.log("log");
+						console.log(status);
+						console.log(just_once);
 					if(status == OverlappingMarkerSpiderfier.UNSPIDERFIABLE && just_once){
 							console.log("test retrigger");
 						just_once = false;
