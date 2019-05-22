@@ -1191,7 +1191,7 @@ google.maps.event.addListenerOnce(map, 'idle', function() {
 	console.log("IDLE ---");
 	//google.maps.event.trigger(map, 'format');
 	console.log(map.getZoom());
-	//map.setZoom(20);
+	map.setZoom(20);
 });
 		
 		
