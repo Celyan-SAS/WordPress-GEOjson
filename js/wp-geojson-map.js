@@ -1181,7 +1181,7 @@ function add_markers( geojson, params ) {
 		
 google.maps.event.addListenerOnce(map, 'idle', function() {
 	console.log("IDLE ---");
-	google.maps.event.trigger(map, 'resize');
+	google.maps.event.trigger(map, 'format');
 });
 		
 		
