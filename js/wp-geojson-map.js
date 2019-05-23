@@ -1059,7 +1059,7 @@ function add_markers( geojson, params ) {
 				markersWontMove: true,
 				markersWontHide: true,
 				basicFormatEvents: false,
-			spiralFootSeparation:26,
+			spiralFootSeparation:50,
 				spiralLengthStart:0,
 				spiralLengthFactor:5,
 				nearbyDistance:40,				
