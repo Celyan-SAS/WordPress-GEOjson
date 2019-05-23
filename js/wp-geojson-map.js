@@ -835,7 +835,13 @@ function ggmap_init() {
 		var map_options = '';
 		if( $('#map-canvas').attr('data-map_options') ){
 			map_options = $('#map-canvas').data('map_options');
+			
+				console.log("map options --- ");
+				console.log(map_options);
 			options = get_map_options_object( options, map_options );
+			
+				console.log("final list");
+				console.log(options);
 		}		
 				
 		map = new google.maps.Map(document.getElementById("map-canvas"), options);
