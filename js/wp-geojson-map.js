@@ -767,6 +767,14 @@ function get_map_options_object( options, map_options ) {
 					if( 'center' == kv[0] ) {
 						kv[1] = kv[1].split(';');
 					}
+					if( 'calculate_google_center' == kv[0] ) {
+						
+						console.log(kv[1].split(';'));
+						console.log("e");
+						console.log(kv[1].split(','));
+						
+						kv[1] = new google.maps.LatLng( '15.4114792', '14.2408973' )
+					}
 					if( 'maxBounds' == kv[0] ) {
 						a = kv[1].split(';');
 						kv[1] = [[a[0],a[1]],[a[2],a[3]]];
@@ -829,8 +837,6 @@ function ggmap_init() {
 			map_options = $('#map-canvas').data('map_options');
 			options = get_map_options_object( options, map_options );
 		}		
-		
-			console.log(new google.maps.LatLng( '15.4114792', '14.2408973' ));
 				
 		map = new google.maps.Map(document.getElementById("map-canvas"), options);
 		
