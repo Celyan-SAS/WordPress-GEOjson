@@ -1058,7 +1058,6 @@ function add_markers( geojson, params ) {
 				circleSpiralSwitchover: "Infinity",
 				circleFootSeparation: 50
 			});	
-				console.log("test -- 4");
 		}
 		
 		/** This code allows clustering **/		
@@ -1105,14 +1104,8 @@ function add_markers( geojson, params ) {
 					});				
 				});
 				
-//google.maps.event.addListener(markerClusterer, 'clusterclick', function(cluster){
-//	map.setCenter(cluster.getCenter());
-//	map.setZoom(map.getZoom()+1);
-//});
-
 
 				/** listen to the status of the marker to know what icon for the spider **/
-				var just_once = true;
 				google.maps.event.addListener(marker, 'spider_format', function(status) {
 					last_spider_format = status;
 					/** spiderfied clicked and changed to round thing, we reset imges to their original **/
@@ -1137,30 +1130,7 @@ function add_markers( geojson, params ) {
 							url: regroup_spider_url,
 							scaledSize: new google.maps.Size(40, 40)  // makes SVG icons work in IE
 						});
-					}
-//						console.log("log");
-//						console.log(status);
-//						console.log(just_once);
-//					if(status == OverlappingMarkerSpiderfier.UNSPIDERFIABLE && just_once){
-//							console.log("test retrigger");
-//						just_once = false;
-////						$.event.trigger({
-////							type:	"spider_format",
-////							marker : marker,
-////							status: status
-////						});
-//					}
-
-//					$.event.trigger({
-//						type:	"spider_format",
-//						marker : marker,
-//						status: status
-//					});
-
-//console.log("TEST with spider 6 ");
-//console.log(last_spider_format);
-//console.log(marker);
-					
+					}					
 				});	
 			}
 		
