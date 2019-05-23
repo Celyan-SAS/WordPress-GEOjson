@@ -1059,9 +1059,9 @@ function add_markers( geojson, params ) {
 				markersWontMove: true,
 				markersWontHide: true,
 				basicFormatEvents: false,
-			spiralFootSeparation:500,
-				spiralLengthStart:0,
-			spiralLengthFactor:5,
+//			spiralFootSeparation:500,
+//				spiralLengthStart:0,
+//			spiralLengthFactor:5,
 				nearbyDistance:40,				
 				circleSpiralSwitchover: "Infinity",
 				circleFootSeparation: 50
