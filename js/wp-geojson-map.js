@@ -768,16 +768,15 @@ function get_map_options_object( options, map_options ) {
 						kv[1] = kv[1].split(';');
 					}
 					if( 'calculate_google_center' == kv[0] ) {
-						
-						console.log(kv[1].split(';'));
-						console.log("e");
-						console.log(kv[1].split(','));
-						
-						kv[1] = new google.maps.LatLng( '15.4114792', '14.2408973' )
+						a = kv[1].split(';');
+						kv[1] = new google.maps.LatLng( a[0], a[1] );
 					}
 					if( 'maxBounds' == kv[0] ) {
 						a = kv[1].split(';');
 						kv[1] = [[a[0],a[1]],[a[2],a[3]]];
+					}					
+					if( 'zoom' == kv[0] ) {
+						kv[1] = parseInt(kv[1]);
 					}
 					options[ kv[0] ] = kv[1];
 				}
@@ -832,6 +831,10 @@ function ggmap_init() {
 			mapTypeControlOptions: { mapTypeIds: [] },
 			fullscreenControl: true
 		};
+		
+		console.log("before");
+		console.log(options);
+		
 		var map_options = '';
 		if( $('#map-canvas').attr('data-map_options') ){
 			map_options = $('#map-canvas').data('map_options');
