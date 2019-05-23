@@ -1122,7 +1122,8 @@ function add_markers( geojson, params ) {
 					if(status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIED){
 						marker.setIcon({
 							url:icon_user,
-							scaledSize: new google.maps.Size(40, 40)
+							scaledSize: new google.maps.Size(40, 40),
+							anchor: new google.maps.Point(20, 20)
 							//scaledSize: new google.maps.Size(32, 32)  // makes SVG icons work in IE
 						});
 					}					
