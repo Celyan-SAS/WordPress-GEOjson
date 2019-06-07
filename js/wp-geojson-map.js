@@ -1076,6 +1076,8 @@ function add_markers( geojson, params ) {
 
 			/** if we are in user type and we want the user thumb **/
 			var defaulticon = true;
+			var icon_1 = '';
+			var icon_2 = '';
 			if(typeof params.user_personnal_icon!= 'undefined' &&  params.user_personnal_icon=='yes'){						
 				if(typeof icons != "undefined" 
 					&& typeof icons[feature.id] != "undefined" 
@@ -1090,15 +1092,26 @@ function add_markers( geojson, params ) {
 						}, //for css look for customoverlay.draw "markerLayer" a few lines down
 						optimized:false
 					});	
+					icon_1 = icon_user;
 					defaulticon = false;
 				}
 			}				
 			if(defaulticon){					
 				if(typeof params.marker_icon!= 'undefined' &&  params.marker_icon!=''){
 					var marker = new google.maps.Marker({ 'position': position, 'icon':params.marker_icon });
+					icon_1 = params.marker_icon;
 				}else{
 					var marker = new google.maps.Marker({ 'position': position});
 				}
+			}
+			
+			if(icon_1!='' && typeof params.marker_icon!= 'undefined' && params.marker_icon_2!=''){
+				google.maps.event.addListener(marker, 'mouseover', function() {
+					marker.setIcon(params.marker_icon_2);
+				});
+				google.maps.event.addListener(marker, 'mouseout', function() {
+					marker.setIcon(icon_1);
+				});
 			}
 			
 			if('yes' == params.spideroverlaping){
