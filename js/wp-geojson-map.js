@@ -15,7 +15,7 @@ var gray_if_no;
 var last_params_used;
 
 function clog(data){
-	if(false){
+	if(true){
 		console.log(data);
 	}
 }
@@ -1069,6 +1069,8 @@ function add_markers( geojson, params ) {
 			
 				console.log("version 1");
 		}
+		
+console.log('add marker?');
 		
 		/** This code allows clustering **/		
 		var flmarkers = geojson.features.map(function (feature) {
