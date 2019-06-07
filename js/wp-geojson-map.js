@@ -15,7 +15,7 @@ var gray_if_no;
 var last_params_used;
 
 function clog(data){
-	if(true){
+	if(false){
 		console.log(data);
 	}
 }
@@ -1065,12 +1065,9 @@ function add_markers( geojson, params ) {
 				nearbyDistance:40,				
 				circleSpiralSwitchover: "Infinity",
 				circleFootSeparation: 50
-			});	
-			
-				console.log("version 1");
+			});				
+			clog("version 1");
 		}
-		
-console.log('add marker?');
 		
 		/** This code allows clustering **/		
 		var flmarkers = geojson.features.map(function (feature) {
