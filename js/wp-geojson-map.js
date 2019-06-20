@@ -1099,6 +1099,11 @@ function add_markers( geojson, params ) {
 					defaulticon = false;
 				}
 			}				
+			
+console.log('defaulticon');
+console.log(defaulticon);
+console.log(params.marker_icon);
+			
 			if(defaulticon){					
 				if(typeof params.marker_icon!= 'undefined' &&  params.marker_icon!=''){
 					var marker = new google.maps.Marker({ 'position': position, 'icon':params.marker_icon });
