@@ -60,15 +60,15 @@ function clog(data){
 		
 		var marker_icon_2 = '';
 		if( $('#map-canvas').attr('data-marker_icon_2') )
-			marker_icon = $('#map-canvas').data('marker_icon_2');
+			marker_icon_2 = $('#map-canvas').data('marker_icon_2');
 		
 		var marker_icon_3 = '';
 		if( $('#map-canvas').attr('data-marker_icon_3') )
-			marker_icon = $('#map-canvas').data('marker_icon_3');
+			marker_icon_3 = $('#map-canvas').data('marker_icon_3');
 		
 		var marker_icon_4 = '';
 		if( $('#map-canvas').attr('data-marker_icon_4') )
-			marker_icon = $('#map-canvas').data('marker_icon_4');
+			marker_icon_4 = $('#map-canvas').data('marker_icon_4');
 		
 		var custom_cluster_icons = 'no';
 		if( $('#map-canvas').attr('data-custom_cluster_icons') )
