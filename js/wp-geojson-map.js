@@ -1181,10 +1181,12 @@ console.log("here create marker -- ");
 				});
 			}
 			
-//			if('yes' == params.spideroverlaping){
-//				oms.addMarker(marker);
-//			}
-			oms.addMarker(marker);
+			if('yes' == params.spideroverlaping){
+				oms.addMarker(marker);
+			}
+			
+console.log("the amrker");
+console.log(marker);
 			
 			return marker;
 		});
