@@ -345,6 +345,11 @@ function clog(data){
 					});
 					return false;
 				}
+				
+				console.log("TEST DATA");
+				console.log(params);
+				console.log(data);
+				
 				add_markers( data, params );
 				
 				$.event.trigger({
