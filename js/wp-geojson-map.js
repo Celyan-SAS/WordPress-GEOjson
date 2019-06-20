@@ -1108,6 +1108,7 @@ console.log(params.marker_icon);
 				if(typeof params.marker_icon!= 'undefined' &&  params.marker_icon!=''){
 					var marker = new google.maps.Marker({ 'position': position, 'icon':params.marker_icon });
 					icon_1 = params.marker_icon;
+console.log("here create marker -- ");
 				}else{
 					var marker = new google.maps.Marker({ 'position': position});
 				}
@@ -1180,9 +1181,10 @@ console.log(params.marker_icon);
 				});
 			}
 			
-			if('yes' == params.spideroverlaping){
-				oms.addMarker(marker);
-			}
+//			if('yes' == params.spideroverlaping){
+//				oms.addMarker(marker);
+//			}
+			oms.addMarker(marker);
 			
 			return marker;
 		});
