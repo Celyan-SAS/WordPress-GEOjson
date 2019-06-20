@@ -1100,7 +1100,7 @@ function add_markers( geojson, params ) {
 				}
 			}				
 			
-console.log('defaulticon');
+console.log('defaulticon 2');
 console.log(defaulticon);
 console.log(params.marker_icon);
 			
@@ -1113,14 +1113,14 @@ console.log(params.marker_icon);
 				}
 			}
 			
-			if(icon_1!='' && typeof params.marker_icon!= 'undefined' && params.marker_icon_2!=''){
-				google.maps.event.addListener(marker, 'mouseover', function() {
-					marker.setIcon(params.marker_icon_2);
-				});
-				google.maps.event.addListener(marker, 'mouseout', function() {
-					marker.setIcon(icon_1);
-				});
-			}
+//			if(icon_1!='' && typeof params.marker_icon!= 'undefined' && params.marker_icon_2!=''){
+//				google.maps.event.addListener(marker, 'mouseover', function() {
+//					marker.setIcon(params.marker_icon_2);
+//				});
+//				google.maps.event.addListener(marker, 'mouseout', function() {
+//					marker.setIcon(icon_1);
+//				});
+//			}
 			
 			if('yes' == params.spideroverlaping){
 				google.maps.event.addListener(marker, 'spider_click', function(event) {  // 'spider_click', not plain 'click'
