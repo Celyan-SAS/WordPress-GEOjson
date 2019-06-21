@@ -196,7 +196,7 @@ function clog(data){
 		
 		$('.wpgeojson_locateme').click( function(e) {
 			clog( 'Trying out geolocation...' );
-			if (navigator.geolocation) {
+			if (navigator.geolocation && ( 'undefined' == typeof disable_locateme || !disable_locateme )) {
 				navigator.geolocation.getCurrentPosition( 
 					function( position ){
 						clog( 'position:' );
@@ -1477,7 +1477,7 @@ console.log(marker);
 	
 	if( $('.wpgeojson_locateme').length && $('.wpgeojson_locateme').attr('data-auto') ) {
 		clog( 'Trying out auto geolocation...' );
-		if (navigator.geolocation) {
+		if (navigator.geolocation && ( 'undefined' == typeof disable_locateme || !disable_locateme )) {
 			navigator.geolocation.getCurrentPosition( 
 				function( position ){
 					clog( 'position:' );
