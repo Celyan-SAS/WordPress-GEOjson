@@ -60,15 +60,15 @@ function clog(data){
 		
 		var marker_icon_2 = '';
 		if( $('#map-canvas').attr('data-marker_icon_2') )
-			marker_icon_2 = $('#map-canvas').data('marker_icon_2');
+			marker_icon = $('#map-canvas').data('marker_icon_2');
 		
 		var marker_icon_3 = '';
 		if( $('#map-canvas').attr('data-marker_icon_3') )
-			marker_icon_3 = $('#map-canvas').data('marker_icon_3');
+			marker_icon = $('#map-canvas').data('marker_icon_3');
 		
 		var marker_icon_4 = '';
 		if( $('#map-canvas').attr('data-marker_icon_4') )
-			marker_icon_4 = $('#map-canvas').data('marker_icon_4');
+			marker_icon = $('#map-canvas').data('marker_icon_4');
 		
 		var custom_cluster_icons = 'no';
 		if( $('#map-canvas').attr('data-custom_cluster_icons') )
@@ -345,11 +345,6 @@ function clog(data){
 					});
 					return false;
 				}
-				
-				console.log("TEST DATA");
-				console.log(params);
-				console.log(data);
-				
 				add_markers( data, params );
 				
 				$.event.trigger({
@@ -1070,8 +1065,9 @@ function add_markers( geojson, params ) {
 				nearbyDistance:40,				
 				circleSpiralSwitchover: "Infinity",
 				circleFootSeparation: 50
-			});				
-			clog("version 1");
+			});	
+			
+				console.log("version 1");
 		}
 		
 		/** This code allows clustering **/		
@@ -1080,7 +1076,6 @@ function add_markers( geojson, params ) {
 
 			/** if we are in user type and we want the user thumb **/
 			var defaulticon = true;
-			var icon_1 = '';
 			if(typeof params.user_personnal_icon!= 'undefined' &&  params.user_personnal_icon=='yes'){						
 				if(typeof icons != "undefined" 
 					&& typeof icons[feature.id] != "undefined" 
@@ -1095,33 +1090,16 @@ function add_markers( geojson, params ) {
 						}, //for css look for customoverlay.draw "markerLayer" a few lines down
 						optimized:false
 					});	
-					icon_1 = icon_user;
 					defaulticon = false;
 				}
 			}				
-			
-console.log('defaulticon 2');
-console.log(defaulticon);
-console.log(params.marker_icon);
-			
 			if(defaulticon){					
 				if(typeof params.marker_icon!= 'undefined' &&  params.marker_icon!=''){
 					var marker = new google.maps.Marker({ 'position': position, 'icon':params.marker_icon });
-					icon_1 = params.marker_icon;
-console.log("here create marker -- ");
 				}else{
 					var marker = new google.maps.Marker({ 'position': position});
 				}
 			}
-			
-//			if(icon_1!='' && typeof params.marker_icon!= 'undefined' && params.marker_icon_2!=''){
-//				google.maps.event.addListener(marker, 'mouseover', function() {
-//					marker.setIcon(params.marker_icon_2);
-//				});
-//				google.maps.event.addListener(marker, 'mouseout', function() {
-//					marker.setIcon(icon_1);
-//				});
-//			}
 			
 			if('yes' == params.spideroverlaping){
 				google.maps.event.addListener(marker, 'spider_click', function(event) {  // 'spider_click', not plain 'click'
@@ -1184,9 +1162,6 @@ console.log("here create marker -- ");
 			if('yes' == params.spideroverlaping){
 				oms.addMarker(marker);
 			}
-			
-console.log("the amrker");
-console.log(marker);
 			
 			return marker;
 		});
