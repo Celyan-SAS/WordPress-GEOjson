@@ -60,31 +60,15 @@ function clog(data){
 		
 		var marker_icon_2 = '';
 		if( $('#map-canvas').attr('data-marker_icon_2') )
-			marker_icon = $('#map-canvas').data('marker_icon_2');
+			marker_icon_2 = $('#map-canvas').data('marker_icon_2');
 		
 		var marker_icon_3 = '';
 		if( $('#map-canvas').attr('data-marker_icon_3') )
-			marker_icon = $('#map-canvas').data('marker_icon_3');
+			marker_icon_3 = $('#map-canvas').data('marker_icon_3');
 		
 		var marker_icon_4 = '';
 		if( $('#map-canvas').attr('data-marker_icon_4') )
-			marker_icon = $('#map-canvas').data('marker_icon_4');
-		
-		var custom_cluster_icons = 'no';
-		if( $('#map-canvas').attr('data-custom_cluster_icons') )
-			custom_cluster_icons = $('#map-canvas').data('custom_cluster_icons');	
-		
-		var user_personnal_icon = 'no';
-		if( $('#map-canvas').attr('data-user_personnal_icon') )
-			user_personnal_icon = $('#map-canvas').data('user_personnal_icon');	
-		
-		var spideroverlaping = 'no';
-		if( $('#map-canvas').attr('data-spideroverlaping') )
-			spideroverlaping = $('#map-canvas').data('spideroverlaping');	
-		
-		var spideroverlaping_zoom = 'no';
-		if( $('#map-canvas').attr('data-spideroverlaping_zoom') )
-			spideroverlaping_zoom = $('#map-canvas').data('spideroverlaping_zoom');			
+			marker_icon_4 = $('#map-canvas').data('marker_icon_4');
 		
 		var big_cluster_icon = '';
 		if( $('#map-canvas').attr('data-big_cluster_icon') )
@@ -93,7 +77,7 @@ function clog(data){
 		var medium_cluster_icon = '';
 		if( $('#map-canvas').attr('data-medium_cluster_icon') )
 			medium_cluster_icon = $('#map-canvas').data('medium_cluster_icon');
-				
+		
 		var small_cluster_icon = '';
 		if( $('#map-canvas').attr('data-small_cluster_icon') )
 			small_cluster_icon = $('#map-canvas').data('small_cluster_icon');
@@ -104,13 +88,13 @@ function clog(data){
 		
 		var fit_bounds = 'yes';
 		if( $('#map-canvas').attr('data-fit_bounds') )
-			fit_bounds = $('#map-canvas').data('fit_bounds');
+			load_tiles = $('#map-canvas').data('fit_bounds');
 		
 		var v_load_points = 'yes';
 		if( $('#map-canvas').attr('data-load_points') )
 			v_load_points = $('#map-canvas').data('load_points');
 		
-		var cluster_points = 'no';
+		var cluster_points = 'yes';
 		if( $('#map-canvas').attr('data-cluster_points') )
 			cluster_points = $('#map-canvas').data('cluster_points');
 		
@@ -150,17 +134,13 @@ function clog(data){
 			marker_icon_2: marker_icon_2,
 			marker_icon_3: marker_icon_3,
 			marker_icon_4: marker_icon_4,
-			user_personnal_icon : user_personnal_icon,
-			custom_cluster_icons : custom_cluster_icons,
 			big_cluster_icon: big_cluster_icon,
 			medium_cluster_icon: medium_cluster_icon,
 			small_cluster_icon: small_cluster_icon,
 			map_type: map_type,
 			fit_bounds: fit_bounds,
 			force_load_points: force_load_points,
-			cluster_points: cluster_points,
-			spideroverlaping:spideroverlaping,
-			spideroverlaping_zoom:spideroverlaping_zoom
+			cluster_points: cluster_points
 		}
 		
 		if( 'yes'==v_load_points ) {
@@ -498,18 +478,21 @@ function clog(data){
 				map.data.setStyle( function(my_feature){
 
 					feature_id = my_feature.getId();
-					if( visible.length !== 0 && marker_colors[feature_id] && typeof marker_colors[feature_id] !== 'undefined' ) {
-						color_number = marker_colors[feature_id];
-						if( $('#map-canvas').attr('data-marker_icon_' + color_number) ) {
-							marker_icon = $('#map-canvas').data('marker_icon_' + color_number);
-						} else {
-							marker_icon = $('#map-canvas').data('marker_icon');
-						}
-					} else {
-						marker_icon = $('#map-canvas').data('marker_icon');
-						color_number = '';
-					}
+//					if( visible.length !== 0 && marker_colors[feature_id] && typeof marker_colors[feature_id] !== 'undefined' ) {
+//						color_number = marker_colors[feature_id];
+//						if( $('#map-canvas').attr('data-marker_icon_' + color_number) ) {
+//							marker_icon = $('#map-canvas').data('marker_icon_' + color_number);
+//						} else {
+//							marker_icon = $('#map-canvas').data('marker_icon');
+//						}
+//					} else {
+//						marker_icon = $('#map-canvas').data('marker_icon');
+//						color_number = '';
+//					}
 
+					marker_icon = $('#map-canvas').data('marker_icon');
+					color_number = '';
+						
 					/* DEBUG *
 					clog( 'feature_id: ' + feature_id );
 					clog( 'marker_colors[feature_id]: ' + marker_colors[feature_id] );
@@ -767,16 +750,9 @@ function get_map_options_object( options, map_options ) {
 					if( 'center' == kv[0] ) {
 						kv[1] = kv[1].split(';');
 					}
-					if( 'calculate_google_center' == kv[0] ) {
-						a = kv[1].split(';');
-						kv[1] = new google.maps.LatLng( a[0], a[1] );
-					}
 					if( 'maxBounds' == kv[0] ) {
 						a = kv[1].split(';');
 						kv[1] = [[a[0],a[1]],[a[2],a[3]]];
-					}					
-					if( 'zoom' == kv[0] ) {
-						kv[1] = parseInt(kv[1]);
 					}
 					options[ kv[0] ] = kv[1];
 				}
@@ -831,12 +807,10 @@ function ggmap_init() {
 			mapTypeControlOptions: { mapTypeIds: [] },
 			fullscreenControl: true
 		};
-		
 		var map_options = '';
-		if( $('#map-canvas').attr('data-map_options') ){
-			map_options = $('#map-canvas').data('map_options');		
-			options = get_map_options_object( options, map_options );	
-		}		
+		if( $('#map-canvas').attr('data-map_options') )
+			map_options = $('#map-canvas').data('map_options');
+		options = get_map_options_object( options, map_options );
 				
 		map = new google.maps.Map(document.getElementById("map-canvas"), options);
 		
@@ -854,15 +828,36 @@ function ggmap_init() {
 		
 		infowindow = new google.maps.InfoWindow();
 		
-		// Set mouseover event for each feature.
-		map.data.addListener('mouseover', function(event) {
-			list_highlight( event.feature.getId(), true );
-			clog( 'highlighting:' + event.feature.getId() );
-		});
-		map.data.addListener('mouseout', function(event) {
-			list_highlight( event.feature.getId(), false );
-			clog( 'unlighting:' + event.feature.getId() );
-		});
+		// Set mouseover event for each feature.		
+		setTimeout(function(){
+			map.data.addListener('mouseover', function(event) {
+				list_highlight( event.feature.getId(), true );
+				clog( 'highlighting:' + event.feature.getId() );
+					$.event.trigger({
+						type:		"wpGeoJSON_feature_mouse_over",
+						feature:	event.feature,
+						map:		map,
+						maptype:	"ggmap",
+						time:		new Date()
+					});
+
+			});
+		},1000);
+		
+		setTimeout(function(){
+			map.data.addListener('mouseout', function(event) {
+				list_highlight( event.feature.getId(), false );
+				clog( 'unlighting:' + event.feature.getId() );
+					$.event.trigger({
+						type:		"wpGeoJSON_feature_mouse_out",
+						feature:	event.feature,
+						map:		map,
+						maptype:	"ggmap",
+						time:		new Date()
+					});		
+
+			});
+		},1000);
 		
 		// Set click event on each feature
 		map.data.addListener('click', function(event) {
@@ -1051,175 +1046,16 @@ function add_markers( geojson, params ) {
 	
 	if( 'ggmap' == params.map_type ) {
 		
-		//map.data.addGeoJson(geojson);		
-		var last_spider_format = '';
+		map.data.addGeoJson(geojson);
 		
-		if('yes' == params.spideroverlaping){
-			var oms = new OverlappingMarkerSpiderfier(map, {
-				markersWontMove: true,
-				markersWontHide: true,
-				basicFormatEvents: false,
-//			spiralFootSeparation:500,
-//				spiralLengthStart:0,
-//			spiralLengthFactor:5,
-				nearbyDistance:40,				
-				circleSpiralSwitchover: "Infinity",
-				circleFootSeparation: 50
-			});	
-			
-				console.log("version 1");
-		}
-		
-		/** This code allows clustering **/		
+		/** This code allows clustering **	
 		var flmarkers = geojson.features.map(function (feature) {
 			var position = new google.maps.LatLng( feature.geometry.coordinates[1], feature.geometry.coordinates[0] );
-
-			/** if we are in user type and we want the user thumb **/
-			var defaulticon = true;
-			if(typeof params.user_personnal_icon!= 'undefined' &&  params.user_personnal_icon=='yes'){						
-				if(typeof icons != "undefined" 
-					&& typeof icons[feature.id] != "undefined" 
-					&& icons[feature.id].icon ){
-					var icon_user = icons[feature.id].icon;
-					var marker = new google.maps.Marker({ 
-						'position': position, 
-						'map': map,
-						'icon': { 
-							url:icon_user,
-							scaledSize: new google.maps.Size(40, 40)
-						}, //for css look for customoverlay.draw "markerLayer" a few lines down
-						optimized:false
-					});	
-					defaulticon = false;
-				}
-			}				
-			if(defaulticon){					
-				if(typeof params.marker_icon!= 'undefined' &&  params.marker_icon!=''){
-					var marker = new google.maps.Marker({ 'position': position, 'icon':params.marker_icon });
-				}else{
-					var marker = new google.maps.Marker({ 'position': position});
-				}
-			}
-			
-			if('yes' == params.spideroverlaping){
-				google.maps.event.addListener(marker, 'spider_click', function(event) {  // 'spider_click', not plain 'click'
-					//infowindow.setContent(markerData.text);
-					//infowindow.open(map, marker);
-					$.event.trigger({
-						type:	"wpGeoJSON_marker_clicked",
-						marker_clicked: event,
-						marker:marker,
-						feature:feature,
-						time:	new Date()
-					});				
-				});
-				
-
-				/** listen to the status of the marker to know what icon for the spider **/
-				google.maps.event.addListener(marker, 'spider_format', function(status) {
-					last_spider_format = status;
-					/** spiderfied clicked and changed to round thing, we reset imges to their original **/
-					if(status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIED){
-						marker.setIcon({
-							url:icon_user,
-							scaledSize: new google.maps.Size(40, 40),
-							anchor: new google.maps.Point(20, 20)
-							//scaledSize: new google.maps.Size(32, 32)  // makes SVG icons work in IE
-						});
-					}					
-					/** if we are in the zoom zone that cluster does not cover and we have not clicked on the spider **/
-					if(status == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE){
-						var regroup_spider_url = '';
-						if(params.big_cluster_icon != ''){
-							regroup_spider_url = params.medium_cluster_icon;
-						}else if(params.medium_cluster_icon != ''){
-							regroup_spider_url = params.small_cluster_icon;
-						}else if(params.small_cluster_icon != ''){
-							regroup_spider_url = params.big_cluster_icon;
-						}
-						marker.setIcon({
-							url: regroup_spider_url,
-							scaledSize: new google.maps.Size(40, 40)  // makes SVG icons work in IE
-						});
-					}					
-				});	
-			}
-		
-			/** other listener when we do not have spider **/
-			if('no' == params.spideroverlaping){
-				/** add event listener **/
-				marker.addListener('click', function(event) {
-					$.event.trigger({
-						type:	"wpGeoJSON_marker_clicked",
-						marker_clicked: event,
-						marker:marker,
-						feature:feature,
-						time:	new Date()
-					});
-				});
-			}
-			
-			if('yes' == params.spideroverlaping){
-				oms.addMarker(marker);
-			}
-			
-			return marker;
-		});
-				
-		google.maps.event.addListenerOnce(map, 'idle', function() {
-			if(map.getZoom() > 14){
-				map.setZoom(map.getZoom());
-			}
-		});
-		
-		map.addListener('zoom_changed', function() {
-				clog('Zoom: ' + map.getZoom());
-		});
-
-		if( 'yes' == params.cluster_points ) {
-			if(typeof params.custom_cluster_icons!= 'undefined' &&  params.custom_cluster_icons!='no'){
-				var clusterStyles = [
-					{
-						textColor: 'black',
-						url: params.big_cluster_icon,
-						height: 32,
-						width: 32
-					},
-					{
-						textColor: 'black',
-						url: params.medium_cluster_icon,
-						height: 32,
-						width: 32
-					},
-					{
-						textColor: 'black',
-						url: params.small_cluster_icon,
-						height: 32,
-						width: 32
-					}
-				];
-				var mcOptions = {
-					maxZoom: 10,
-					styles: clusterStyles
-				}				
-				var markerCluster = new MarkerClusterer(
-				map, 
-				flmarkers,
-				mcOptions);
-			}else{
-				var markerCluster = new MarkerClusterer(
-				map, 
-				flmarkers,
-				{ imagePath: 'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m' });
-			}
-			if('yes' == params.spideroverlaping){
-				if(params.spideroverlaping_zoom != '' && params.spideroverlaping_zoom != 'no'){
-					markerCluster.setMaxZoom(params.spideroverlaping_zoom);
-				}else{
-					markerCluster.setMaxZoom(15);
-				}
-			}
-		}
+            var marker = new google.maps.Marker({ 'position': position, 'icon':'/wp-content/uploads/2019/05/picto_20.png' });
+            return marker;
+        });
+		var markerCluster = new MarkerClusterer(map, flmarkers,{ imagePath: 'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m' });
+		/** **/
 		
 		if( params.marker_icon ){
 			map.data.setStyle({icon: params.marker_icon});
@@ -1242,20 +1078,6 @@ function add_markers( geojson, params ) {
 		map.data.addGeoJson(hull);
 		map.data.addGeoJson(hull2, { fillColor: 'red', style: {color: 'red', fillColor: 'red'} });
 		*/
-	   
-		/** allow customisation of icons by css, target #markerLayer **/
-		var customoverlay = new google.maps.OverlayView();
-		customoverlay.draw = function () {
-			if(last_spider_format!='' && 
-				last_spider_format == OverlappingMarkerSpiderfier.markerStatus.SPIDERFIABLE)
-			{
-				this.getPanes().markerLayer.id='markerLayer_spider';
-			}else{
-				this.getPanes().markerLayer.id='markerLayer';
-			}			
-		};
-		customoverlay.setMap(map);
-	   
 	}
 	
 	if( 'leaflet' == params.map_type ) {
