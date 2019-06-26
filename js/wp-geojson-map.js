@@ -570,7 +570,9 @@ function clog(data){
 	        infowindow.close();
 	    }
 		infowindow.setContent( html );
-		infowindow.setPosition( feature.getGeometry().get() );
+		
+console.log("info here set position");
+//		infowindow.setPosition( feature.getGeometry().get() );
 	    infowindow.setOptions( { pixelOffset: new google.maps.Size(0,-30) } );
 	    infowindow.open(map);
 	};
@@ -948,7 +950,7 @@ function find_closest_marker( pos ) {
  */
 function getCity( latLng, closest_position ) {
 	
-		console.log("GET CITY ------------------ ");
+console.log("GET CITY ------------------ ");
 	
 	var geocoder= new google.maps.Geocoder();
 	geocoder.geocode({'latLng': latLng}, function(results, status) {
