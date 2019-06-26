@@ -233,6 +233,7 @@ function clog(data){
 						time:	new Date()
 					});
 					
+console.log("SET CENTYERT");
 					map.setCenter( place.geometry.location );
 					var closest_m = find_closest_marker( place.geometry.location );
 					clog( 'closest marker:' );
@@ -824,6 +825,8 @@ function ggmap_init() {
 		var bounds = new google.maps.LatLngBounds();
 		map.data.addListener('addfeature', function(e) {
 			processPoints(e.feature.getGeometry(), bounds.extend, bounds);
+			
+console.log("FIT BOUND 1 ");
 			map.fitBounds(bounds);
 		});
 		
@@ -966,6 +969,7 @@ function getCity( latLng, closest_position ) {
 			clog( 'city_bounds:' );
 			clog( city_bounds );
 			city_bounds.extend( closest_position );
+console.log("BOUND CITY");			
 			map.fitBounds( city_bounds );
 
     			if (results[1]) {
@@ -1316,6 +1320,7 @@ function center_map_on_feature( id ) {
 		if( 'Point' == feature.geometry.type ) {
 			if( id == feature.id ) {
 				position = new google.maps.LatLng( feature.geometry.coordinates[1], feature.geometry.coordinates[0] );
+console.log("CENTER position");				
 				map.setCenter( position );
 				clog( 'centered feature:' );
 				clog( feature );
@@ -1364,6 +1369,7 @@ function locate_me( position ) {
 	
 	clog( 'marker ok' );
 	
+console.log("PAN TO");
 	map.panTo( pos );
 	clog( 'panTo ok' );
 	
