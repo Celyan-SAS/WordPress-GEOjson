@@ -13,6 +13,7 @@ var list_limit = 50;	// Maximum number of point data to return in the list box
 var field_names;
 var gray_if_no;
 var last_params_used;
+var refrech_list_left;
 
 function clog(data){
 	if(false){
@@ -897,9 +898,14 @@ function on_bounds_changed() {
 	//clog( 'bounds changed' );
 	var visible = get_visible_markers();
 	
-	if( nodes = document.getElementsByClassName("wpgeojson_list") ) {
-		update_list_box( visible );	
-	}
+	clearTimeout(refrech_list_left);
+	refrech_list_left = setTimeout(function(){
+console.log("bound change");
+		if( nodes = document.getElementsByClassName("wpgeojson_list") ) {
+			update_list_box( visible );	
+		}
+	}, 2000);
+
 }
 
 /**
