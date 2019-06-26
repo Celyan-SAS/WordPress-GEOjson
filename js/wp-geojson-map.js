@@ -1342,6 +1342,8 @@ function center_map_on_feature( id ) {
 
 function locate_me( position ) {
 	
+console.log("LOCATE ME --- ");
+	
 	clog( 'locate me!' );
 	
 	if( 'undefined' == typeof map || !map )
