@@ -824,10 +824,10 @@ function ggmap_init() {
 		// zoom to show all the features
 		var bounds = new google.maps.LatLngBounds();
 		map.data.addListener('addfeature', function(e) {
-			processPoints(e.feature.getGeometry(), bounds.extend, bounds);
-			
-console.log("FIT BOUND 1 ");
-			map.fitBounds(bounds);
+//			processPoints(e.feature.getGeometry(), bounds.extend, bounds);
+//			
+//console.log("FIT BOUND 1 ");
+//			map.fitBounds(bounds);
 		});
 		
 		infowindow = new google.maps.InfoWindow();
