@@ -824,9 +824,8 @@ function ggmap_init() {
 		var bounds = new google.maps.LatLngBounds();
 		map.data.addListener('addfeature', function(e) {
 			processPoints(e.feature.getGeometry(), bounds.extend, bounds);
-			
-				console.log("FIT BOUNDS 1");
-			map.fitBounds(bounds);
+console.log("FIT BOUNDS 1 TEST");
+			//map.fitBounds(bounds);
 		});
 		
 		infowindow = new google.maps.InfoWindow();
@@ -1238,7 +1237,6 @@ function add_markers( geojson, params ) {
 		
 		var bounds = features.getBounds();
 		if( 'no' != params.fit_bounds ) {
-			console.log("FIT BOUNDS 2");
 			map.fitBounds( bounds, {
 	            padding: [10, 20]
 	        });
@@ -1257,7 +1255,6 @@ function add_markers( geojson, params ) {
 		
 		var group = L.featureGroup( allFeatures );
 		if( 'no' != params.fit_bounds ) {
-			console.log("FIT BOUNDS 3");
 			map.fitBounds(group.getBounds());
 		}
 		
