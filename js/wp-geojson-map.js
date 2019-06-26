@@ -826,10 +826,7 @@ function ggmap_init() {
 		if( $('#map-canvas').attr('data-fit_bounds') ){
 			fitbounds = $('#map-canvas').attr('data-fit_bounds');
 		}
-			console.log("fit?");
-			console.log(fitbounds);
 		if(fitbounds == "yes"){
-				console.log("inside fit");
 			var bounds = new google.maps.LatLngBounds();
 			map.data.addListener('addfeature', function(e) {
 				processPoints(e.feature.getGeometry(), bounds.extend, bounds);
