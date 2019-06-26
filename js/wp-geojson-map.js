@@ -966,7 +966,8 @@ function getCity( latLng, closest_position ) {
 			clog( 'city_bounds:' );
 			clog( city_bounds );
 			city_bounds.extend( closest_position );
-			map.fitBounds( city_bounds );
+console.log("ICI -- fit bounds");
+//map.fitBounds( city_bounds );
 
     			if (results[1]) {
      				//formatted address
