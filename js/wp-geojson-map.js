@@ -801,6 +801,8 @@ function ggmap_init() {
 	
 	clog( 'ggmap_init()' );
 	
+		console.log("VERSION TEST 1 ---- ");
+	
 	if( document.getElementById("map-canvas") ) {
 		
 		clog( 'found map-canvas' );
