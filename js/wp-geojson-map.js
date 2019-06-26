@@ -233,7 +233,9 @@ function clog(data){
 						time:	new Date()
 					});
 					
-					map.setCenter( place.geometry.location );
+					console.log("CENTER MAP 2");
+					//map.setCenter( place.geometry.location );
+					
 					var closest_m = find_closest_marker( place.geometry.location );
 					clog( 'closest marker:' );
 					clog( closest_m );
@@ -1323,7 +1325,10 @@ function center_map_on_feature( id ) {
 		if( 'Point' == feature.geometry.type ) {
 			if( id == feature.id ) {
 				position = new google.maps.LatLng( feature.geometry.coordinates[1], feature.geometry.coordinates[0] );
-				map.setCenter( position );
+				
+					console.log("CENTER MAP 1 ");
+				
+				//map.setCenter( position );
 				clog( 'centered feature:' );
 				clog( feature );
 				open_infowindow( map.data.getFeatureById( id ) );
