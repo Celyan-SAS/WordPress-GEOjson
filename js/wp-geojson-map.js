@@ -89,7 +89,7 @@ function clog(data){
 		
 		var fit_bounds = 'yes';
 		if( $('#map-canvas').attr('data-fit_bounds') )
-			load_tiles = $('#map-canvas').data('fit_bounds');
+			fit_bounds = $('#map-canvas').data('fit_bounds');
 		
 		var v_load_points = 'yes';
 		if( $('#map-canvas').attr('data-load_points') )
@@ -822,13 +822,13 @@ function ggmap_init() {
 		});
 		
 		// zoom to show all the features
-		var bounds = new google.maps.LatLngBounds();
-		map.data.addListener('addfeature', function(e) {
-//			processPoints(e.feature.getGeometry(), bounds.extend, bounds);
-//			
-//console.log("FIT BOUND 1 ");
-//			map.fitBounds(bounds);
-		});
+		if( 'no' != params.fit_bounds ) {
+			var bounds = new google.maps.LatLngBounds();
+			map.data.addListener('addfeature', function(e) {
+				processPoints(e.feature.getGeometry(), bounds.extend, bounds);
+				map.fitBounds(bounds);
+			});
+		}
 		
 		infowindow = new google.maps.InfoWindow();
 		
@@ -969,7 +969,6 @@ function getCity( latLng, closest_position ) {
 			clog( 'city_bounds:' );
 			clog( city_bounds );
 			city_bounds.extend( closest_position );
-console.log("BOUND CITY");			
 			map.fitBounds( city_bounds );
 
     			if (results[1]) {
