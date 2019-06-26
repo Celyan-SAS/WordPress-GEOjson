@@ -233,9 +233,7 @@ function clog(data){
 						time:	new Date()
 					});
 					
-					console.log("CENTER MAP 2");
-					//map.setCenter( place.geometry.location );
-					
+					map.setCenter( place.geometry.location );
 					var closest_m = find_closest_marker( place.geometry.location );
 					clog( 'closest marker:' );
 					clog( closest_m );
@@ -572,9 +570,7 @@ function clog(data){
 	        infowindow.close();
 	    }
 		infowindow.setContent( html );
-		
-console.log("info here set position");
-//		infowindow.setPosition( feature.getGeometry().get() );
+		infowindow.setPosition( feature.getGeometry().get() );
 	    infowindow.setOptions( { pixelOffset: new google.maps.Size(0,-30) } );
 	    infowindow.open(map);
 	};
@@ -801,8 +797,6 @@ function ggmap_init() {
 	
 	clog( 'ggmap_init()' );
 	
-		console.log("VERSION TEST 1 ---- ");
-	
 	if( document.getElementById("map-canvas") ) {
 		
 		clog( 'found map-canvas' );
@@ -830,8 +824,7 @@ function ggmap_init() {
 		var bounds = new google.maps.LatLngBounds();
 		map.data.addListener('addfeature', function(e) {
 			processPoints(e.feature.getGeometry(), bounds.extend, bounds);
-console.log("FIT BOUNDS 1 TEST");
-			//map.fitBounds(bounds);
+			map.fitBounds(bounds);
 		});
 		
 		infowindow = new google.maps.InfoWindow();
@@ -953,9 +946,6 @@ function find_closest_marker( pos ) {
  *
  */
 function getCity( latLng, closest_position ) {
-	
-console.log("GET CITY ------------------ ");
-	
 	var geocoder= new google.maps.Geocoder();
 	geocoder.geocode({'latLng': latLng}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
@@ -976,8 +966,7 @@ console.log("GET CITY ------------------ ");
 			clog( 'city_bounds:' );
 			clog( city_bounds );
 			city_bounds.extend( closest_position );
-console.log("ICI -- fit bounds");
-//map.fitBounds( city_bounds );
+			map.fitBounds( city_bounds );
 
     			if (results[1]) {
      				//formatted address
@@ -1327,10 +1316,7 @@ function center_map_on_feature( id ) {
 		if( 'Point' == feature.geometry.type ) {
 			if( id == feature.id ) {
 				position = new google.maps.LatLng( feature.geometry.coordinates[1], feature.geometry.coordinates[0] );
-				
-					console.log("CENTER MAP 1 ");
-				
-				//map.setCenter( position );
+				map.setCenter( position );
 				clog( 'centered feature:' );
 				clog( feature );
 				open_infowindow( map.data.getFeatureById( id ) );
@@ -1348,8 +1334,6 @@ function center_map_on_feature( id ) {
 }
 
 function locate_me( position ) {
-	
-console.log("LOCATE ME --- ");
 	
 	clog( 'locate me!' );
 	
@@ -1380,9 +1364,7 @@ console.log("LOCATE ME --- ");
 	
 	clog( 'marker ok' );
 	
-	
-console.log("PANTo -- stop");
-	//map.panTo( pos );
+	map.panTo( pos );
 	clog( 'panTo ok' );
 	
 	var closest_m = find_closest_marker( pos );
