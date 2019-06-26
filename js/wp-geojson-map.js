@@ -896,19 +896,13 @@ function processPoints(geometry, callback, thisArg) {
 /** Google Maps function **/
 function on_bounds_changed() {
 	//clog( 'bounds changed' );
-	var visible = get_visible_markers();
-	
-console.log("REFRECH");
-	
+	var visible = get_visible_markers();	
 	clearTimeout(refrech_list_left);
 	refrech_list_left = setTimeout(function(){
-console.log("bound change");
 		if( nodes = document.getElementsByClassName("wpgeojson_list") ) {
-console.log("UPDATE ------- ");			
 			update_list_box( visible );	
 		}
-	}, 2000);
-
+	}, 1500);
 }
 
 /**
