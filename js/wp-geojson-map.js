@@ -1371,7 +1371,9 @@ function locate_me( position ) {
 	
 	clog( 'marker ok' );
 	
-	map.panTo( pos );
+	
+console.log("PANTo -- stop");
+	//map.panTo( pos );
 	clog( 'panTo ok' );
 	
 	var closest_m = find_closest_marker( pos );
