@@ -233,7 +233,6 @@ function clog(data){
 						time:	new Date()
 					});
 					
-console.log("SET CENTYERT");
 					map.setCenter( place.geometry.location );
 					var closest_m = find_closest_marker( place.geometry.location );
 					clog( 'closest marker:' );
@@ -1322,8 +1321,7 @@ function center_map_on_feature( id ) {
 	allFeatures.forEach( function( feature ) {
 		if( 'Point' == feature.geometry.type ) {
 			if( id == feature.id ) {
-				position = new google.maps.LatLng( feature.geometry.coordinates[1], feature.geometry.coordinates[0] );
-console.log("CENTER position");				
+				position = new google.maps.LatLng( feature.geometry.coordinates[1], feature.geometry.coordinates[0] );			
 				map.setCenter( position );
 				clog( 'centered feature:' );
 				clog( feature );
@@ -1371,8 +1369,6 @@ function locate_me( position ) {
 	});
 	
 	clog( 'marker ok' );
-	
-console.log("PAN TO");
 	map.panTo( pos );
 	clog( 'panTo ok' );
 	
