@@ -408,9 +408,6 @@ function clog(data){
 				general_data: JSON.stringify(general_data),
 			}, function( data ) {
 				
-				console.log("TESTdata -- ");
-				console.log(data);
-				
 				if( data ) {					
 					html = data;
 				}else{
