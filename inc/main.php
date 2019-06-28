@@ -842,6 +842,17 @@ class wpGEOjson {
 	
 	public function get_points_for_post_type() {
 		
+		/** in case we want to use a query in the theme **/
+		$geojson = false;
+		$geojson = apply_filters('geojson_getpointsforposttype_geojson_replace',$geojson,$_REQUEST);
+		if(!$geojson){
+			if( $json = json_encode( $geojson, JSON_NUMERIC_CHECK ) ){
+				$this->store_cache( $post_type, $acf_field_id, 'all', $json );
+			}
+			$this->send_ajax_response( $json );
+			return;
+		}
+		
 		/** Get the ajax request parameters **/
 		$post_type = 'post';	//default
 		if( !empty( $_REQUEST['post_type'] ) ){
