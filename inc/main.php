@@ -855,6 +855,13 @@ class wpGEOjson {
 		if( !empty( $_REQUEST['selection'] ) )
 			$selection = sanitize_text_field( $_REQUEST['selection'] );
 		
+		if( empty( $acf_field_id ) ){
+			$acf_field_id = $this->find_acf_ggmap_field( $post_type );
+			$acf_field_id = apply_filters('geojson_getpointsforposttype_geofieldid',$acf_field_id,$post_type);
+			if( !$acf_field_id ){				
+				$this->send_ajax_error( 'geo field not found' );
+			}
+		}
 		
 		/** in case we want to use a query in the theme **/
 		$geojson = false;
@@ -865,16 +872,7 @@ class wpGEOjson {
 			}
 			$this->send_ajax_response( $json );
 			return;
-		}//stop here
-		
-		
-		if( empty( $acf_field_id ) ){
-			$acf_field_id = $this->find_acf_ggmap_field( $post_type );
-			$acf_field_id = apply_filters('geojson_getpointsforposttype_geofieldid',$acf_field_id,$post_type);
-			if( !$acf_field_id ){				
-				$this->send_ajax_error( 'geo field not found' );
-			}
-		}
+		}//stop here		
 
 		$fields = array();
 		if( !empty( $_REQUEST['fields'] ) )
