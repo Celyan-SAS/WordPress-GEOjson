@@ -845,7 +845,7 @@ class wpGEOjson {
 		/** in case we want to use a query in the theme **/
 		$geojson = false;
 		$geojson = apply_filters('geojson_getpointsforposttype_geojson_replace',$geojson,$_REQUEST);
-		if(!$geojson){
+		if($geojson){
 			if( $json = json_encode( $geojson, JSON_NUMERIC_CHECK ) ){
 				$this->store_cache( $post_type, $acf_field_id, 'all', $json );
 			}
