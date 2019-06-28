@@ -390,68 +390,7 @@ function clog(data){
 			
 			fields_arr = field_names.split(",");
 				
-			html += '<ul>';
-			var marker_colors = [];
-			var count = 0;
-			visible.forEach( function( feature ){
-				
-				count ++;
-				
-				if( count > list_limit )
-					return;
-				
-				var color_number = ( ( count - 1 ) % 4 ) + 1;
-				//clog(feature);
-				marker_colors[feature.id] = color_number;
-				
-				html += '<li ';
-				if( feature.id )
-					html += 'id="' + feature.id + '" ';
-				html += 'class="color_' + color_number + '" ';
-				html += '>';
-				
-				if( feature.properties['link'] && !list_box.attr('data-no_link') )
-					html += '<a href="' + feature.properties['link'] + '">';
-				
-				fields_arr.forEach( function( field ){
-					
-					html += '<div class="' + field + '">';
-					if( typeof feature.properties[field] !== 'undefined' )
-						html += nl2br( feature.properties[field] );
-					html += '</div>';
-					
-				});
-				
-				if( feature.properties['link'] && !list_box.attr('data-no_link') )
-					html += '</a>';
-				
-				if( locate_button || more_button )
-					html += '<div class="clear">';
-				
-				if( locate_button && feature.id ) {
-					html += '<input type="button" class="locate_button" value="' + locate_text + '" data-id="' + feature.id + '" ';
-					html += '/>';
-				}
 
-				if( locate_button && more_button )
-					html += ' ';
-				
-				if( more_button && feature.id && feature.properties['link'] != 'no_link' ) {
-					html += '<input type="button" class="more_button" value="' + more_text + '" data-id="' + feature.id + '" ';
-					if( feature.properties['link'] ) {
-						html += 'data-link="' + feature.properties['link'] + '" ';
-					}
-					html += 'data-blank="' + more_blank + '" ';
-					html += '/>';	
-				}
-				
-				if( locate_button || more_button )
-					html += '</div>';
-				
-				html +='</li>';
-			});
-			
-			html += '</ul>';
 			
 			/** add ajax call to do a filter **/
 			var general_data = {
@@ -467,11 +406,79 @@ function clog(data){
 				action: 'geojson_html_result_build_filter',
 				visible: JSON.stringify(visible),
 				general_data: JSON.stringify(general_data),
-				html:html,
 			}, function( data ) {
+				
+				console.log("TESTdata -- ");
+				console.log(data);
+				
 				if( data ) {					
 					html = data;
-				}				
+				}else{
+					//if we do not have a external creator of the list, we do it here
+					html += '<ul>';
+					var marker_colors = [];
+					var count = 0;
+					visible.forEach( function( feature ){
+
+						count ++;
+
+						if( count > list_limit )
+							return;
+
+						var color_number = ( ( count - 1 ) % 4 ) + 1;
+						//clog(feature);
+						marker_colors[feature.id] = color_number;
+
+						html += '<li ';
+						if( feature.id )
+							html += 'id="' + feature.id + '" ';
+						html += 'class="color_' + color_number + '" ';
+						html += '>';
+
+						if( feature.properties['link'] && !list_box.attr('data-no_link') )
+							html += '<a href="' + feature.properties['link'] + '">';
+
+						fields_arr.forEach( function( field ){
+
+							html += '<div class="' + field + '">';
+							if( typeof feature.properties[field] !== 'undefined' )
+								html += nl2br( feature.properties[field] );
+							html += '</div>';
+
+						});
+
+						if( feature.properties['link'] && !list_box.attr('data-no_link') )
+							html += '</a>';
+
+						if( locate_button || more_button )
+							html += '<div class="clear">';
+
+						if( locate_button && feature.id ) {
+							html += '<input type="button" class="locate_button" value="' + locate_text + '" data-id="' + feature.id + '" ';
+							html += '/>';
+						}
+
+						if( locate_button && more_button )
+							html += ' ';
+
+						if( more_button && feature.id && feature.properties['link'] != 'no_link' ) {
+							html += '<input type="button" class="more_button" value="' + more_text + '" data-id="' + feature.id + '" ';
+							if( feature.properties['link'] ) {
+								html += 'data-link="' + feature.properties['link'] + '" ';
+							}
+							html += 'data-blank="' + more_blank + '" ';
+							html += '/>';	
+						}
+
+						if( locate_button || more_button )
+							html += '</div>';
+
+						html +='</li>';
+					});
+
+					html += '</ul>';					
+					
+				}
 			}).always(function() {
 				list_box.html( html );
 				

@@ -82,7 +82,7 @@ class wpGEOjson {
 		$list_visible = json_decode(stripslashes($_POST['visible']));
 		$general_data = json_decode(stripslashes($_POST['general_data']));
 		
-		$html = $_POST['html'];				
+		$html = false;				
 		$html = apply_filters('geojson_html_result_build_filter',$html,$list_visible,$general_data);
 				
 		echo $html;
