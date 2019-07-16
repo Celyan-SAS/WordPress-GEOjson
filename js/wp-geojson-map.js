@@ -988,11 +988,11 @@ function getCity( latLng, closest_position ) {
 			clog( 'city_bounds:' );
 			clog( city_bounds );
 			
-				console.log("TEST ---- ");
-			console.log(city_bounds);
-				console.log(closest_position);
+console.log("TEST ---- ");
+console.log(city_bounds);
+console.log(closest_position.coords);
 			
-			city_bounds.extend( closest_position );			
+			city_bounds.extend( closest_position.coords );			
 			map.fitBounds( city_bounds );
 
 			if (results[1]) {
