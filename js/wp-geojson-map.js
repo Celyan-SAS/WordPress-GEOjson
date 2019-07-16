@@ -362,7 +362,6 @@ function clog(data){
 			status:		"before_update_list_box",
 			time:		new Date()
 		});
-		return;
 		
 		$('.wpgeojson_list').each( function( index ) {
 			
