@@ -1340,6 +1340,7 @@ function center_map_on_feature( id ) {
 					status:	"center_map_on_feature",
 					position: position,
 					feature_id : feature.id,
+					feature : feature,
 					time:	new Date()
 				});				
 			}
