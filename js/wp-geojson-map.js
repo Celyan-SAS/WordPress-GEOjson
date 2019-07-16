@@ -357,6 +357,11 @@ function clog(data){
 		clog( 'visible:' );
 		clog( visible );
 		/* */
+		$.event.trigger({
+			type:		"wpGeoJSON",
+			status:		"before_update_list_box",
+			time:		new Date()
+		});
 		
 		$('.wpgeojson_list').each( function( index ) {
 			
@@ -506,8 +511,15 @@ function clog(data){
 					/* */
 
 					return({icon: marker_icon});
-				});				
+				});		
+				
 			});
+		});
+		
+		$.event.trigger({
+			type:		"wpGeoJSON",
+			status:		"after_update_list_box",
+			time:		new Date()
 		});
 	};
 	
