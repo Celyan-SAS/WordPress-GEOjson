@@ -1379,13 +1379,13 @@ function locate_me( position ) {
 	var closest_m = find_closest_marker( pos );
 	clog( 'closest marker:' );
 	clog( closest_m );
-	//map.setZoom( 15 );
 	
-	var bounds = new google.maps.LatLngBounds();
-	var position = new google.maps.LatLng( closest_m.geometry.coordinates[1], closest_m.geometry.coordinates[0] );
-	//bounds.extend(position);
-	//bounds.extend(place.geometry.location);
-	getCity( pos, position );
+	if(typeof closest_m !="undefined"
+		&& typeof closest_m.geometry !="undefined"
+		&& typeof closest_m.geometry.coordinates !="undefined"){
+		var position = new google.maps.LatLng( closest_m.geometry.coordinates[1], closest_m.geometry.coordinates[0] );
+	}
+	getCity( pos, position );		
 }
 
 /** See: https://stackoverflow.com/questions/2919337/jquery-convert-line-breaks-to-br-nl2br-equivalent **/
