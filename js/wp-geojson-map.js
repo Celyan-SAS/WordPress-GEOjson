@@ -975,21 +975,25 @@ function getCity( latLng, closest_position ) {
 			}
 			clog( 'city_bounds:' );
 			clog( city_bounds );
-			city_bounds.extend( closest_position );
+			
+				console.log("TEST ---- ");
+			console.log(city_bounds);
+				console.log(closest_position);
+			
+			city_bounds.extend( closest_position );			
 			map.fitBounds( city_bounds );
 
-    			if (results[1]) {
-     				//formatted address
-    				clog( results[0].formatted_address );
-			        //find city name
+			if (results[1]) {
+				//formatted address
+				clog( results[0].formatted_address );
+				//find city name
 				for (var i=0; i<results[0].address_components.length; i++) {
 					for (var b=0;b<results[0].address_components[i].types.length;b++) {
 
 						//there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
 						if ( results[0].address_components[i].types[0] == 'locality' ) {
-                						//this is the object you are looking for
-                						city = results[0].address_components[i];
-
+							//this is the object you are looking for
+							city = results[0].address_components[i];
 							$ = jQuery;
 							$('h4.ville').html( city.long_name );
 							return city;
