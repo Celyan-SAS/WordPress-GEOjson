@@ -988,15 +988,9 @@ function getCity( latLng, closest_position ) {
 			clog( 'city_bounds:' );
 			clog( city_bounds );
 			
-console.log("TEST ---- ");
-console.log(city_bounds);
-console.log(closest_position.coords);
 			var point_extend = new google.maps.LatLng(
 				parseFloat(closest_position.coords.latitude),
 				parseFloat(closest_position.coords.longitude));
-				
-				console.log("point");
-				console.log(point_extend);
 				
 			city_bounds.extend( point_extend );			
 			map.fitBounds( city_bounds );
