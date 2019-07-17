@@ -265,6 +265,12 @@ function clog(data){
 	 */
 	window.load_points = function( params ) {
 		clog( 'Loading points...' );
+		
+		$.event.trigger({
+			type:		"wpGeoJSON",
+			status:		"load_points_started",
+			time:		new Date()
+		});
 
 		if(map != undefined){
 			/**reset map features **/
