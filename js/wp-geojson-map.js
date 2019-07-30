@@ -516,6 +516,12 @@ function clog(data){
 					clog( 'color_number: ' + color_number );
 					/* */
 
+					$.event.trigger({
+						type:		"wpGeoJSON",
+						status:		"after_update_list_box_ajaxalways",
+						time:		new Date()
+					});
+		
 					return({icon: marker_icon});
 				});		
 				
