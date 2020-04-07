@@ -924,7 +924,14 @@ echo "<pre>", print_r($oth_post_type, 1), "</pre>";
 			if( !preg_match( '/^\d+$/', $value ) ) {
 				$post = get_page_by_path( $value, OBJECT, $oth_post_type );
 				$value = $post->ID;
+				
+				echo "<pre>", print_r("HERE", 1), "</pre>";
+echo "<pre>", print_r($value, 1), "</pre>";
+
 			}
+			
+echo "<pre>", print_r("value 2 ---------", 1), "</pre>";
+echo "<pre>", print_r($value, 1), "</pre>";
 			
 			$geojson['properties']['value2']	= $value;
 		
