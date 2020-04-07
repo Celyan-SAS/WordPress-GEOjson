@@ -915,23 +915,11 @@ class wpGEOjson {
 			/** Find the other part of the relationship field **/
 			$oth_post_type = $this->find_acf_rel_pt( $post_type, $key );
 										
-			echo "<pre>", print_r($post_type, 1), "</pre>";
-			echo "<pre>", print_r($key, 1), "</pre>";
-echo "<pre>", print_r("oth_post_type", 1), "</pre>";
-echo "<pre>", print_r($oth_post_type, 1), "</pre>";
-			
 			/** If the relation value was passed by path, find the post ID **/
 			if( !preg_match( '/^\d+$/', $value ) ) {
 				$post = get_page_by_path( $value, OBJECT, $oth_post_type );
 				$value = $post->ID;
-				
-				echo "<pre>", print_r("HERE", 1), "</pre>";
-echo "<pre>", print_r($value, 1), "</pre>";
-
 			}
-			
-echo "<pre>", print_r("value 2 ---------", 1), "</pre>";
-echo "<pre>", print_r($value, 1), "</pre>";
 			
 			$geojson['properties']['value2']	= $value;
 		
@@ -1144,26 +1132,14 @@ echo "<pre>", print_r($value, 1), "</pre>";
 	private function find_acf_rel_pt( $post_type, $key ) {
 		
 		
-		if( !function_exists( 'get_field_objects' ) ){
-			echo "<pre>", print_r("first false", 1), "</pre>";
+		if( !function_exists( 'get_field_objects' ) )
 			return false;
-		}
-			
 		
-		if( !$posts = get_posts( array( 'post_type'=>$post_type ) ) ){
-			echo "<pre>", print_r("no posts", 1), "</pre>";
-			echo "<pre>", print_r($posts, 1), "</pre>";
+		if( !$posts = get_posts( array( 'post_type'=>$post_type ) ) )
 			return false;
-		}
 		
-		if( !$fields = get_field_objects( $posts[0]->ID ) ){
-			echo "<pre>", print_r("no fields", 1), "</pre>";
-			echo "<pre>", print_r($fields, 1), "</pre>";
+		if( !$fields = get_field_objects( $posts[0]->ID ) )
 			return false;
-		}
-		
-		echo "<pre>", print_r("---------------fields", 1), "</pre>";
-		echo "<pre>", print_r($fields, 1), "</pre>";
 		
 		foreach( $fields as $field )
 			if( $key == $field['name'] )
