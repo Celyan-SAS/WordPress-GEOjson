@@ -915,6 +915,8 @@ class wpGEOjson {
 			/** Find the other part of the relationship field **/
 			$oth_post_type = $this->find_acf_rel_pt( $post_type, $key );
 										
+			echo "<pre>", print_r($post_type, 1), "</pre>";
+			echo "<pre>", print_r($key, 1), "</pre>";
 echo "<pre>", print_r("oth_post_type", 1), "</pre>";
 echo "<pre>", print_r($oth_post_type, 1), "</pre>";
 			
