@@ -1144,14 +1144,26 @@ echo "<pre>", print_r($value, 1), "</pre>";
 	private function find_acf_rel_pt( $post_type, $key ) {
 		
 		
-		if( !function_exists( 'get_field_objects' ) )
+		if( !function_exists( 'get_field_objects' ) ){
+			echo "<pre>", print_r("first false", 1), "</pre>";
 			return false;
+		}
+			
 		
-		if( !$posts = get_posts( array( 'post_type'=>$post_type ) ) )
+		if( !$posts = get_posts( array( 'post_type'=>$post_type ) ) ){
+			echo "<pre>", print_r("no posts", 1), "</pre>";
+			echo "<pre>", print_r($posts, 1), "</pre>";
 			return false;
+		}
 		
-		if( !$fields = get_field_objects( $posts[0]->ID ) )
+		if( !$fields = get_field_objects( $posts[0]->ID ) ){
+			echo "<pre>", print_r("no fields", 1), "</pre>";
+			echo "<pre>", print_r($fields, 1), "</pre>";
 			return false;
+		}
+		
+		echo "<pre>", print_r("---------------fields", 1), "</pre>";
+		echo "<pre>", print_r($fields, 1), "</pre>";
 		
 		foreach( $fields as $field )
 			if( $key == $field['name'] )
