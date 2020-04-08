@@ -272,7 +272,8 @@ function clog(data){
 			time:		new Date()
 		});
 
-		if(map != undefined){
+		//only for google maps
+		if(map != undefined && map.data != undefined){
 			/**reset map features **/
 			map.data.forEach(function(feature) {
 				// If you want, check here for some constraints.
