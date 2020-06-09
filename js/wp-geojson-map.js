@@ -220,6 +220,11 @@ function clog(data){
 			google.maps.event.addListener(autocomplete, 'place_changed', function() {
 				var place = autocomplete.getPlace();
 				
+				if(typeof place.geometry == "undefined"
+					|| typeof place.geometry.location == "undefined"){
+					return false;
+				}
+				
 				if( document.getElementById("map-canvas") ) {
 					//document.getElementById("map-canvas") && 
 					//( 'undefined' == typeof iti || !iti ) && 
@@ -314,7 +319,7 @@ function clog(data){
 			var data_filters = {};
 			if(params.data_filters!=undefined && params.data_filters!=''){
 				data_filters = params.data_filters;
-			}
+			}			
 			$.post( ajaxurl, {
 				action: 'get_points_for_post_type',
 				post_type: params.post_type,
@@ -339,7 +344,7 @@ function clog(data){
 					type:		"wpGeoJSON_loadpoints",
 					time:		new Date()
 				});
-				
+
 			}).done(function() {
 				clog( "Ajax get_points_for_post_type success" );
 			}).fail(function() {
@@ -359,7 +364,6 @@ function clog(data){
 		
 		if( !$('.wpgeojson_list').length > 0 )
 			return;
-		
 		/* DEBUG *
 		clog( 'visible:' );
 		clog( visible );
@@ -1001,11 +1005,17 @@ function getCity( latLng, closest_position ) {
 			clog( 'city_bounds:' );
 			clog( city_bounds );
 			
-			var point_extend = new google.maps.LatLng(
-				parseFloat(closest_position.coords.latitude),
-				parseFloat(closest_position.coords.longitude));
-				
-			city_bounds.extend( point_extend );			
+			clog('closest position');
+			clog(closest_position);
+			
+			if(typeof closest_position.coords != "undefined" 
+				&& typeof closest_position.coords.latitude != "undefined"){			
+				var point_extend = new google.maps.LatLng(
+					parseFloat(closest_position.coords.latitude),
+					parseFloat(closest_position.coords.longitude));				
+				city_bounds.extend( point_extend );
+			}			
+			
 			map.fitBounds( city_bounds );
 
 			if (results[1]) {
@@ -1040,12 +1050,12 @@ function getCity( latLng, closest_position ) {
 function get_visible_markers() {
 	
 	var visible = [];
-	
+		
 	allFeatures.forEach( function( feature ) {
-		//clog('feature:');
-		//clog( feature );
+//			clog('feature:');
+//			clog( feature );
 		if( 'Point' == feature.geometry.type ) {
-			position = new google.maps.LatLng( feature.geometry.coordinates[1], feature.geometry.coordinates[0] );
+			position = new google.maps.LatLng( feature.geometry.coordinates[1], feature.geometry.coordinates[0] );			
 			if ( map.getBounds().contains( position )) {
 				visible.push( feature );
 			}
@@ -1338,7 +1348,7 @@ function add_markers( geojson, params ) {
 		} else {
 			clog( 'Geolocation unavailable' );
 			$('.wpgeojson_locateme').val('Geolocation unavailable');
-		}			
+		}
 	}
 	
 	$.event.trigger({
