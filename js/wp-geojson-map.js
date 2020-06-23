@@ -1098,7 +1098,13 @@ function add_markers( geojson, params ) {
 	
 	if( 'ggmap' == params.map_type ) {
 		
+		//add this data to know GeoJson is running and the listener zoom_changed will be called by him 
+		//and reset what the user chose
+		last_params_used.donotsetzoom = 1;
+		
 		map.data.addGeoJson(geojson);
+		
+		last_params_used.donotsetzoom = 0;
 		
 		/** This code allows clustering **	
 		var flmarkers = geojson.features.map(function (feature) {
