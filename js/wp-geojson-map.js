@@ -1333,24 +1333,32 @@ function add_markers( geojson, params ) {
 	if( $('.wpgeojson_locateme').length && $('.wpgeojson_locateme').attr('data-auto') ) {
 		clog( 'Trying out auto geolocation...' );
 		if (navigator.geolocation && ( 'undefined' == typeof disable_locateme || !disable_locateme ) ) {
-			navigator.geolocation.getCurrentPosition( 
-				function( position ){
-					clog( 'position:' );
-					clog( position );
-					locate_me( position );
-				},
-				function (err){
-					clog( 'navigator.geolocation.getCurrentPosition error:' );
-					clog( err );
-					$.event.trigger({
-						type:	"wpGeoJSON",
-						status:	"geolocation_error",
-						error:	err,
-						auto:	true,
-						time:	new Date()
-					});
-				}
-			);
+			
+			if(typeof last_params_used != "undefined"
+				&& typeof last_params_used.donotlocatemeanymore!="undefined" 
+				&& last_params_used.donotlocatemeanymore == true){
+				//do nothing
+			}else{
+			
+				navigator.geolocation.getCurrentPosition( 
+					function( position ){
+						clog( 'position:' );
+						clog( position );
+						locate_me( position );
+					},
+					function (err){
+						clog( 'navigator.geolocation.getCurrentPosition error:' );
+						clog( err );
+						$.event.trigger({
+							type:	"wpGeoJSON",
+							status:	"geolocation_error",
+							error:	err,
+							auto:	true,
+							time:	new Date()
+						});
+					}
+				);
+			}
 		} else {
 			clog( 'Geolocation unavailable' );
 			$('.wpgeojson_locateme').val('Geolocation unavailable');
