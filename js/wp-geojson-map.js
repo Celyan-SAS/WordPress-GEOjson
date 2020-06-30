@@ -16,7 +16,7 @@ var last_params_used;
 var refrech_list_left;
 
 function clog(data){
-	if(false){
+	if(true){
 		console.log(data);
 	}
 }
