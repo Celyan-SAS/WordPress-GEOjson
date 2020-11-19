@@ -2,13 +2,13 @@
 /**
  *	@package WordPress GEOjson
  *	@author Celyan
- *	@version 0.0.4
+ *	@version 0.0.5
  */
 /*
  Plugin Name: WordPress GEOjson
  Plugin URI: https://github.com/Celyan-SAS/WordPress-GEOjson
  Description: GEOjson utility library for WordPress
- Version: 0.0.4
+ Version: 0.0.5
  Author: Yann Dubois
  Author URI: http://www.yann.com/
  License: GPL2

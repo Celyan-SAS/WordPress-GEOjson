@@ -354,6 +354,9 @@ class wpGEOjson {
 		
 		if( !empty( $atts['post_type'] ) )
 			$html .= 'data-post_type="' . $atts['post_type'] . '" ';
+		
+		if( !empty( $atts['acf_field_id'] ) )
+			$html .= 'data-acf_field_id="' . $atts['acf_field_id'] . '" ';
 			
 		if( !empty( $atts['file'] ) )
 			$html .= 'data-file="' . $atts['file'] . '" ';

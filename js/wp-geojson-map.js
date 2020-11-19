@@ -103,6 +103,10 @@ function clog(data){
 		if( $('#map-canvas').attr('data-force_load_points') )
 			force_load_points = $('#map-canvas').data('force_load_points');
 		
+		var acf_field_id = ''
+		if( $('#map-canvas').attr('data-acf_field_id') )
+			force_load_points = $('#map-canvas').data('acf_field_id');
+		
 		$.event.trigger({
 			type:	"wpGeoJSON",
 			status:	"map_before_init",
@@ -141,7 +145,8 @@ function clog(data){
 			map_type: map_type,
 			fit_bounds: fit_bounds,
 			force_load_points: force_load_points,
-			cluster_points: cluster_points
+			cluster_points: cluster_points,
+			acf_field_id : acf_field_id
 		}
 		
 		if( 'yes'==v_load_points ) {
@@ -325,6 +330,7 @@ function clog(data){
 				post_type: params.post_type,
 				selection: params.selection,
 				fields: params.popup_fields,
+				acf_field_id: params.acf_field_id,
 				datafilters:data_filters
 			}, function( data ) {
 				if( data ) {
