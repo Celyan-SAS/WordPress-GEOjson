@@ -1198,7 +1198,7 @@ class wpGEOjson {
 			'leaflet',
 			$leaflet_css_url,
 			array(),
-			'1.0.1'
+			'1.0.2'
 		);
 		wp_enqueue_style( 'leaflet' );
 		wp_register_script(
