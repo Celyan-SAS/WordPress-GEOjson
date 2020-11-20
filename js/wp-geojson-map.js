@@ -105,7 +105,7 @@ function clog(data){
 		
 		var acf_field_id = ''
 		if( $('#map-canvas').attr('data-acf_field_id') )
-			force_load_points = $('#map-canvas').data('acf_field_id');
+			acf_field_id = $('#map-canvas').data('acf_field_id');
 		
 		$.event.trigger({
 			type:	"wpGeoJSON",
@@ -158,11 +158,11 @@ function clog(data){
 			process_choropleths();
 		});
 		
-		$('.locate_button').live('click', function(e){
+		$('.locate_button').on('click',document, function(e){
 			center_map_on_feature( $(this).data('id') );
 		});
 		
-		$('.more_button').live('click', function(e){
+		$('.more_button').on('click',document, function(e){
 			clog('clicked more_button');
 			if( $(this).data('link') ) {
 				if( 'yes' == $(this).data('blank') ) {
@@ -324,7 +324,8 @@ function clog(data){
 			var data_filters = {};
 			if(params.data_filters!=undefined && params.data_filters!=''){
 				data_filters = params.data_filters;
-			}			
+			}
+			
 			$.post( ajaxurl, {
 				action: 'get_points_for_post_type',
 				post_type: params.post_type,
