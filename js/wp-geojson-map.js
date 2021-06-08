@@ -423,7 +423,8 @@ function clog(data){
 				'more_button':more_button,
 				'more_blank':more_blank,
 				'fields_arr':fields_arr,
-				'data_no_link':list_box.attr('data-no_link')
+				'data_no_link':list_box.attr('data-no_link'),
+				'last_params_used':last_params_used
 			};
 			$.post( ajaxurl, {
 				action: 'geojson_html_result_build_filter',
