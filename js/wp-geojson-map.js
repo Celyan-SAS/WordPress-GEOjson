@@ -1339,38 +1339,7 @@ function add_markers( geojson, params ) {
 	}
 	
 	if( $('.wpgeojson_locateme').length && $('.wpgeojson_locateme').attr('data-auto') ) {
-		clog( 'Trying out auto geolocation...' );
-		if (navigator.geolocation && ( 'undefined' == typeof disable_locateme || !disable_locateme ) ) {
-			
-			if(typeof last_params_used != "undefined"
-				&& typeof last_params_used.donotlocatemeanymore!="undefined" 
-				&& last_params_used.donotlocatemeanymore == true){
-				//do nothing
-			}else{
-			
-				navigator.geolocation.getCurrentPosition( 
-					function( position ){
-						clog( 'position:' );
-						clog( position );
-						locate_me( position );
-					},
-					function (err){
-						clog( 'navigator.geolocation.getCurrentPosition error:' );
-						clog( err );
-						$.event.trigger({
-							type:	"wpGeoJSON",
-							status:	"geolocation_error",
-							error:	err,
-							auto:	true,
-							time:	new Date()
-						});
-					}
-				);
-			}
-		} else {
-			clog( 'Geolocation unavailable' );
-			$('.wpgeojson_locateme').val('Geolocation unavailable');
-		}
+		locate_user_function_isolated();
 	}
 	
 	$.event.trigger({
@@ -1403,6 +1372,41 @@ function center_map_on_feature( id ) {
 			}
 		}
 	});
+}
+
+window.locate_user_function_isolated = function (){
+	clog( 'Trying out auto geolocation...' );
+	if (navigator.geolocation && ( 'undefined' == typeof disable_locateme || !disable_locateme ) ) {
+
+		if(typeof last_params_used != "undefined"
+			&& typeof last_params_used.donotlocatemeanymore!="undefined" 
+			&& last_params_used.donotlocatemeanymore == true){
+			//do nothing
+		}else{
+
+			navigator.geolocation.getCurrentPosition( 
+				function( position ){
+					clog( 'position:' );
+					clog( position );
+					locate_me( position );
+				},
+				function (err){
+					clog( 'navigator.geolocation.getCurrentPosition error:' );
+					clog( err );
+					jQuery.event.trigger({
+						type:	"wpGeoJSON",
+						status:	"geolocation_error",
+						error:	err,
+						auto:	true,
+						time:	new Date()
+					});
+				}
+			);
+		}
+	} else {
+		clog( 'Geolocation unavailable' );
+		jQuery('.wpgeojson_locateme').val('Geolocation unavailable');
+	}
 }
 
 function locate_me( position ) {
@@ -1464,3 +1468,4 @@ function markup2html( str ) {
 }
 
 })( jQuery );
+
