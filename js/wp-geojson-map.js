@@ -269,6 +269,11 @@ function clog(data){
 		}
 	});
 	
+	/**  **/
+	window.find_closest_marker_from = function(location){
+		return find_closest_marker( location );
+	}
+	
 	/** 
 	 * Ajax request to load needed points/features on the map
 	 * 
