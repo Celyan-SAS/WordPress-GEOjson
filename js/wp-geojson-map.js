@@ -158,7 +158,7 @@ function clog(data){
 			process_choropleths();
 		});
 		
-		$('.locate_button').on('click',document, function(e){
+		$(document).on('click','.locate_button',function(){
 			center_map_on_feature( $(this).data('id') );
 		});
 		
