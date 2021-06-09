@@ -224,9 +224,8 @@ function clog(data){
 			var selector_type = 'city';
 			if(typeof input.dataset != "undefined"
 				&& typeof input.dataset.searchtype != "undefined"){
-				var selector_type = input.dataset.searchtype;
+				selector_type = input.dataset.searchtype;
 			}			
-			
 			var options = {
 			  types: ['('+selector_type+')'],
 			  componentRestrictions: {country: 'fr'}
