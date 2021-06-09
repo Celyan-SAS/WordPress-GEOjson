@@ -216,8 +216,19 @@ function clog(data){
 			}
 			
 			var input = document.getElementById('ggsearch');
+			
+			/** 
+			 * if ggsearch input has data-searchtype we can change search type
+			 * https://developers.google.com/maps/documentation/places/web-service/supported_types#table3
+			 *  **/
+			var selector_type = 'city';
+			if(typeof input.dataset != "undefined"
+				&& typeof input.dataset.searchtype != "undefined"){
+				var selector_type = input.dataset.searchtype;
+			}			
+			
 			var options = {
-			  types: ['(regions)'],
+			  types: ['('+selector_type+')'],
 			  componentRestrictions: {country: 'fr'}
 			};
 			autocomplete = new google.maps.places.Autocomplete(input, options);
