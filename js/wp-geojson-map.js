@@ -217,7 +217,7 @@ function clog(data){
 			
 			var input = document.getElementById('ggsearch');
 			var options = {
-			  types: ['(cities)'],
+			  types: ['(regions)'],
 			  componentRestrictions: {country: 'fr'}
 			};
 			autocomplete = new google.maps.places.Autocomplete(input, options);
