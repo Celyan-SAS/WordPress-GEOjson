@@ -14,6 +14,7 @@ var field_names;
 var gray_if_no;
 var last_params_used;
 var refrech_list_left;
+var param_global_gmap = {};
 
 function clog(data){
 	if(false){
@@ -1405,16 +1406,28 @@ window.locate_user_function_isolated = function (){
 					clog( position );
 					locate_me( position );
 				},
-				function (err){
-					clog( 'navigator.geolocation.getCurrentPosition error:' );
-					clog( err );
-					jQuery.event.trigger({
-						type:	"wpGeoJSON",
-						status:	"geolocation_error",
-						error:	err,
-						auto:	true,
-						time:	new Date()
-					});
+				function (err){					
+					if(typeof param_global_gmap.weneedtocenter!="undefined" 
+						&& param_global_gmap.weneedtocenter
+					){
+						//locate_me on center france
+						let position = {};
+						position.coords = {};
+						position.coords.latitude = 47.0780911;
+						position.coords.longitude = 2.3632841;				
+						locate_me( position );
+					}else{
+
+						clog( 'navigator.geolocation.getCurrentPosition error:' );
+						clog( err );
+						jQuery.event.trigger({
+							type:	"wpGeoJSON",
+							status:	"geolocation_error",
+							error:	err,
+							auto:	true,
+							time:	new Date()
+						});
+					}
 				}
 			);
 		}
