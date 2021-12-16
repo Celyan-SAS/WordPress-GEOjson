@@ -394,40 +394,42 @@ class wpGEOjson {
 		if( !empty( $atts['spideroverlaping_zoom'] ) )
 			$html .= 'data-spideroverlaping_zoom="' . $atts['spideroverlaping_zoom'] . '" ';				
 		
-		if( function_exists( 'get_field' ) ) {
-			
-			if( $marker_icon = get_field( 'marker_icon', 'option' ) )
-				$html .= 'data-marker_icon="' . $marker_icon . '" ';
-			
-			if( $marker_icon_2 = get_field( 'marker_icon_2', 'option' ) )
-				$html .= 'data-marker_icon_2="' . $marker_icon_2 . '" ';
-			
-			if( $marker_icon_3 = get_field( 'marker_icon_3', 'option' ) )
-				$html .= 'data-marker_icon_3="' . $marker_icon_3 . '" ';
-			
-			if( $marker_icon_4 = get_field( 'marker_icon_4', 'option' ) )
-				$html .= 'data-marker_icon_4="' . $marker_icon_4 . '" ';
-			
-			if( $big_cluster_icon = get_field( 'big_cluster_icon', 'option' ) )
-				$html .= 'data-big_cluster_icon="' . $big_cluster_icon . '" ';
-			
-			if( $medium_cluster_icon = get_field( 'medium_cluster_icon', 'option' ) )
-				$html .= 'data-medium_cluster_icon="' . $medium_cluster_icon . '" ';
-			
-			if( $small_cluster_icon = get_field( 'small_cluster_icon', 'option' ) )
-				$html .= 'data-small_cluster_icon="' . $small_cluster_icon . '" ';
-			
-		}
-		
 		/**
 		 * If marker icons are specified in shortcode atts, they override ACF option values
 		 * 
 		 */
-		if( !empty( $atts['marker_icon'] ) )
+		if( !empty( $atts['marker_icon'] ) ){
 			$html .= 'data-marker_icon="' . $atts['marker_icon'] . '" ';
+		}else{		
+			if( function_exists( 'get_field' ) ) {
+
+				if( $marker_icon = get_field( 'marker_icon', 'option' ) )
+					$html .= 'data-marker_icon="' . $marker_icon . '" ';
+
+				if( $marker_icon_2 = get_field( 'marker_icon_2', 'option' ) )
+					$html .= 'data-marker_icon_2="' . $marker_icon_2 . '" ';
+
+				if( $marker_icon_3 = get_field( 'marker_icon_3', 'option' ) )
+					$html .= 'data-marker_icon_3="' . $marker_icon_3 . '" ';
+			}
+		}
 		
-		if( !empty( $atts['big_cluster_icon'] ) )
+		if( !empty( $atts['big_cluster_icon'] ) ){
 			$html .= 'data-big_cluster_icon="' . $atts['big_cluster_icon'] . '" ';
+		}else{
+			if( function_exists( 'get_field' ) ) {
+				if( $big_cluster_icon = get_field( 'big_cluster_icon', 'option' ) )
+					$html .= 'data-big_cluster_icon="' . $big_cluster_icon . '" ';
+
+				if( $medium_cluster_icon = get_field( 'medium_cluster_icon', 'option' ) )
+					$html .= 'data-medium_cluster_icon="' . $medium_cluster_icon . '" ';
+
+				if( $small_cluster_icon = get_field( 'small_cluster_icon', 'option' ) )
+					$html .= 'data-small_cluster_icon="' . $small_cluster_icon . '" ';
+
+			}
+		}
+
 		/** **/
 		
 		if( !empty( $atts['height'] ) ) {
