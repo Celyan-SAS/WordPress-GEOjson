@@ -1545,8 +1545,8 @@ class wpGEOjson {
 	}
 	public function media_send_to_editor( $html, $send_id, $attachment ) {
 		if( 
-			!empty($attachment['url']) 
-			|| !preg_match( '/\.geojson$/', $attachment['url'] ) 
+			empty($attachment['url']) 
+			|| (!empty($attachment['url']) && !preg_match( '/\.geojson$/', $attachment['url'] ) )
 		){
 			return $html;
 		}
