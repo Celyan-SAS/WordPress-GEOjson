@@ -1544,9 +1544,12 @@ class wpGEOjson {
 		return $mime_types;
 	}
 	public function media_send_to_editor( $html, $send_id, $attachment ) {
-		if( !preg_match( '/\.geojson$/', $attachment['url'] ) )
+		if( 
+			!empty($attachment['url']) 
+			|| !preg_match( '/\.geojson$/', $attachment['url'] ) 
+		){
 			return $html;
-		
+		}
 		return( '[su_wpgeojson_map file="' . $attachment['url'] . '"]' );
 	}
 	/** **/
