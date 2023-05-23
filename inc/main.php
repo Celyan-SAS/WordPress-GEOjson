@@ -2,7 +2,7 @@
 /**
  * WordPress GEOjson plugin main class
 *
-* @author yann@abc.fr
+* @author WP&Co
 * @see: https://github.com/Celyan-SAS/WordPress-GEOjson
 *
 */

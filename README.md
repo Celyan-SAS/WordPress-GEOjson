@@ -66,22 +66,6 @@ Ceci permet de paramétrer dynamiquement cetains attributs en fonction du contex
 ?>
 ~~~
 
-## Fichiers de données GeoJSON
-
-On peut aussi charger des données géographiques déjà codées dans un fichier en GeoJSON. Exemple pour la liste des bureaux de vote:
-
-`[su_wpgeojson_map file="https://94.citoyens.com/media/geojson/bureaux-primaire-droite-centre.geo.json" height="450" popup_fields="num_bureau,adresse,salle,code_postal,ville"]`
-
-...ici on a un paramètre qui indique quels champs du fichier GeoJSON doivent s'afficher quand on clique sur les épingles.
-
-## Configuration des données à afficher dans les fenêtres pop-up
-
-Exemple assez complexe :
-
-`[su_wpgeojson_map file="https://94.citoyens.com/media/geojson/resultats-primaires-droite-tour1-94.geo.json" height="450" popup_fields="res.Ville,res.Exprimés,res.N. Sarkozy%res.Exprimés,res.F. Fillon%res.Exprimés,res.N. Kosciusko-Morizet%res.Exprimés,res.A. Juppé%res.Exprimés,res.J.-F. Copé%res.Exprimés,res.B. Le Maire%res.Exprimés,res.J.-F. Poisson%res.Exprimés" field_names="yes" gray_if_no="res.Exprimés"]`
-
-On a des paramètres du shortcode qui indiquent quels champs afficher en pop-up, sur quels champs faire des pourcentage, etc. Ca commence à se compliquer ! :)
-
 ## Aller encore plus loin
 
 On peut mixer une carte faite avec le shortcode, avec des bibliothèques de traitement de données géographiques en JS, 

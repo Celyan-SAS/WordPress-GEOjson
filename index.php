@@ -9,8 +9,8 @@
  Plugin URI: https://github.com/Celyan-SAS/WordPress-GEOjson
  Description: GEOjson utility library for WordPress
  Version: 0.0.7
- Author: Yann Dubois
- Author URI: http://www.yann.com/
+ Author: WP&Co
+ Author URI: https://wordpressandco.fr/
  License: GPL2
  */
 
